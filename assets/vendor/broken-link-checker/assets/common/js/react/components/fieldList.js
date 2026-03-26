@@ -1,0 +1,4 @@
+import React,{useEffect,useState}from'react';import{Column,Grid,Row}from"./grid";const{__}=wp.i18n;export function FieldList(props){const[fields,setFields]=useState([]);useEffect(()=>{if(props.fields){setFields(props.fields);}else{setFields([])}},[props.fields]);const getFieldColumn=(columnData,rowKey)=>{const columns=[];Object.entries(columnData).map(([key,value])=>{columns.push(<Column key={`${props.id}-${rowKey}-${key}`}>{value}</Column>);})
+return columns;}
+const printFields=()=>{if(typeof fields!=='undefined'&&fields.length>0){return(fields.map((fieldItem)=>((typeof fieldItem!=='undefined'&&fieldItem.hasOwnProperty('key'))&&<Row key={`${props.id}-${fieldItem.key}`}classes={"field-list-row"}>{getFieldColumn(fieldItem.data,fieldItem.key)}</Row>)))}}
+return(<Grid id={props.id}className={props.classes}>{printFields()}</Grid>)}
