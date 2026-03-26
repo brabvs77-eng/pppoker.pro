@@ -1,0 +1,13 @@
+"use strict";function UniteAddonPreviewAdmin(){var g_objPreview,g_addonID,g_requestPreview;var g_helper=new UniteCreatorHelper();var g_settings=new UniteSettingsUC();var that=this;if(!g_ucAdmin)
+var g_ucAdmin=new UniteAdminUC();this.init=function(){boot();loadSettings(function(){refreshPreview();});};this.initBySlot=function(slot){boot();loadSettings(function(){that.restoreSlot(slot);});};this.getAddonId=function(){return g_addonID;};this.getSettingsValues=function(){return g_settings.getSettingsValues();};this.clearSettings=function(){g_settings.clearSettings();refreshPreview();};this.getSelectorsCss=function(){return g_settings.getSelectorsCss();};this.restoreSlot=function(slot){var data={id:g_addonID,slotnum:slot,combine:true,};g_ucAdmin.ajaxRequest("get_test_addon_data",data,function(response){var values=g_ucAdmin.getVal(response,"settings_values");trace("restoring settings:");trace(values);if(!values){trace("no settings found");return;}
+g_settings.setValues(values);refreshPreview();});};function boot(){g_addonID=jQuery("#uc_preview_addon_wrapper").data("addonid");g_objPreview=jQuery("#uc_preview_wrapper");g_settings.setSelectorWrapperID("uc_preview_wrapper");}
+function loadSettings(onSuccess){g_ucAdmin.setAjaxLoaderID("uc_settings_loader");return g_ucAdmin.ajaxRequest("get_addon_settings_html",{id:g_addonID},function(response){trace("initializing settings");initSettingsByHtml(response.html);if(typeof onSuccess==="function")
+onSuccess();});}
+function initSettingsByHtml(html){var objSettingsWrapper=jQuery("#uc_settings_wrapper");objSettingsWrapper.html(html);g_settings.init(objSettingsWrapper);g_settings.setEventOnChange(refreshPreview);g_settings.setEventOnSelectorsChange(handleSelectorsChange);}
+function handleSelectorsChange(){updateSelectorsIncludes();updateSelectorsStyles();}
+function updateSelectorsIncludes(){var includes=g_settings.getSelectorsIncludes();if(includes)
+g_helper.putIncludes(window,includes);}
+function updateSelectorsStyles(){var css=g_settings.getSelectorsCss();jQuery("[name=uc_selectors_css]").text(css);}
+function refreshPreview(){var values=g_settings.getSettingsValues();var data={id:g_addonID,settings:values,selectors:true,};g_ucAdmin.setAjaxLoaderID("uc_preview_loader");if(g_requestPreview)
+g_requestPreview.abort();g_requestPreview=g_ucAdmin.ajaxRequest("get_addon_output_data",data,function(response){var html=g_ucAdmin.getVal(response,"html");var includes=g_ucAdmin.getVal(response,"includes");g_helper.putIncludes(window,includes,function(){g_objPreview.html(html);});}).done(function(response){var success=g_ucAdmin.getVal(response,"success");var message=g_ucAdmin.getVal(response,"message");if(success===false)
+g_objPreview.html("<span style='color:red'><b>Error:</b> "+message+"</span>");});}}
