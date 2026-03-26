@@ -1,0 +1,1 @@
+{"selector":".search-field","threshold":"0.1","useExtendedSearch":false,"ignoreLocation":false,"maxResults":10,"weights":{"title":1,"content":1,"excerpt":1}}
