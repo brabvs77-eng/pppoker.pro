@@ -1,0 +1,2 @@
+(function(){window.wp=window.wp||{};wp.sanitize={stripTags:function(text){let _text=text||'';do{text=_text;_text=text.replace(/<!--[\s\S]*?(-->|$)/g,'').replace(/<(script|style)[^>]*>[\s\S]*?(<\/\1>|$)/ig,'').replace(/<\/?[a-z][\s\S]*?(>|$)/ig,'');}while(_text!==text);return _text;},stripTagsAndEncodeText:function(text){let _text=wp.sanitize.stripTags(text),textarea=document.createElement('textarea');try{textarea.textContent=_text;_text=wp.sanitize.stripTags(textarea.value);}catch(er){}
+return _text;}};}());
