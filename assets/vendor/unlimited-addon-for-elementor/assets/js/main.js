@@ -7,7 +7,8 @@ function onePage(){$('.ts-onepage .ts-primary-nav-list a').on('click',function()
 return false;});}
 function scrollFunction(){var scroll=$(window).scrollTop();if(scroll>=10){$('.ts-site-header').addClass('small-height');}else{$('.ts-site-header').removeClass('small-height');}}
 function stickyFooter(){var footerHeight=($('.ts-sticky-footer').height())+'px';$('.ts-content').css("margin-bottom",footerHeight);}
-function progressBar(){var bar=new ProgressBar.Line(progress,{strokeWidth:4,easing:'easeInOut',duration:1400,color:'#FFEA82',trailColor:'#eee',trailWidth:1,svgStyle:{width:'100%',height:'100%'}});bar.animate(1.0);}
+function progressBar(){var progress=document.querySelector('#progress');if(!progress){return;}
+var bar=new ProgressBar.Line(progress,{strokeWidth:4,easing:'easeInOut',duration:1400,color:'#FFEA82',trailColor:'#eee',trailWidth:1,svgStyle:{width:'100%',height:'100%'}});bar.animate(1.0);}
 function modalVideo(){$(document).on('click','.ts-video-open',function(e){e.preventDefault();var video=$(this).attr('href');$('.ts-video-popup-container iframe').attr('src',video);$('.ts-video-popup').addClass('active');});$('.ts-video-popup-close, .ts-video-popup-layer').on('click',function(e){$('.ts-video-popup').removeClass('active');$('html').removeClass('overflow-hidden');$('.ts-video-popup-container iframe').attr('src','about:blank')
 e.preventDefault();});}
 function counterSetup(){if($.exists('.ts-counter')){const ready=(selector,callback)=>{window.addEventListener('DOMContentLoaded',function(){const elems=[...document.querySelectorAll(selector)];if(elems.length){for(let elem of elems){callback(elem);}}});};ready('.ts-counter',(stat)=>{const patt=/(\D+)?(\d+)(\D+)?(\d+)?(\D+)?/;const time=1000;let result=[...patt.exec(stat.textContent)];let fresh=true;let ticks;result.shift();result=result.filter(res=>res!=null);while(stat.firstChild){stat.removeChild(stat.firstChild);}

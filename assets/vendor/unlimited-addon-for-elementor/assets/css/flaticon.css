@@ -1,1 +1,62 @@
-@font-face{font-family:Flaticon;src:url(https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.eot);src:url(https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.eot#iefix) format("embedded-opentype"),url(https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.woff2) format("woff2"),url(https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.woff) format("woff"),url(https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.ttf) format("truetype");font-weight:normal;font-style:normal}@media screen and (-webkit-min-device-pixel-ratio:0){@font-face{font-family:Flaticon;src:url(https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/css/Flaticon.svg#Flaticon) format("svg")}}[class^=flaticon-]:before,[class*=" flaticon-"]:before,[class^=flaticon-]:after,[class*=" flaticon-"]:after{font-family:Flaticon;font-size:inherit;font-style:normal;margin-left:0}.flaticon-research:before{content:"\f100"}.flaticon-market:before{content:"\f101"}.flaticon-coding:before{content:"\f102"}.flaticon-file:before{content:"\f103"}.flaticon-layers:before{content:"\f104"}.flaticon-computer:before{content:"\f105"}.flaticon-computer-1:before{content:"\f106"}.flaticon-placeholder:before{content:"\f107"}.flaticon-mail:before{content:"\f108"}.flaticon-call:before{content:"\f109"}.flaticon-left-arrow:before{content:"\f10a"}.flaticon-right-arrow:before{content:"\f10b"}.flaticon-logout:before{content:"\f10c"}.flaticon-website:before{content:"\f10d"}.flaticon-symbol:before{content:"\f10e"}.flaticon-tick:before{content:"\f10f"}.flaticon-mail-1:before{content:"\f110"}.flaticon-sharing-content:before{content:"\f111"}.flaticon-consumer-behaviour:before{content:"\f112"}.flaticon-web:before{content:"\f113"}.flaticon-coding-1:before{content:"\f114"}.flaticon-administrator:before{content:"\f115"}.flaticon-creativity:before{content:"\f116"}.flaticon-smartphone:before{content:"\f117"}.flaticon-bar-chart:before{content:"\f118"}.flaticon-startup:before{content:"\f119"}.flaticon-work:before{content:"\f11a"}.flaticon-target:before{content:"\f11b"}.flaticon-analysis-1:before{content:"\f11c"}.flaticon-responsive:before{content:"\f11d"}.flaticon-seo:before{content:"\f11e"}
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 20/05/2019 21:57
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.eot");
+  src: url("https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.eot#iefix") format("embedded-opentype"),
+       url("https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.woff2") format("woff2"),
+       url("https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.woff") format("woff"),
+       url("https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/fonts/Flaticon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("https://pppoker.pro/assets/vendor/unlimited-addon-for-elementor/assets/css/Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: inherit;
+font-style: normal;
+margin-left: 0;
+}
+
+.flaticon-research:before { content: "\f100"; }
+.flaticon-market:before { content: "\f101"; }
+.flaticon-coding:before { content: "\f102"; }
+.flaticon-file:before { content: "\f103"; }
+.flaticon-layers:before { content: "\f104"; }
+.flaticon-computer:before { content: "\f105"; }
+.flaticon-computer-1:before { content: "\f106"; }
+.flaticon-placeholder:before { content: "\f107"; }
+.flaticon-mail:before { content: "\f108"; }
+.flaticon-call:before { content: "\f109"; }
+.flaticon-left-arrow:before { content: "\f10a"; }
+.flaticon-right-arrow:before { content: "\f10b"; }
+.flaticon-logout:before { content: "\f10c"; }
+.flaticon-website:before { content: "\f10d"; }
+.flaticon-symbol:before { content: "\f10e"; }
+.flaticon-tick:before { content: "\f10f"; }
+.flaticon-mail-1:before { content: "\f110"; }
+.flaticon-sharing-content:before { content: "\f111"; }
+.flaticon-consumer-behaviour:before { content: "\f112"; }
+.flaticon-web:before { content: "\f113"; }
+.flaticon-coding-1:before { content: "\f114"; }
+.flaticon-administrator:before { content: "\f115"; }
+.flaticon-creativity:before { content: "\f116"; }
+.flaticon-smartphone:before { content: "\f117"; }
+.flaticon-bar-chart:before { content: "\f118"; }
+.flaticon-startup:before { content: "\f119"; }
+.flaticon-work:before { content: "\f11a"; }
+.flaticon-target:before { content: "\f11b"; }
+.flaticon-analysis-1:before { content: "\f11c"; }
+.flaticon-responsive:before { content: "\f11d"; }
+.flaticon-seo:before { content: "\f11e"; }
