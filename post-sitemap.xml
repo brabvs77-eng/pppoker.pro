@@ -2,6 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	<url>
 		<loc>https://pppoker.pro/blog/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/blog/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/blog/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/blog/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/blog/" />
@@ -11,6 +12,7 @@
 	</url>
 	<url>
 		<loc>https://pppoker.pro/en/blog/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/blog/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/blog/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/blog/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/blog/" />
@@ -20,6 +22,7 @@
 	</url>
 	<url>
 		<loc>https://pppoker.pro/kz/blog/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/blog/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/blog/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/blog/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/blog/" />
@@ -29,6 +32,7 @@
 	</url>
 	<url>
 		<loc>https://pppoker.pro/uz/blog/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/blog/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/blog/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/blog/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/blog/" />

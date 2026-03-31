@@ -2,6 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 	<url>
 		<loc>https://pppoker.pro/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/" />
@@ -103,7 +104,108 @@
 		</image:image>
 	</url>
 	<url>
+		<loc>https://pppoker.pro/hy/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/" />
+		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/" />
+		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/" />
+		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/" />
+		<xhtml:link rel="alternate" hreflang="uz" href="https://pppoker.pro/uz/" />
+		<xhtml:link rel="alternate" hreflang="x-default" href="https://pppoker.pro/" />
+		<lastmod>2026-03-31T02:55:56+03:00</lastmod>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/NUTS.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/Vector-60.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/but-back.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/turbo.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Group-23.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Vector1.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Vector-4.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Vector5.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Vector6.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Vector7.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/03/Vector8.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/elementor/thumbs/4-1-1-rfpvvec18whoke7mfdgazu9lsu6z1ukj68dsq85nog.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/gr-1.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/but-back.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/money.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/but-back.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/Dollar.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/but-back.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/image-10.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/b1.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/b2.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/08/but.jpg</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/09/android-ppp.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/ph_poker-chip-fill.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/material-symbols_poker-chip.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/Vector.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/S600xU_2x.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2024/07/maxresdefault.jpg</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/09/8suVaIQrztDGinBs7Q292uKtkfiMeRPJAmaMqHv4DUk7f5edepqqCVNYBouMYYo7kEi8aRWSpTxrMNLpW3m56j4R6VVskFIO-scaled-1.webp</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>https://pppoker.pro/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp</image:loc>
+		</image:image>
+	</url>
+	<url>
 		<loc>https://pppoker.pro/en/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/" />
@@ -206,6 +308,7 @@
 	</url>
 	<url>
 		<loc>https://pppoker.pro/kz/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/" />
@@ -308,6 +411,7 @@
 	</url>
 	<url>
 		<loc>https://pppoker.pro/uz/</loc>
+		<xhtml:link rel="alternate" hreflang="hy" href="https://pppoker.pro/hy/" />
 		<xhtml:link rel="alternate" hreflang="en" href="https://pppoker.pro/en/" />
 		<xhtml:link rel="alternate" hreflang="kz" href="https://pppoker.pro/kz/" />
 		<xhtml:link rel="alternate" hreflang="ru" href="https://pppoker.pro/" />
