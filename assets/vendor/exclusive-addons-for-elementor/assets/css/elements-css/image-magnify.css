@@ -1,1 +1,24 @@
-.exad-image-magnify{width:100%;position:relative;cursor:none}.exad-magnify-large{position:absolute;z-index:1;display:none}.exad-magnify-small>img{display:block;z-index:-1}
+
+/*  Magnifying js styles */
+
+.exad-image-magnify {
+    width: 100%;
+    position: relative; 
+    cursor: none
+}
+
+/*Lets create the magnifying glass*/
+.exad-magnify-large {
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+
+/*To solve overlap bug at the edges during magnification*/
+.exad-magnify-small > img { 
+    display: block;
+    z-index: -1;
+}
+
+
+
