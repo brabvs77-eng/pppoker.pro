@@ -1,3 +1,193 @@
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"PPPoker Pro","url":"https://pppoker.pro","logo":"https://pppoker.pro/assets/media/2024/07/cropped-Лого-PPPoker.webp","description":"Официальный партнер PPPoker - приватные покерные клубы онлайн","sameAs":["https://t.me/pppoker_pro","https://wa.me/message/KIXDUQ7TC2ULM1"],"contactPoint":{"@type":"ContactPoint","contactType":"customer service","availableLanguage":["Russian","English","Uzbek","Kazakh","Armenian","Tajik"]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PPPoker Pro","item":"https://pppoker.pro"},{"@type":"ListItem","position":2,"name":"Uz","item":"https://pppoker.pro/uz"},{"@type":"ListItem","position":3,"name":"Elementor hf","item":"https://pppoker.pro/uz/elementor-hf"},{"@type":"ListItem","position":4,"name":"Podval","item":"https://pppoker.pro/uz/elementor-hf/podval"}]}</script>
 <!DOCTYPE html><html><head><title>Redirecting...</title><meta http-equiv="refresh" content="0;url=https://pppoker.pro/"></head><body><script type="text/javascript">
 			window.location = "https://pppoker.pro/";
-		</script><p>You are being redirected to <a href="https://pppoker.pro/">https://pppoker.pro/</a></p></body></html>
+		</script><p>You are being redirected to <a href="https://pppoker.pro/">https://pppoker.pro/</a></p>
+<!-- Cookie Banner Start -->
+<div id="cookie-banner" class="cookie-banner" style="display: none;">
+  <div class="cookie-banner-container">
+    <div class="cookie-banner-content">
+      <h3 class="cookie-banner-title">Cookie-fayllardan foydalanish</h3>
+      <p class="cookie-banner-text">Biz saytdagi tajribangizni yaxshilash uchun cookie-fayllardan foydalanamiz. Saytdan foydalanishni davom ettirib, siz cookie-fayllardan foydalanishga rozilik berayotgan bo'lasiz.</p>
+    </div>
+    <div class="cookie-banner-actions">
+      <button id="cookie-decline" class="cookie-btn cookie-btn-secondary">Rad etish</button>
+      <button id="cookie-accept" class="cookie-btn cookie-btn-primary">Qabul qilish</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.cookie-banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cookie-banner-content {
+  flex: 1;
+  min-width: 250px;
+}
+
+.cookie-banner-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cookie-banner-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #cccccc;
+}
+
+.cookie-banner-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cookie-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.cookie-btn-primary {
+  background-color: #4a7c59;
+  color: #ffffff;
+}
+
+.cookie-btn-primary:hover {
+  background-color: #5a9169;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(74, 124, 89, 0.3);
+}
+
+.cookie-btn-secondary {
+  background-color: #555555;
+  color: #ffffff;
+}
+
+.cookie-btn-secondary:hover {
+  background-color: #666666;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .cookie-banner {
+    padding: 15px;
+  }
+
+  .cookie-banner-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cookie-banner-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .cookie-btn {
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Получение текущего языка из URL
+  function getLanguage() {
+    const path = window.location.pathname;
+    const langMatch = path.match(/\/(en|uz|kz|hy|tj|ru)\//);
+    return langMatch ? langMatch[1] : 'ru';
+  }
+
+  // Функция для проверки согласия с куки
+  function checkCookieConsent() {
+    const consent = localStorage.getItem('cookie-consent');
+    if (!consent) {
+      showCookieBanner();
+    }
+  }
+
+  // Показать баннер куки
+  function showCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.style.display = 'block';
+    }
+  }
+
+  // Скрыть баннер куки
+  function hideCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.style.display = 'none';
+    }
+  }
+
+  // Сохранить согласие с куки
+  function acceptCookies() {
+    localStorage.setItem('cookie-consent', 'accepted');
+    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    hideCookieBanner();
+  }
+
+  // Отклонить куки (только необходимые)
+  function declineCookies() {
+    localStorage.setItem('cookie-consent', 'declined');
+    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    hideCookieBanner();
+  }
+
+  // Инициализация при загрузке страницы
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      checkCookieConsent();
+      
+      const acceptBtn = document.getElementById('cookie-accept');
+      const declineBtn = document.getElementById('cookie-decline');
+      
+      if (acceptBtn) acceptBtn.addEventListener('click', acceptCookies);
+      if (declineBtn) declineBtn.addEventListener('click', declineCookies);
+    });
+  } else {
+    checkCookieConsent();
+    
+    const acceptBtn = document.getElementById('cookie-accept');
+    const declineBtn = document.getElementById('cookie-decline');
+    
+    if (acceptBtn) acceptBtn.addEventListener('click', acceptCookies);
+    if (declineBtn) declineBtn.addEventListener('click', declineCookies);
+  }
+})();
+</script>
+<!-- Cookie Banner End -->
+
+</body></html>
