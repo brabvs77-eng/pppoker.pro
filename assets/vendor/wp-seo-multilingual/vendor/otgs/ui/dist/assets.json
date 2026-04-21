@@ -1,0 +1,30 @@
+{
+  "entrypoints": {
+    "otgsSwitcher": {
+      "js": [
+        "js/otgsSwitcher.js"
+      ],
+      "css": [
+        "css/otgsSwitcher.css"
+      ]
+    },
+    "otgsPopoverTooltip": {
+      "js": [
+        "js/otgsPopoverTooltip.js"
+      ],
+      "css": [
+        "css/otgsPopoverTooltip.css"
+      ]
+    },
+    "otgsTableStickyHeader": {
+      "js": [
+        "js/otgsTableStickyHeader.js"
+      ]
+    }
+  },
+  "otgsPopoverTooltip.css": "css/otgsPopoverTooltip.css",
+  "otgsPopoverTooltip.js": "js/otgsPopoverTooltip.js",
+  "otgsSwitcher.css": "css/otgsSwitcher.css",
+  "otgsSwitcher.js": "js/otgsSwitcher.js",
+  "otgsTableStickyHeader.js": "js/otgsTableStickyHeader.js"
+}
