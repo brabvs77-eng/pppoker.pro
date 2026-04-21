@@ -1,3 +1,0 @@
-import tippy from'tippy.js';import'../scss/otgsPopoverTooltip.scss';window.addEventListener("DOMContentLoaded",()=>{initialize();});export function initSingle(element){const args={arrow:true,theme:'otgs',animation:'fade',sticky:true,interactive:true,};if(!element.getAttribute('data-tippy-content')&&element.getAttribute('title')){args.content=element.getAttribute('title');element.removeAttribute('title');}
-tippy(element,args);}
-export function initialize(){const elements=[...document.querySelectorAll('.js-otgs-popover-tooltip, .js-wpml-popover-tooltip')];elements.forEach(element=>initSingle(element));}
