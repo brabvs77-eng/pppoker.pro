@@ -7,6 +7,15 @@
     "whatsapp": "WhatsApp"
   },
   "blog": { "title": "Բլոգ", "readMore": "Կարդալ" },
+  "siteFooter": {
+    "languageLabel": "Լեզու",
+    "navLabel": "Նավիգացիա",
+    "blog": "Բլոգ",
+    "manager": "Մենեջեր",
+    "terms": "Պայմաններ",
+    "privacy": "Գաղտնիություն",
+    "tagline": "օնլայն պոկեր ակումբ"
+  },
   "notFound": {
     "title": "404",
     "message": "Էջը չի գտնվել։",

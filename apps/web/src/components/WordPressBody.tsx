@@ -16,6 +16,7 @@ export function WordPressBody({ page, bodyHtml, bodyClassName }: WordPressBodyPr
       id="wordpress-page-root"
       data-route={page.route}
       data-locale={page.locale}
+      data-native-chrome=""
       data-home-promo={onHomeNative ? '' : undefined}
       data-hide-blog-loop={hideBlogLoop ? '' : undefined}
       className={bodyClassName}

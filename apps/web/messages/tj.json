@@ -10,6 +10,15 @@
     "title": "Блог",
     "readMore": "Хондан"
   },
+  "siteFooter": {
+    "languageLabel": "Забон",
+    "navLabel": "Навигатсия",
+    "blog": "Блог",
+    "manager": "Менеҷер",
+    "terms": "Шартнома",
+    "privacy": "Махфият",
+    "tagline": "клуби покери онлайн"
+  },
   "notFound": {
     "title": "404",
     "message": "Саҳифа ёфт нашуд.",

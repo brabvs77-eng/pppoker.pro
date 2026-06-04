@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { HomePromo } from '@/components/native/HomePromo';
+import { SiteFooter } from '@/components/native/SiteFooter';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
 import { homePromoRoutes } from '@/config/site';
@@ -26,6 +27,7 @@ export function PageShell({ page, bodyHtml, children }: PageShellProps) {
       {children ?? (
         <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
       )}
+      <SiteFooter page={page} />
       <AnalyticsScripts />
       {page.bodyScripts.map((src) => (
         <script key={src} src={src} defer />

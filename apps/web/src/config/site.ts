@@ -15,3 +15,14 @@ export const siteContacts = {
   telegramChannel: 'https://t.me/pppoker_pro',
   whatsapp: 'https://wa.me/message/KIXDUQ7TC2ULM1',
 } as const;
+
+const FLAG_BASE = '/assets/vendor/sitepress-multilingual-cms/res/flags';
+
+export const localeFlags = {
+  ru: `${FLAG_BASE}/ru.png`,
+  en: `${FLAG_BASE}/en.png`,
+  uz: `${FLAG_BASE}/uz.png`,
+  kz: `${FLAG_BASE}/kz.png`,
+  hy: `${FLAG_BASE}/hy.png`,
+  tj: `${FLAG_BASE}/tj.png`,
+} as const;

@@ -10,6 +10,15 @@
     "title": "Blog",
     "readMore": "Read"
   },
+  "siteFooter": {
+    "languageLabel": "Language",
+    "navLabel": "Footer navigation",
+    "blog": "Blog",
+    "manager": "Manager",
+    "terms": "User agreement",
+    "privacy": "Privacy policy",
+    "tagline": "online poker club"
+  },
   "notFound": {
     "title": "404",
     "message": "Page not found.",

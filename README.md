@@ -88,6 +88,12 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Deduped nav** — hides Elementor `menu-item-3206` when native promo is active
 - **RSS feed** — `npm run generate:rss` → `/feed.xml` (32 RU posts from `content/posts/`)
 
+## Sprint 8 features
+
+- **`SiteFooter`** — native footer on every page: locale switcher, blog, contacts, legal links
+- **`LocaleSwitcher`** — from manifest `hreflang`; hides Elementor/WPML switchers
+- **`data-native-chrome`** — marks pages using native chrome (footer + dedupe rules)
+
 ## Deploy
 
 Vercel uses `vercel.json`:

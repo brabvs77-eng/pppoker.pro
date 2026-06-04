@@ -7,6 +7,15 @@
     "whatsapp": "WhatsApp"
   },
   "blog": { "title": "Блог", "readMore": "Оқу" },
+  "siteFooter": {
+    "languageLabel": "Тіл",
+    "navLabel": "Навигация",
+    "blog": "Блог",
+    "manager": "Менеджер",
+    "terms": "Келісім",
+    "privacy": "Құпиялылық",
+    "tagline": "онлайн покер клубы"
+  },
   "notFound": {
     "title": "404",
     "message": "Бет табылмады.",

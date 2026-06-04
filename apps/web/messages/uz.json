@@ -7,6 +7,15 @@
     "whatsapp": "WhatsApp"
   },
   "blog": { "title": "Blog", "readMore": "O'qish" },
+  "siteFooter": {
+    "languageLabel": "Til",
+    "navLabel": "Navigatsiya",
+    "blog": "Blog",
+    "manager": "Menejer",
+    "terms": "Shartnoma",
+    "privacy": "Maxfiylik",
+    "tagline": "onlayn poker klubi"
+  },
   "notFound": {
     "title": "404",
     "message": "Sahifa topilmadi.",
