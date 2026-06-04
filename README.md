@@ -109,6 +109,11 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **HomePromo dedupe** — hides hero play button (`d014ade`), hotspot (`404896e`), manager icon row (`b5a91f5`); keeps bonus/headline column
 - **Secondary nav** — hides `elementor-3120` strip in `#masthead` on promo homepages (`/`, `/hy/`)
 
+## Sprint 12 features
+
+- **Secondary nav (all RU)** — `elementor-3120` hidden on every page with `data-native-chrome` (~43 RU routes), not only home
+- **Hero spacing** — removes `80px` top padding on homepage root (`23c91dc`) under native header + HomePromo
+
 ## Deploy
 
 Vercel uses `vercel.json`:

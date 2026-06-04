@@ -19,9 +19,14 @@ body {
   display: none !important;
 }
 
-/* Hide secondary Elementor nav strip in masthead (RU homepage). */
-#wordpress-page-root[data-home-promo] #masthead .elementor.elementor-3120 {
+/* Hide secondary Elementor nav strip in #masthead (RU pages, duplicate of SiteHeader). */
+#wordpress-page-root[data-native-chrome] #masthead .elementor.elementor-3120 {
   display: none !important;
+}
+
+/* Drop legacy hero top offset on promo homepages (was for Elementor fixed header). */
+#wordpress-page-root[data-home-promo] .elementor-element-23c91dc {
+  padding-top: 0 !important;
 }
 
 /* Hide hero CTAs duplicated by native HomePromo (keep headings + bonus box). */

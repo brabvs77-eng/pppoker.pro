@@ -21,8 +21,11 @@ export const elementorFooterSelector = '#colophon, footer#colophon, .main_footer
 /** Global Elementor header template inside #masthead (replaced by native SiteHeader). */
 export const elementorGlobalHeaderClass = 'elementor-3180';
 
-/** Secondary nav strip in #masthead on RU homepage (hidden with HomePromo). */
+/** Secondary nav strip in #masthead on RU pages (hidden with native chrome). */
 export const elementorSecondaryNavClass = 'elementor-3120';
+
+/** Homepage hero outer container (legacy top padding for old fixed header). */
+export const homepageHeroRootElementId = '23c91dc';
 
 /**
  * Hero widgets that duplicate HomePromo CTAs (play button, hotspot, manager icon row).
