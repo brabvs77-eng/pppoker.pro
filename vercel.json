@@ -45,5 +45,87 @@
       ]
     }
   ],
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/elementor-hf/podval",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/elementor-hf/shapka-2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/elementor-hf/podval",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/en/elementor-hf/shapka-2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/kz/elementor-hf/podval",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/kz/elementor-hf/shapka-2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/admin",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/admin/page/2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/admin/page/3",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/ilya",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/ivan",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/laura",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/stasdorohov",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/team/steepfellow",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/uz/elementor-hf/podval",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/uz/elementor-hf/shapka-2",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
 }

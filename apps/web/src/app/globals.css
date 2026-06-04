@@ -9,6 +9,11 @@ body {
   min-height: 100vh;
 }
 
+/* Temporarily hide blog loop on homepage (Elementor loop-grid widget). */
+#wordpress-page-root[data-route='/'] .elementor-element-39eeae8 {
+  display: none !important;
+}
+
 .post-article {
   max-width: 900px;
   margin: 0 auto;

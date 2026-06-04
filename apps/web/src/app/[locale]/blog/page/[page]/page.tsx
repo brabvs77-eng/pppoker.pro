@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
 
-import { BlogArchive } from '@/components/BlogArchive';
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import { getBlogArchiveManifestPages, getBlogPosts, getPageByRoute } from '@/lib/content';
+import { getBodyHtml, getBlogArchiveManifestPages, getPageByRoute } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type BlogPaginationProps = {
@@ -54,17 +52,7 @@ export default async function BlogPaginationPage({ params }: BlogPaginationProps
     notFound();
   }
 
-  const t = await getTranslations('blog');
-  const posts = await getBlogPosts(appLocale);
+  const bodyHtml = await getBodyHtml(manifestPage);
 
-  return (
-    <PageShell page={manifestPage} bodyHtml="">
-      <BlogArchive
-        posts={posts}
-        page={pageNumber}
-        locale={appLocale}
-        title={t('title')}
-      />
-    </PageShell>
-  );
+  return <PageShell page={manifestPage} bodyHtml={bodyHtml} />;
 }

@@ -21,6 +21,7 @@ export type PageEntry = {
   bodyAttributes: Record<string, string>;
   jsonLd: string[];
   isRedirect: boolean;
+  redirectTo?: string | null;
   hasStructuredPost: boolean;
 };
 

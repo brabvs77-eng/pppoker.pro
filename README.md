@@ -42,12 +42,19 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 
 ## Sprint 2 features
 
-- **next-intl** — locales `ru`, `en`, `uz`, `kz`, `hy` with `localePrefix: 'as-needed'` (Russian without prefix)
-- **Typed blog routes** — `/blog/`, `/blog/page/N/` with `BlogArchive` component
+- **next-intl** — locales `ru`, `en`, `uz`, `kz`, `hy`, `tj` with `localePrefix: 'as-needed'` (Russian without prefix)
+- **Typed blog routes** — `/blog/`, `/blog/page/N/` (dedicated App Router pages)
 - **Structured posts** — article HTML extracted to `content/posts/*.json`, rendered via `PostArticle`
 - **JSON-LD** — Yoast blocks rendered from manifest (`JsonLd` component)
 - **Sitemap** — `app/sitemap.ts` generated from manifest
 - **Body classes** — applied on `#wordpress-page-root` (no client-side `BodyAttributes`)
+
+## Sprint 3 features
+
+- **Vercel redirects** — meta-refresh legacy URLs (`/team/*`, `/elementor-hf/*`, …) synced to `vercel.json` via `npm run sync:redirects`
+- **Blog visual parity** — `/blog/` and pagination render full Elementor HTML from extract (not the minimal `BlogArchive` list)
+- **Homepage** — blog loop grid hidden via CSS (`elementor-element-39eeae8`)
+- **Dev routing** — `next-intl` middleware for local `npm run dev`
 
 ## Deploy
 

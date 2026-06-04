@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
 
-import { BlogArchive } from '@/components/BlogArchive';
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import { getBlogPosts, getPageByRoute } from '@/lib/content';
+import { getBodyHtml, getPageByRoute } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type BlogIndexProps = {
@@ -30,18 +28,13 @@ export async function generateMetadata({ params }: BlogIndexProps) {
 export default async function BlogIndexPage({ params }: BlogIndexProps) {
   const { locale } = await params;
   const appLocale = locale as AppLocale;
-  const t = await getTranslations('blog');
   const page = await getPageByRoute(blogRoute(appLocale));
 
   if (!page) {
     notFound();
   }
 
-  const posts = await getBlogPosts(appLocale);
+  const bodyHtml = await getBodyHtml(page);
 
-  return (
-    <PageShell page={page} bodyHtml="">
-      <BlogArchive posts={posts} page={1} locale={appLocale} title={t('title')} />
-    </PageShell>
-  );
+  return <PageShell page={page} bodyHtml={bodyHtml} />;
 }

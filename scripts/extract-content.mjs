@@ -108,6 +108,30 @@ function extractPostArticleHtml($) {
   return null;
 }
 
+function extractRedirectTarget($) {
+  const meta = $('head meta[http-equiv="refresh" i]').attr('content');
+  if (!meta) return null;
+
+  const match = meta.match(/url=([^;]+)/i);
+  if (!match) return null;
+
+  let target = normalizeUrls(match[1].trim());
+  if (target.startsWith('http')) {
+    try {
+      const url = new URL(target);
+      target = url.pathname || '/';
+    } catch {
+      return null;
+    }
+  }
+
+  if (!target.startsWith('/')) {
+    target = `/${target}`;
+  }
+
+  return target.endsWith('/') || target === '/' ? target : `${target}/`;
+}
+
 function extractPublishedTime($) {
   const meta =
     $('meta[property="article:published_time"]').attr('content') ||
@@ -190,8 +214,13 @@ async function main() {
       bodyAttributes: normalizeRecord(body.attr() ?? {}),
       jsonLd: extractJsonLd($),
       isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
+      redirectTo: null,
       hasStructuredPost: false,
     };
+
+    if (entry.isRedirect) {
+      entry.redirectTo = extractRedirectTarget($);
+    }
 
     if (type === 'post') {
       const articleHtml = extractPostArticleHtml($);
