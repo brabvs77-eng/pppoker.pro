@@ -4,7 +4,9 @@ import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
 import { CoreStylesheets } from '@/components/CoreStylesheets';
-import { routing } from '@/i18n/routing';
+import { SiteHead } from '@/components/SiteHead';
+import { localeHtmlLang } from '@/i18n/localeHtmlLang';
+import { routing, type AppLocale } from '@/i18n/routing';
 
 import '../globals.css';
 
@@ -27,9 +29,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   setRequestLocale(locale);
   const messages = await getMessages();
 
+  const appLocale = locale as AppLocale;
+
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={localeHtmlLang[appLocale]} suppressHydrationWarning>
       <head>
+        <SiteHead />
         <CoreStylesheets />
       </head>
       <body suppressHydrationWarning>

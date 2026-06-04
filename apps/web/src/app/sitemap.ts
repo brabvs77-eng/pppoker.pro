@@ -7,7 +7,7 @@ export const dynamic = 'force-static';
 const SITE_URL = 'https://pppoker.pro';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const pages = await getAllPages();
+  const pages = (await getAllPages()).filter((page) => !page.isRedirect);
 
   return pages.map((page) => ({
     url: `${SITE_URL}${page.route === '/' ? '' : page.route.replace(/\/$/, '')}/`,

@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/PageShell';
-import { PostArticle } from '@/components/PostArticle';
 import { routing, type AppLocale } from '@/i18n/routing';
 import {
   getBodyHtml,
   getPageBySlug,
   getPagesByLocale,
-  getPostRecord,
   slugParamsFromPage,
 } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
@@ -22,7 +20,11 @@ export async function generateStaticParams() {
   for (const locale of routing.locales) {
     const pages = await getPagesByLocale(locale as AppLocale);
     for (const page of pages) {
-      if (page.type === 'blog' || page.route.match(/\/blog\/page\/\d+\/$/)) {
+      if (
+        page.type === 'blog' ||
+        page.route.match(/\/blog\/page\/\d+\/$/) ||
+        page.route.match(/\/category\/blog\/page\/\d+\/$/)
+      ) {
         continue;
       }
       params.push({
@@ -55,18 +57,7 @@ export default async function CatchAllPage({ params }: PageProps) {
     notFound();
   }
 
-  const [bodyHtml, post] = await Promise.all([
-    getBodyHtml(page),
-    page.hasStructuredPost ? getPostRecord(page) : Promise.resolve(null),
-  ]);
-
-  if (page.type === 'post' && post) {
-    return (
-      <PageShell page={page} bodyHtml={bodyHtml}>
-        <PostArticle post={post} bodyClassName={page.bodyAttributes.class} />
-      </PageShell>
-    );
-  }
+  const bodyHtml = await getBodyHtml(page);
 
   return <PageShell page={page} bodyHtml={bodyHtml} />;
 }

@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://pppoker.pro/sitemap.xml',
+    sitemap: 'https://pppoker.pro/sitemap_index.xml',
   };
 }

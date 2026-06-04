@@ -56,6 +56,14 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 - **Homepage** — blog loop grid hidden via CSS (`elementor-element-39eeae8`)
 - **Dev routing** — `next-intl` middleware for local `npm run dev`
 
+## Sprint 4 features
+
+- **Post pages** — full Elementor body HTML (header, footer, layout parity with legacy)
+- **SEO** — `robots.txt` points to Yoast `sitemap_index.xml`; hreflang includes `x-default`; sitemap excludes redirects
+- **Site head** — charset, viewport, favicons in locale layout; correct BCP 47 `lang` per locale
+- **CI** — GitHub Actions workflow runs `npm run build` on push/PR
+- **`verify:redirects`** — ensures `vercel.json` stays in sync with manifest
+
 ## Deploy
 
 Vercel uses `vercel.json`:

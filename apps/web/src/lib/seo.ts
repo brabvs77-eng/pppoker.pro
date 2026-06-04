@@ -30,7 +30,6 @@ function buildAlternates(page: PageEntry): Metadata['alternates'] {
 
   const languages: Record<string, string> = {};
   for (const entry of page.hreflang) {
-    if (entry.hreflang === 'x-default') continue;
     languages[entry.hreflang] = absoluteUrl(entry.href);
   }
 
