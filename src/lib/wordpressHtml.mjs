@@ -44,18 +44,121 @@ export async function parseWordPressHtml(filePath) {
   const html = $('html').first();
   const head = $('head').first();
   const body = $('body').first();
+  const bodyClasses = splitClasses(body.attr('class'));
 
   return {
     htmlAttributes: html.attr() ?? {},
     headHtml: head.html() ?? '',
     bodyAttributes: body.attr() ?? {},
     bodyHtml: body.html() ?? '',
+    bodyClasses,
     title: normalizeText($('head title').first().text()),
     description: $('head meta[name="description"]').first().attr('content') ?? '',
     canonical: $('head link[rel="canonical"]').first().attr('href') ?? '',
     lang: html.attr('lang') ?? '',
     isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
+    alternates: $('head link[rel="alternate"][hreflang]')
+      .toArray()
+      .map((element) => {
+        const alternate = $(element);
+
+        return {
+          hreflang: alternate.attr('hreflang') ?? '',
+          href: alternate.attr('href') ?? '',
+        };
+      })
+      .filter((alternate) => alternate.hreflang && alternate.href),
+    schemaGraphCount: $('head script[type="application/ld+json"]').length,
+    landmarks: {
+      hasHeader: $('body header').length > 0,
+      hasFooter: $('body footer').length > 0,
+      h1Count: $('body h1').length,
+    },
   };
+}
+
+export function buildRouteMetadata(route, parsed) {
+  return {
+    locale: inferLocale(route, parsed.lang),
+    type: classifyRoute(route, parsed),
+    isLocalized: routeHasLocalePrefix(route),
+  };
+}
+
+export function classifyRoute(route, parsed = {}) {
+  const bodyClasses = new Set(parsed.bodyClasses ?? []);
+
+  if (parsed.isRedirect) {
+    return 'redirect';
+  }
+
+  if (route === '/') {
+    return 'home';
+  }
+
+  if (route === '/__qs/') {
+    return 'search';
+  }
+
+  if (/^\/(?:en|hy|kz|tj|uz)\/?$/.test(route)) {
+    return 'home';
+  }
+
+  if (/\/blog\/page\/\d+\/$/.test(route)) {
+    return 'blog-page';
+  }
+
+  if (/\/blog\/$/.test(route)) {
+    return 'blog-index';
+  }
+
+  if (/\/category\//.test(route) || bodyClasses.has('category')) {
+    return 'category';
+  }
+
+  if (/\/tag\//.test(route) || bodyClasses.has('tag')) {
+    return 'tag';
+  }
+
+  if (/\/team\//.test(route) || bodyClasses.has('author')) {
+    return 'author';
+  }
+
+  if (bodyClasses.has('single-post')) {
+    return 'post';
+  }
+
+  if (bodyClasses.has('page')) {
+    return 'page';
+  }
+
+  return 'page';
+}
+
+export function inferLocale(route, htmlLang = '') {
+  const routeLocale = route.match(/^\/(en|hy|kz|tj|uz)(?:\/|$)/)?.[1];
+
+  if (routeLocale) {
+    return routeLocale;
+  }
+
+  if (htmlLang.toLowerCase().startsWith('en')) {
+    return 'en';
+  }
+
+  if (htmlLang.toLowerCase().startsWith('hy')) {
+    return 'hy';
+  }
+
+  if (htmlLang.toLowerCase().startsWith('kz')) {
+    return 'kz';
+  }
+
+  if (htmlLang.toLowerCase().startsWith('uz')) {
+    return 'uz';
+  }
+
+  return 'ru';
 }
 
 export async function copyStaticAssets(rootDir, outDir) {
@@ -120,4 +223,12 @@ async function fileExists(filePath) {
 
 function normalizeText(value) {
   return value.replace(/\s+/g, ' ').trim();
+}
+
+function splitClasses(value = '') {
+  return value.split(/\s+/).filter(Boolean);
+}
+
+function routeHasLocalePrefix(route) {
+  return /^\/(?:en|hy|kz|tj|uz)(?:\/|$)/.test(route);
 }

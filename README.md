@@ -20,6 +20,15 @@ npm run migrate:react
 ```
 
 The generated `dist/react-route-manifest.json` lists every preserved route,
-language, title, canonical URL, and source file. SEO support files such as
-`robots.txt`, `sitemap_index.xml`, and Yoast-generated sitemaps are copied into
-`dist/` alongside the existing `assets/` tree.
+source file, route type, locale, language, title, canonical URL, hreflang
+alternate links, JSON-LD count, and key page landmarks. SEO support files such
+as `robots.txt`, `sitemap_index.xml`, and Yoast-generated sitemaps are copied
+into `dist/` alongside the existing `assets/` tree.
+
+`npm run verify` compares critical SEO snapshots between the WordPress source
+HTML and the React-generated output so incremental component replacements do
+not silently drop titles, descriptions, canonical URLs, language attributes,
+hreflang alternates, or JSON-LD schema blocks.
+
+See `docs/react-componentization.md` for the ordered React component extraction
+plan.

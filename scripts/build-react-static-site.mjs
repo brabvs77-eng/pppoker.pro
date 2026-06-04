@@ -7,6 +7,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 import { StaticDocument } from '../src/components/StaticDocument.mjs';
 import {
+  buildRouteMetadata,
   copyStaticAssets,
   discoverWordPressPages,
   outputPathForRoute,
@@ -30,6 +31,7 @@ async function main() {
 
   for (const page of pages) {
     const parsed = await parseWordPressHtml(page.sourcePath);
+    const routeMetadata = buildRouteMetadata(page.route, parsed);
     const renderedPage = renderToStaticMarkup(
       React.createElement(StaticDocument, {
         htmlAttributes: parsed.htmlAttributes,
@@ -47,11 +49,15 @@ async function main() {
       route: page.route,
       source: page.relativePath,
       output: path.relative(outDir, outputPath).replaceAll(path.sep, '/'),
+      ...routeMetadata,
       lang: parsed.lang,
       title: parsed.title,
       description: parsed.description,
       canonical: parsed.canonical,
       isRedirect: parsed.isRedirect,
+      alternates: parsed.alternates,
+      schemaGraphCount: parsed.schemaGraphCount,
+      landmarks: parsed.landmarks,
     });
   }
 
