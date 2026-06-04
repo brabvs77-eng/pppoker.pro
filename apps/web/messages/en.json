@@ -1,4 +1,12 @@
 {
+  "siteHeader": {
+    "navLabel": "Main menu",
+    "languageLabel": "Language",
+    "openMenu": "Open menu",
+    "home": "Home",
+    "blog": "Blog",
+    "manager": "Manager"
+  },
   "homePromo": {
     "ariaLabel": "Play poker for real money on PPPoker",
     "title": "Play poker for real money on PPPoker",

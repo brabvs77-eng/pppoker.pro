@@ -25,8 +25,17 @@
 | `apps/web/out/**/*.txt` | RSC payload Next.js при export — не публиковать отдельно, Vercel отдаёт `index.html` |
 | `normalizeUrls` / `strip:hekler` | Защита от legacy-домена в исходниках |
 
+## Native chrome (Sprint 6–9)
+
+| Компонент | Заменяет |
+|-----------|----------|
+| `HomePromo` | Дубли CTA / `menu-item-3206` на главных |
+| `SiteHeader` | Верхнее меню + lang switcher в шапке |
+| `SiteFooter` | `#colophon`, `.main_footer`, WPML footer |
+
+Elementor `#masthead` **сохраняется** — внутри hero и контент главной.
+
 ## Рекомендации (позже)
 
-- Постепенно выносить секции Elementor в `components/native/*`
+- Сузить или заменить `#masthead` на внутренних страницах
 - Headless CMS вместо HTML-extract
-- Свести Yoast sitemap и динамический sitemap к одному источнику, если понадобится programmatic SEO

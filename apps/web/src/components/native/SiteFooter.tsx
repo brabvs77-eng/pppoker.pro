@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { siteContacts } from '@/config/site';
 import { getLocaleAlternates } from '@/lib/localeAlternates';
+import { blogHref, legalHref } from '@/lib/navigation';
 import type { PageEntry } from '@/lib/types';
 
 import { LocaleSwitcher } from './LocaleSwitcher';
@@ -10,17 +11,6 @@ import { LocaleSwitcher } from './LocaleSwitcher';
 type SiteFooterProps = {
   page: PageEntry;
 };
-
-function blogHref(locale: string) {
-  return locale === 'ru' ? '/blog/' : `/${locale}/blog/`;
-}
-
-function legalHref(locale: string, slug: 'user-agreement' | 'privacy-policy') {
-  if (locale === 'ru') {
-    return slug === 'user-agreement' ? '/en/user-agreement/' : '/en/privacy-policy/';
-  }
-  return `/${locale}/${slug}/`;
-}
 
 export async function SiteFooter({ page }: SiteFooterProps) {
   const t = await getTranslations({ locale: page.locale, namespace: 'siteFooter' });

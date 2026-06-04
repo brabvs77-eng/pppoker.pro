@@ -1,4 +1,12 @@
 {
+  "siteHeader": {
+    "navLabel": "Asosiy menyu",
+    "languageLabel": "Til",
+    "openMenu": "Menyuni ochish",
+    "home": "Bosh sahifa",
+    "blog": "Blog",
+    "manager": "Menejer"
+  },
   "homePromo": {
     "ariaLabel": "PPPoker’da pulga onlayn poker",
     "title": "PPPoker’da pulga onlayn poker",

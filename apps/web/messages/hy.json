@@ -1,4 +1,12 @@
 {
+  "siteHeader": {
+    "navLabel": "Հիմնական մենյու",
+    "languageLabel": "Լեզու",
+    "openMenu": "Բացել մենյու",
+    "home": "Գլխավոր",
+    "blog": "Բլոգ",
+    "manager": "Մենեջեր"
+  },
   "homePromo": {
     "ariaLabel": "Օնլայն պոկեր PPPoker-ում",
     "title": "Օնլայն պոկեր PPPoker-ում",

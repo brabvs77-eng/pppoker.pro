@@ -1,4 +1,12 @@
 {
+  "siteHeader": {
+    "navLabel": "Негізгі мәзір",
+    "languageLabel": "Тіл",
+    "openMenu": "Мәзірді ашу",
+    "home": "Басты",
+    "blog": "Блог",
+    "manager": "Менеджер"
+  },
   "homePromo": {
     "ariaLabel": "PPPoker-де ақшаға онлайн покер",
     "title": "PPPoker-де ақшаға онлайн покер",

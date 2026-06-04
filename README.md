@@ -94,6 +94,12 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **`LocaleSwitcher`** — from manifest `hreflang`; hides Elementor/WPML switchers
 - **`data-native-chrome`** — marks pages using native chrome (footer + dedupe rules)
 
+## Sprint 9 features
+
+- **`SiteHeader`** — sticky bar: logo, nav (mobile drawer), languages, manager link
+- **Elementor footer hidden** — `#colophon` / `.main_footer` replaced by native footer
+- **`lib/navigation.ts`** — shared locale-aware href helpers for header/footer
+
 ## Deploy
 
 Vercel uses `vercel.json`:

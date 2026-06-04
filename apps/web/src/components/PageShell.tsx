@@ -4,6 +4,7 @@ import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { HomePromo } from '@/components/native/HomePromo';
 import { SiteFooter } from '@/components/native/SiteFooter';
+import { SiteHeader } from '@/components/native/SiteHeader';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
 import { homePromoRoutes } from '@/config/site';
@@ -23,6 +24,7 @@ export function PageShell({ page, bodyHtml, children }: PageShellProps) {
     <>
       <WordPressHead page={page} />
       <JsonLd blocks={page.jsonLd} />
+      <SiteHeader page={page} />
       {showHomePromo ? <HomePromo locale={page.locale} /> : null}
       {children ?? (
         <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />

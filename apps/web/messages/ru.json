@@ -1,4 +1,12 @@
 {
+  "siteHeader": {
+    "navLabel": "Главное меню",
+    "languageLabel": "Язык",
+    "openMenu": "Открыть меню",
+    "home": "Главная",
+    "blog": "Блог",
+    "manager": "Менеджер"
+  },
   "homePromo": {
     "ariaLabel": "Онлайн-покер на деньги в PPPoker",
     "title": "Онлайн-покер на деньги в PPPoker",

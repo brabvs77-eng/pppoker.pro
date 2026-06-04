@@ -10,6 +10,14 @@ export const homepageBlogLoopElementId = '39eeae8';
 /** Duplicate “manager bonus” items in Elementor nav (hidden when HomePromo is shown). */
 export const duplicateManagerMenuItemClass = 'menu-item-3206';
 
+export const siteBranding = {
+  logoSrc: '/assets/media/2024/07/NUTS.webp',
+  logoAlt: 'Nuts PPPoker',
+} as const;
+
+/** Elementor footer template (replaced by native SiteFooter). */
+export const elementorFooterSelector = '#colophon, footer#colophon, .main_footer';
+
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
   telegramChannel: 'https://t.me/pppoker_pro',

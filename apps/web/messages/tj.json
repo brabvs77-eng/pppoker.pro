@@ -1,4 +1,12 @@
 {
+  "siteHeader": {
+    "navLabel": "Менюи асосӣ",
+    "languageLabel": "Забон",
+    "openMenu": "Кушодани меню",
+    "home": "Асосӣ",
+    "blog": "Блог",
+    "manager": "Менеҷер"
+  },
   "homePromo": {
     "ariaLabel": "Покери онлайнӣ дар PPPoker",
     "title": "Покери онлайнӣ дар PPPoker",

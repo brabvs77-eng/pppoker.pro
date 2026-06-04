@@ -19,10 +19,123 @@ body {
   display: none !important;
 }
 
-/* Hide Elementor/WPML language switchers replaced by native footer. */
+/* Hide Elementor/WPML language switchers replaced by native chrome. */
 #wordpress-page-root[data-native-chrome] .custom-lang-switcher,
 #wordpress-page-root[data-native-chrome] .wpml-ls-statics-footer {
   display: none !important;
+}
+
+/* Hide Elementor footer template — replaced by native SiteFooter. */
+#wordpress-page-root[data-native-chrome] #colophon,
+#wordpress-page-root[data-native-chrome] .main_footer {
+  display: none !important;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12, 17, 26, 0.96);
+  border-bottom: 1px solid rgba(253, 230, 97, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.site-header__inner {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.site-header__brand img {
+  display: block;
+  height: 28px;
+  width: auto;
+}
+
+.site-header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.875rem;
+}
+
+.site-header__nav a {
+  color: #e8ecf4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-header__nav a:hover {
+  color: #fde661;
+}
+
+.site-header__nav--desktop {
+  display: none;
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+.site-header__drawer {
+  margin-right: auto;
+  margin-left: 0.5rem;
+}
+
+.site-header__menu-btn {
+  list-style: none;
+  cursor: pointer;
+  color: #fde661;
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem;
+  user-select: none;
+}
+
+.site-header__menu-btn::-webkit-details-marker {
+  display: none;
+}
+
+.site-header__drawer[open] .site-header__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding: 1rem 1.25rem 1.25rem;
+  background: #0c111a;
+  border-bottom: 1px solid rgba(253, 230, 97, 0.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+}
+
+.site-header__locales {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.site-header__locales .locale-switcher__link {
+  font-size: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .site-header__drawer {
+    display: none;
+  }
+
+  .site-header__nav--desktop {
+    display: flex;
+  }
 }
 
 .site-footer {
