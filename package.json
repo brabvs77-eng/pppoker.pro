@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "extract:content": "node scripts/extract-content.mjs",
+    "analyze:styles": "node scripts/analyze-stylesheets.mjs",
     "prepare:public": "node scripts/prepare-next-public.mjs",
     "build:legacy-react": "node scripts/build-react-static-site.mjs",
     "verify:legacy-react": "node scripts/verify-react-static-site.mjs",

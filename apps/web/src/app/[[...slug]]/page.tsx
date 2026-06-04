@@ -5,12 +5,7 @@ import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { BodyAttributes } from '@/components/BodyAttributes';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
-import {
-  getAllPages,
-  getBodyHtml,
-  getManifest,
-  getPageBySlug,
-} from '@/lib/content';
+import { getAllPages, getBodyHtml, getPageBySlug } from '@/lib/content';
 import type { PageEntry } from '@/lib/types';
 
 type PageProps = {
@@ -76,11 +71,11 @@ export default async function WordPressPage({ params }: PageProps) {
     notFound();
   }
 
-  const [manifest, bodyHtml] = await Promise.all([getManifest(), getBodyHtml(page)]);
+  const bodyHtml = await getBodyHtml(page);
 
   return (
     <>
-      <WordPressHead page={page} globalStylesheets={manifest.globalStylesheets} />
+      <WordPressHead page={page} />
       <BodyAttributes attributes={page.bodyAttributes} />
       <WordPressBody page={page} bodyHtml={bodyHtml} />
       <AnalyticsScripts />

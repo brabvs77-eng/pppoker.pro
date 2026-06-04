@@ -2,16 +2,14 @@ import type { PageEntry } from '@/lib/types';
 
 type WordPressHeadProps = {
   page: PageEntry;
-  globalStylesheets: string[];
 };
 
-export function WordPressHead({ page, globalStylesheets }: WordPressHeadProps) {
-  const stylesheets = [...new Set([...globalStylesheets, ...page.stylesheets])];
-
+/** Page-specific stylesheets (core set is in root layout via CoreStylesheets). */
+export function WordPressHead({ page }: WordPressHeadProps) {
   return (
     <>
-      {stylesheets.map((href) => (
-        <link key={href} rel="stylesheet" href={href} />
+      {page.stylesheets.map((href) => (
+        <link key={`page-${href}`} rel="stylesheet" href={href} />
       ))}
       {page.headInlineStyles.map((css, index) => (
         <style

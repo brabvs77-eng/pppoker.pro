@@ -22,9 +22,23 @@ export type PageEntry = {
   isRedirect: boolean;
 };
 
+export type CssBudgetStats = {
+  totalUnique: number;
+  coreCount: number;
+  activePages: number;
+  threshold: number;
+  averagePageSpecific: number;
+};
+
 export type ContentManifest = {
   generatedAt: string;
   pageCount: number;
+  /** Shared styles loaded once in root layout */
+  coreStylesheets: string[];
+  /** All unique stylesheet URLs across the site */
+  allStylesheets: string[];
+  /** @deprecated Use coreStylesheets */
   globalStylesheets: string[];
+  cssBudget: CssBudgetStats;
   pages: PageEntry[];
 };
