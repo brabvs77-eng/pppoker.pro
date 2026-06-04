@@ -104,6 +104,11 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 
 - **Elementor header hidden** — global template `elementor-3180` in `#masthead` hidden when native chrome is active (page content / single-post templates remain)
 
+## Sprint 11 features
+
+- **HomePromo dedupe** — hides hero play button (`d014ade`), hotspot (`404896e`), manager icon row (`b5a91f5`); keeps bonus/headline column
+- **Secondary nav** — hides `elementor-3120` strip in `#masthead` on promo homepages (`/`, `/hy/`)
+
 ## Deploy
 
 Vercel uses `vercel.json`:

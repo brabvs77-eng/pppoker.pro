@@ -21,6 +21,19 @@ export const elementorFooterSelector = '#colophon, footer#colophon, .main_footer
 /** Global Elementor header template inside #masthead (replaced by native SiteHeader). */
 export const elementorGlobalHeaderClass = 'elementor-3180';
 
+/** Secondary nav strip in #masthead on RU homepage (hidden with HomePromo). */
+export const elementorSecondaryNavClass = 'elementor-3120';
+
+/**
+ * Hero widgets that duplicate HomePromo CTAs (play button, hotspot, manager icon row).
+ * Shared element IDs across RU (`elementor-3117`) and HY (`elementor-4301`) homepages.
+ */
+export const homepageDuplicateCtaElementIds = [
+  'd014ade',
+  '404896e',
+  'b5a91f5',
+] as const;
+
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
   telegramChannel: 'https://t.me/pppoker_pro',

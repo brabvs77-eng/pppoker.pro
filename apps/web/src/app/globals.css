@@ -19,6 +19,18 @@ body {
   display: none !important;
 }
 
+/* Hide secondary Elementor nav strip in masthead (RU homepage). */
+#wordpress-page-root[data-home-promo] #masthead .elementor.elementor-3120 {
+  display: none !important;
+}
+
+/* Hide hero CTAs duplicated by native HomePromo (keep headings + bonus box). */
+#wordpress-page-root[data-home-promo] .elementor-element-d014ade,
+#wordpress-page-root[data-home-promo] .elementor-element-404896e,
+#wordpress-page-root[data-home-promo] .elementor-element-b5a91f5 {
+  display: none !important;
+}
+
 /* Hide Elementor/WPML language switchers replaced by native chrome. */
 #wordpress-page-root[data-native-chrome] .custom-lang-switcher,
 #wordpress-page-root[data-native-chrome] .wpml-ls-statics-footer {

@@ -29,7 +29,7 @@
 
 | Компонент | Заменяет |
 |-----------|----------|
-| `HomePromo` | Дубли CTA / `menu-item-3206` на главных |
+| `HomePromo` | Дубли CTA / `menu-item-3206`; hero play/hotspot/icon row; `elementor-3120` на `/` |
 | `SiteHeader` | Верхнее меню + lang switcher в шапке |
 | `SiteFooter` | `#colophon`, `.main_footer`, WPML footer |
 
