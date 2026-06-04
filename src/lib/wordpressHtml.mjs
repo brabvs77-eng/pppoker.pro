@@ -517,7 +517,22 @@ function buildHomepageBlogLoopInventory(contentHtml) {
     cards,
     duplicateHrefs: getDuplicates(cards.map((card) => card.href).filter(Boolean)),
     loadMoreAnchorCount: loopGrid.find('.e-load-more-anchor').length,
+    paginationType: readElementorSettings(loopGrid).pagination_type ?? '',
   };
+}
+
+function readElementorSettings(element) {
+  const settings = element.attr('data-settings');
+
+  if (!settings) {
+    return {};
+  }
+
+  try {
+    return JSON.parse(settings);
+  } catch {
+    return {};
+  }
 }
 
 function extractLoadMoreNextPages(fragments) {

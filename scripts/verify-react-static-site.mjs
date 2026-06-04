@@ -25,6 +25,12 @@ async function main() {
   const nonRedirectRouteCount = manifest.pages.filter((page) => !page.isRedirect).length;
   const missingOutputs = [];
   const pageMismatches = [];
+  const sourceHomepage = await parseWordPressHtml(path.join(rootDir, 'index.html'), {
+    applyTransforms: false,
+    route: '/',
+  });
+
+  verifyHomepageBlogLoop(pageMismatches, sourceHomepage.homepageBlogLoop, 'source homepage');
 
   for (const page of sourcePages) {
     const outputPath = outputPathForRoute(outDir, page.route);
@@ -190,21 +196,25 @@ function compareFragmentInventory(
   }
 }
 
-function verifyHomepageBlogLoop(mismatches, homepageBlogLoop) {
+function verifyHomepageBlogLoop(mismatches, homepageBlogLoop, label = 'homepage') {
   if (!homepageBlogLoop) {
-    mismatches.push('/: missing homepage blog loop inventory');
+    mismatches.push(`/: missing ${label} blog loop inventory`);
     return;
   }
 
   if (homepageBlogLoop.loadMoreAnchorCount > 0) {
     mismatches.push(
-      `/: homepage blog loop still has ${homepageBlogLoop.loadMoreAnchorCount} load-more anchors`,
+      `/: ${label} blog loop still has ${homepageBlogLoop.loadMoreAnchorCount} load-more anchors`,
     );
+  }
+
+  if (homepageBlogLoop.paginationType === 'load_more_infinite_scroll') {
+    mismatches.push(`/: ${label} blog loop still has infinite-scroll pagination enabled`);
   }
 
   if (homepageBlogLoop.duplicateHrefs.length > 0) {
     mismatches.push(
-      `/: homepage blog loop has duplicate article links: ${homepageBlogLoop.duplicateHrefs
+      `/: ${label} blog loop has duplicate article links: ${homepageBlogLoop.duplicateHrefs
         .map((duplicate) => `${duplicate.value} (${duplicate.count})`)
         .join(', ')}`,
     );
