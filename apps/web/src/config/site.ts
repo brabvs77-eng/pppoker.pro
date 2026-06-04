@@ -28,6 +28,12 @@ export const elementorSecondaryNavClass = 'elementor-3120';
 export const homepageHeroRootElementId = '23c91dc';
 
 /**
+ * Empty spacer containers (min-height 100px) for the old fixed header.
+ * `8141f77` — blog/archive templates; `3f45d89` — single post & pages.
+ */
+export const legacyHeaderSpacerElementIds = ['8141f77', '3f45d89'] as const;
+
+/**
  * Hero widgets that duplicate HomePromo CTAs (play button, hotspot, manager icon row).
  * Shared element IDs across RU (`elementor-3117`) and HY (`elementor-4301`) homepages.
  */

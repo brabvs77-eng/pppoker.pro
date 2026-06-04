@@ -114,6 +114,10 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Secondary nav (all RU)** — `elementor-3120` hidden on every page with `data-native-chrome` (~43 RU routes), not only home
 - **Hero spacing** — removes `80px` top padding on homepage root (`23c91dc`) under native header + HomePromo
 
+## Sprint 13 features
+
+- **Header spacers** — hides empty `8141f77` (blog/archive) and `3f45d89` (posts/pages) `100px` blocks left for the old fixed Elementor header
+
 ## Deploy
 
 Vercel uses `vercel.json`:

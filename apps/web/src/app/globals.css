@@ -29,6 +29,12 @@ body {
   padding-top: 0 !important;
 }
 
+/* Hide empty 100px header spacers in blog/archive and post/page templates. */
+#wordpress-page-root[data-native-chrome] .elementor-element-8141f77,
+#wordpress-page-root[data-native-chrome] .elementor-element-3f45d89 {
+  display: none !important;
+}
+
 /* Hide hero CTAs duplicated by native HomePromo (keep headings + bonus box). */
 #wordpress-page-root[data-home-promo] .elementor-element-d014ade,
 #wordpress-page-root[data-home-promo] .elementor-element-404896e,

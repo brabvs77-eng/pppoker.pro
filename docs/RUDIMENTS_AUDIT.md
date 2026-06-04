@@ -30,7 +30,7 @@
 | Компонент | Заменяет |
 |-----------|----------|
 | `HomePromo` | Дубли CTA / `menu-item-3206`; hero play/hotspot/icon row |
-| `SiteHeader` | Верхнее меню + lang switcher; `elementor-3180` + `elementor-3120` в `#masthead` |
+| `SiteHeader` | Верхнее меню + lang switcher; `elementor-3180` + `elementor-3120`; спейсеры `8141f77` / `3f45d89` |
 | `SiteFooter` | `#colophon`, `.main_footer`, WPML footer |
 
 Elementor `#masthead` **сохраняется** — внутри hero и контент главной.
