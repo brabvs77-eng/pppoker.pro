@@ -216,7 +216,15 @@ function verifyHomepageBlogLoop(mismatches, homepageBlogLoop, label = 'homepage'
   }
 
   if (homepageBlogLoop.staticBlogGridCount !== 1) {
-    mismatches.push(`/: ${label} should expose exactly one static homepage blog grid, got ${homepageBlogLoop.staticBlogGridCount}`);
+    mismatches.push(`/: ${label} should expose exactly one homepage blog grid, got ${homepageBlogLoop.staticBlogGridCount}`);
+  }
+
+  if (homepageBlogLoop.reactBlogSectionCount !== 1) {
+    mismatches.push(`/: ${label} should use the new React homepage blog section exactly once, got ${homepageBlogLoop.reactBlogSectionCount}`);
+  }
+
+  if (homepageBlogLoop.legacyLoopItemCount > 0) {
+    mismatches.push(`/: ${label} still contains ${homepageBlogLoop.legacyLoopItemCount} legacy Elementor loop items`);
   }
 
   if (homepageBlogLoop.duplicateHrefs.length > 0) {

@@ -487,16 +487,19 @@ function routeFromUrl(value) {
 function buildHomepageBlogLoopInventory(contentHtml) {
   const $ = load(`<body>${contentHtml}</body>`, { decodeEntities: false });
   const loopGrid = getHomepageBlogGrid($);
-  const cards = loopGrid
-    .find('.e-loop-item')
+  const cards = getHomepageBlogCards(loopGrid)
     .toArray()
     .map((element) => {
       const card = $(element);
 
       return {
-        postId: splitClasses(card.attr('class')).find((className) => /^post-\d+$/.test(className)) ?? '',
+        postId: card.attr('data-post-slug')
+          ?? splitClasses(card.attr('class')).find((className) => /^post-\d+$/.test(className))
+          ?? '',
         href: card.find('a[href]').first().attr('href') ?? '',
-        title: normalizeText(card.find('.elementor-heading-title').first().text()),
+        title: normalizeText(
+          card.find('.react-homepage-blog-card__title, .elementor-heading-title').first().text(),
+        ),
       };
     })
     .filter((card) => card.href || card.title);
@@ -508,11 +511,19 @@ function buildHomepageBlogLoopInventory(contentHtml) {
     loadMoreAnchorCount: loopGrid.find('.e-load-more-anchor').length,
     paginationType: readElementorSettings(loopGrid).pagination_type ?? '',
     dynamicLoopGridCount: $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').length,
-    staticBlogGridCount: $('.static-homepage-blog-grid').length,
+    staticBlogGridCount: $('.react-homepage-blog, .static-homepage-blog-grid').length,
+    reactBlogSectionCount: $('.react-homepage-blog').length,
+    legacyLoopItemCount: $('.e-loop-item').length,
   };
 }
 
 function getHomepageBlogGrid($) {
+  const reactGrid = $('.react-homepage-blog').first();
+
+  if (reactGrid.length > 0) {
+    return reactGrid;
+  }
+
   const staticGrid = $('.static-homepage-blog-grid').first();
 
   if (staticGrid.length > 0) {
@@ -520,6 +531,16 @@ function getHomepageBlogGrid($) {
   }
 
   return $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').first();
+}
+
+function getHomepageBlogCards(loopGrid) {
+  const reactCards = loopGrid.find('.react-homepage-blog-card');
+
+  if (reactCards.length > 0) {
+    return reactCards;
+  }
+
+  return loopGrid.find('.e-loop-item');
 }
 
 function readElementorSettings(element) {

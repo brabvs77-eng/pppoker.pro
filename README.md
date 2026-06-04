@@ -36,6 +36,14 @@ Large page sections are rendered as React elements via `HtmlFragment`; raw HTML
 injection is limited to `<script>` and `<style>` contents so legacy CSS/JS is
 not corrupted during SSR.
 
+The Russian homepage blog block is no longer an Elementor loop-grid. It is
+rendered from `src/data/homepageBlogPosts.mjs` through the React
+`HomepageBlogSection` component and can be refreshed in the source export with:
+
+```bash
+npm run render:homepage-blog
+```
+
 `npm run verify` compares critical SEO snapshots between the WordPress source
 HTML and the React-generated output so incremental component replacements do
 not silently drop titles, descriptions, canonical URLs, language attributes,
