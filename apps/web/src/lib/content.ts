@@ -1,7 +1,8 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-import type { ContentManifest, PageEntry } from './types';
+import type { AppLocale } from '@/i18n/routing';
+import type { ContentManifest, PageEntry, PostRecord } from './types';
 
 const contentRoot = path.join(process.cwd(), '..', '..', 'content');
 
@@ -19,15 +20,51 @@ export async function getAllPages(): Promise<PageEntry[]> {
   return manifest.pages.filter((page) => !page.isRedirect);
 }
 
-export async function getPageBySlug(slug: string[] | undefined): Promise<PageEntry | null> {
+export async function getPagesByLocale(locale: AppLocale): Promise<PageEntry[]> {
   const pages = await getAllPages();
-  const normalized = slug ?? [];
+  return pages.filter((page) => page.locale === locale);
+}
 
+export function routeFromSlugAndLocale(
+  slug: string[] | undefined,
+  locale: AppLocale,
+): string {
+  const normalized = slug ?? [];
   if (normalized.length === 0) {
-    return pages.find((page) => page.route === '/') ?? null;
+    return locale === 'ru' ? '/' : `/${locale}/`;
+  }
+  if (locale === 'ru') {
+    return `/${normalized.join('/')}/`;
+  }
+  return `/${locale}/${normalized.join('/')}/`;
+}
+
+export function slugParamsFromPage(page: PageEntry, locale: AppLocale): string[] | undefined {
+  const segments = page.route.replace(/^\//, '').replace(/\/$/, '').split('/').filter(Boolean);
+
+  if (locale === 'ru') {
+    return segments.length ? segments : undefined;
   }
 
-  const route = `/${normalized.join('/')}/`;
+  if (segments[0] === locale) {
+    const rest = segments.slice(1);
+    return rest.length ? rest : undefined;
+  }
+
+  return segments.length ? segments : undefined;
+}
+
+export async function getPageBySlug(
+  slug: string[] | undefined,
+  locale: AppLocale,
+): Promise<PageEntry | null> {
+  const route = routeFromSlugAndLocale(slug, locale);
+  const pages = await getPagesByLocale(locale);
+  return pages.find((page) => page.route === route) ?? null;
+}
+
+export async function getPageByRoute(route: string): Promise<PageEntry | null> {
+  const pages = await getAllPages();
   return pages.find((page) => page.route === route) ?? null;
 }
 
@@ -36,7 +73,33 @@ export async function getBodyHtml(page: PageEntry): Promise<string> {
   return fs.readFile(filePath, 'utf8');
 }
 
-export function slugToRoute(slug: string[]): string {
-  if (slug.length === 0) return '/';
-  return `/${slug.join('/')}/`;
+export async function getPostRecord(page: PageEntry): Promise<PostRecord | null> {
+  if (!page.hasStructuredPost) return null;
+  try {
+    const raw = await fs.readFile(
+      path.join(contentRoot, 'posts', `${page.fileId}.json`),
+      'utf8',
+    );
+    return JSON.parse(raw) as PostRecord;
+  } catch {
+    return null;
+  }
+}
+
+export async function getBlogPosts(locale: AppLocale): Promise<PageEntry[]> {
+  return (await getPagesByLocale(locale))
+    .filter((page) => page.type === 'post')
+    .sort((a, b) => b.title.localeCompare(a.title, locale));
+}
+
+export function parseBlogPageNumber(route: string): number | null {
+  const match = route.match(/\/blog\/page\/(\d+)\/$/);
+  return match ? Number.parseInt(match[1], 10) : null;
+}
+
+export async function getBlogArchiveManifestPages(locale: AppLocale): Promise<PageEntry[]> {
+  const pages = await getPagesByLocale(locale);
+  return pages.filter(
+    (page) => page.type === 'blog' || parseBlogPageNumber(page.route) !== null,
+  );
 }

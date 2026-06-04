@@ -19,7 +19,18 @@ export type PageEntry = {
   headInlineStyles: string[];
   bodyScripts: string[];
   bodyAttributes: Record<string, string>;
+  jsonLd: string[];
   isRedirect: boolean;
+  hasStructuredPost: boolean;
+};
+
+export type PostRecord = {
+  route: string;
+  locale: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  html: string;
 };
 
 export type CssBudgetStats = {
@@ -33,11 +44,8 @@ export type CssBudgetStats = {
 export type ContentManifest = {
   generatedAt: string;
   pageCount: number;
-  /** Shared styles loaded once in root layout */
   coreStylesheets: string[];
-  /** All unique stylesheet URLs across the site */
   allStylesheets: string[];
-  /** @deprecated Use coreStylesheets */
   globalStylesheets: string[];
   cssBudget: CssBudgetStats;
   pages: PageEntry[];

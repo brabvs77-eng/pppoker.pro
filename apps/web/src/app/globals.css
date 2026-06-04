@@ -8,3 +8,60 @@ body {
 #wordpress-page-root {
   min-height: 100vh;
 }
+
+.post-article {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #fff;
+}
+
+.post-article__header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-article__header time {
+  color: #9aa8c7;
+  font-size: 0.9rem;
+}
+
+.blog-archive {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #fff;
+}
+
+.blog-archive__list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+.blog-archive__list li {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.blog-archive__list a {
+  color: #fde661;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.blog-archive__list p {
+  color: #9aa8c7;
+  margin: 0.5rem 0 0;
+}
+
+.blog-archive__pagination {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.blog-archive__pagination a {
+  color: #fde661;
+}

@@ -4,15 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "strip:hekler": "node scripts/strip-hekler-legacy.mjs",
     "extract:content": "node scripts/extract-content.mjs",
     "analyze:styles": "node scripts/analyze-stylesheets.mjs",
     "prepare:public": "node scripts/prepare-next-public.mjs",
     "build:legacy-react": "node scripts/build-react-static-site.mjs",
     "verify:legacy-react": "node scripts/verify-react-static-site.mjs",
-    "build:next": "npm run extract:content && npm run prepare:public && npm --prefix apps/web run build",
+    "flatten:ru": "node scripts/flatten-ru-export.mjs",
+    "build:next": "rm -rf apps/web/out content && npm run strip:hekler && npm run extract:content && npm run prepare:public && npm --prefix apps/web run build && npm run flatten:ru && npm run verify:next && npm run verify:no-hekler",
     "build": "npm run build:next",
     "dev": "npm run extract:content && npm run prepare:public && npm --prefix apps/web run dev",
     "verify:next": "node scripts/verify-next-site.mjs",
+    "verify:no-hekler": "node scripts/verify-no-hekler.mjs",
     "migrate:react": "npm run build:legacy-react && npm run verify:legacy-react"
   },
   "dependencies": {

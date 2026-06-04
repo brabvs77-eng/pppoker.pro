@@ -16,6 +16,8 @@ const WORKSPACE_IGNORES = [
 const PAGE_IGNORES = [
   ...WORKSPACE_IGNORES,
   'assets/**',
+  'apps/**',
+  'content/**',
 ];
 
 export async function discoverWordPressPages(rootDir) {

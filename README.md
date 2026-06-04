@@ -36,9 +36,18 @@ npm run build:legacy-react
 
 ## CSS budget and URL normalization
 
-On extract, absolute `pppoker.pro` / `hekler.info` URLs in HTML, inline CSS (`url(...)`), and metadata become root-relative (`/assets/...`).
+On extract, legacy `hekler.info` URLs are rewritten to `pppoker.pro`, then converted to root-relative paths (`/assets/...`). `npm run verify:no-hekler` fails the build if the old domain leaks into generated output.
 
-Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **core** and loaded once in `app/layout.tsx`. Each route only loads its **page-specific** diff (~15 files on average instead of the full ~70 on every page).
+Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **core** and loaded once in the locale layout. Each route only loads its **page-specific** diff.
+
+## Sprint 2 features
+
+- **next-intl** — locales `ru`, `en`, `uz`, `kz`, `hy` with `localePrefix: 'as-needed'` (Russian without prefix)
+- **Typed blog routes** — `/blog/`, `/blog/page/N/` with `BlogArchive` component
+- **Structured posts** — article HTML extracted to `content/posts/*.json`, rendered via `PostArticle`
+- **JSON-LD** — Yoast blocks rendered from manifest (`JsonLd` component)
+- **Sitemap** — `app/sitemap.ts` generated from manifest
+- **Body classes** — applied on `#wordpress-page-root` (no client-side `BodyAttributes`)
 
 ## Deploy
 

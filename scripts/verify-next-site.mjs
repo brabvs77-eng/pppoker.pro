@@ -6,17 +6,23 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
 
+function outputPathForRoute(route) {
+  if (route === '/') {
+    return path.join(outDir, 'index.html');
+  }
+
+  return path.join(outDir, route.replace(/^\//, ''), 'index.html');
+}
+
 async function main() {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   const missing = [];
 
   for (const page of manifest.pages) {
     if (page.isRedirect) continue;
+    if (page.route.includes('/apps/web/')) continue;
 
-    const outputPath =
-      page.route === '/'
-        ? path.join(outDir, 'index.html')
-        : path.join(outDir, page.route.replace(/^\//, ''), 'index.html');
+    const outputPath = outputPathForRoute(page.route);
 
     try {
       await fs.access(outputPath);
@@ -27,12 +33,12 @@ async function main() {
 
   if (missing.length) {
     console.error(`Missing ${missing.length} routes in apps/web/out:`);
-    missing.slice(0, 20).forEach((route) => console.error(`  - ${route}`));
+    missing.slice(0, 25).forEach((route) => console.error(`  - ${route}`));
     process.exitCode = 1;
     return;
   }
 
-  const active = manifest.pages.filter((page) => !page.isRedirect).length;
+  const active = manifest.pages.filter((p) => !p.isRedirect && !p.route.includes('/apps/web/')).length;
   console.log(`Verified ${active} routes in apps/web/out`);
 }
 

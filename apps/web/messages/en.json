@@ -1,0 +1,10 @@
+{
+  "blog": {
+    "title": "Blog",
+    "readMore": "Read"
+  },
+  "notFound": {
+    "title": "404",
+    "back": "Home"
+  }
+}

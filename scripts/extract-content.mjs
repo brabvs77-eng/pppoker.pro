@@ -5,12 +5,14 @@ import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
 
 import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
-import { normalizeUrls } from '../src/lib/normalizeUrls.mjs';
+import { assertNoHekler, normalizeUrls } from '../src/lib/normalizeUrls.mjs';
 import { computeCssBudget } from './compute-css-budget.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = path.join(rootDir, 'content');
 const bodiesDir = path.join(contentDir, 'bodies');
+const postsDir = path.join(contentDir, 'posts');
+const SITE_URL = 'https://pppoker.pro';
 
 function routeToFileId(route) {
   if (route === '/') return '_root';
@@ -23,8 +25,14 @@ function detectLocale(route) {
   return 'ru';
 }
 
+function isBlogArchiveRoute(route) {
+  if (route === '/blog/') return true;
+  if (/^\/blog\/page\/\d+\/$/.test(route)) return true;
+  return /^\/(en|uz|kz|hy|tj)\/blog(\/page\/\d+)?\/?$/.test(route);
+}
+
 function classifyPage(route, bodyHtml) {
-  if (route.startsWith('/blog')) return 'blog';
+  if (isBlogArchiveRoute(route)) return 'blog';
   if (route.startsWith('/category/')) return 'category';
   if (route.startsWith('/tag/')) return 'tag';
   if (route.startsWith('/team/')) return 'team';
@@ -83,6 +91,67 @@ function extractBodyScripts($) {
   return [...new Set(scripts)];
 }
 
+function extractJsonLd($) {
+  const blocks = [];
+  $('script[type="application/ld+json"]').each((_, el) => {
+    const raw = $(el).html()?.trim();
+    if (raw) blocks.push(normalizeUrls(raw));
+  });
+  return blocks;
+}
+
+function extractPostArticleHtml($) {
+  const widget = $('.elementor-widget-theme-post-content').first();
+  if (widget.length) {
+    return normalizeUrls(widget.html() ?? '');
+  }
+  return null;
+}
+
+function extractPublishedTime($) {
+  const meta =
+    $('meta[property="article:published_time"]').attr('content') ||
+    $('meta[property="og:updated_time"]').attr('content') ||
+    '';
+  return meta ? normalizeUrls(meta) : '';
+}
+
+async function writePostRecord(fileId, record) {
+  await fs.mkdir(postsDir, { recursive: true });
+  const serialized = JSON.stringify(record, null, 2);
+  assertNoHekler(serialized, `content/posts/${fileId}.json`);
+  await fs.writeFile(path.join(postsDir, `${fileId}.json`), `${serialized}\n`, 'utf8');
+}
+
+async function generateLlmsTxt(pages) {
+  const active = pages.filter((page) => !page.isRedirect);
+  const lines = [
+    '# Nuts онлайн покер клуб pppoker россия',
+    '',
+    '> Онлайн покер на деньги — PPPoker. Надежный покер-рум с выводом, бонусами и турнирами.',
+    '',
+    `Generated ${new Date().toISOString().split('T')[0]}. All URLs: ${SITE_URL}`,
+    '',
+    '## Страницы',
+  ];
+
+  for (const page of active.filter((p) => ['home', 'page'].includes(p.type)).slice(0, 12)) {
+    lines.push(`- [${page.title}](${SITE_URL}${page.route === '/' ? '' : page.route.replace(/^\//, '')})`);
+  }
+
+  lines.push('', '## Записи блога');
+  for (const page of active.filter((p) => p.type === 'post').slice(0, 20)) {
+    const pathPart = page.route.replace(/^\//, '').replace(/\/$/, '');
+    lines.push(`- [${page.title}](${SITE_URL}/${pathPart}/)`);
+  }
+
+  lines.push('', '## Optional', `- [Sitemap index](${SITE_URL}/sitemap_index.xml)`, '');
+
+  const llms = lines.join('\n');
+  assertNoHekler(llms, 'llms.txt');
+  await fs.writeFile(path.join(rootDir, 'llms.txt'), llms, 'utf8');
+}
+
 async function main() {
   await fs.rm(contentDir, { recursive: true, force: true });
   await fs.mkdir(bodiesDir, { recursive: true });
@@ -96,17 +165,20 @@ async function main() {
     const body = $('body').first();
     const bodyHtml = normalizeUrls(body.html() ?? '');
     const stylesheets = extractStylesheets($);
-
+    const type = classifyPage(page.route, bodyHtml);
     const fileId = routeToFileId(page.route);
-    await fs.writeFile(path.join(contentDir, 'bodies', `${fileId}.html`), bodyHtml, 'utf8');
 
-    manifestPages.push({
+    assertNoHekler(bodyHtml, `body ${page.route}`);
+
+    await fs.writeFile(path.join(bodiesDir, `${fileId}.html`), bodyHtml, 'utf8');
+
+    const entry = {
       route: page.route,
       slug: page.route === '/' ? [] : page.route.replace(/^\//, '').replace(/\/$/, '').split('/'),
       fileId,
       source: page.relativePath,
       locale: detectLocale(page.route),
-      type: classifyPage(page.route, bodyHtml),
+      type,
       title: normalizeUrls($('head title').first().text().replace(/\s+/g, ' ').trim()),
       description: normalizeUrls($('head meta[name="description"]').first().attr('content') ?? ''),
       canonical: normalizeUrls($('head link[rel="canonical"]').first().attr('href') ?? page.route),
@@ -116,8 +188,27 @@ async function main() {
       headInlineStyles: extractHeadInlineStyles($),
       bodyScripts: extractBodyScripts($),
       bodyAttributes: normalizeRecord(body.attr() ?? {}),
+      jsonLd: extractJsonLd($),
       isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
-    });
+      hasStructuredPost: false,
+    };
+
+    if (type === 'post') {
+      const articleHtml = extractPostArticleHtml($);
+      if (articleHtml) {
+        entry.hasStructuredPost = true;
+        await writePostRecord(fileId, {
+          route: entry.route,
+          locale: entry.locale,
+          title: entry.title,
+          description: entry.description,
+          publishedAt: extractPublishedTime($),
+          html: articleHtml,
+        });
+      }
+    }
+
+    manifestPages.push(entry);
   }
 
   const budget = computeCssBudget(manifestPages);
@@ -127,21 +218,23 @@ async function main() {
     pageCount: budget.pages.length,
     coreStylesheets: budget.coreStylesheets,
     allStylesheets: budget.allStylesheets,
-    /** @deprecated Use coreStylesheets + per-page stylesheets */
     globalStylesheets: budget.allStylesheets,
     cssBudget: budget.stats,
     pages: budget.pages.sort((a, b) => a.route.localeCompare(b.route)),
   };
 
-  await fs.writeFile(
-    path.join(contentDir, 'manifest.json'),
-    `${JSON.stringify(manifest, null, 2)}\n`,
-    'utf8',
-  );
+  const manifestJson = JSON.stringify(manifest, null, 2);
+  assertNoHekler(manifestJson, 'manifest.json');
+
+  await fs.writeFile(path.join(contentDir, 'manifest.json'), `${manifestJson}\n`, 'utf8');
+  await generateLlmsTxt(budget.pages);
 
   console.log(`Extracted ${budget.pages.length} pages to content/`);
   console.log(
-    `CSS budget: ${budget.stats.coreCount} core + ~${budget.stats.averagePageSpecific.toFixed(1)} page-specific stylesheets (was ${budget.stats.totalUnique} on every page)`,
+    `CSS budget: ${budget.stats.coreCount} core + ~${budget.stats.averagePageSpecific.toFixed(1)} page-specific stylesheets`,
+  );
+  console.log(
+    `Structured posts: ${budget.pages.filter((p) => p.hasStructuredPost).length}`,
   );
 }
 
