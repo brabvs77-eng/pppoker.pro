@@ -33,7 +33,10 @@ async function main() {
   const manifest = [];
 
   for (const page of pages) {
-    const parsed = await parseWordPressHtml(page.sourcePath, { generatedRoutes });
+    const parsed = await parseWordPressHtml(page.sourcePath, {
+      generatedRoutes,
+      route: page.route,
+    });
     const routeMetadata = buildRouteMetadata(page.route, parsed);
     const renderedFragments = {
       headerHtml: renderToStaticMarkup(
@@ -72,10 +75,22 @@ async function main() {
       landmarks: parsed.landmarks,
       fragmentInventory: parsed.fragmentInventory,
       contentTransforms: parsed.contentTransforms,
+      seoSnippet: parsed.seoSnippet,
+      seoSnippetTransforms: parsed.seoSnippetTransforms,
       homepageBlogLoop: parsed.homepageBlogLoop,
       loadMoreNextPages: parsed.loadMoreNextPages,
     });
   }
+
+  const publicSnippets = manifest
+    .filter((page) => !page.isRedirect)
+    .map((page) => page.seoSnippet);
+
+  await writeJson(path.join(outDir, 'site-snippets.json'), {
+    generatedAt: new Date().toISOString(),
+    snippetCount: publicSnippets.length,
+    snippets: publicSnippets,
+  });
 
   await writeJson(path.join(outDir, 'react-route-manifest.json'), {
     generatedAt: new Date().toISOString(),

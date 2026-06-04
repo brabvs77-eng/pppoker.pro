@@ -26,13 +26,19 @@ inventory. SEO support files such as `robots.txt`, `sitemap_index.xml`, and
 Yoast-generated sitemaps are copied into `dist/` alongside the existing
 `assets/` tree.
 
+The build also writes `dist/site-snippets.json` with the public SEO/social
+snippet for each non-redirect route. Missing snippet fields are filled during
+generation with safe localized fallbacks for meta description, canonical,
+Open Graph, and Twitter preview tags.
+
 `npm run verify` compares critical SEO snapshots between the WordPress source
 HTML and the React-generated output so incremental component replacements do
 not silently drop titles, descriptions, canonical URLs, language attributes,
 hreflang alternates, JSON-LD schema blocks, or the expected header/content/
 footer/script fragment boundaries. It also checks generated Elementor
 load-more targets and prevents duplicate article links in the homepage blog
-loop.
+loop. Snippet validation requires every non-redirect route to have populated
+title, description, canonical URL, Open Graph preview, and Twitter preview.
 
 See `docs/react-componentization.md` for the ordered React component extraction
 plan.

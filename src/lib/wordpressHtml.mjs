@@ -4,6 +4,8 @@ import path from 'node:path';
 import { load } from 'cheerio';
 import { glob } from 'glob';
 
+import { applySeoSnippet, readSeoSnippet } from './seoSnippets.mjs';
+
 const WORKSPACE_IGNORES = [
   '.git/**',
   '.next/**',
@@ -50,6 +52,20 @@ export async function parseWordPressHtml(filePath, options = {}) {
   const description = $('head meta[name="description"]').first().attr('content') ?? '';
   const canonical = $('head link[rel="canonical"]').first().attr('href') ?? '';
   const lang = html.attr('lang') ?? '';
+  const isRedirect = Boolean($('head meta[http-equiv="refresh" i]').length);
+  const route = options.route ?? routeFromCanonical(canonical) ?? '/';
+  const routeMetadata = {
+    route,
+    locale: inferLocale(route, lang),
+    type: classifyRoute(route, { bodyClasses, isRedirect }),
+    isRedirect,
+  };
+  const seoSnippetResult = options.applyTransforms === false
+    ? {
+      snippet: readSeoSnippet($, routeMetadata),
+      transforms: [],
+    }
+    : applySeoSnippet($, routeMetadata);
   const bodyFragments = extractBodyFragments($, body);
   const contentTransforms = options.applyTransforms === false
     ? []
@@ -65,11 +81,11 @@ export async function parseWordPressHtml(filePath, options = {}) {
     bodyHtml: body.html() ?? '',
     bodyFragments,
     bodyClasses,
-    title,
-    description,
-    canonical,
+    title: normalizeText($('head title').first().text()) || title,
+    description: $('head meta[name="description"]').first().attr('content') ?? description,
+    canonical: $('head link[rel="canonical"]').first().attr('href') ?? canonical,
     lang,
-    isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
+    isRedirect,
     alternates: $('head link[rel="alternate"][hreflang]')
       .toArray()
       .map((element) => {
@@ -89,6 +105,8 @@ export async function parseWordPressHtml(filePath, options = {}) {
     },
     fragmentInventory: buildFragmentInventory(bodyFragments),
     contentTransforms,
+    seoSnippet: seoSnippetResult.snippet,
+    seoSnippetTransforms: seoSnippetResult.transforms,
     homepageBlogLoop: canonical === 'https://pppoker.pro/'
       ? buildHomepageBlogLoopInventory(bodyFragments.contentHtml)
       : null,
@@ -260,6 +278,24 @@ function splitClasses(value = '') {
 
 function routeHasLocalePrefix(route) {
   return /^\/(?:en|hy|kz|tj|uz)(?:\/|$)/.test(route);
+}
+
+function routeFromCanonical(canonical) {
+  if (!canonical) {
+    return null;
+  }
+
+  try {
+    const url = new URL(canonical);
+
+    if (url.hostname !== 'pppoker.pro') {
+      return null;
+    }
+
+    return url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+  } catch {
+    return null;
+  }
 }
 
 function extractBodyFragments($, body) {

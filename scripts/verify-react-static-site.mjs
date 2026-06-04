@@ -18,7 +18,11 @@ async function main() {
   const manifest = JSON.parse(
     await fs.readFile(path.join(outDir, 'react-route-manifest.json'), 'utf8'),
   );
+  const snippetManifest = JSON.parse(
+    await fs.readFile(path.join(outDir, 'site-snippets.json'), 'utf8'),
+  );
   const manifestByRoute = new Map(manifest.pages.map((page) => [page.route, page]));
+  const nonRedirectRouteCount = manifest.pages.filter((page) => !page.isRedirect).length;
   const missingOutputs = [];
   const pageMismatches = [];
 
@@ -33,8 +37,8 @@ async function main() {
     }
 
     const [sourcePage, generatedPage] = await Promise.all([
-      parseWordPressHtml(page.sourcePath, { generatedRoutes }),
-      parseWordPressHtml(outputPath, { applyTransforms: false }),
+      parseWordPressHtml(page.sourcePath, { generatedRoutes, route: page.route }),
+      parseWordPressHtml(outputPath, { applyTransforms: false, route: page.route }),
     ]);
     const manifestPage = manifestByRoute.get(page.route);
     const expectedMetadata = buildRouteMetadata(page.route, sourcePage);
@@ -81,6 +85,8 @@ async function main() {
       verifyHomepageBlogLoop(pageMismatches, generatedPage.homepageBlogLoop);
     }
 
+    verifySeoSnippet(pageMismatches, page.route, generatedPage.seoSnippet, generatedPage.isRedirect);
+
     if (!manifestPage) {
       pageMismatches.push(`${page.route}: missing route manifest entry`);
     } else {
@@ -93,6 +99,7 @@ async function main() {
         manifestPage.fragmentInventory,
         'manifest.fragmentInventory',
       );
+      verifySeoSnippet(pageMismatches, page.route, manifestPage.seoSnippet, generatedPage.isRedirect, 'manifest.seoSnippet');
     }
   }
 
@@ -104,6 +111,7 @@ async function main() {
     'category-sitemap.xml',
     'post_tag-sitemap.xml',
     'main-sitemap.xsl',
+    'site-snippets.json',
   ];
 
   const missingStaticFiles = [];
@@ -122,6 +130,16 @@ async function main() {
     );
   }
 
+  if (snippetManifest.snippetCount !== nonRedirectRouteCount) {
+    throw new Error(
+      `Snippet count mismatch: snippet manifest has ${snippetManifest.snippetCount}, non-redirect routes have ${nonRedirectRouteCount}`,
+    );
+  }
+
+  for (const snippet of snippetManifest.snippets) {
+    verifySeoSnippet(pageMismatches, snippet.route, snippet, false, 'site-snippets');
+  }
+
   if (missingOutputs.length > 0) {
     throw new Error(`Missing generated pages: ${missingOutputs.join(', ')}`);
   }
@@ -136,6 +154,7 @@ async function main() {
 
   console.log(`Verified ${sourcePages.length} generated routes`);
   console.log('Verified SEO snapshots for generated routes');
+  console.log(`Verified ${snippetManifest.snippetCount} generated snippets`);
   console.log(`Verified ${requiredStaticFiles.length} SEO/static support files`);
 }
 
@@ -189,6 +208,35 @@ function verifyHomepageBlogLoop(mismatches, homepageBlogLoop) {
         .map((duplicate) => `${duplicate.value} (${duplicate.count})`)
         .join(', ')}`,
     );
+  }
+}
+
+function verifySeoSnippet(mismatches, route, snippet, isRedirect, fieldPrefix = 'seoSnippet') {
+  if (isRedirect) {
+    return;
+  }
+
+  if (!snippet) {
+    mismatches.push(`${route}: missing ${fieldPrefix}`);
+    return;
+  }
+
+  for (const field of [
+    'title',
+    'description',
+    'canonical',
+    'ogTitle',
+    'ogDescription',
+    'ogUrl',
+    'ogImage',
+    'twitterCard',
+    'twitterTitle',
+    'twitterDescription',
+    'twitterImage',
+  ]) {
+    if (!snippet[field]) {
+      mismatches.push(`${route}: ${fieldPrefix}.${field} is empty`);
+    }
   }
 }
 
