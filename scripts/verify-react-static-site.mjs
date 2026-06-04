@@ -151,7 +151,8 @@ function compareFragmentInventory(
     'hasHeader',
     'hasFooter',
     'hasAfterFooter',
-    'contentLength',
+    'contentElementCount',
+    'contentScriptCount',
     'afterFooterScriptCount',
   ]) {
     comparePageField(

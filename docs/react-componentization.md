@@ -88,7 +88,7 @@ Then compare the affected routes:
 - canonical is unchanged
 - hreflang count and targets are unchanged
 - JSON-LD script count is unchanged
-- fragment inventory is unchanged unless the DOM change is intentional
+- structural fragment inventory is unchanged unless the DOM change is intentional
 - H1 count is intentional and documented
 - Telegram/WhatsApp URLs are unchanged
 - sitemap and robots files are present in `dist/`

@@ -5,6 +5,14 @@ export function normalizeReactAttributes(attributes = {}) {
         return ['className', value];
       }
 
+      if (name === 'itemscope') {
+        return ['itemScope', value];
+      }
+
+      if (name === 'itemtype') {
+        return ['itemType', value];
+      }
+
       return [name, value];
     }),
   );

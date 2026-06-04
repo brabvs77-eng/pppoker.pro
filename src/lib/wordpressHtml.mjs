@@ -282,6 +282,8 @@ function buildFragmentInventory(fragments) {
     hasFooter: Boolean(fragments.footer),
     hasAfterFooter: fragments.afterFooterHtml.length > 0,
     contentLength: fragments.contentHtml.length,
+    contentElementCount: countHtmlElements(fragments.contentHtml),
+    contentScriptCount: countScriptTags(fragments.contentHtml),
     afterFooterScriptCount: countScriptTags(fragments.afterFooterHtml),
   };
 }
@@ -306,4 +308,8 @@ function findLastIndex(items, predicate) {
 
 function countScriptTags(html) {
   return (html.match(/<script[\s>]/gi) ?? []).length;
+}
+
+function countHtmlElements(html) {
+  return (html.match(/<[a-z][\w:-]*(?:\s|>)/gi) ?? []).length;
 }
