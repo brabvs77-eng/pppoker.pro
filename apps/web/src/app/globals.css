@@ -1,0 +1,10 @@
+/* WordPress/Elementor pages ship their own styles; keep Next shell minimal. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wordpress-page-root {
+  min-height: 100vh;
+}

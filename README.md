@@ -1,25 +1,49 @@
 # pppoker.pro
 
-## React static migration
+Marketing site for the Nuts PPPoker club. The production stack is **Next.js 15** (App Router, static export) with content extracted from the legacy WordPress/Elementor static export.
 
-The WordPress/Elementor export remains the source of truth during the first
-migration stage. The React build pipeline reads every public `index.html`
-route, renders it through React server-side rendering, preserves the original
-`head`, `body` attributes, content, metadata, scripts, and URL structure, then
-writes the static site to `dist/`.
+## Architecture
+
+| Path | Purpose |
+|------|---------|
+| `apps/web/` | Next.js application |
+| `content/` | Generated page manifest + HTML bodies (build artifact) |
+| `scripts/extract-content.mjs` | Parses legacy `**/index.html` into `content/` |
+| `scripts/prepare-next-public.mjs` | Copies `assets/`, `includes/`, sitemaps into `apps/web/public/` |
+| `src/lib/wordpressHtml.mjs` | Shared HTML discovery utilities |
+| `index.html`, `blog/`, … | Legacy WordPress static export (source for extraction) |
+
+## Commands
 
 ```bash
+# Full production build (extract → copy assets → Next static export)
 npm run build
-npm run verify
+
+# Local development
+npm run dev
+
+# Verify all routes exist in apps/web/out
+npm run verify:next
+
+# Legacy React SSR wrapper (previous migration stage)
+npm run build:legacy-react
 ```
 
-Or run both:
+## Deploy
 
-```bash
-npm run migrate:react
-```
+Vercel uses `vercel.json`:
 
-The generated `dist/react-route-manifest.json` lists every preserved route,
-language, title, canonical URL, and source file. SEO support files such as
-`robots.txt`, `sitemap_index.xml`, and Yoast-generated sitemaps are copied into
-`dist/` alongside the existing `assets/` tree.
+- **Build:** `npm run build`
+- **Output:** `apps/web/out`
+
+## Adding or updating pages
+
+1. Update the legacy static HTML export (or edit WordPress and re-export).
+2. Run `npm run build` — content is re-extracted automatically.
+3. Deploy.
+
+## Next steps (optional improvements)
+
+- Replace preserved Elementor HTML sections with native React components section by section.
+- Add `next-intl` route prefixes with middleware if locale routing needs refinement.
+- Wire headless CMS instead of HTML extraction when editorial workflow is ready.

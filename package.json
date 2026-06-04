@@ -1,12 +1,18 @@
 {
-  "name": "pppoker-react-static-site",
-  "version": "1.0.0",
+  "name": "pppoker-pro",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-react-static-site.mjs",
-    "verify": "node scripts/verify-react-static-site.mjs",
-    "migrate:react": "npm run build && npm run verify"
+    "extract:content": "node scripts/extract-content.mjs",
+    "prepare:public": "node scripts/prepare-next-public.mjs",
+    "build:legacy-react": "node scripts/build-react-static-site.mjs",
+    "verify:legacy-react": "node scripts/verify-react-static-site.mjs",
+    "build:next": "npm run extract:content && npm run prepare:public && npm --prefix apps/web run build",
+    "build": "npm run build:next",
+    "dev": "npm run extract:content && npm run prepare:public && npm --prefix apps/web run dev",
+    "verify:next": "node scripts/verify-next-site.mjs",
+    "migrate:react": "npm run build:legacy-react && npm run verify:legacy-react"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

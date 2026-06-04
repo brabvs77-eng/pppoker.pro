@@ -1,4 +1,8 @@
 node_modules/
 dist/
 .next/
+apps/web/out/
+apps/web/public/assets/
+apps/web/public/includes/
+content/
 npm-debug.log*
