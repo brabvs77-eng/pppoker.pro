@@ -30,7 +30,9 @@ Yoast-generated sitemaps are copied into `dist/` alongside the existing
 HTML and the React-generated output so incremental component replacements do
 not silently drop titles, descriptions, canonical URLs, language attributes,
 hreflang alternates, JSON-LD schema blocks, or the expected header/content/
-footer/script fragment boundaries.
+footer/script fragment boundaries. It also checks generated Elementor
+load-more targets and prevents duplicate article links in the homepage blog
+loop.
 
 See `docs/react-componentization.md` for the ordered React component extraction
 plan.

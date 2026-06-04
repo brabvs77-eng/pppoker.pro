@@ -14,6 +14,7 @@ const outDir = path.join(rootDir, 'dist');
 
 async function main() {
   const sourcePages = await discoverWordPressPages(rootDir);
+  const generatedRoutes = new Set(sourcePages.map((page) => page.route));
   const manifest = JSON.parse(
     await fs.readFile(path.join(outDir, 'react-route-manifest.json'), 'utf8'),
   );
@@ -32,8 +33,8 @@ async function main() {
     }
 
     const [sourcePage, generatedPage] = await Promise.all([
-      parseWordPressHtml(page.sourcePath),
-      parseWordPressHtml(outputPath),
+      parseWordPressHtml(page.sourcePath, { generatedRoutes }),
+      parseWordPressHtml(outputPath, { applyTransforms: false }),
     ]);
     const manifestPage = manifestByRoute.get(page.route);
     const expectedMetadata = buildRouteMetadata(page.route, sourcePage);
@@ -74,6 +75,11 @@ async function main() {
       sourcePage.fragmentInventory,
       generatedPage.fragmentInventory,
     );
+    verifyLoadMoreTargets(pageMismatches, page.route, generatedPage.loadMoreNextPages, generatedRoutes);
+
+    if (page.route === '/') {
+      verifyHomepageBlogLoop(pageMismatches, generatedPage.homepageBlogLoop);
+    }
 
     if (!manifestPage) {
       pageMismatches.push(`${page.route}: missing route manifest entry`);
@@ -162,6 +168,51 @@ function compareFragmentInventory(
       expected?.[key],
       actual?.[key],
     );
+  }
+}
+
+function verifyHomepageBlogLoop(mismatches, homepageBlogLoop) {
+  if (!homepageBlogLoop) {
+    mismatches.push('/: missing homepage blog loop inventory');
+    return;
+  }
+
+  if (homepageBlogLoop.loadMoreAnchorCount > 0) {
+    mismatches.push(
+      `/: homepage blog loop still has ${homepageBlogLoop.loadMoreAnchorCount} load-more anchors`,
+    );
+  }
+
+  if (homepageBlogLoop.duplicateHrefs.length > 0) {
+    mismatches.push(
+      `/: homepage blog loop has duplicate article links: ${homepageBlogLoop.duplicateHrefs
+        .map((duplicate) => `${duplicate.value} (${duplicate.count})`)
+        .join(', ')}`,
+    );
+  }
+}
+
+function verifyLoadMoreTargets(mismatches, route, nextPages, generatedRoutes) {
+  for (const nextPage of nextPages) {
+    const nextRoute = routeFromUrl(nextPage);
+
+    if (nextRoute && !generatedRoutes.has(nextRoute)) {
+      mismatches.push(`${route}: load-more target is not generated: ${nextPage}`);
+    }
+  }
+}
+
+function routeFromUrl(value) {
+  try {
+    const url = new URL(value, 'https://pppoker.pro');
+
+    if (url.hostname !== 'pppoker.pro') {
+      return null;
+    }
+
+    return url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+  } catch {
+    return null;
   }
 }
 

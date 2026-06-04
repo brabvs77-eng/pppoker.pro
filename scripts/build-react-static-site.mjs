@@ -28,11 +28,12 @@ async function main() {
     discoverWordPressPages(rootDir),
     copyStaticAssets(rootDir, outDir),
   ]);
+  const generatedRoutes = new Set(pages.map((page) => page.route));
 
   const manifest = [];
 
   for (const page of pages) {
-    const parsed = await parseWordPressHtml(page.sourcePath);
+    const parsed = await parseWordPressHtml(page.sourcePath, { generatedRoutes });
     const routeMetadata = buildRouteMetadata(page.route, parsed);
     const renderedFragments = {
       headerHtml: renderToStaticMarkup(
@@ -70,6 +71,9 @@ async function main() {
       schemaGraphCount: parsed.schemaGraphCount,
       landmarks: parsed.landmarks,
       fragmentInventory: parsed.fragmentInventory,
+      contentTransforms: parsed.contentTransforms,
+      homepageBlogLoop: parsed.homepageBlogLoop,
+      loadMoreNextPages: parsed.loadMoreNextPages,
     });
   }
 

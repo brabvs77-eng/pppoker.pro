@@ -39,14 +39,24 @@ export async function discoverWordPressPages(rootDir) {
     }));
 }
 
-export async function parseWordPressHtml(filePath) {
+export async function parseWordPressHtml(filePath, options = {}) {
   const source = await fs.readFile(filePath, 'utf8');
   const $ = load(source, { decodeEntities: false });
   const html = $('html').first();
   const head = $('head').first();
   const body = $('body').first();
   const bodyClasses = splitClasses(body.attr('class'));
+  const title = normalizeText($('head title').first().text());
+  const description = $('head meta[name="description"]').first().attr('content') ?? '';
+  const canonical = $('head link[rel="canonical"]').first().attr('href') ?? '';
+  const lang = html.attr('lang') ?? '';
   const bodyFragments = extractBodyFragments($, body);
+  const contentTransforms = options.applyTransforms === false
+    ? []
+    : applyContentTransforms(bodyFragments, {
+      canonical,
+      generatedRoutes: options.generatedRoutes,
+    });
 
   return {
     htmlAttributes: html.attr() ?? {},
@@ -55,10 +65,10 @@ export async function parseWordPressHtml(filePath) {
     bodyHtml: body.html() ?? '',
     bodyFragments,
     bodyClasses,
-    title: normalizeText($('head title').first().text()),
-    description: $('head meta[name="description"]').first().attr('content') ?? '',
-    canonical: $('head link[rel="canonical"]').first().attr('href') ?? '',
-    lang: html.attr('lang') ?? '',
+    title,
+    description,
+    canonical,
+    lang,
     isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
     alternates: $('head link[rel="alternate"][hreflang]')
       .toArray()
@@ -78,6 +88,11 @@ export async function parseWordPressHtml(filePath) {
       h1Count: $('body h1').length,
     },
     fragmentInventory: buildFragmentInventory(bodyFragments),
+    contentTransforms,
+    homepageBlogLoop: canonical === 'https://pppoker.pro/'
+      ? buildHomepageBlogLoopInventory(bodyFragments.contentHtml)
+      : null,
+    loadMoreNextPages: extractLoadMoreNextPages(bodyFragments),
   };
 }
 
@@ -312,4 +327,187 @@ function countScriptTags(html) {
 
 function countHtmlElements(html) {
   return (html.match(/<[a-z][\w:-]*(?:\s|>)/gi) ?? []).length;
+}
+
+function applyContentTransforms(fragments, { canonical, generatedRoutes }) {
+  const transforms = [];
+
+  if (canonical === 'https://pppoker.pro/') {
+    const transform = disableHomepageBlogInfiniteScroll(fragments);
+
+    if (transform) {
+      transforms.push(transform);
+    }
+  }
+
+  if (generatedRoutes) {
+    const transform = removeInvalidLoadMoreTargets(fragments, generatedRoutes);
+
+    if (transform) {
+      transforms.push(transform);
+    }
+  }
+
+  return transforms;
+}
+
+function disableHomepageBlogInfiniteScroll(fragments) {
+  const $ = load(`<body>${fragments.contentHtml}</body>`, { decodeEntities: false });
+  const loopGrid = $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').first();
+
+  if (loopGrid.length === 0) {
+    return null;
+  }
+
+  const loadMoreAnchors = loopGrid.find('.e-load-more-anchor').length;
+  const loadMoreSpinners = loopGrid.find('.e-load-more-spinner').length;
+  const loadMoreMessages = loopGrid.find('.e-load-more-message').length;
+
+  if (loadMoreAnchors === 0 && loadMoreSpinners === 0 && loadMoreMessages === 0) {
+    return null;
+  }
+
+  loopGrid.find('.e-load-more-anchor, .e-load-more-spinner, .e-load-more-message').remove();
+  updateElementorSettings(loopGrid, (settings) => {
+    if (settings.pagination_type === 'load_more_infinite_scroll') {
+      settings.pagination_type = 'none';
+    }
+
+    delete settings.load_more_spinner;
+
+    return settings;
+  });
+  fragments.contentHtml = $('body').html() ?? '';
+
+  return {
+    name: 'disable-homepage-blog-infinite-scroll',
+    removedLoadMoreAnchors: loadMoreAnchors,
+    removedLoadMoreSpinners: loadMoreSpinners,
+    removedLoadMoreMessages: loadMoreMessages,
+  };
+}
+
+function updateElementorSettings(element, updateSettings) {
+  const currentSettings = element.attr('data-settings');
+
+  if (!currentSettings) {
+    return;
+  }
+
+  try {
+    element.attr('data-settings', JSON.stringify(updateSettings(JSON.parse(currentSettings))));
+  } catch {
+    // Leave malformed legacy Elementor settings untouched.
+  }
+}
+
+function removeInvalidLoadMoreTargets(fragments, generatedRoutes) {
+  const $ = load(`<body>${fragments.contentHtml}</body>`, { decodeEntities: false });
+  const removedTargets = [];
+
+  $('.e-load-more-anchor[data-next-page]').each((_, element) => {
+    const anchor = $(element);
+    const nextPage = anchor.attr('data-next-page') ?? '';
+    const nextRoute = routeFromUrl(nextPage);
+
+    if (!nextRoute || generatedRoutes.has(nextRoute)) {
+      return;
+    }
+
+    const widgetContainer = anchor.closest('.elementor-widget-container');
+
+    removedTargets.push(nextPage);
+    anchor.remove();
+
+    if (widgetContainer.length > 0) {
+      widgetContainer.find('.e-load-more-spinner, .e-load-more-message').remove();
+      updateElementorSettings(widgetContainer.closest('.elementor-widget'), (settings) => {
+        if (settings.pagination_type === 'load_more_infinite_scroll') {
+          settings.pagination_type = 'none';
+        }
+
+        delete settings.load_more_spinner;
+
+        return settings;
+      });
+    }
+  });
+
+  if (removedTargets.length === 0) {
+    return null;
+  }
+
+  fragments.contentHtml = $('body').html() ?? '';
+
+  return {
+    name: 'remove-invalid-load-more-targets',
+    removedTargets,
+  };
+}
+
+function routeFromUrl(value) {
+  try {
+    const url = new URL(value, 'https://pppoker.pro');
+
+    if (url.hostname !== 'pppoker.pro') {
+      return null;
+    }
+
+    return url.pathname.endsWith('/') ? url.pathname : `${url.pathname}/`;
+  } catch {
+    return null;
+  }
+}
+
+function buildHomepageBlogLoopInventory(contentHtml) {
+  const $ = load(`<body>${contentHtml}</body>`, { decodeEntities: false });
+  const loopGrid = $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').first();
+  const cards = loopGrid
+    .find('.e-loop-item')
+    .toArray()
+    .map((element) => {
+      const card = $(element);
+
+      return {
+        postId: splitClasses(card.attr('class')).find((className) => /^post-\d+$/.test(className)) ?? '',
+        href: card.find('a[href]').first().attr('href') ?? '',
+        title: normalizeText(card.find('.elementor-heading-title').first().text()),
+      };
+    })
+    .filter((card) => card.href || card.title);
+
+  return {
+    cardCount: cards.length,
+    cards,
+    duplicateHrefs: getDuplicates(cards.map((card) => card.href).filter(Boolean)),
+    loadMoreAnchorCount: loopGrid.find('.e-load-more-anchor').length,
+  };
+}
+
+function extractLoadMoreNextPages(fragments) {
+  const html = [
+    fragments.beforeHeaderHtml,
+    fragments.header?.outerHtml ?? '',
+    fragments.contentHtml,
+    fragments.footer?.outerHtml ?? '',
+    fragments.afterFooterHtml,
+  ].join('');
+  const $ = load(`<body>${html}</body>`, { decodeEntities: false });
+
+  return $('.e-load-more-anchor[data-next-page]')
+    .toArray()
+    .map((element) => $(element).attr('data-next-page') ?? '')
+    .filter(Boolean);
+}
+
+function getDuplicates(values) {
+  const counts = new Map();
+
+  for (const value of values) {
+    counts.set(value, (counts.get(value) ?? 0) + 1);
+  }
+
+  return [...counts]
+    .filter(([, count]) => count > 1)
+    .map(([value, count]) => ({ value, count }));
 }
