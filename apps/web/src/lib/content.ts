@@ -86,18 +86,12 @@ export async function getPostRecord(page: PageEntry): Promise<PostRecord | null>
   }
 }
 
-export async function getBlogPosts(locale: AppLocale): Promise<PageEntry[]> {
-  return (await getPagesByLocale(locale))
-    .filter((page) => page.type === 'post')
-    .sort((a, b) => b.title.localeCompare(a.title, locale));
-}
-
 export function parseBlogPageNumber(route: string): number | null {
   const match = route.match(/\/blog\/page\/(\d+)\/$/);
   return match ? Number.parseInt(match[1], 10) : null;
 }
 
-export async function getBlogArchiveManifestPages(locale: AppLocale): Promise<PageEntry[]> {
+export async function getBlogPaginationPages(locale: AppLocale): Promise<PageEntry[]> {
   const pages = await getPagesByLocale(locale);
   return pages.filter(
     (page) => page.type === 'blog' || parseBlogPageNumber(page.route) !== null,

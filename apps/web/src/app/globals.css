@@ -27,6 +27,55 @@ body {
   color: #fde661;
 }
 
+/* Native React block (Sprint 6 — Strangler Fig). */
+.home-promo {
+  position: relative;
+  z-index: 20;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(90deg, #1a2744 0%, #2a3f6b 100%);
+  border-bottom: 1px solid rgba(253, 230, 97, 0.25);
+  text-align: center;
+}
+
+.home-promo__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fde661;
+}
+
+.home-promo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.home-promo__btn {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.home-promo__btn:hover {
+  opacity: 0.9;
+}
+
+.home-promo__btn--primary {
+  background: #fde661;
+  color: #131b2b;
+}
+
+.home-promo__btn--ghost {
+  border: 1px solid rgba(253, 230, 97, 0.6);
+  color: #fde661;
+}
+
 .post-article {
   max-width: 900px;
   margin: 0 auto;

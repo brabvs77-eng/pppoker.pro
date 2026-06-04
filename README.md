@@ -30,8 +30,8 @@ npm run verify:next
 # Inspect core vs page-specific CSS split (after extract)
 npm run analyze:styles
 
-# Legacy React SSR wrapper (previous migration stage)
-npm run build:legacy-react
+# Fail if legacy migration artifacts reappear
+npm run audit:rudiments
 ```
 
 ## CSS budget and URL normalization
@@ -44,7 +44,7 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 
 - **next-intl** — locales `ru`, `en`, `uz`, `kz`, `hy`, `tj` with `localePrefix: 'as-needed'` (Russian without prefix)
 - **Typed blog routes** — `/blog/`, `/blog/page/N/` (dedicated App Router pages)
-- **Structured posts** — article HTML extracted to `content/posts/*.json`, rendered via `PostArticle`
+- **Structured posts** — article HTML extracted to `content/posts/*.json` (reserved for RSS/API)
 - **JSON-LD** — Yoast blocks rendered from manifest (`JsonLd` component)
 - **Sitemap** — `app/sitemap.ts` generated from manifest
 - **Body classes** — applied on `#wordpress-page-root` (no client-side `BodyAttributes`)
@@ -66,12 +66,21 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 
 ## Sprint 5 features
 
+See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
+
 - **Locale 404** — `[locale]/not-found.tsx` with translated copy
 - **i18n navigation** — `createNavigation` helpers in `src/i18n/navigation.ts`
 - **Site config** — `hideBlogLoopRoutes` drives blog-hide via `data-hide-blog-loop`
 - **SEO** — `og:image` and `publishedAt` in manifest; sitemap uses post dates
 - **Redirects** — `/ru` and `/ru/*` → unprefixed paths (after flatten export)
 - **`verify:links`** — broken root-relative links in extracted bodies fail the build
+
+## Sprint 6 features
+
+- **Rudiment cleanup** — removed legacy React SSR pipeline, unused `BlogArchive` / `PostArticle`, duplicate `sitemap.ts`, create-next-app CSS
+- **`audit:rudiments`** — CI guard against reintroducing legacy artifacts
+- **Strangler Fig** — native `HomePromo` React strip on `/` and `/hy/` (manager + Telegram CTA)
+- **Docs** — [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md)
 
 ## Deploy
 
@@ -88,6 +97,6 @@ Vercel uses `vercel.json`:
 
 ## Next steps (optional improvements)
 
-- Replace preserved Elementor HTML sections with native React components section by section.
-- Add `next-intl` route prefixes with middleware if locale routing needs refinement.
-- Wire headless CMS instead of HTML extraction when editorial workflow is ready.
+- More `components/native/*` blocks to replace Elementor sections.
+- Headless CMS instead of HTML extraction when editorial workflow is ready.
+- Remove `flatten-ru-export.mjs` if Next/next-intl static routing improves for default locale.

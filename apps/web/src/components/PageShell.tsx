@@ -2,8 +2,10 @@ import type { ReactNode } from 'react';
 
 import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
+import { HomePromo } from '@/components/native/HomePromo';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
+import { homePromoRoutes } from '@/config/site';
 import type { PageEntry } from '@/lib/types';
 
 type PageShellProps = {
@@ -14,11 +16,13 @@ type PageShellProps = {
 
 export function PageShell({ page, bodyHtml, children }: PageShellProps) {
   const bodyClass = page.bodyAttributes.class;
+  const showHomePromo = (homePromoRoutes as readonly string[]).includes(page.route);
 
   return (
     <>
       <WordPressHead page={page} />
       <JsonLd blocks={page.jsonLd} />
+      {showHomePromo ? <HomePromo locale={page.locale} /> : null}
       {children ?? (
         <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
       )}

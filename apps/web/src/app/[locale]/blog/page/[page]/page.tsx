@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import { getBodyHtml, getBlogArchiveManifestPages, getPageByRoute } from '@/lib/content';
+import { getBodyHtml, getBlogPaginationPages, getPageByRoute } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type BlogPaginationProps = {
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   const result: Array<{ locale: string; page: string }> = [];
 
   for (const locale of routing.locales) {
-    const archivePages = await getBlogArchiveManifestPages(locale as AppLocale);
+    const archivePages = await getBlogPaginationPages(locale as AppLocale);
     for (const entry of archivePages) {
       const match = entry.route.match(/\/blog\/page\/(\d+)\/$/);
       if (match) {
