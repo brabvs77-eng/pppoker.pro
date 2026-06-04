@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { HtmlFragment } from './HtmlFragment.mjs';
 import { normalizeReactAttributes } from './htmlAttributes.mjs';
 
 export function LegacyHeader({ fragment }) {
@@ -23,6 +24,8 @@ function LegacyElement({ fallbackTagName, fragment }) {
 
   return React.createElement(fragment.tagName || fallbackTagName, {
     ...normalizeReactAttributes(fragment.attributes),
-    dangerouslySetInnerHTML: { __html: fragment.innerHtml },
-  });
+  }, React.createElement(HtmlFragment, {
+    html: fragment.innerHtml,
+    keyPrefix: fragment.tagName || fallbackTagName,
+  }));
 }

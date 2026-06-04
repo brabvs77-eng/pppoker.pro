@@ -182,7 +182,6 @@ function compareFragmentInventory(
     'hasHeader',
     'hasFooter',
     'hasAfterFooter',
-    'contentElementCount',
     'contentScriptCount',
     'afterFooterScriptCount',
   ]) {

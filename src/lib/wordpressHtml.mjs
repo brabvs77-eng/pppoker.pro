@@ -78,7 +78,6 @@ export async function parseWordPressHtml(filePath, options = {}) {
     htmlAttributes: html.attr() ?? {},
     headHtml: head.html() ?? '',
     bodyAttributes: body.attr() ?? {},
-    bodyHtml: body.html() ?? '',
     bodyFragments,
     bodyClasses,
     title: normalizeText($('head title').first().text()) || title,
@@ -196,16 +195,6 @@ export function inferLocale(route, htmlLang = '') {
   }
 
   return 'ru';
-}
-
-export function assembleBodyHtmlFromFragments(fragments, renderedFragments = {}) {
-  return [
-    fragments.beforeHeaderHtml,
-    renderedFragments.headerHtml ?? fragments.header?.outerHtml ?? '',
-    fragments.contentHtml,
-    renderedFragments.footerHtml ?? fragments.footer?.outerHtml ?? '',
-    fragments.afterFooterHtml,
-  ].join('');
 }
 
 export async function copyStaticAssets(rootDir, outDir) {

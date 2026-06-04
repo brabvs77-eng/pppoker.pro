@@ -5,10 +5,8 @@ import { fileURLToPath } from 'node:url';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-import { LegacyFooter, LegacyHeader } from '../src/components/LegacyFragments.mjs';
 import { StaticDocument } from '../src/components/StaticDocument.mjs';
 import {
-  assembleBodyHtmlFromFragments,
   buildRouteMetadata,
   copyStaticAssets,
   discoverWordPressPages,
@@ -38,21 +36,12 @@ async function main() {
       route: page.route,
     });
     const routeMetadata = buildRouteMetadata(page.route, parsed);
-    const renderedFragments = {
-      headerHtml: renderToStaticMarkup(
-        React.createElement(LegacyHeader, { fragment: parsed.bodyFragments.header }),
-      ),
-      footerHtml: renderToStaticMarkup(
-        React.createElement(LegacyFooter, { fragment: parsed.bodyFragments.footer }),
-      ),
-    };
-    const bodyHtml = assembleBodyHtmlFromFragments(parsed.bodyFragments, renderedFragments);
     const renderedPage = renderToStaticMarkup(
       React.createElement(StaticDocument, {
         htmlAttributes: parsed.htmlAttributes,
         headHtml: parsed.headHtml,
         bodyAttributes: parsed.bodyAttributes,
-        bodyHtml,
+        bodyFragments: parsed.bodyFragments,
       }),
     );
     const outputPath = outputPathForRoute(outDir, page.route);

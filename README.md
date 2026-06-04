@@ -4,9 +4,10 @@
 
 The WordPress/Elementor export remains the source of truth during the first
 migration stage. The React build pipeline reads every public `index.html`
-route, renders it through React server-side rendering, preserves the original
-`head`, `body` attributes, content, metadata, scripts, and URL structure, then
-writes the static site to `dist/`.
+route, parses legacy HTML into an AST, renders the document through React
+server-side rendering, preserves the original `head`, `body` attributes,
+content, metadata, scripts, and URL structure, then writes the static site to
+`dist/`.
 
 ```bash
 npm run build
@@ -30,6 +31,10 @@ The build also writes `dist/site-snippets.json` with the public SEO/social
 snippet for each non-redirect route. Missing snippet fields are filled during
 generation with safe localized fallbacks for meta description, canonical,
 Open Graph, and Twitter preview tags.
+
+Large page sections are rendered as React elements via `HtmlFragment`; raw HTML
+injection is limited to `<script>` and `<style>` contents so legacy CSS/JS is
+not corrupted during SSR.
 
 `npm run verify` compares critical SEO snapshots between the WordPress source
 HTML and the React-generated output so incremental component replacements do
