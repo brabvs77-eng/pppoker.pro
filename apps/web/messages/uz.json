@@ -1,4 +1,8 @@
 {
   "blog": { "title": "Blog", "readMore": "O'qish" },
-  "notFound": { "title": "404", "back": "Bosh sahifa" }
+  "notFound": {
+    "title": "404",
+    "message": "Sahifa topilmadi.",
+    "back": "Bosh sahifa"
+  }
 }

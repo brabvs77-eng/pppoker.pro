@@ -12,12 +12,13 @@
     "build:legacy-react": "node scripts/build-react-static-site.mjs",
     "verify:legacy-react": "node scripts/verify-react-static-site.mjs",
     "flatten:ru": "node scripts/flatten-ru-export.mjs",
-    "build:next": "rm -rf apps/web/out content && npm run strip:hekler && npm run extract:content && npm run sync:redirects && npm run verify:redirects && npm run prepare:public && npm --prefix apps/web run build && npm run flatten:ru && npm run verify:next && npm run verify:no-hekler",
+    "build:next": "rm -rf apps/web/out content && npm run strip:hekler && npm run extract:content && npm run sync:redirects && npm run verify:redirects && npm run verify:links && npm run prepare:public && npm --prefix apps/web run build && npm run flatten:ru && npm run verify:next && npm run verify:no-hekler",
     "build": "npm run build:next",
     "dev": "npm run extract:content && npm run prepare:public && npm --prefix apps/web run dev",
     "verify:next": "node scripts/verify-next-site.mjs",
     "verify:no-hekler": "node scripts/verify-no-hekler.mjs",
     "verify:redirects": "node scripts/verify-redirects.mjs",
+    "verify:links": "node scripts/verify-internal-links.mjs",
     "migrate:react": "npm run build:legacy-react && npm run verify:legacy-react"
   },
   "dependencies": {

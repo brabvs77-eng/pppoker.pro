@@ -1,4 +1,8 @@
 {
   "blog": { "title": "Блог", "readMore": "Оқу" },
-  "notFound": { "title": "404", "back": "Басты бет" }
+  "notFound": {
+    "title": "404",
+    "message": "Бет табылмады.",
+    "back": "Басты бет"
+  }
 }

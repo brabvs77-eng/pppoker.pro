@@ -15,7 +15,16 @@ async function main() {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   const vercel = JSON.parse(await fs.readFile(vercelPath, 'utf8'));
 
-  const expected = new Map();
+  const STATIC_REDIRECTS = [
+    ['/ru', '/'],
+    ['/user-agreement', '/en/user-agreement'],
+    ['/privacy-policy', '/en/privacy-policy'],
+    ['/tag/pppoker-2', '/tag/pppoker'],
+  ];
+
+  const STATIC_WILDCARD = [{ source: '/ru/:path*', destination: '/:path*' }];
+
+  const expected = new Map(STATIC_REDIRECTS);
   for (const page of manifest.pages) {
     if (!page.isRedirect || !page.redirectTo) continue;
     expected.set(normalizeSource(page.route), normalizeSource(page.redirectTo));
@@ -35,6 +44,13 @@ async function main() {
     }
     if (actual.get(source) !== destination) {
       wrong.push({ source, expected: destination, actual: actual.get(source) });
+    }
+  }
+
+  for (const { source, destination } of STATIC_WILDCARD) {
+    const entry = (vercel.redirects ?? []).find((item) => item.source === source);
+    if (!entry || entry.destination !== destination) {
+      wrong.push({ source, expected: destination, actual: entry?.destination ?? '(missing)' });
     }
   }
 

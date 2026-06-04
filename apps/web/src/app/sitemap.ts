@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return pages.map((page) => ({
     url: `${SITE_URL}${page.route === '/' ? '' : page.route.replace(/\/$/, '')}/`,
-    lastModified: new Date(),
+    lastModified: page.publishedAt ? new Date(page.publishedAt) : undefined,
     changeFrequency: page.type === 'post' ? 'weekly' : 'monthly',
     priority: page.type === 'home' ? 1 : page.type === 'post' ? 0.8 : 0.6,
   }));

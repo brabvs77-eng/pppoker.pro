@@ -9,8 +9,17 @@ type BlogIndexProps = {
   params: Promise<{ locale: string }>;
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+export async function generateStaticParams() {
+  const params: Array<{ locale: string }> = [];
+
+  for (const locale of routing.locales) {
+    const page = await getPageByRoute(blogRoute(locale as AppLocale));
+    if (page) {
+      params.push({ locale });
+    }
+  }
+
+  return params;
 }
 
 function blogRoute(locale: AppLocale) {

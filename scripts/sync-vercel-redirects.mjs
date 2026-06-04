@@ -15,8 +15,14 @@ async function main() {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
   const vercel = JSON.parse(await fs.readFile(vercelPath, 'utf8'));
 
-  const redirects = [];
-  const seen = new Set();
+  const redirects = [
+    { source: '/ru', destination: '/', permanent: true },
+    { source: '/ru/:path*', destination: '/:path*', permanent: true },
+    { source: '/user-agreement', destination: '/en/user-agreement', permanent: true },
+    { source: '/privacy-policy', destination: '/en/privacy-policy', permanent: true },
+    { source: '/tag/pppoker-2', destination: '/tag/pppoker', permanent: true },
+  ];
+  const seen = new Set(redirects.map((entry) => entry.source));
 
   for (const page of manifest.pages) {
     if (!page.isRedirect || !page.redirectTo) continue;

@@ -5,6 +5,7 @@
   },
   "notFound": {
     "title": "404",
+    "message": "Page not found.",
     "back": "Home"
   }
 }

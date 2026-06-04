@@ -78,6 +78,26 @@
       "permanent": true
     },
     {
+      "source": "/privacy-policy",
+      "destination": "/en/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/ru",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/tag/pppoker-2",
+      "destination": "/tag/pppoker",
+      "permanent": true
+    },
+    {
       "source": "/team/admin",
       "destination": "/",
       "permanent": true
@@ -115,6 +135,11 @@
     {
       "source": "/team/steepfellow",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/user-agreement",
+      "destination": "/en/user-agreement",
       "permanent": true
     },
     {

@@ -64,6 +64,15 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 - **CI** — GitHub Actions workflow runs `npm run build` on push/PR
 - **`verify:redirects`** — ensures `vercel.json` stays in sync with manifest
 
+## Sprint 5 features
+
+- **Locale 404** — `[locale]/not-found.tsx` with translated copy
+- **i18n navigation** — `createNavigation` helpers in `src/i18n/navigation.ts`
+- **Site config** — `hideBlogLoopRoutes` drives blog-hide via `data-hide-blog-loop`
+- **SEO** — `og:image` and `publishedAt` in manifest; sitemap uses post dates
+- **Redirects** — `/ru` and `/ru/*` → unprefixed paths (after flatten export)
+- **`verify:links`** — broken root-relative links in extracted bodies fail the build
+
 ## Deploy
 
 Vercel uses `vercel.json`:

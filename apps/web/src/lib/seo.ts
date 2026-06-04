@@ -15,6 +15,15 @@ export function buildPageMetadata(page: PageEntry): Metadata {
       url: page.canonical.startsWith('http') ? page.canonical : `https://pppoker.pro${page.canonical}`,
       locale: page.lang.replace('-', '_'),
       type: page.type === 'post' || page.type === 'blog' ? 'article' : 'website',
+      ...(page.ogImage
+        ? {
+            images: [
+              {
+                url: absoluteUrl(page.ogImage),
+              },
+            ],
+          }
+        : {}),
     },
     robots: {
       index: true,

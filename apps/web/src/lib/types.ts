@@ -14,6 +14,8 @@ export type PageEntry = {
   description: string;
   canonical: string;
   lang: string;
+  publishedAt?: string;
+  ogImage?: string;
   hreflang: HreflangEntry[];
   stylesheets: string[];
   headInlineStyles: string[];

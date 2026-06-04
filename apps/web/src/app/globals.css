@@ -9,10 +9,22 @@ body {
   min-height: 100vh;
 }
 
-/* Temporarily hide blog loop on homepages (Elementor loop-grid widget). */
-#wordpress-page-root[data-route='/'] .elementor-element-39eeae8,
-#wordpress-page-root[data-route='/hy/'] .elementor-element-39eeae8 {
+/* Hide blog loop on selected homepages (see src/config/site.ts). */
+#wordpress-page-root[data-hide-blog-loop] .elementor-element-39eeae8 {
   display: none !important;
+}
+
+.not-found {
+  min-height: 60vh;
+  padding: 2rem 1.5rem;
+  font-family: system-ui, sans-serif;
+  color: #fff;
+  background: #131b2b;
+  text-align: center;
+}
+
+.not-found a {
+  color: #fde661;
 }
 
 .post-article {

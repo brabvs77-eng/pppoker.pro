@@ -1,4 +1,8 @@
 {
   "blog": { "title": "Բլոգ", "readMore": "Կարդալ" },
-  "notFound": { "title": "404", "back": "Գլխավոր" }
+  "notFound": {
+    "title": "404",
+    "message": "Էջը չի գտնվել։",
+    "back": "Գլխավոր"
+  }
 }

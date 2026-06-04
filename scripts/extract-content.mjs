@@ -207,6 +207,8 @@ async function main() {
       description: normalizeUrls($('head meta[name="description"]').first().attr('content') ?? ''),
       canonical: normalizeUrls($('head link[rel="canonical"]').first().attr('href') ?? page.route),
       lang: $('html').attr('lang') ?? '',
+      publishedAt: type === 'post' ? extractPublishedTime($) : '',
+      ogImage: normalizeUrls($('meta[property="og:image"]').first().attr('content') ?? ''),
       hreflang: extractHreflang($),
       stylesheets,
       headInlineStyles: extractHeadInlineStyles($),
