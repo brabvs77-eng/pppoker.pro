@@ -212,6 +212,14 @@ function verifyHomepageBlogLoop(mismatches, homepageBlogLoop, label = 'homepage'
     mismatches.push(`/: ${label} blog loop still has infinite-scroll pagination enabled`);
   }
 
+  if (homepageBlogLoop.dynamicLoopGridCount > 0) {
+    mismatches.push(`/: ${label} still exposes ${homepageBlogLoop.dynamicLoopGridCount} Elementor dynamic loop-grid widgets`);
+  }
+
+  if (homepageBlogLoop.staticBlogGridCount !== 1) {
+    mismatches.push(`/: ${label} should expose exactly one static homepage blog grid, got ${homepageBlogLoop.staticBlogGridCount}`);
+  }
+
   if (homepageBlogLoop.duplicateHrefs.length > 0) {
     mismatches.push(
       `/: ${label} blog loop has duplicate article links: ${homepageBlogLoop.duplicateHrefs

@@ -389,7 +389,7 @@ function applyContentTransforms(fragments, { canonical, generatedRoutes }) {
 
 function disableHomepageBlogInfiniteScroll(fragments) {
   const $ = load(`<body>${fragments.contentHtml}</body>`, { decodeEntities: false });
-  const loopGrid = $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').first();
+  const loopGrid = getHomepageBlogGrid($);
 
   if (loopGrid.length === 0) {
     return null;
@@ -497,7 +497,7 @@ function routeFromUrl(value) {
 
 function buildHomepageBlogLoopInventory(contentHtml) {
   const $ = load(`<body>${contentHtml}</body>`, { decodeEntities: false });
-  const loopGrid = $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').first();
+  const loopGrid = getHomepageBlogGrid($);
   const cards = loopGrid
     .find('.e-loop-item')
     .toArray()
@@ -518,7 +518,19 @@ function buildHomepageBlogLoopInventory(contentHtml) {
     duplicateHrefs: getDuplicates(cards.map((card) => card.href).filter(Boolean)),
     loadMoreAnchorCount: loopGrid.find('.e-load-more-anchor').length,
     paginationType: readElementorSettings(loopGrid).pagination_type ?? '',
+    dynamicLoopGridCount: $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').length,
+    staticBlogGridCount: $('.static-homepage-blog-grid').length,
   };
+}
+
+function getHomepageBlogGrid($) {
+  const staticGrid = $('.static-homepage-blog-grid').first();
+
+  if (staticGrid.length > 0) {
+    return staticGrid;
+  }
+
+  return $('.elementor-widget-loop-grid[data-widget_type="loop-grid.post"]').first();
 }
 
 function readElementorSettings(element) {
