@@ -8,6 +8,7 @@ const WORKSPACE_IGNORES = [
   '.git/**',
   '.next/**',
   'dist/**',
+  'docs/**',
   'node_modules/**',
   'scripts/**',
   'src/**',
