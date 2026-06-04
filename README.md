@@ -70,7 +70,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 
 - **Locale 404** — `[locale]/not-found.tsx` with translated copy
 - **i18n navigation** — `createNavigation` helpers in `src/i18n/navigation.ts`
-- **Site config** — `hideBlogLoopRoutes` drives blog-hide via `data-hide-blog-loop`
+- **Site config** — `hideLegacyBlogSectionRoutes` hides Elementor blog on RU `/`
 - **SEO** — `og:image` and `publishedAt` in manifest; sitemap uses post dates
 - **Redirects** — `/ru` and `/ru/*` → unprefixed paths (after flatten export)
 - **`verify:links`** — broken root-relative links in extracted bodies fail the build
@@ -117,6 +117,11 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 ## Sprint 13 features
 
 - **Header spacers** — hides empty `8141f77` (blog/archive) and `3f45d89` (posts/pages) `100px` blocks left for the old fixed Elementor header
+
+## Homepage blog (RU)
+
+- Legacy Elementor blog grid hidden on `/` (`data-hide-legacy-blog`)
+- Native `HomeBlogRotator`: 6 cards, daily start offset, client rotation every 8s
 
 ## Sprint 14 features
 

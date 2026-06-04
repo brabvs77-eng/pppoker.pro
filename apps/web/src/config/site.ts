@@ -1,11 +1,22 @@
-/** Homepages using native React chrome (promo strip, blog hide, deduped nav). */
+/** Homepages using native React chrome (promo strip, deduped nav). */
 export const homepageNativeRoutes = ['/', '/hy/'] as const;
 
-export const hideBlogLoopRoutes = homepageNativeRoutes;
 export const homePromoRoutes = homepageNativeRoutes;
 
-/** Elementor widget id for the post loop grid on homepages. */
+/** RU homepage: hide legacy Elementor blog loop and show native rotator instead. */
+export const hideLegacyBlogSectionRoutes = ['/'] as const;
+
+/** Elementor containers for the static blog grid on homepages. */
+export const homepageLegacyBlogSectionElementId = '39311d7';
 export const homepageBlogLoopElementId = '39eeae8';
+
+/** Native rotating blog block on the RU homepage. */
+export const homepageRotatingBlogRoutes = ['/'] as const;
+
+export const homeBlogRotatorConfig = {
+  visibleCount: 6,
+  rotationIntervalMs: 8_000,
+} as const;
 
 /** Duplicate “manager bonus” items in Elementor nav (hidden when HomePromo is shown). */
 export const duplicateManagerMenuItemClass = 'menu-item-3206';
