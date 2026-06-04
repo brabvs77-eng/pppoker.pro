@@ -1,4 +1,11 @@
 {
+  "homePromo": {
+    "ariaLabel": "PPPoker-де ақшаға онлайн покер",
+    "title": "PPPoker-де ақшаға онлайн покер",
+    "manager": "Менеджерге жазу",
+    "channel": "Telegram",
+    "whatsapp": "WhatsApp"
+  },
   "blog": { "title": "Блог", "readMore": "Оқу" },
   "notFound": {
     "title": "404",

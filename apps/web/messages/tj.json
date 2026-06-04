@@ -1,4 +1,11 @@
 {
+  "homePromo": {
+    "ariaLabel": "Покери онлайнӣ дар PPPoker",
+    "title": "Покери онлайнӣ дар PPPoker",
+    "manager": "Ба менеҷер навиштан",
+    "channel": "Telegram",
+    "whatsapp": "WhatsApp"
+  },
   "blog": {
     "title": "Блог",
     "readMore": "Хондан"

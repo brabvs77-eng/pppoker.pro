@@ -1,4 +1,4 @@
-import { hideBlogLoopRoutes } from '@/config/site';
+import { hideBlogLoopRoutes, homePromoRoutes } from '@/config/site';
 import type { PageEntry } from '@/lib/types';
 
 type WordPressBodyProps = {
@@ -8,6 +8,7 @@ type WordPressBodyProps = {
 };
 
 export function WordPressBody({ page, bodyHtml, bodyClassName }: WordPressBodyProps) {
+  const onHomeNative = (homePromoRoutes as readonly string[]).includes(page.route);
   const hideBlogLoop = (hideBlogLoopRoutes as readonly string[]).includes(page.route);
 
   return (
@@ -15,6 +16,7 @@ export function WordPressBody({ page, bodyHtml, bodyClassName }: WordPressBodyPr
       id="wordpress-page-root"
       data-route={page.route}
       data-locale={page.locale}
+      data-home-promo={onHomeNative ? '' : undefined}
       data-hide-blog-loop={hideBlogLoop ? '' : undefined}
       className={bodyClassName}
       dangerouslySetInnerHTML={{ __html: bodyHtml }}

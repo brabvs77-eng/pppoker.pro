@@ -1,4 +1,11 @@
 {
+  "homePromo": {
+    "ariaLabel": "Play poker for real money on PPPoker",
+    "title": "Play poker for real money on PPPoker",
+    "manager": "Message manager",
+    "channel": "Telegram channel",
+    "whatsapp": "WhatsApp"
+  },
   "blog": {
     "title": "Blog",
     "readMore": "Read"

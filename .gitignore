@@ -5,4 +5,6 @@ apps/web/out/
 apps/web/public/assets/
 apps/web/public/includes/
 content/
+feed.xml
+apps/web/public/feed.xml
 npm-debug.log*

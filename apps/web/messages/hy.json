@@ -1,4 +1,11 @@
 {
+  "homePromo": {
+    "ariaLabel": "Օնլայն պոկեր PPPoker-ում",
+    "title": "Օնլայն պոկեր PPPoker-ում",
+    "manager": "Գրել մենեջերին",
+    "channel": "Telegram",
+    "whatsapp": "WhatsApp"
+  },
   "blog": { "title": "Բլոգ", "readMore": "Կարդալ" },
   "notFound": {
     "title": "404",

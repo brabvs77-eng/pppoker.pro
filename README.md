@@ -82,6 +82,12 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Strangler Fig** — native `HomePromo` React strip on `/` and `/hy/` (manager + Telegram CTA)
 - **Docs** — [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md)
 
+## Sprint 7 features
+
+- **HomePromo i18n** — copy in `messages/*.json` via next-intl; WhatsApp CTA added
+- **Deduped nav** — hides Elementor `menu-item-3206` when native promo is active
+- **RSS feed** — `npm run generate:rss` → `/feed.xml` (32 RU posts from `content/posts/`)
+
 ## Deploy
 
 Vercel uses `vercel.json`:

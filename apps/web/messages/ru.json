@@ -1,4 +1,11 @@
 {
+  "homePromo": {
+    "ariaLabel": "Онлайн-покер на деньги в PPPoker",
+    "title": "Онлайн-покер на деньги в PPPoker",
+    "manager": "Написать менеджеру",
+    "channel": "Telegram-канал",
+    "whatsapp": "WhatsApp"
+  },
   "blog": {
     "title": "Блог",
     "readMore": "Читать"

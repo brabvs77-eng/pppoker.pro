@@ -16,6 +16,7 @@ const COPY_FILES = [
   'post_tag-sitemap.xml',
   'main-sitemap.xsl',
   'llms.txt',
+  'feed.xml',
 ];
 
 async function copyDir(from, to) {

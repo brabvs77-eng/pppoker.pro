@@ -18,6 +18,12 @@ export function SiteHead() {
         rel="apple-touch-icon"
         href="/assets/media/2024/07/cropped-photo_2022-09-21_22-05-12-180x180.jpg"
       />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="Nuts PPPoker — блог"
+        href="/feed.xml"
+      />
     </>
   );
 }

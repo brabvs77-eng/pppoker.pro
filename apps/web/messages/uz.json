@@ -1,4 +1,11 @@
 {
+  "homePromo": {
+    "ariaLabel": "PPPoker’da pulga onlayn poker",
+    "title": "PPPoker’da pulga onlayn poker",
+    "manager": "Menejerga yozish",
+    "channel": "Telegram",
+    "whatsapp": "WhatsApp"
+  },
   "blog": { "title": "Blog", "readMore": "O'qish" },
   "notFound": {
     "title": "404",
