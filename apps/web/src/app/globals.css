@@ -14,14 +14,17 @@ body {
   display: none !important;
 }
 
-/* Hide duplicate “manager bonus” nav items when native HomePromo is shown. */
-#wordpress-page-root[data-home-promo] .menu-item-3206 {
+/* Hide duplicate “manager bonus” nav items (Elementor menus, all locales). */
+#wordpress-page-root[data-native-chrome] .menu-item-3206 {
   display: none !important;
 }
 
-/* Hide secondary Elementor nav strip in #masthead (RU pages, duplicate of SiteHeader). */
-#wordpress-page-root[data-native-chrome] #masthead .elementor.elementor-3120 {
-  display: none !important;
+/* Collapse masthead shell once Elementor chrome inside is hidden. */
+#wordpress-page-root[data-native-chrome] #masthead {
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 /* Drop legacy hero top offset on promo homepages (was for Elementor fixed header). */
@@ -54,8 +57,17 @@ body {
   display: none !important;
 }
 
-/* Hide global Elementor header in #masthead — replaced by native SiteHeader. */
-#wordpress-page-root[data-native-chrome] #masthead .elementor.elementor-3180 {
+/* Hide global Elementor header in #masthead — all locales (elementor-hf). */
+#wordpress-page-root[data-native-chrome]
+  #masthead
+  .elementor[data-elementor-post-type='elementor-hf'] {
+  display: none !important;
+}
+
+/* Hide secondary nav strip in #masthead — all locales (top-level section template). */
+#wordpress-page-root[data-native-chrome]
+  #masthead
+  > .elementor[data-elementor-type='section'] {
   display: none !important;
 }
 

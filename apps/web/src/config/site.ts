@@ -18,10 +18,20 @@ export const siteBranding = {
 /** Elementor footer template (replaced by native SiteFooter). */
 export const elementorFooterSelector = '#colophon, footer#colophon, .main_footer';
 
-/** Global Elementor header template inside #masthead (replaced by native SiteHeader). */
+/**
+ * Masthead selectors for Elementor header/footer templates (locale-specific post ids).
+ * RU: `elementor-3180` + `elementor-3120`; EN: `elementor-256` + `elementor-445`; etc.
+ */
+export const elementorMastheadHeaderSelector =
+  '#masthead .elementor[data-elementor-post-type="elementor-hf"]';
+
+export const elementorMastheadSecondaryNavSelector =
+  '#masthead > .elementor[data-elementor-type="section"]';
+
+/** @deprecated RU-only class names — prefer {@link elementorMastheadHeaderSelector}. */
 export const elementorGlobalHeaderClass = 'elementor-3180';
 
-/** Secondary nav strip in #masthead on RU pages (hidden with native chrome). */
+/** @deprecated RU-only class names — prefer {@link elementorMastheadSecondaryNavSelector}. */
 export const elementorSecondaryNavClass = 'elementor-3120';
 
 /** Homepage hero outer container (legacy top padding for old fixed header). */

@@ -118,6 +118,12 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 
 - **Header spacers** — hides empty `8141f77` (blog/archive) and `3f45d89` (posts/pages) `100px` blocks left for the old fixed Elementor header
 
+## Sprint 14 features
+
+- **Masthead dedupe (all locales)** — hides Elementor HF header (`data-elementor-post-type="elementor-hf"`) and secondary `section` nav in `#masthead` (EN `256`/`445`, UZ, KZ, not only RU `3180`/`3120`)
+- **Manager nav item** — hides `menu-item-3206` on every `data-native-chrome` page
+- **Empty masthead** — zeroes padding on `#masthead` after Elementor chrome is removed
+
 ## Deploy
 
 Vercel uses `vercel.json`:
