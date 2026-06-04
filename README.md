@@ -100,6 +100,10 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Elementor footer hidden** — `#colophon` / `.main_footer` replaced by native footer
 - **`lib/navigation.ts`** — shared locale-aware href helpers for header/footer
 
+## Sprint 10 features
+
+- **Elementor header hidden** — global template `elementor-3180` in `#masthead` hidden when native chrome is active (page content / single-post templates remain)
+
 ## Deploy
 
 Vercel uses `vercel.json`:

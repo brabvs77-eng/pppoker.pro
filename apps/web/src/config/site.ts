@@ -18,6 +18,9 @@ export const siteBranding = {
 /** Elementor footer template (replaced by native SiteFooter). */
 export const elementorFooterSelector = '#colophon, footer#colophon, .main_footer';
 
+/** Global Elementor header template inside #masthead (replaced by native SiteHeader). */
+export const elementorGlobalHeaderClass = 'elementor-3180';
+
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
   telegramChannel: 'https://t.me/pppoker_pro',
