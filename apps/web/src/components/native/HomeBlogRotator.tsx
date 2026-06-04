@@ -1,7 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 
-import { homeBlogRotatorConfig } from '@/config/site';
-import { getBlogPostCards, getDailyRotationOffset } from '@/lib/blogPosts';
+import { homeBlogRotatorConfig, homepageLegacyBlogSectionElementId } from '@/config/site';
+import ruHomeBlogPosts from '@/generated/ruHomeBlogPosts.json';
+import type { BlogPostCard } from '@/lib/blogRotation';
+import { getDailyRotationOffset } from '@/lib/blogRotation';
 import { blogHref } from '@/lib/navigation';
 
 import { HomeBlogRotatorClient } from './HomeBlogRotatorClient';
@@ -11,7 +13,7 @@ type HomeBlogRotatorProps = {
 };
 
 export async function HomeBlogRotator({ locale }: HomeBlogRotatorProps) {
-  const posts = await getBlogPostCards('ru');
+  const posts = ruHomeBlogPosts as BlogPostCard[];
   if (posts.length === 0) return null;
 
   const t = await getTranslations({ locale, namespace: 'homeBlog' });
@@ -24,6 +26,7 @@ export async function HomeBlogRotator({ locale }: HomeBlogRotatorProps) {
       visibleCount={homeBlogRotatorConfig.visibleCount}
       intervalMs={homeBlogRotatorConfig.rotationIntervalMs}
       blogArchiveHref={blogHref('ru')}
+      legacyBlogAnchorClass={`elementor-element-${homepageLegacyBlogSectionElementId}`}
       labels={{
         title: t('title'),
         subtitle: t('subtitle'),
