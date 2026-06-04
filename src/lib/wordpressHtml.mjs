@@ -46,12 +46,14 @@ export async function parseWordPressHtml(filePath) {
   const head = $('head').first();
   const body = $('body').first();
   const bodyClasses = splitClasses(body.attr('class'));
+  const bodyFragments = extractBodyFragments($, body);
 
   return {
     htmlAttributes: html.attr() ?? {},
     headHtml: head.html() ?? '',
     bodyAttributes: body.attr() ?? {},
     bodyHtml: body.html() ?? '',
+    bodyFragments,
     bodyClasses,
     title: normalizeText($('head title').first().text()),
     description: $('head meta[name="description"]').first().attr('content') ?? '',
@@ -75,6 +77,7 @@ export async function parseWordPressHtml(filePath) {
       hasFooter: $('body footer').length > 0,
       h1Count: $('body h1').length,
     },
+    fragmentInventory: buildFragmentInventory(bodyFragments),
   };
 }
 
@@ -162,6 +165,16 @@ export function inferLocale(route, htmlLang = '') {
   return 'ru';
 }
 
+export function assembleBodyHtmlFromFragments(fragments, renderedFragments = {}) {
+  return [
+    fragments.beforeHeaderHtml,
+    renderedFragments.headerHtml ?? fragments.header?.outerHtml ?? '',
+    fragments.contentHtml,
+    renderedFragments.footerHtml ?? fragments.footer?.outerHtml ?? '',
+    fragments.afterFooterHtml,
+  ].join('');
+}
+
 export async function copyStaticAssets(rootDir, outDir) {
   const files = await glob('**/*', {
     cwd: rootDir,
@@ -232,4 +245,65 @@ function splitClasses(value = '') {
 
 function routeHasLocalePrefix(route) {
   return /^\/(?:en|hy|kz|tj|uz)(?:\/|$)/.test(route);
+}
+
+function extractBodyFragments($, body) {
+  const bodyNodes = body.contents().toArray();
+  const headerIndex = bodyNodes.findIndex((node) => getNodeName(node) === 'header');
+  const rawFooterIndex = findLastIndex(bodyNodes, (node) => getNodeName(node) === 'footer');
+  const footerIndex = rawFooterIndex >= 0 && rawFooterIndex > headerIndex ? rawFooterIndex : -1;
+  const contentStart = headerIndex >= 0 ? headerIndex + 1 : 0;
+  const contentEnd = footerIndex >= 0 && footerIndex > contentStart ? footerIndex : bodyNodes.length;
+
+  return {
+    beforeHeaderHtml: serializeNodes($, headerIndex >= 0 ? bodyNodes.slice(0, headerIndex) : []),
+    header: headerIndex >= 0 ? buildElementFragment($, bodyNodes[headerIndex]) : null,
+    contentHtml: serializeNodes($, bodyNodes.slice(contentStart, contentEnd)),
+    footer: footerIndex >= 0 ? buildElementFragment($, bodyNodes[footerIndex]) : null,
+    afterFooterHtml: serializeNodes($, footerIndex >= 0 ? bodyNodes.slice(footerIndex + 1) : []),
+  };
+}
+
+function buildElementFragment($, node) {
+  const element = $(node);
+
+  return {
+    tagName: getNodeName(node),
+    attributes: element.attr() ?? {},
+    innerHtml: element.html() ?? '',
+    outerHtml: $.html(node),
+  };
+}
+
+function buildFragmentInventory(fragments) {
+  return {
+    hasBeforeHeader: fragments.beforeHeaderHtml.length > 0,
+    hasHeader: Boolean(fragments.header),
+    hasFooter: Boolean(fragments.footer),
+    hasAfterFooter: fragments.afterFooterHtml.length > 0,
+    contentLength: fragments.contentHtml.length,
+    afterFooterScriptCount: countScriptTags(fragments.afterFooterHtml),
+  };
+}
+
+function serializeNodes($, nodes) {
+  return nodes.map((node) => $.html(node)).join('');
+}
+
+function getNodeName(node) {
+  return (node?.name ?? node?.tagName ?? '').toLowerCase();
+}
+
+function findLastIndex(items, predicate) {
+  for (let index = items.length - 1; index >= 0; index -= 1) {
+    if (predicate(items[index], index)) {
+      return index;
+    }
+  }
+
+  return -1;
+}
+
+function countScriptTags(html) {
+  return (html.match(/<script[\s>]/gi) ?? []).length;
 }

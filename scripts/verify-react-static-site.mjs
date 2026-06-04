@@ -68,12 +68,25 @@ async function main() {
       sourcePage.alternates.length,
       generatedPage.alternates.length,
     );
+    compareFragmentInventory(
+      pageMismatches,
+      page.route,
+      sourcePage.fragmentInventory,
+      generatedPage.fragmentInventory,
+    );
 
     if (!manifestPage) {
       pageMismatches.push(`${page.route}: missing route manifest entry`);
     } else {
       comparePageField(pageMismatches, page.route, 'manifest.locale', expectedMetadata.locale, manifestPage.locale);
       comparePageField(pageMismatches, page.route, 'manifest.type', expectedMetadata.type, manifestPage.type);
+      compareFragmentInventory(
+        pageMismatches,
+        page.route,
+        sourcePage.fragmentInventory,
+        manifestPage.fragmentInventory,
+        'manifest.fragmentInventory',
+      );
     }
   }
 
@@ -123,6 +136,31 @@ async function main() {
 function comparePageField(mismatches, route, field, expected, actual) {
   if (expected !== actual) {
     mismatches.push(`${route}: ${field} mismatch: expected ${formatValue(expected)}, got ${formatValue(actual)}`);
+  }
+}
+
+function compareFragmentInventory(
+  mismatches,
+  route,
+  expected,
+  actual,
+  fieldPrefix = 'fragmentInventory',
+) {
+  for (const key of [
+    'hasBeforeHeader',
+    'hasHeader',
+    'hasFooter',
+    'hasAfterFooter',
+    'contentLength',
+    'afterFooterScriptCount',
+  ]) {
+    comparePageField(
+      mismatches,
+      route,
+      `${fieldPrefix}.${key}`,
+      expected?.[key],
+      actual?.[key],
+    );
   }
 }
 

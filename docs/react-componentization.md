@@ -24,6 +24,20 @@ routes at once.
 
 ## Component extraction order
 
+The build already separates each legacy body into these controlled fragments:
+
+- `beforeHeaderHtml`
+- `LegacyHeader`
+- `contentHtml`
+- `LegacyFooter`
+- `afterFooterHtml`
+
+`LegacyHeader` and `LegacyFooter` render through React components while
+`contentHtml` and `afterFooterHtml` remain wrapper-free raw HTML to avoid DOM
+changes. Replace one fragment at a time and keep `npm run verify` passing.
+
+## Recommended replacement order
+
 1. `SeoHead`
    - title
    - meta description
@@ -74,6 +88,7 @@ Then compare the affected routes:
 - canonical is unchanged
 - hreflang count and targets are unchanged
 - JSON-LD script count is unchanged
+- fragment inventory is unchanged unless the DOM change is intentional
 - H1 count is intentional and documented
 - Telegram/WhatsApp URLs are unchanged
 - sitemap and robots files are present in `dist/`
