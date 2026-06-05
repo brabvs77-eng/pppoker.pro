@@ -14,15 +14,58 @@ import type { PageEntry } from '@/lib/types';
 type PageShellProps = {
   page: PageEntry;
   bodyHtml: string;
+  bodyBeforeHtml?: string;
+  bodyAfterHtml?: string;
   children?: ReactNode;
 };
 
-export function PageShell({ page, bodyHtml, children }: PageShellProps) {
+type PageShellBodyProps = {
+  page: PageEntry;
+  bodyHtml: string;
+  bodyBeforeHtml?: string;
+  bodyAfterHtml?: string;
+};
+
+function PageShellBody({
+  page,
+  bodyHtml,
+  bodyBeforeHtml,
+  bodyAfterHtml,
+}: PageShellBodyProps) {
   const bodyClass = page.bodyAttributes.class;
+  const showRotatingBlog = (homepageRotatingBlogRoutes as readonly string[]).includes(
+    page.route,
+  );
+  const usesSplitBody = bodyBeforeHtml != null && bodyAfterHtml != null;
+
+  return (
+    <WordPressBody
+      page={page}
+      bodyHtml={usesSplitBody ? undefined : bodyHtml}
+      bodyBeforeHtml={bodyBeforeHtml}
+      bodyAfterHtml={bodyAfterHtml}
+      bodyClassName={bodyClass}
+      middleContent={
+        showRotatingBlog && usesSplitBody ? (
+          <HomeBlogRotator locale={page.locale} />
+        ) : null
+      }
+    />
+  );
+}
+
+export function PageShell({
+  page,
+  bodyHtml,
+  bodyBeforeHtml,
+  bodyAfterHtml,
+  children,
+}: PageShellProps) {
   const showHomePromo = (homePromoRoutes as readonly string[]).includes(page.route);
   const showRotatingBlog = (homepageRotatingBlogRoutes as readonly string[]).includes(
     page.route,
   );
+  const usesSplitBody = bodyBeforeHtml != null && bodyAfterHtml != null;
 
   return (
     <>
@@ -31,9 +74,16 @@ export function PageShell({ page, bodyHtml, children }: PageShellProps) {
       <SiteHeader page={page} />
       {showHomePromo ? <HomePromo locale={page.locale} /> : null}
       {children ?? (
-        <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
+        <PageShellBody
+          page={page}
+          bodyHtml={bodyHtml}
+          bodyBeforeHtml={bodyBeforeHtml}
+          bodyAfterHtml={bodyAfterHtml}
+        />
       )}
-      {showRotatingBlog ? <HomeBlogRotator locale={page.locale} /> : null}
+      {showRotatingBlog && !usesSplitBody ? (
+        <HomeBlogRotator locale={page.locale} />
+      ) : null}
       <SiteFooter page={page} />
       <AnalyticsScripts />
       {page.bodyScripts.map((src) => (

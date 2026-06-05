@@ -18,8 +18,20 @@ async function main() {
   }
 
   const cardCount = (html.match(/class="home-blog__card"/g) ?? []).length;
-  if (cardCount < 1) {
-    violations.push(`Expected home-blog cards on homepage, found ${cardCount}`);
+  if (cardCount < 6) {
+    violations.push(`Expected at least 6 home-blog cards on homepage, found ${cardCount}`);
+  }
+
+  if (html.includes('data-id="39eeae8"')) {
+    violations.push(
+      'Legacy Elementor blog loop widget (39eeae8) still in homepage HTML',
+    );
+  }
+
+  const homeBlogIndex = html.indexOf('class="home-blog"');
+  const footerIndex = html.indexOf('id="colophon"');
+  if (homeBlogIndex !== -1 && footerIndex !== -1 && homeBlogIndex > footerIndex) {
+    violations.push('home-blog section renders after footer — placement regression');
   }
 
   if (violations.length) {
@@ -29,7 +41,7 @@ async function main() {
     return;
   }
 
-  console.log(`Verified native home blog on homepage (${cardCount} cards).`);
+  console.log(`Verified native home blog on homepage (${cardCount} cards, before footer).`);
 }
 
 main().catch((error) => {

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { BlogPostCard } from '@/lib/blogRotation';
 import { sliceRotatedPosts } from '@/lib/blogRotation';
@@ -12,7 +12,6 @@ type HomeBlogRotatorClientProps = {
   visibleCount: number;
   intervalMs: number;
   blogArchiveHref: string;
-  legacyBlogAnchorClass: string;
   labels: {
     title: string;
     subtitle: string;
@@ -38,23 +37,9 @@ export function HomeBlogRotatorClient({
   visibleCount,
   intervalMs,
   blogArchiveHref,
-  legacyBlogAnchorClass,
   labels,
 }: HomeBlogRotatorClientProps) {
-  const sectionRef = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(initialOffset);
-
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const anchor = document.querySelector(
-      `#wordpress-page-root .${legacyBlogAnchorClass}`,
-    );
-    if (anchor instanceof HTMLElement) {
-      anchor.insertAdjacentElement('afterend', section);
-    }
-  }, [legacyBlogAnchorClass]);
 
   useEffect(() => {
     setOffset(initialOffset);
@@ -75,7 +60,7 @@ export function HomeBlogRotatorClient({
   if (visible.length === 0) return null;
 
   return (
-    <section ref={sectionRef} className="home-blog" aria-labelledby="home-blog-title">
+    <section className="home-blog" aria-labelledby="home-blog-title">
       <div className="home-blog__inner">
         <header className="home-blog__header">
           <div>

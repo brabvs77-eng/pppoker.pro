@@ -73,6 +73,26 @@ export async function getBodyHtml(page: PageEntry): Promise<string> {
   return fs.readFile(filePath, 'utf8');
 }
 
+export type HomeBodyParts = {
+  beforeHtml: string;
+  afterHtml: string;
+};
+
+/** Pre-split RU homepage body (see `scripts/split-homepage-body.mjs`). */
+export async function getHomeBodyParts(page: PageEntry): Promise<HomeBodyParts | null> {
+  if (page.route !== '/') return null;
+
+  try {
+    const [beforeHtml, afterHtml] = await Promise.all([
+      fs.readFile(path.join(contentRoot, 'bodies', `${page.fileId}-before-blog.html`), 'utf8'),
+      fs.readFile(path.join(contentRoot, 'bodies', `${page.fileId}-after-blog.html`), 'utf8'),
+    ]);
+    return { beforeHtml, afterHtml };
+  } catch {
+    return null;
+  }
+}
+
 export async function getPostRecord(page: PageEntry): Promise<PostRecord | null> {
   if (!page.hasStructuredPost) return null;
   try {
