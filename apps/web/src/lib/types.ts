@@ -3,6 +3,10 @@ export type HreflangEntry = {
   href: string;
 };
 
+export type RuntimeScriptEntry =
+  | { kind: 'external'; src: string; type?: string; id?: string }
+  | { kind: 'inline'; content: string; type?: string; id?: string };
+
 export type PageEntry = {
   route: string;
   slug: string[];
@@ -20,6 +24,7 @@ export type PageEntry = {
   stylesheets: string[];
   headInlineStyles: string[];
   bodyScripts: string[];
+  runtimeScripts?: RuntimeScriptEntry[];
   bodyAttributes: Record<string, string>;
   jsonLd: string[];
   isRedirect: boolean;

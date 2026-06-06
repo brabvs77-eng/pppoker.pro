@@ -8,6 +8,7 @@ import { SiteFooter } from '@/components/native/SiteFooter';
 import { SiteHeader } from '@/components/native/SiteHeader';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
+import { WordPressRuntimeScripts } from '@/components/WordPressRuntimeScripts';
 import { homePromoRoutes, homepageRotatingBlogRoutes } from '@/config/site';
 import type { PageEntry } from '@/lib/types';
 
@@ -23,6 +24,7 @@ export function PageShell({ page, bodyHtml, children }: PageShellProps) {
   const showRotatingBlog = (homepageRotatingBlogRoutes as readonly string[]).includes(
     page.route,
   );
+  const hasElementorFooter = bodyHtml.includes('id="colophon"');
 
   return (
     <>
@@ -34,11 +36,9 @@ export function PageShell({ page, bodyHtml, children }: PageShellProps) {
         <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
       )}
       {showRotatingBlog ? <HomeBlogRotator locale={page.locale} /> : null}
-      <SiteFooter page={page} />
+      <SiteFooter page={page} variant={hasElementorFooter ? 'locale-only' : 'full'} />
       <AnalyticsScripts />
-      {page.bodyScripts.map((src) => (
-        <script key={src} src={src} defer />
-      ))}
+      <WordPressRuntimeScripts scripts={page.runtimeScripts ?? []} />
     </>
   );
 }

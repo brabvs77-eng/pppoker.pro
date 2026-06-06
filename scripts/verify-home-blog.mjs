@@ -26,9 +26,9 @@ async function main() {
     violations.push(`Expected exactly 1 home-blog section, found ${homeBlogSections.length}`);
   }
 
-  const cardCount = (html.match(/class="home-blog__card"/g) ?? []).length;
-  if (cardCount < 6) {
-    violations.push(`Expected at least 6 home-blog cards on homepage, found ${cardCount}`);
+  const cardCount = (html.match(/<article class="home-blog__card"/g) ?? []).length;
+  if (cardCount !== 6) {
+    violations.push(`Expected exactly 6 home-blog cards on homepage, found ${cardCount}`);
   }
 
   if (html.includes('data-id="39eeae8"')) {
@@ -49,7 +49,7 @@ async function main() {
     violations.push('home-blog section renders after Elementor footer — placement regression');
   }
 
-  const markers = ['id="colophon"', 'class="site-footer"'];
+  const markers = ['id="colophon"', 'instagram.com', 'class="site-footer"'];
   for (const marker of markers) {
     if (!html.includes(marker)) {
       violations.push(`Missing expected homepage marker: ${marker}`);

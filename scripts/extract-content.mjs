@@ -91,6 +91,41 @@ function extractBodyScripts($) {
   return [...new Set(scripts)];
 }
 
+/** Ordered head/body script tags required for Elementor widgets (jQuery, inline config, etc.). */
+function extractRuntimeScripts($) {
+  const entries = [];
+
+  const pushScript = (el) => {
+    const src = $(el).attr('src');
+    const type = $(el).attr('type') ?? undefined;
+    const id = $(el).attr('id') ?? undefined;
+
+    if (src) {
+      const normalized = normalizeUrls(src);
+      if (normalized.includes('googletagmanager.com') || normalized.includes('googleoptimize.com')) {
+        return;
+      }
+      entries.push({ kind: 'external', src: normalized, type, id });
+      return;
+    }
+
+    const content = $(el).html()?.trim();
+    if (!content) return;
+    entries.push({ kind: 'inline', content: normalizeUrls(content), type, id });
+  };
+
+  $('head script').each((_, el) => pushScript(el));
+  $('body script').each((_, el) => pushScript(el));
+
+  return entries;
+}
+
+function extractBodyHtml($) {
+  const body = $('body').first().clone();
+  body.find('script').remove();
+  return normalizeUrls(body.html() ?? '');
+}
+
 function extractJsonLd($) {
   const blocks = [];
   $('script[type="application/ld+json"]').each((_, el) => {
@@ -187,7 +222,7 @@ async function main() {
     const source = await fs.readFile(page.sourcePath, 'utf8');
     const $ = load(source, { decodeEntities: false });
     const body = $('body').first();
-    const bodyHtml = normalizeUrls(body.html() ?? '');
+    const bodyHtml = extractBodyHtml($);
     const stylesheets = extractStylesheets($);
     const type = classifyPage(page.route, bodyHtml);
     const fileId = routeToFileId(page.route);
@@ -213,6 +248,7 @@ async function main() {
       stylesheets,
       headInlineStyles: extractHeadInlineStyles($),
       bodyScripts: extractBodyScripts($),
+      runtimeScripts: extractRuntimeScripts($),
       bodyAttributes: normalizeRecord(body.attr() ?? {}),
       jsonLd: extractJsonLd($),
       isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),

@@ -52,11 +52,7 @@ body {
   display: none !important;
 }
 
-/* Hide Elementor footer template — replaced by native SiteFooter. */
-#wordpress-page-root[data-native-chrome] #colophon,
-#wordpress-page-root[data-native-chrome] .main_footer {
-  display: none !important;
-}
+/* Elementor footer (#colophon) stays visible — social links and layout live there. */
 
 /* Hide global Elementor header in #masthead — all locales (elementor-hf). */
 #wordpress-page-root[data-native-chrome]
@@ -70,6 +66,24 @@ body {
   #masthead
   > .elementor[data-elementor-type='section'] {
   display: none !important;
+}
+
+.site-footer[data-variant='locale-only'] {
+  padding: 1rem 1.25rem 1.5rem;
+  border-top: 0;
+  background: transparent;
+}
+
+.site-footer[data-variant='locale-only'] .site-footer__inner {
+  gap: 0;
+}
+
+/* FAQ: ensure accordion answers are readable (Bootstrap collapse hides .collapse by default). */
+#wordpress-page-root .elementskit-accordion .collapse,
+#wordpress-page-root .elementskit-accordion .elementskit-card-body {
+  display: block !important;
+  height: auto !important;
+  visibility: visible !important;
 }
 
 .site-header {

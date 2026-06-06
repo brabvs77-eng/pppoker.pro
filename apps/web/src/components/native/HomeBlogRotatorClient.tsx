@@ -47,6 +47,7 @@ export function HomeBlogRotatorClient({
   useLayoutEffect(() => {
     const mount = document.getElementById(nativeHomeBlogSlotId);
     if (mount instanceof HTMLElement) {
+      mount.innerHTML = '';
       setSlot(mount);
     }
   }, []);
