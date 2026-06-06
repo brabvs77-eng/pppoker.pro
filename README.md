@@ -121,8 +121,9 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 
 ## Homepage blog (RU)
 
-- Legacy Elementor blog grid hidden on `/` (`data-hide-legacy-blog`)
-- Native `HomeBlogRotator`: 6 cards, daily start offset, client rotation every 8s
+- Legacy Elementor blog section removed at build time; mount slot `#native-home-blog-slot` in body HTML
+- Static export injects `home-blog` markup into the slot (`npm run inject:home-blog`)
+- Client rotator (`ssr: false`) portals into the slot for rotation every 8s
 
 ## Sprint 14 features
 

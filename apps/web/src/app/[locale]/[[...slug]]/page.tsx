@@ -2,14 +2,7 @@ import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import {
-  getBodyHtml,
-  getHomeBodyParts,
-  getPageBySlug,
-  getPagesByLocale,
-  slugParamsFromPage,
-} from '@/lib/content';
-import { splitHomepageBodyForNativeBlog } from '@/lib/splitHomepageBody';
+import { getBodyHtml, getPageBySlug, getPagesByLocale, slugParamsFromPage } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type PageProps = {
@@ -60,18 +53,6 @@ export default async function CatchAllPage({ params }: PageProps) {
   }
 
   const bodyHtml = await getBodyHtml(page);
-  const homeParts = await getHomeBodyParts(page);
-  const runtimeSplit =
-    page.route === '/' && !homeParts
-      ? splitHomepageBodyForNativeBlog(bodyHtml)
-      : null;
 
-  return (
-    <PageShell
-      page={page}
-      bodyHtml={bodyHtml}
-      bodyBeforeHtml={homeParts?.beforeHtml ?? runtimeSplit?.beforeHtml}
-      bodyAfterHtml={homeParts?.afterHtml ?? runtimeSplit?.afterHtml}
-    />
-  );
+  return <PageShell page={page} bodyHtml={bodyHtml} />;
 }

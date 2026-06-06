@@ -14,58 +14,15 @@ import type { PageEntry } from '@/lib/types';
 type PageShellProps = {
   page: PageEntry;
   bodyHtml: string;
-  bodyBeforeHtml?: string;
-  bodyAfterHtml?: string;
   children?: ReactNode;
 };
 
-type PageShellBodyProps = {
-  page: PageEntry;
-  bodyHtml: string;
-  bodyBeforeHtml?: string;
-  bodyAfterHtml?: string;
-};
-
-function PageShellBody({
-  page,
-  bodyHtml,
-  bodyBeforeHtml,
-  bodyAfterHtml,
-}: PageShellBodyProps) {
+export function PageShell({ page, bodyHtml, children }: PageShellProps) {
   const bodyClass = page.bodyAttributes.class;
-  const showRotatingBlog = (homepageRotatingBlogRoutes as readonly string[]).includes(
-    page.route,
-  );
-  const usesSplitBody = bodyBeforeHtml != null && bodyAfterHtml != null;
-
-  return (
-    <WordPressBody
-      page={page}
-      bodyHtml={usesSplitBody ? undefined : bodyHtml}
-      bodyBeforeHtml={bodyBeforeHtml}
-      bodyAfterHtml={bodyAfterHtml}
-      bodyClassName={bodyClass}
-      middleContent={
-        showRotatingBlog && usesSplitBody ? (
-          <HomeBlogRotator locale={page.locale} />
-        ) : null
-      }
-    />
-  );
-}
-
-export function PageShell({
-  page,
-  bodyHtml,
-  bodyBeforeHtml,
-  bodyAfterHtml,
-  children,
-}: PageShellProps) {
   const showHomePromo = (homePromoRoutes as readonly string[]).includes(page.route);
   const showRotatingBlog = (homepageRotatingBlogRoutes as readonly string[]).includes(
     page.route,
   );
-  const usesSplitBody = bodyBeforeHtml != null && bodyAfterHtml != null;
 
   return (
     <>
@@ -74,16 +31,9 @@ export function PageShell({
       <SiteHeader page={page} />
       {showHomePromo ? <HomePromo locale={page.locale} /> : null}
       {children ?? (
-        <PageShellBody
-          page={page}
-          bodyHtml={bodyHtml}
-          bodyBeforeHtml={bodyBeforeHtml}
-          bodyAfterHtml={bodyAfterHtml}
-        />
+        <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
       )}
-      {showRotatingBlog && !usesSplitBody ? (
-        <HomeBlogRotator locale={page.locale} />
-      ) : null}
+      {showRotatingBlog ? <HomeBlogRotator locale={page.locale} /> : null}
       <SiteFooter page={page} />
       <AnalyticsScripts />
       {page.bodyScripts.map((src) => (

@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
+import { nativeHomeBlogSlotId } from '@/config/site';
 import type { BlogPostCard } from '@/lib/blogRotation';
 import { sliceRotatedPosts } from '@/lib/blogRotation';
 
@@ -39,7 +41,15 @@ export function HomeBlogRotatorClient({
   blogArchiveHref,
   labels,
 }: HomeBlogRotatorClientProps) {
+  const [slot, setSlot] = useState<HTMLElement | null>(null);
   const [offset, setOffset] = useState(initialOffset);
+
+  useLayoutEffect(() => {
+    const mount = document.getElementById(nativeHomeBlogSlotId);
+    if (mount instanceof HTMLElement) {
+      setSlot(mount);
+    }
+  }, []);
 
   useEffect(() => {
     setOffset(initialOffset);
@@ -57,9 +67,9 @@ export function HomeBlogRotatorClient({
 
   const visible = sliceRotatedPosts(posts, offset, visibleCount);
 
-  if (visible.length === 0) return null;
+  if (visible.length === 0 || !slot) return null;
 
-  return (
+  const section = (
     <section className="home-blog" aria-labelledby="home-blog-title">
       <div className="home-blog__inner">
         <header className="home-blog__header">
@@ -111,4 +121,6 @@ export function HomeBlogRotatorClient({
       </div>
     </section>
   );
+
+  return createPortal(section, slot);
 }

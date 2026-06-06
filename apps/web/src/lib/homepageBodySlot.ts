@@ -1,18 +1,18 @@
-import { homepageLegacyBlogSectionElementId } from '@/config/site';
+import {
+  homepageLegacyBlogSectionElementId,
+  nativeHomeBlogSlotId,
+} from '@/config/site';
 
-export type HomepageBodySplit = {
-  beforeHtml: string;
-  afterHtml: string;
-};
+export const nativeHomeBlogSlotHtml = `<div id="${nativeHomeBlogSlotId}"></div>`;
 
 /**
- * Splits homepage WordPress HTML around the legacy Elementor blog container so a
- * native block can be rendered between the fragments inside #wordpress-page-root.
+ * Removes the legacy Elementor blog container and inserts a mount slot for the
+ * native HomeBlogRotator. Returns one contiguous HTML fragment (balanced divs).
  */
-export function splitHomepageBodyForNativeBlog(
+export function replaceLegacyBlogWithSlot(
   bodyHtml: string,
   legacySectionId = homepageLegacyBlogSectionElementId,
-): HomepageBodySplit | null {
+): string | null {
   const classNeedle = `elementor-element-${legacySectionId}`;
   const classIndex = bodyHtml.indexOf(classNeedle);
   if (classIndex === -1) return null;
@@ -23,10 +23,7 @@ export function splitHomepageBodyForNativeBlog(
   const divEnd = findMatchingDivClose(bodyHtml, divStart);
   if (divEnd === -1) return null;
 
-  return {
-    beforeHtml: bodyHtml.slice(0, divStart),
-    afterHtml: bodyHtml.slice(divEnd),
-  };
+  return `${bodyHtml.slice(0, divStart)}${nativeHomeBlogSlotHtml}${bodyHtml.slice(divEnd)}`;
 }
 
 function findMatchingDivClose(html: string, divStart: number): number {
@@ -51,4 +48,10 @@ function findMatchingDivClose(html: string, divStart: number): number {
   }
 
   return -1;
+}
+
+export function divTagBalance(html: string): number {
+  const opens = (html.match(/<div/gi) ?? []).length;
+  const closes = (html.match(/<\/div>/gi) ?? []).length;
+  return opens - closes;
 }

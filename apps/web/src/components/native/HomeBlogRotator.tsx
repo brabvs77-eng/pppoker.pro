@@ -6,7 +6,7 @@ import type { BlogPostCard } from '@/lib/blogRotation';
 import { getDailyRotationOffset } from '@/lib/blogRotation';
 import { blogHref } from '@/lib/navigation';
 
-import { HomeBlogRotatorClient } from './HomeBlogRotatorClient';
+import { HomeBlogRotatorMount } from './HomeBlogRotatorMount';
 
 type HomeBlogRotatorProps = {
   locale: string;
@@ -20,7 +20,7 @@ export async function HomeBlogRotator({ locale }: HomeBlogRotatorProps) {
   const initialOffset = getDailyRotationOffset(posts.length);
 
   return (
-    <HomeBlogRotatorClient
+    <HomeBlogRotatorMount
       posts={posts}
       initialOffset={initialOffset}
       visibleCount={homeBlogRotatorConfig.visibleCount}

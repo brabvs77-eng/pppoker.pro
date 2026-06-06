@@ -13,6 +13,9 @@ export const homepageBlogLoopElementId = '39eeae8';
 /** Native rotating blog block on the RU homepage. */
 export const homepageRotatingBlogRoutes = ['/'] as const;
 
+/** DOM mount point inside #wordpress-page-root (see homepageBodySlot). */
+export const nativeHomeBlogSlotId = 'native-home-blog-slot';
+
 export const homeBlogRotatorConfig = {
   visibleCount: 6,
   rotationIntervalMs: 8_000,

@@ -4,7 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const bodyPath = path.join(rootDir, 'content/bodies/_root.html');
+const outputPath = path.join(rootDir, 'content/bodies/_root-with-blog-slot.html');
 const legacySectionId = '39311d7';
+const slotHtml = '<div id="native-home-blog-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -30,7 +32,7 @@ function findMatchingDivClose(html, divStart) {
   return -1;
 }
 
-function splitHomepageBody(bodyHtml, legacySectionId) {
+function replaceLegacyBlogWithSlot(bodyHtml, legacySectionId) {
   const classNeedle = `elementor-element-${legacySectionId}`;
   const classIndex = bodyHtml.indexOf(classNeedle);
   if (classIndex === -1) return null;
@@ -41,30 +43,33 @@ function splitHomepageBody(bodyHtml, legacySectionId) {
   const divEnd = findMatchingDivClose(bodyHtml, divStart);
   if (divEnd === -1) return null;
 
-  return {
-    beforeHtml: bodyHtml.slice(0, divStart),
-    afterHtml: bodyHtml.slice(divEnd),
-  };
+  return `${bodyHtml.slice(0, divStart)}${slotHtml}${bodyHtml.slice(divEnd)}`;
+}
+
+function divTagBalance(html) {
+  return (html.match(/<div/gi) ?? []).length - (html.match(/<\/div>/gi) ?? []).length;
 }
 
 async function main() {
   const bodyHtml = await fs.readFile(bodyPath, 'utf8');
-  const split = splitHomepageBody(bodyHtml, legacySectionId);
+  const withSlot = replaceLegacyBlogWithSlot(bodyHtml, legacySectionId);
 
-  if (!split) {
-    console.error('Failed to split homepage body around legacy blog section');
+  if (!withSlot) {
+    console.error('Failed to insert blog slot on homepage body');
     process.exitCode = 1;
     return;
   }
 
-  const beforePath = path.join(rootDir, 'content/bodies/_root-before-blog.html');
-  const afterPath = path.join(rootDir, 'content/bodies/_root-after-blog.html');
+  const balance = divTagBalance(withSlot);
+  if (balance !== 0) {
+    console.error(`Homepage body with slot has unbalanced div tags: ${balance}`);
+    process.exitCode = 1;
+    return;
+  }
 
-  await fs.writeFile(beforePath, split.beforeHtml, 'utf8');
-  await fs.writeFile(afterPath, split.afterHtml, 'utf8');
-
+  await fs.writeFile(outputPath, withSlot, 'utf8');
   console.log(
-    `Split homepage body: before ${split.beforeHtml.length} bytes, after ${split.afterHtml.length} bytes (removed legacy blog section)`,
+    `Prepared homepage body with blog slot (${withSlot.length} bytes, div balance ${balance})`,
   );
 }
 
