@@ -16,6 +16,7 @@ export function WordPressBody({ page, bodyHtml, bodyClassName }: WordPressBodyPr
   return (
     <div
       id="wordpress-page-root"
+      suppressHydrationWarning
       data-route={page.route}
       data-locale={page.locale}
       data-native-chrome=""

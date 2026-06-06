@@ -78,12 +78,13 @@ body {
   gap: 0;
 }
 
-/* FAQ: ensure accordion answers are readable (Bootstrap collapse hides .collapse by default). */
-#wordpress-page-root .elementskit-accordion .collapse,
-#wordpress-page-root .elementskit-accordion .elementskit-card-body {
-  display: block !important;
-  height: auto !important;
-  visibility: visible !important;
+/* FAQ accordion: show open panel only (ElementsKit toggles .show on .collapse). */
+#wordpress-page-root .elementskit-accordion .collapse:not(.show) {
+  display: none;
+}
+
+#wordpress-page-root .elementskit-accordion .collapse.show {
+  display: block;
 }
 
 .site-header {

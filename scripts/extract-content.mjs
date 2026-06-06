@@ -120,10 +120,16 @@ function extractRuntimeScripts($) {
   return entries;
 }
 
+function fixElementskitAccordionHashes(html) {
+  // Legacy WP markup: href="#collapse-…" but id="Collapse-…" — broken anchor without JS.
+  return html.replace(/href="#collapse-/g, 'href="#Collapse-');
+}
+
 function extractBodyHtml($) {
   const body = $('body').first().clone();
   body.find('script').remove();
-  return normalizeUrls(body.html() ?? '');
+  const html = normalizeUrls(body.html() ?? '');
+  return fixElementskitAccordionHashes(html);
 }
 
 function extractJsonLd($) {
