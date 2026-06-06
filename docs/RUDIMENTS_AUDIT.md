@@ -22,7 +22,7 @@
 | `scripts/flatten-ru-export.mjs` | next-intl + `output: 'export'` всё ещё кладёт `ru` в `/ru/`; без middleware `as-needed` на статике не работает |
 | `content/posts/*.json` | Структурированные статьи для будущего RSS/API (пока не в UI) |
 | Дубль `robots.txt` | `prepare:public` копирует legacy; в `out/` побеждает `app/robots.ts` → Yoast sitemap |
-| `apps/web/out/**/*.txt` | RSC payload Next.js при export — не публиковать отдельно, Vercel отдаёт `index.html` |
+| `apps/web/out/**/*.txt` | RSC payload Next.js при export — не публиковать отдельно, Cloudflare Pages отдаёт `index.html` |
 | `normalizeUrls` / `strip:hekler` | Защита от legacy-домена в исходниках |
 
 ## Native chrome (Sprint 6–9)

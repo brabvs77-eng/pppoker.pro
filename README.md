@@ -51,7 +51,7 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 
 ## Sprint 3 features
 
-- **Vercel redirects** — meta-refresh legacy URLs (`/team/*`, `/elementor-hf/*`, …) synced to `vercel.json` via `npm run sync:redirects`
+- **Cloudflare redirects** — legacy URLs (`/team/*`, `/elementor-hf/*`, …) synced to `deploy/cloudflare/_redirects` via `npm run sync:redirects`
 - **Blog visual parity** — `/blog/` and pagination render full Elementor HTML from extract (not the minimal `BlogArchive` list)
 - **Homepage** — blog loop grid hidden via CSS (`elementor-element-39eeae8`)
 - **Dev routing** — `next-intl` middleware for local `npm run dev`
@@ -62,7 +62,8 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 - **SEO** — `robots.txt` points to Yoast `sitemap_index.xml`; hreflang includes `x-default`; sitemap excludes redirects
 - **Site head** — charset, viewport, favicons in locale layout; correct BCP 47 `lang` per locale
 - **CI** — GitHub Actions workflow runs `npm run build` on push/PR
-- **`verify:redirects`** — ensures `vercel.json` stays in sync with manifest
+- **`verify:redirects`** — ensures `deploy/cloudflare/_redirects` stays in sync with manifest
+- **`verify:cloudflare`** — ensures `_redirects` and `_headers` are present in `apps/web/out`
 
 ## Sprint 5 features
 
@@ -129,12 +130,17 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Manager nav item** — hides `menu-item-3206` on every `data-native-chrome` page
 - **Empty masthead** — zeroes padding on `#masthead` after Elementor chrome is removed
 
-## Deploy
+## Deploy (Cloudflare Pages)
 
-Vercel uses `vercel.json`:
+See [deploy/cloudflare/README.md](deploy/cloudflare/README.md).
 
-- **Build:** `npm run build`
-- **Output:** `apps/web/out`
+| Setting | Value |
+|---------|--------|
+| Build command | `npm ci && npm --prefix apps/web ci && npm run build` |
+| Output directory | `apps/web/out` |
+| Node.js | `20` |
+
+`npm run build` copies `_redirects` and `_headers` into `apps/web/out/` for Cloudflare edge rules.
 
 ## Adding or updating pages
 

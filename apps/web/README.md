@@ -1,13 +1,13 @@
-# apps/web
+# apps/web — Next.js static site
 
-Next.js 15 App Router app for [pppoker.pro](https://pppoker.pro) (static export).
+App Router, `output: 'export'`, `next-intl` for locales.
+
+## Commands
 
 ```bash
-# From repo root (extracts content first):
-npm run dev
-
-# Or only this package (requires ../content from extract):
-npm --prefix apps/web run dev
+# from repo root
+npm run dev      # extract + next dev
+npm run build    # full pipeline → apps/web/out
 ```
 
-Build output: `out/` (deployed via root `vercel.json`).
+Build output: `out/` — deployed to **Cloudflare Pages** (see `deploy/cloudflare/README.md`).
