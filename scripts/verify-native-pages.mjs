@@ -13,24 +13,24 @@ function outputPathForRoute(route) {
 
 async function main() {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
-  const posts = manifest.pages.filter((p) => p.type === 'post' && p.hasStructuredPost && !p.isRedirect);
+  const pages = manifest.pages.filter((p) => p.hasNativePage && !p.isRedirect);
   const violations = [];
   let checked = 0;
 
-  for (const page of posts) {
+  for (const page of pages) {
     const outputPath = outputPathForRoute(page.route);
     let html;
     try {
       html = await fs.readFile(outputPath, 'utf8');
     } catch {
-      violations.push(`Missing output for structured post: ${page.route}`);
+      violations.push(`Missing output for native page: ${page.route}`);
       continue;
     }
 
     checked += 1;
 
-    if (!html.includes('class="post-article"')) {
-      violations.push(`No native post-article shell on ${page.route}`);
+    if (!html.includes('class="native-page"')) {
+      violations.push(`No native-page shell on ${page.route}`);
     }
 
     if (html.includes('id="wordpress-page-root"')) {
@@ -38,34 +38,26 @@ async function main() {
     }
 
     if (html.includes('elementor-frontend-js')) {
-      violations.push(`Elementor runtime still loaded on structured post ${page.route}`);
+      violations.push(`Elementor runtime still loaded on native page ${page.route}`);
     }
-  }
 
-  const enBlogRoutes = [
-    '/en/pppoker-review-2026/',
-    '/en/know-your-poker-opponents-secrets-of-winning-strategies/',
-  ];
-  for (const route of enBlogRoutes) {
-    if (!posts.some((p) => p.route === route)) {
-      violations.push(`Missing EN structured blog post in manifest: ${route}`);
+    if (page.type !== 'page') {
+      violations.push(`Manifest type should be page for native page ${page.route}, got ${page.type}`);
+    }
+
+    if (page.hasStructuredPost) {
+      violations.push(`Native page ${page.route} must not have hasStructuredPost`);
     }
   }
 
   if (violations.length) {
-    console.error('Structured posts verification failed:');
-    violations.slice(0, 20).forEach((line) => console.error(`  - ${line}`));
-    if (violations.length > 20) {
-      console.error(`  ... and ${violations.length - 20} more`);
-    }
+    console.error('Native pages verification failed:');
+    violations.forEach((line) => console.error(`  - ${line}`));
     process.exitCode = 1;
     return;
   }
 
-  const enCount = posts.filter((p) => p.locale === 'en').length;
-  console.log(
-    `Verified ${checked} structured post pages (incl. ${enCount} EN) use native article layout.`,
-  );
+  console.log(`Verified ${checked} native pages (legal/about) without Elementor body/runtime.`);
 }
 
 main().catch((error) => {

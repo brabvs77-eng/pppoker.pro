@@ -102,24 +102,24 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 17)
+## Current native coverage (Sprint 20)
 
 | Feature | Status |
 |---------|--------|
 | Header / footer / languages | All pages |
-| HomePromo | `/`, `/en/`, `/hy/`, `/uz/`, `/kz/`, `/tj/` |
-| RU posts (32) | `StructuredPost` |
+| HomePromo | All 6 homepages; `verify:home-promo`; smoke RU + HY |
+| RU posts | `StructuredPost` |
+| EN blog posts (2) | `StructuredPost` |
+| Legal / about | `NativePage` — see `config/native-pages.json` |
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive` |
 | Home blog inject | RU `/`, HY `/hy/` |
 | Elementor runtime budget | `needsElementorRuntime` in manifest |
 
 ## Planned work (backlog)
 
-1. Smoke tests on `/hy/`
-2. HomePromo CTA dedupe on EN/UZ/KZ/TJ homepages
-3. `StructuredPost` for EN posts
-4. Native template for legal/about pages
-5. Optional: home blog on `/en/`
+1. Home blog on `/en/`
+2. `NativePage` for locale-specific legal URLs when HTML exports exist
+3. More Elementor sections → native components
 
 ## Adding or updating content
 

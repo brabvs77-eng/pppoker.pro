@@ -1,4 +1,4 @@
-import { promises as fs } from 'node:fs';
+import { promises as fs, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -12,7 +12,15 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const contentDir = path.join(rootDir, 'content');
 const bodiesDir = path.join(contentDir, 'bodies');
 const postsDir = path.join(contentDir, 'posts');
+const pagesDir = path.join(contentDir, 'pages');
 const SITE_URL = 'https://pppoker.pro';
+
+function loadNativePageRoutes() {
+  const config = JSON.parse(
+    readFileSync(path.join(rootDir, 'apps/web/src/config/native-pages.json'), 'utf8'),
+  );
+  return new Set(config.routes ?? []);
+}
 
 function routeToFileId(route) {
   if (route === '/') return '_root';
@@ -31,8 +39,9 @@ function isBlogArchiveRoute(route) {
   return /^\/(en|uz|kz|hy|tj)\/blog(\/page\/\d+)?\/?$/.test(route);
 }
 
-function needsElementorRuntime(type, bodyHtml, hasStructuredPost, route) {
+function needsElementorRuntime(type, bodyHtml, hasStructuredPost, hasNativePage, route) {
   if (hasStructuredPost) return false;
+  if (hasNativePage) return false;
   if (isBlogArchiveRoute(route)) return false;
 
   return (
@@ -45,8 +54,13 @@ function needsElementorRuntime(type, bodyHtml, hasStructuredPost, route) {
   );
 }
 
-function classifyPage(route, bodyHtml) {
+function isNativePageRoute(route, nativePageRoutes) {
+  return nativePageRoutes.has(route);
+}
+
+function classifyPage(route, bodyHtml, nativePageRoutes) {
   if (isBlogArchiveRoute(route)) return 'blog';
+  if (isNativePageRoute(route, nativePageRoutes)) return 'page';
   if (route.startsWith('/category/')) return 'category';
   if (route.startsWith('/tag/')) return 'tag';
   if (route.startsWith('/team/')) return 'team';
@@ -202,6 +216,13 @@ async function writePostRecord(fileId, record) {
   await fs.writeFile(path.join(postsDir, `${fileId}.json`), `${serialized}\n`, 'utf8');
 }
 
+async function writePageRecord(fileId, record) {
+  await fs.mkdir(pagesDir, { recursive: true });
+  const serialized = JSON.stringify(record, null, 2);
+  assertNoHekler(serialized, `content/pages/${fileId}.json`);
+  await fs.writeFile(path.join(pagesDir, `${fileId}.json`), `${serialized}\n`, 'utf8');
+}
+
 async function generateLlmsTxt(pages) {
   const active = pages.filter((page) => !page.isRedirect);
   const lines = [
@@ -235,6 +256,7 @@ async function main() {
   await fs.rm(contentDir, { recursive: true, force: true });
   await fs.mkdir(bodiesDir, { recursive: true });
 
+  const nativePageRoutes = loadNativePageRoutes();
   const pages = await discoverWordPressPages(rootDir);
   const manifestPages = [];
 
@@ -244,7 +266,7 @@ async function main() {
     const body = $('body').first();
     const bodyHtml = extractBodyHtml($);
     const stylesheets = extractStylesheets($);
-    const type = classifyPage(page.route, bodyHtml);
+    const type = classifyPage(page.route, bodyHtml, nativePageRoutes);
     const fileId = routeToFileId(page.route);
 
     assertNoHekler(bodyHtml, `body ${page.route}`);
@@ -274,6 +296,7 @@ async function main() {
       isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
       redirectTo: null,
       hasStructuredPost: false,
+      hasNativePage: false,
       needsElementorRuntime: true,
     };
 
@@ -281,7 +304,19 @@ async function main() {
       entry.redirectTo = extractRedirectTarget($);
     }
 
-    if (type === 'post') {
+    if (isNativePageRoute(page.route, nativePageRoutes)) {
+      const articleHtml = extractPostArticleHtml($);
+      if (articleHtml) {
+        entry.hasNativePage = true;
+        await writePageRecord(fileId, {
+          route: entry.route,
+          locale: entry.locale,
+          title: entry.title,
+          description: entry.description,
+          html: articleHtml,
+        });
+      }
+    } else if (type === 'post') {
       const articleHtml = extractPostArticleHtml($);
       if (articleHtml) {
         entry.hasStructuredPost = true;
@@ -300,6 +335,7 @@ async function main() {
       type,
       bodyHtml,
       entry.hasStructuredPost,
+      entry.hasNativePage,
       entry.route,
     );
 
@@ -328,9 +364,16 @@ async function main() {
   console.log(
     `CSS budget: ${budget.stats.coreCount} core + ~${budget.stats.averagePageSpecific.toFixed(1)} page-specific stylesheets`,
   );
+  const structured = budget.pages.filter((p) => p.hasStructuredPost);
+  const nativePages = budget.pages.filter((p) => p.hasNativePage);
+  console.log(`Structured posts: ${structured.length}`);
   console.log(
-    `Structured posts: ${budget.pages.filter((p) => p.hasStructuredPost).length}`,
+    `Native pages: ${nativePages.length} (${nativePages.map((p) => p.route).join(', ')})`,
   );
+  const enPosts = structured.filter((p) => p.locale === 'en');
+  if (enPosts.length) {
+    console.log(`EN structured posts: ${enPosts.map((p) => p.route).join(', ')}`);
+  }
 }
 
 main().catch((error) => {

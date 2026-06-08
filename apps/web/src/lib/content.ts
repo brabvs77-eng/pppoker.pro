@@ -5,7 +5,7 @@ import { hideLegacyBlogSectionRoutes } from '@/config/site';
 import type { AppLocale } from '@/i18n/routing';
 
 import type { BlogPostCard } from './blogRotation';
-import type { ContentManifest, PageEntry, PostRecord } from './types';
+import type { ContentManifest, PageEntry, PageRecord, PostRecord } from './types';
 
 const contentRoot = path.join(process.cwd(), '..', '..', 'content');
 
@@ -113,6 +113,19 @@ export async function getPostRecord(page: PageEntry): Promise<PostRecord | null>
       'utf8',
     );
     return JSON.parse(raw) as PostRecord;
+  } catch {
+    return null;
+  }
+}
+
+export async function getPageRecord(page: PageEntry): Promise<PageRecord | null> {
+  if (!page.hasNativePage) return null;
+  try {
+    const raw = await fs.readFile(
+      path.join(contentRoot, 'pages', `${page.fileId}.json`),
+      'utf8',
+    );
+    return JSON.parse(raw) as PageRecord;
   } catch {
     return null;
   }

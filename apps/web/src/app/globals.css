@@ -480,6 +480,52 @@ body {
   border-radius: 8px;
 }
 
+.native-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #fff;
+}
+
+.native-page__header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.native-page__content {
+  margin-top: 1.5rem;
+  line-height: 1.65;
+  font-size: 1rem;
+}
+
+.native-page__content h2,
+.native-page__content h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #fde661;
+}
+
+.native-page__content p {
+  margin: 0 0 1rem;
+  color: #e8ecf4;
+}
+
+.native-page__content a {
+  color: #fde661;
+}
+
+.native-page__content ul,
+.native-page__content ol {
+  margin: 0 0 1rem 1.25rem;
+  color: #e8ecf4;
+}
+
+.native-page__content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 .blog-archive {
   max-width: 900px;
   margin: 0 auto;

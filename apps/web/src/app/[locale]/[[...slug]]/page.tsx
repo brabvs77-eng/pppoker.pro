@@ -5,6 +5,7 @@ import { routing, type AppLocale } from '@/i18n/routing';
 import {
   getBodyHtml,
   getPageBySlug,
+  getPageRecord,
   getPagesByLocale,
   getPostRecord,
   slugParamsFromPage,
@@ -58,9 +59,19 @@ export default async function CatchAllPage({ params }: PageProps) {
     notFound();
   }
 
+  const nativePage = page.hasNativePage ? await getPageRecord(page) : null;
   const structuredPost =
-    page.type === 'post' && page.hasStructuredPost ? await getPostRecord(page) : null;
-  const bodyHtml = structuredPost ? '' : await getBodyHtml(page);
+    !nativePage && page.type === 'post' && page.hasStructuredPost
+      ? await getPostRecord(page)
+      : null;
+  const bodyHtml = structuredPost || nativePage ? '' : await getBodyHtml(page);
 
-  return <PageShell page={page} bodyHtml={bodyHtml} structuredPost={structuredPost} />;
+  return (
+    <PageShell
+      page={page}
+      bodyHtml={bodyHtml}
+      structuredPost={structuredPost}
+      nativePage={nativePage}
+    />
+  );
 }

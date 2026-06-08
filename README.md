@@ -131,6 +131,12 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Dead code cleanup** — removed unused `HomeBlogRotator*` client components (static blog only)
 - **`verify:site-contacts`** — CI check for manager/channel/WhatsApp URLs in homepage output
 
+## Sprint 18–20 features
+
+- **Sprint 18** — HomePromo smoke on RU + HY; `verify:home-promo` on all 6 homepages; Playwright checks CTA dedupe (`d014ade` hidden)
+- **Sprint 19** — EN blog posts use `StructuredPost` (`/en/pppoker-review-2026/`, `/en/know-your-poker-opponents-…/`); verify asserts EN manifest entries
+- **Sprint 20** — `NativePage` for legal/about (`/en/user-agreement/`, `/en/privacy-policy/`, `/rus/`); `content/pages/*.json`; `verify:native-pages`
+
 ## Sprint 17 features
 
 - **Native blog archive** — `NativeBlogArchive` on `/blog/` and locale archives with pagination (no Elementor body/runtime)

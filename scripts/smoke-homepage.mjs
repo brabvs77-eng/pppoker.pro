@@ -9,6 +9,11 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
+const HOME_SMOKE_PAGES = [
+  { label: 'RU', urlPath: '/', minSwipers: 3 },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 3 },
+];
+
 function contentType(filePath) {
   if (filePath.endsWith('.html')) return 'text/html; charset=utf-8';
   if (filePath.endsWith('.js')) return 'application/javascript';
@@ -43,33 +48,57 @@ function startStaticServer() {
   });
 }
 
+async function smokeHomepage(page, { label, urlPath, minSwipers }) {
+  const violations = [];
+  await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
+    waitUntil: 'networkidle',
+    timeout: 90_000,
+  });
+  await page.waitForTimeout(5000);
+
+  const state = await page.evaluate(() => ({
+    swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
+    swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
+    faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
+    channelLink: !!document.querySelector('a[href="https://t.me/+Sj5sG5o0aqJkMTBi"]'),
+    whatsappLink: !!document.querySelector('a[href="https://wa.clck.bar/995592934850"]'),
+    homePromo: !!document.querySelector('.home-promo'),
+    hiddenPlayCta: (() => {
+      const el = document.querySelector('.elementor-element-d014ade');
+      if (!el) return null;
+      return getComputedStyle(el).display === 'none';
+    })(),
+  }));
+
+  if (state.swiperInitialized < minSwipers) {
+    violations.push(
+      `[${label}] Expected ${minSwipers} initialized swipers, got ${state.swiperInitialized}/${state.swiperTotal}`,
+    );
+  }
+  if (state.faqBadHash) violations.push(`[${label}] FAQ still has lowercase #collapse- anchors`);
+  if (!state.channelLink) violations.push(`[${label}] Missing Telegram channel link in header`);
+  if (!state.whatsappLink) violations.push(`[${label}] Missing WhatsApp link in header`);
+  if (!state.homePromo) violations.push(`[${label}] Missing HomePromo strip`);
+  if (state.hiddenPlayCta === false) {
+    violations.push(`[${label}] Legacy play CTA (d014ade) is still visible — HomePromo dedupe failed`);
+  }
+
+  return violations;
+}
+
 async function main() {
   const server = await startStaticServer();
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const errors = [];
+  const violations = [];
 
   page.on('pageerror', (error) => errors.push(error.message));
 
   try {
-    await page.goto(`http://127.0.0.1:${port}/`, { waitUntil: 'networkidle', timeout: 90_000 });
-    await page.waitForTimeout(5000);
-
-    const state = await page.evaluate(() => ({
-      swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
-      swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
-      faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
-      channelLink: !!document.querySelector('a[href="https://t.me/+Sj5sG5o0aqJkMTBi"]'),
-      whatsappLink: !!document.querySelector('a[href="https://wa.clck.bar/995592934850"]'),
-    }));
-
-    const violations = [];
-    if (state.swiperInitialized < 3) {
-      violations.push(`Expected 3 initialized swipers, got ${state.swiperInitialized}/${state.swiperTotal}`);
+    for (const config of HOME_SMOKE_PAGES) {
+      violations.push(...(await smokeHomepage(page, config)));
     }
-    if (state.faqBadHash) violations.push('FAQ still has lowercase #collapse- anchors');
-    if (!state.channelLink) violations.push('Missing Telegram channel link in header');
-    if (!state.whatsappLink) violations.push('Missing WhatsApp link in header');
 
     if (violations.length) {
       console.error('Homepage smoke test failed:');
@@ -82,7 +111,9 @@ async function main() {
       return;
     }
 
-    console.log('Homepage smoke test passed (swiper, FAQ anchors, header contacts).');
+    console.log(
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, HomePromo dedupe).`,
+    );
   } finally {
     await browser.close();
     server.close();

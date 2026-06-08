@@ -30,7 +30,16 @@ export type PageEntry = {
   isRedirect: boolean;
   redirectTo?: string | null;
   hasStructuredPost: boolean;
+  hasNativePage: boolean;
   needsElementorRuntime: boolean;
+};
+
+export type PageRecord = {
+  route: string;
+  locale: string;
+  title: string;
+  description: string;
+  html: string;
 };
 
 export type PostRecord = {

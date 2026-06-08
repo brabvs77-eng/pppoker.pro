@@ -5,6 +5,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
 import { HomePromo } from '@/components/native/HomePromo';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
+import { NativePage } from '@/components/native/NativePage';
 import { StructuredPost } from '@/components/native/StructuredPost';
 import { SiteFooter } from '@/components/native/SiteFooter';
 import { SiteHeader } from '@/components/native/SiteHeader';
@@ -14,12 +15,13 @@ import { WordPressRuntimeScripts } from '@/components/WordPressRuntimeScripts';
 import { homePromoRoutes } from '@/config/site';
 import type { BlogArchiveSlice } from '@/lib/blogArchive';
 import type { AppLocale } from '@/i18n/routing';
-import type { PageEntry, PostRecord } from '@/lib/types';
+import type { PageEntry, PageRecord, PostRecord } from '@/lib/types';
 
 type PageShellProps = {
   page: PageEntry;
   bodyHtml: string;
   structuredPost?: PostRecord | null;
+  nativePage?: PageRecord | null;
   nativeBlog?: BlogArchiveSlice | null;
   children?: ReactNode;
 };
@@ -28,14 +30,15 @@ export function PageShell({
   page,
   bodyHtml,
   structuredPost,
+  nativePage,
   nativeBlog,
   children,
 }: PageShellProps) {
   const bodyClass = page.bodyAttributes.class;
   const showHomePromo = (homePromoRoutes as readonly string[]).includes(page.route);
-  const useLegacyBody = !structuredPost && !nativeBlog;
+  const useLegacyBody = !structuredPost && !nativePage && !nativeBlog;
   const hasElementorFooter = useLegacyBody && bodyHtml.includes('id="colophon"');
-  const loadPageStyles = useLegacyBody || Boolean(structuredPost);
+  const loadPageStyles = useLegacyBody || Boolean(structuredPost) || Boolean(nativePage);
   const loadElementorRuntime = useLegacyBody && page.needsElementorRuntime;
 
   return (
@@ -47,6 +50,8 @@ export function PageShell({
       {children ??
         (nativeBlog ? (
           <NativeBlogArchive locale={page.locale as AppLocale} archive={nativeBlog} />
+        ) : nativePage ? (
+          <NativePage page={nativePage} />
         ) : structuredPost ? (
           <StructuredPost post={structuredPost} />
         ) : (

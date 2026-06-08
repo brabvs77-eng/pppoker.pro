@@ -1,4 +1,5 @@
 import elementorChrome from './elementor-chrome.json';
+import nativePagesConfig from './native-pages.json';
 
 /** Homepages using native React chrome (promo strip, deduped nav). */
 export const homepageNativeRoutes = [
@@ -11,6 +12,9 @@ export const homepageNativeRoutes = [
 ] as const;
 
 export const homePromoRoutes = homepageNativeRoutes;
+
+/** Legal/about pages rendered via NativePage (content/pages/*.json). */
+export const nativePageRoutes = nativePagesConfig.routes as readonly string[];
 
 /** Homepages: hide legacy Elementor blog loop and show native blog slot instead. */
 export const hideLegacyBlogSectionRoutes = elementorChrome.homeBlogSlotRoutes.map(
