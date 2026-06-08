@@ -5,6 +5,7 @@ import { load } from 'cheerio';
 import { glob } from 'glob';
 
 import { applySeoSnippet, readSeoSnippet } from './seoSnippets.mjs';
+import { fixStructuredData } from './structuredData.mjs';
 
 const WORKSPACE_IGNORES = [
   '.git/**',
@@ -66,6 +67,9 @@ export async function parseWordPressHtml(filePath, options = {}) {
       transforms: [],
     }
     : applySeoSnippet($, routeMetadata);
+  const structuredDataTransforms = options.applyTransforms === false
+    ? []
+    : fixStructuredData($, routeMetadata);
   const bodyFragments = extractBodyFragments($, body);
   const contentTransforms = options.applyTransforms === false
     ? []
@@ -106,6 +110,7 @@ export async function parseWordPressHtml(filePath, options = {}) {
     contentTransforms,
     seoSnippet: seoSnippetResult.snippet,
     seoSnippetTransforms: seoSnippetResult.transforms,
+    structuredDataTransforms,
     homepageBlogLoop: canonical === 'https://pppoker.pro/'
       ? buildHomepageBlogLoopInventory(bodyFragments.contentHtml)
       : null,

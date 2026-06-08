@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build-react-static-site.mjs",
     "verify": "node scripts/verify-react-static-site.mjs",
+    "fix:structured-data": "node scripts/fix-structured-data.mjs",
     "render:homepage-blog": "node scripts/render-homepage-blog-section.mjs",
     "migrate:react": "npm run build && npm run verify"
   },

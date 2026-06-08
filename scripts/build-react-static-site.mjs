@@ -66,6 +66,7 @@ async function main() {
       contentTransforms: parsed.contentTransforms,
       seoSnippet: parsed.seoSnippet,
       seoSnippetTransforms: parsed.seoSnippetTransforms,
+      structuredDataTransforms: parsed.structuredDataTransforms,
       homepageBlogLoop: parsed.homepageBlogLoop,
       loadMoreNextPages: parsed.loadMoreNextPages,
     });

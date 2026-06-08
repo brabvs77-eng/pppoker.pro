@@ -8,6 +8,8 @@ import {
   outputPathForRoute,
   parseWordPressHtml,
 } from '../src/lib/wordpressHtml.mjs';
+import { collectStructuredDataIssues } from '../src/lib/structuredData.mjs';
+import { load } from 'cheerio';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'dist');
@@ -86,6 +88,7 @@ async function main() {
       generatedPage.fragmentInventory,
     );
     verifyLoadMoreTargets(pageMismatches, page.route, generatedPage.loadMoreNextPages, generatedRoutes);
+    verifyStructuredData(pageMismatches, page.route, await fs.readFile(outputPath, 'utf8'));
 
     if (page.route === '/') {
       verifyHomepageBlogLoop(pageMismatches, generatedPage.homepageBlogLoop);
@@ -162,6 +165,17 @@ async function main() {
   console.log('Verified SEO snapshots for generated routes');
   console.log(`Verified ${snippetManifest.snippetCount} generated snippets`);
   console.log(`Verified ${requiredStaticFiles.length} SEO/static support files`);
+}
+
+function verifyStructuredData(mismatches, route, html) {
+  const $ = load(html, { decodeEntities: false });
+  const issues = collectStructuredDataIssues($);
+
+  for (const issue of issues) {
+    mismatches.push(
+      `${route}: structured data issue in JSON-LD script ${issue.scriptIndex}: ${issue.message}`,
+    );
+  }
 }
 
 function comparePageField(mismatches, route, field, expected, actual) {
