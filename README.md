@@ -131,6 +131,15 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Dead code cleanup** — removed unused `HomeBlogRotator*` client components (static blog only)
 - **`verify:site-contacts`** — CI check for manager/channel/WhatsApp URLs in homepage output
 
+## Sprint 17 features
+
+- **Native blog archive** — `NativeBlogArchive` on `/blog/` and locale archives with pagination (no Elementor body/runtime)
+- **HomePromo on all locales** — `/`, `/en/`, `/hy/`, `/uz/`, `/kz/`, `/tj/`
+- **Native home blog on HY** — same slot/inject flow as RU (`homeBlogSlotRoutes` in `elementor-chrome.json`)
+- **`needsElementorRuntime`** — manifest flag skips Elementor JS on structured posts and blog archives
+- **`verify:native-blog-archive`** — blog index/pagination pages must use `blog-archive` shell without Elementor JS
+- **`verify:home-blog`** — checks RU and HY homepages for native `home-blog` section
+
 ## Sprint 16 features
 
 - **Native post template** — `StructuredPost` renders posts from `content/posts/*.json` (no Elementor body/runtime)

@@ -9,37 +9,54 @@ import {
 } from './lib/home-blog-static-html.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const bodyPath = path.join(rootDir, 'content/bodies/_root-with-blog-slot.html');
+const bodiesDir = path.join(rootDir, 'content/bodies');
+const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotId = 'native-home-blog-slot';
 const slotPattern = new RegExp(`<div id="${slotId}"></div>`);
 
-async function main() {
-  const bodyHtml = await fs.readFile(bodyPath, 'utf8');
+const localeByRoute = {
+  '/': 'ru',
+  '/hy/': 'hy',
+};
 
-  if (!slotPattern.test(bodyHtml)) {
-    if (bodyHtml.includes(`id="${slotId}"`) && bodyHtml.includes('class="home-blog"')) {
-      console.log('Home blog already present in homepage body');
-      return;
+async function main() {
+  const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
+  const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
+  const posts = loadHomeBlogPosts();
+
+  for (const { fileId, route } of homeRoutes) {
+    const bodyPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
+    const bodyHtml = await fs.readFile(bodyPath, 'utf8');
+    const locale = localeByRoute[route] ?? 'ru';
+    const labels = loadHomeBlogLabels(locale);
+
+    if (!slotPattern.test(bodyHtml)) {
+      if (bodyHtml.includes(`id="${slotId}"`) && bodyHtml.includes('class="home-blog"')) {
+        console.log(`Home blog already present in ${route} body`);
+        continue;
+      }
+
+      console.error(`Missing empty #${slotId} in ${fileId}-with-blog-slot.html`);
+      process.exitCode = 1;
+      continue;
     }
 
-    console.error(`Missing empty #${slotId} in _root-with-blog-slot.html`);
-    process.exitCode = 1;
-    return;
+    const blogHtml = renderHomeBlogSection({
+      posts,
+      labels,
+      blogArchiveHref: locale === 'ru' ? '/blog/' : `/${locale}/blog/`,
+    });
+
+    if (!blogHtml) {
+      console.error(`No home blog posts to inject into ${route}`);
+      process.exitCode = 1;
+      continue;
+    }
+
+    const nextBody = bodyHtml.replace(slotPattern, `<div id="${slotId}">${blogHtml}</div>`);
+    await fs.writeFile(bodyPath, nextBody, 'utf8');
+    console.log(`Injected native home blog into #${slotId} on ${route}`);
   }
-
-  const posts = loadHomeBlogPosts();
-  const labels = loadHomeBlogLabels();
-  const blogHtml = renderHomeBlogSection({ posts, labels });
-
-  if (!blogHtml) {
-    console.error('No home blog posts to inject into homepage body');
-    process.exitCode = 1;
-    return;
-  }
-
-  const nextBody = bodyHtml.replace(slotPattern, `<div id="${slotId}">${blogHtml}</div>`);
-  await fs.writeFile(bodyPath, nextBody, 'utf8');
-  console.log(`Injected native home blog into #${slotId} in _root-with-blog-slot.html`);
 }
 
 main().catch((error) => {

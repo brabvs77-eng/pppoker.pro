@@ -18,7 +18,12 @@
   },
   "blog": {
     "title": "Блог",
-    "readMore": "Хондан"
+    "readMore": "Хондан",
+    "pageOf": "Саҳифа {page} аз {total}",
+    "previous": "Қаблӣ",
+    "next": "Баъдӣ",
+    "empty": "Ҳоло мақолаҳои нашршуда нест.",
+    "paginationLabel": "Саҳифабандии блог"
   },
   "siteFooter": {
     "languageLabel": "Забон",

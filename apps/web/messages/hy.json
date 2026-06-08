@@ -16,7 +16,22 @@
     "channel": "Telegram",
     "whatsapp": "WhatsApp"
   },
-  "blog": { "title": "Բլոգ", "readMore": "Կարդալ" },
+  "blog": {
+    "title": "Բլոգ",
+    "readMore": "Կարդալ",
+    "pageOf": "Էջ {page} / {total}",
+    "previous": "Նախորդ",
+    "next": "Հաջորդ",
+    "empty": "Դեռ հրապարակված հոդվածներ չկան։",
+    "paginationLabel": "Բլոգի էջավորում"
+  },
+  "homeBlog": {
+    "title": "Nuts բլոգ",
+    "subtitle": "Թարմ հոդվածներ պոկերի, ռազմավարության և ակումբի մասին — ընտրությունը թարմացվում է ավտոմատ",
+    "readMore": "Կարդալ հոդվածը",
+    "allPosts": "Բոլոր հոդվածները",
+    "category": "Բլոգ"
+  },
   "siteFooter": {
     "languageLabel": "Լեզու",
     "navLabel": "Նավիգացիա",

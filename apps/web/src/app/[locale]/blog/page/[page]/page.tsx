@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import { getBodyHtml, getBlogPaginationPages, getPageByRoute } from '@/lib/content';
+import { BLOG_ARCHIVE_PAGE_SIZE, paginateBlogPosts } from '@/lib/blogArchive';
+import { getBlogArchivePosts, getPageByRoute } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type BlogPaginationProps = {
@@ -13,11 +14,18 @@ export async function generateStaticParams() {
   const result: Array<{ locale: string; page: string }> = [];
 
   for (const locale of routing.locales) {
-    const archivePages = await getBlogPaginationPages(locale as AppLocale);
-    for (const entry of archivePages) {
-      const match = entry.route.match(/\/blog\/page\/(\d+)\/$/);
-      if (match) {
-        result.push({ locale, page: match[1] });
+    const appLocale = locale as AppLocale;
+    const posts = await getBlogArchivePosts(appLocale);
+    const { totalPages } = paginateBlogPosts(posts, 1, BLOG_ARCHIVE_PAGE_SIZE);
+
+    for (let pageNumber = 2; pageNumber <= totalPages; pageNumber += 1) {
+      const route =
+        appLocale === 'ru'
+          ? `/blog/page/${pageNumber}/`
+          : `/${appLocale}/blog/page/${pageNumber}/`;
+      const manifestPage = await getPageByRoute(route);
+      if (manifestPage) {
+        result.push({ locale, page: String(pageNumber) });
       }
     }
   }
@@ -52,7 +60,12 @@ export default async function BlogPaginationPage({ params }: BlogPaginationProps
     notFound();
   }
 
-  const bodyHtml = await getBodyHtml(manifestPage);
+  const posts = await getBlogArchivePosts(appLocale);
+  const archive = paginateBlogPosts(posts, pageNumber, BLOG_ARCHIVE_PAGE_SIZE);
 
-  return <PageShell page={manifestPage} bodyHtml={bodyHtml} />;
+  if (archive.pageNumber !== pageNumber) {
+    notFound();
+  }
+
+  return <PageShell page={manifestPage} bodyHtml="" nativeBlog={archive} />;
 }

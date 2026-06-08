@@ -1,12 +1,21 @@
 import elementorChrome from './elementor-chrome.json';
 
 /** Homepages using native React chrome (promo strip, deduped nav). */
-export const homepageNativeRoutes = ['/', '/hy/'] as const;
+export const homepageNativeRoutes = [
+  '/',
+  '/en/',
+  '/hy/',
+  '/uz/',
+  '/kz/',
+  '/tj/',
+] as const;
 
 export const homePromoRoutes = homepageNativeRoutes;
 
-/** RU homepage: hide legacy Elementor blog loop and show native blog slot instead. */
-export const hideLegacyBlogSectionRoutes = ['/'] as const;
+/** Homepages: hide legacy Elementor blog loop and show native blog slot instead. */
+export const hideLegacyBlogSectionRoutes = elementorChrome.homeBlogSlotRoutes.map(
+  (entry) => entry.route,
+) as readonly string[];
 
 /** Elementor containers for the static blog grid on homepages. */
 export const homepageLegacyBlogSectionElementId = elementorChrome.legacyBlogSectionIds[0];
@@ -53,7 +62,7 @@ export const legacyHeaderSpacerElementIds = elementorChrome.legacyHeaderSpacerEl
 
 /**
  * Hero widgets that duplicate HomePromo CTAs (play button, hotspot, manager icon row).
- * Shared element IDs across RU (`elementor-3117`) and HY (`elementor-4301`) homepages.
+ * Shared element IDs across locale homepages (RU `elementor-3117`, HY `elementor-4301`, etc.).
  */
 export const homepageDuplicateCtaElementIds = elementorChrome.homepageDuplicateCtaElementIds;
 

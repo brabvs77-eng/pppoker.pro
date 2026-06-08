@@ -487,6 +487,36 @@ body {
   color: #fff;
 }
 
+.blog-archive__header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.blog-archive__meta {
+  color: #9aa8c7;
+  font-size: 0.95rem;
+  margin: 0.5rem 0 0;
+}
+
+.blog-archive__empty {
+  color: #9aa8c7;
+  margin: 2rem 0;
+}
+
+.blog-archive__read-more {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #fde661;
+  font-size: 0.9rem;
+}
+
+.blog-archive__list time {
+  display: block;
+  color: #9aa8c7;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+}
+
 .blog-archive__list {
   list-style: none;
   padding: 0;

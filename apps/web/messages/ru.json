@@ -18,7 +18,12 @@
   },
   "blog": {
     "title": "Блог",
-    "readMore": "Читать"
+    "readMore": "Читать",
+    "pageOf": "Страница {page} из {total}",
+    "previous": "Назад",
+    "next": "Вперёд",
+    "empty": "Пока нет опубликованных статей.",
+    "paginationLabel": "Навигация по страницам блога"
   },
   "homeBlog": {
     "title": "Блог Nuts",

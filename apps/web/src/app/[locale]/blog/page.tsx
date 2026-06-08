@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import { getBodyHtml, getPageByRoute } from '@/lib/content';
+import { BLOG_ARCHIVE_PAGE_SIZE, paginateBlogPosts } from '@/lib/blogArchive';
+import { getBlogArchivePosts, getPageByRoute } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type BlogIndexProps = {
@@ -43,7 +44,8 @@ export default async function BlogIndexPage({ params }: BlogIndexProps) {
     notFound();
   }
 
-  const bodyHtml = await getBodyHtml(page);
+  const posts = await getBlogArchivePosts(appLocale);
+  const archive = paginateBlogPosts(posts, 1, BLOG_ARCHIVE_PAGE_SIZE);
 
-  return <PageShell page={page} bodyHtml={bodyHtml} />;
+  return <PageShell page={page} bodyHtml="" nativeBlog={archive} />;
 }

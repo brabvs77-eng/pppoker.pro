@@ -38,11 +38,11 @@ function getDailyRotationOffset(postCount) {
   return dayIndex % postCount;
 }
 
-export function loadHomeBlogLabels() {
+export function loadHomeBlogLabels(locale = 'ru') {
   const messages = JSON.parse(
-    readFileSync(path.join(rootDir, 'apps/web/messages/ru.json'), 'utf8'),
+    readFileSync(path.join(rootDir, `apps/web/messages/${locale}.json`), 'utf8'),
   );
-  return messages.homeBlog;
+  return messages.homeBlog ?? messages.blog;
 }
 
 export function loadHomeBlogPosts() {

@@ -31,6 +31,20 @@ function isBlogArchiveRoute(route) {
   return /^\/(en|uz|kz|hy|tj)\/blog(\/page\/\d+)?\/?$/.test(route);
 }
 
+function needsElementorRuntime(type, bodyHtml, hasStructuredPost, route) {
+  if (hasStructuredPost) return false;
+  if (isBlogArchiveRoute(route)) return false;
+
+  return (
+    bodyHtml.includes('elementor-location-popup') ||
+    bodyHtml.includes('elementor-main-swiper') ||
+    bodyHtml.includes('elementskit-accordion') ||
+    bodyHtml.includes('elementor-widget-slides') ||
+    bodyHtml.includes('elementor-widget-testimonial-carousel') ||
+    bodyHtml.includes('elementor-widget-loop-grid')
+  );
+}
+
 function classifyPage(route, bodyHtml) {
   if (isBlogArchiveRoute(route)) return 'blog';
   if (route.startsWith('/category/')) return 'category';
@@ -260,6 +274,7 @@ async function main() {
       isRedirect: Boolean($('head meta[http-equiv="refresh" i]').length),
       redirectTo: null,
       hasStructuredPost: false,
+      needsElementorRuntime: true,
     };
 
     if (entry.isRedirect) {
@@ -280,6 +295,13 @@ async function main() {
         });
       }
     }
+
+    entry.needsElementorRuntime = needsElementorRuntime(
+      type,
+      bodyHtml,
+      entry.hasStructuredPost,
+      entry.route,
+    );
 
     manifestPages.push(entry);
   }

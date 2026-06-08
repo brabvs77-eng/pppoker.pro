@@ -1,7 +1,10 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
+import { hideLegacyBlogSectionRoutes } from '@/config/site';
 import type { AppLocale } from '@/i18n/routing';
+
+import type { BlogPostCard } from './blogRotation';
 import type { ContentManifest, PageEntry, PostRecord } from './types';
 
 const contentRoot = path.join(process.cwd(), '..', '..', 'content');
@@ -68,8 +71,12 @@ export async function getPageByRoute(route: string): Promise<PageEntry | null> {
   return pages.find((page) => page.route === route) ?? null;
 }
 
+function stripTitleSuffix(title: string): string {
+  return title.replace(/\s*-\s*Nuts онлайн покер клуб pppoker россия\s*$/i, '').trim();
+}
+
 export async function getBodyHtml(page: PageEntry): Promise<string> {
-  if (page.route === '/') {
+  if ((hideLegacyBlogSectionRoutes as readonly string[]).includes(page.route)) {
     try {
       return await fs.readFile(
         path.join(contentRoot, 'bodies', `${page.fileId}-with-blog-slot.html`),
@@ -82,6 +89,20 @@ export async function getBodyHtml(page: PageEntry): Promise<string> {
 
   const filePath = path.join(contentRoot, 'bodies', `${page.fileId}.html`);
   return fs.readFile(filePath, 'utf8');
+}
+
+export async function getBlogArchivePosts(locale: AppLocale): Promise<BlogPostCard[]> {
+  const pages = await getPagesByLocale(locale);
+  return pages
+    .filter((page) => page.type === 'post' && page.publishedAt)
+    .sort((a, b) => Date.parse(b.publishedAt!) - Date.parse(a.publishedAt!))
+    .map((page) => ({
+      route: page.route,
+      title: stripTitleSuffix(page.title),
+      description: page.description,
+      publishedAt: page.publishedAt!,
+      image: page.ogImage || undefined,
+    }));
 }
 
 export async function getPostRecord(page: PageEntry): Promise<PostRecord | null> {

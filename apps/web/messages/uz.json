@@ -16,7 +16,15 @@
     "channel": "Telegram",
     "whatsapp": "WhatsApp"
   },
-  "blog": { "title": "Blog", "readMore": "O'qish" },
+  "blog": {
+    "title": "Blog",
+    "readMore": "O'qish",
+    "pageOf": "Sahifa {page} / {total}",
+    "previous": "Oldingi",
+    "next": "Keyingi",
+    "empty": "Hozircha e'lon qilingan maqolalar yo'q.",
+    "paginationLabel": "Blog sahifalari"
+  },
   "siteFooter": {
     "languageLabel": "Til",
     "navLabel": "Navigatsiya",

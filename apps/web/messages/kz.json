@@ -16,7 +16,15 @@
     "channel": "Telegram",
     "whatsapp": "WhatsApp"
   },
-  "blog": { "title": "Блог", "readMore": "Оқу" },
+  "blog": {
+    "title": "Блог",
+    "readMore": "Оқу",
+    "pageOf": "Бет {page} / {total}",
+    "previous": "Артқа",
+    "next": "Алға",
+    "empty": "Әзірге жарияланған мақалалар жоқ.",
+    "paginationLabel": "Блог беттері"
+  },
   "siteFooter": {
     "languageLabel": "Тіл",
     "navLabel": "Навигация",

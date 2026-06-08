@@ -3,8 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const bodyPath = path.join(rootDir, 'content/bodies/_root.html');
-const outputPath = path.join(rootDir, 'content/bodies/_root-with-blog-slot.html');
+const bodiesDir = path.join(rootDir, 'content/bodies');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotHtml = '<div id="native-home-blog-slot"></div>';
 
@@ -53,26 +52,38 @@ function divTagBalance(html) {
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const legacySectionId = chrome.legacyBlogSectionIds[0];
-  const bodyHtml = await fs.readFile(bodyPath, 'utf8');
-  const withSlot = replaceLegacyBlogWithSlot(bodyHtml, legacySectionId);
+  const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
 
-  if (!withSlot) {
-    console.error('Failed to insert blog slot on homepage body');
-    process.exitCode = 1;
-    return;
+  for (const { fileId, route } of homeRoutes) {
+    const bodyPath = path.join(bodiesDir, `${fileId}.html`);
+    const outputPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
+
+    let bodyHtml;
+    try {
+      bodyHtml = await fs.readFile(bodyPath, 'utf8');
+    } catch {
+      console.error(`Missing homepage body for ${route}: ${fileId}.html`);
+      process.exitCode = 1;
+      continue;
+    }
+
+    const withSlot = replaceLegacyBlogWithSlot(bodyHtml, legacySectionId);
+    if (!withSlot) {
+      console.error(`Failed to insert blog slot on ${route}`);
+      process.exitCode = 1;
+      continue;
+    }
+
+    const balance = divTagBalance(withSlot);
+    if (balance !== 0) {
+      console.error(`Homepage body for ${route} has unbalanced div tags: ${balance}`);
+      process.exitCode = 1;
+      continue;
+    }
+
+    await fs.writeFile(outputPath, withSlot, 'utf8');
+    console.log(`Prepared ${route} body with blog slot (${withSlot.length} bytes)`);
   }
-
-  const balance = divTagBalance(withSlot);
-  if (balance !== 0) {
-    console.error(`Homepage body with slot has unbalanced div tags: ${balance}`);
-    process.exitCode = 1;
-    return;
-  }
-
-  await fs.writeFile(outputPath, withSlot, 'utf8');
-  console.log(
-    `Prepared homepage body with blog slot (${withSlot.length} bytes, div balance ${balance})`,
-  );
 }
 
 main().catch((error) => {

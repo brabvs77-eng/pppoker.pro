@@ -18,7 +18,12 @@
   },
   "blog": {
     "title": "Blog",
-    "readMore": "Read"
+    "readMore": "Read",
+    "pageOf": "Page {page} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "empty": "No published posts yet.",
+    "paginationLabel": "Blog pagination"
   },
   "siteFooter": {
     "languageLabel": "Language",

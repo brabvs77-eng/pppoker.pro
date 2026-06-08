@@ -3,31 +3,48 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const slotBodyPath = path.join(rootDir, 'content/bodies/_root-with-blog-slot.html');
+const bodiesDir = path.join(rootDir, 'content/bodies');
+const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 
 function divTagBalance(html) {
   return (html.match(/<div/gi) ?? []).length - (html.match(/<\/div>/gi) ?? []).length;
 }
 
-async function main() {
-  const html = await fs.readFile(slotBodyPath, 'utf8');
-  const violations = [];
-
+function verifySlottedBody(label, html, violations) {
   if (!html.includes('id="native-home-blog-slot"')) {
-    violations.push('Missing native-home-blog-slot in _root-with-blog-slot.html');
+    violations.push(`[${label}] Missing native-home-blog-slot in slotted homepage body`);
   }
 
   if (html.includes('elementor-element-39311d7')) {
-    violations.push('Legacy blog container 39311d7 still present in slotted homepage body');
+    violations.push(`[${label}] Legacy blog container 39311d7 still present`);
   }
 
   if (html.includes('data-id="39eeae8"')) {
-    violations.push('Legacy blog loop widget 39eeae8 still present in slotted homepage body');
+    violations.push(`[${label}] Legacy blog loop widget 39eeae8 still present`);
   }
 
   const balance = divTagBalance(html);
   if (balance !== 0) {
-    violations.push(`Unbalanced div tags in slotted homepage body: ${balance}`);
+    violations.push(`[${label}] Unbalanced div tags in slotted homepage body: ${balance}`);
+  }
+}
+
+async function main() {
+  const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
+  const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
+  const violations = [];
+
+  for (const { fileId, route } of homeRoutes) {
+    const slotBodyPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
+    let html;
+    try {
+      html = await fs.readFile(slotBodyPath, 'utf8');
+    } catch {
+      violations.push(`[${route}] Missing slotted body: ${fileId}-with-blog-slot.html`);
+      continue;
+    }
+
+    verifySlottedBody(route, html, violations);
   }
 
   if (violations.length) {
@@ -37,7 +54,9 @@ async function main() {
     return;
   }
 
-  console.log('Verified slotted homepage body HTML (balanced divs, legacy blog removed).');
+  console.log(
+    `Verified slotted homepage body HTML for ${homeRoutes.map((entry) => entry.route).join(', ')}.`,
+  );
 }
 
 main().catch((error) => {
