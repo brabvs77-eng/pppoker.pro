@@ -1,0 +1,22 @@
+---
+description: pppoker.pro architecture, build pipeline, and agent constraints
+alwaysApply: true
+---
+
+# pppoker.pro
+
+Next.js 15 static export (`apps/web/out`) for Nuts PPPoker. Content from WordPress/Elementor HTML extract. Strangler Fig: native React chrome + legacy Elementor bodies.
+
+**Read `AGENTS.md` in repo root for full guide.**
+
+## Must remember
+
+- Blog list component: `NativeBlogArchive` — never `BlogArchive` / `PostArticle` (audit fails)
+- Home blog: inject before `next build`; slot `#native-home-blog-slot`; routes in `elementor-chrome.json` → `homeBlogSlotRoutes`
+- `PageShell`: `structuredPost` | `nativeBlog` | legacy `WordPressBody`; Elementor JS only if `page.needsElementorRuntime`
+- Branches: `cursor/<name>-3d19`; merge via PR; run `npm run build` before done
+- Elementor IDs / contacts: `apps/web/src/config/site.ts`, `elementor-chrome.json`
+
+## Build
+
+`npm run build` = extract → split/inject → verify → next export → flatten RU → verify:* → smoke:homepage
