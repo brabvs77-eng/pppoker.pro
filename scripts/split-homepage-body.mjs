@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const bodyPath = path.join(rootDir, 'content/bodies/_root.html');
 const outputPath = path.join(rootDir, 'content/bodies/_root-with-blog-slot.html');
-const legacySectionId = '39311d7';
+const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotHtml = '<div id="native-home-blog-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
@@ -51,6 +51,8 @@ function divTagBalance(html) {
 }
 
 async function main() {
+  const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
+  const legacySectionId = chrome.legacyBlogSectionIds[0];
   const bodyHtml = await fs.readFile(bodyPath, 'utf8');
   const withSlot = replaceLegacyBlogWithSlot(bodyHtml, legacySectionId);
 

@@ -24,6 +24,7 @@ jobs:
         run: |
           npm ci
           npm --prefix apps/web ci
+          npx playwright install chromium
 
       - name: Rudiment audit
         run: npm run audit:rudiments

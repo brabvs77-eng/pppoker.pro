@@ -1,20 +1,22 @@
+import elementorChrome from './elementor-chrome.json';
+
 /** Homepages using native React chrome (promo strip, deduped nav). */
 export const homepageNativeRoutes = ['/', '/hy/'] as const;
 
 export const homePromoRoutes = homepageNativeRoutes;
 
-/** RU homepage: hide legacy Elementor blog loop and show native rotator instead. */
+/** RU homepage: hide legacy Elementor blog loop and show native blog slot instead. */
 export const hideLegacyBlogSectionRoutes = ['/'] as const;
 
 /** Elementor containers for the static blog grid on homepages. */
-export const homepageLegacyBlogSectionElementId = '39311d7';
-export const homepageBlogLoopElementId = '39eeae8';
+export const homepageLegacyBlogSectionElementId = elementorChrome.legacyBlogSectionIds[0];
+export const homepageBlogLoopElementId = elementorChrome.legacyBlogSectionIds[1];
 
 /** DOM mount point inside #wordpress-page-root (see homepageBodySlot). */
 export const nativeHomeBlogSlotId = 'native-home-blog-slot';
 
 /** Duplicate “manager bonus” items in Elementor nav (hidden when HomePromo is shown). */
-export const duplicateManagerMenuItemClass = 'menu-item-3206';
+export const duplicateManagerMenuItemClass = elementorChrome.duplicateManagerMenuItemClass;
 
 export const siteBranding = {
   logoSrc: '/assets/media/2024/07/NUTS.webp',
@@ -41,23 +43,19 @@ export const elementorGlobalHeaderClass = 'elementor-3180';
 export const elementorSecondaryNavClass = 'elementor-3120';
 
 /** Homepage hero outer container (legacy top padding for old fixed header). */
-export const homepageHeroRootElementId = '23c91dc';
+export const homepageHeroRootElementId = elementorChrome.homepageHeroRootElementId;
 
 /**
  * Empty spacer containers (min-height 100px) for the old fixed header.
  * `8141f77` — blog/archive templates; `3f45d89` — single post & pages.
  */
-export const legacyHeaderSpacerElementIds = ['8141f77', '3f45d89'] as const;
+export const legacyHeaderSpacerElementIds = elementorChrome.legacyHeaderSpacerElementIds;
 
 /**
  * Hero widgets that duplicate HomePromo CTAs (play button, hotspot, manager icon row).
  * Shared element IDs across RU (`elementor-3117`) and HY (`elementor-4301`) homepages.
  */
-export const homepageDuplicateCtaElementIds = [
-  'd014ade',
-  '404896e',
-  'b5a91f5',
-] as const;
+export const homepageDuplicateCtaElementIds = elementorChrome.homepageDuplicateCtaElementIds;
 
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
@@ -75,3 +73,5 @@ export const localeFlags = {
   hy: `${FLAG_BASE}/hy.png`,
   tj: `${FLAG_BASE}/tj.png`,
 } as const;
+
+export { elementorChrome };

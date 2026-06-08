@@ -2,7 +2,13 @@ import { notFound } from 'next/navigation';
 
 import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
-import { getBodyHtml, getPageBySlug, getPagesByLocale, slugParamsFromPage } from '@/lib/content';
+import {
+  getBodyHtml,
+  getPageBySlug,
+  getPagesByLocale,
+  getPostRecord,
+  slugParamsFromPage,
+} from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
 
 type PageProps = {
@@ -52,7 +58,9 @@ export default async function CatchAllPage({ params }: PageProps) {
     notFound();
   }
 
-  const bodyHtml = await getBodyHtml(page);
+  const structuredPost =
+    page.type === 'post' && page.hasStructuredPost ? await getPostRecord(page) : null;
+  const bodyHtml = structuredPost ? '' : await getBodyHtml(page);
 
-  return <PageShell page={page} bodyHtml={bodyHtml} />;
+  return <PageShell page={page} bodyHtml={bodyHtml} structuredPost={structuredPost} />;
 }

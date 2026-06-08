@@ -131,6 +131,13 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Dead code cleanup** — removed unused `HomeBlogRotator*` client components (static blog only)
 - **`verify:site-contacts`** — CI check for manager/channel/WhatsApp URLs in homepage output
 
+## Sprint 16 features
+
+- **Native post template** — `StructuredPost` renders posts from `content/posts/*.json` (no Elementor body/runtime)
+- **Elementor chrome DRY** — `config/elementor-chrome.json` + `emit:chrome-css` → `chrome-overrides.css`
+- **`verify:structured-posts`** — 32 RU posts must use native `post-article` shell without Elementor JS
+- **`smoke:homepage`** — Playwright smoke (swiper init, FAQ anchors, header contact links)
+
 ## Sprint 14 features
 
 - **Masthead dedupe (all locales)** — hides Elementor HF header (`data-elementor-post-type="elementor-hf"`) and secondary `section` nav in `#masthead` (EN `256`/`445`, UZ, KZ, not only RU `3180`/`3120`)

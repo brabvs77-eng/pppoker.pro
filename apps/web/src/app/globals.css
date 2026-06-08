@@ -1,4 +1,6 @@
 /* WordPress/Elementor pages ship their own styles; keep Next shell minimal. */
+@import './chrome-overrides.css';
+
 html,
 body {
   margin: 0;
@@ -9,64 +11,7 @@ body {
   min-height: 100vh;
 }
 
-/* Hide legacy Elementor blog section on RU homepage (replaced by native home-blog slot). */
-#wordpress-page-root[data-hide-legacy-blog] .elementor-element-39311d7,
-#wordpress-page-root[data-hide-legacy-blog] .elementor-element-39eeae8 {
-  display: none !important;
-}
-
-/* Hide duplicate “manager bonus” nav items (Elementor menus, all locales). */
-#wordpress-page-root[data-native-chrome] .menu-item-3206 {
-  display: none !important;
-}
-
-/* Collapse masthead shell once Elementor chrome inside is hidden. */
-#wordpress-page-root[data-native-chrome] #masthead {
-  min-height: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-/* Drop legacy hero top offset on promo homepages (was for Elementor fixed header). */
-#wordpress-page-root[data-home-promo] .elementor-element-23c91dc {
-  padding-top: 0 !important;
-}
-
-/* Hide empty 100px header spacers in blog/archive and post/page templates. */
-#wordpress-page-root[data-native-chrome] .elementor-element-8141f77,
-#wordpress-page-root[data-native-chrome] .elementor-element-3f45d89 {
-  display: none !important;
-}
-
-/* Hide hero CTAs duplicated by native HomePromo (keep headings + bonus box). */
-#wordpress-page-root[data-home-promo] .elementor-element-d014ade,
-#wordpress-page-root[data-home-promo] .elementor-element-404896e,
-#wordpress-page-root[data-home-promo] .elementor-element-b5a91f5 {
-  display: none !important;
-}
-
-/* Hide Elementor/WPML language switchers replaced by native chrome. */
-#wordpress-page-root[data-native-chrome] .custom-lang-switcher,
-#wordpress-page-root[data-native-chrome] .wpml-ls-statics-footer {
-  display: none !important;
-}
-
 /* Elementor footer (#colophon) stays visible — social links and layout live there. */
-
-/* Hide global Elementor header in #masthead — all locales (elementor-hf). */
-#wordpress-page-root[data-native-chrome]
-  #masthead
-  .elementor[data-elementor-post-type='elementor-hf'] {
-  display: none !important;
-}
-
-/* Hide secondary nav strip in #masthead — all locales (top-level section template). */
-#wordpress-page-root[data-native-chrome]
-  #masthead
-  > .elementor[data-elementor-type='section'] {
-  display: none !important;
-}
 
 .site-footer[data-variant='locale-only'] {
   padding: 1rem 1.25rem 1.5rem;
@@ -505,6 +450,34 @@ body {
 .post-article__header time {
   color: #9aa8c7;
   font-size: 0.9rem;
+}
+
+.post-article__content {
+  margin-top: 1.5rem;
+  line-height: 1.65;
+  font-size: 1rem;
+}
+
+.post-article__content h2,
+.post-article__content h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #fde661;
+}
+
+.post-article__content p {
+  margin: 0 0 1rem;
+  color: #e8ecf4;
+}
+
+.post-article__content a {
+  color: #fde661;
+}
+
+.post-article__content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
 .blog-archive {
