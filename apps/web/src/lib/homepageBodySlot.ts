@@ -7,7 +7,7 @@ export const nativeHomeBlogSlotHtml = `<div id="${nativeHomeBlogSlotId}"></div>`
 
 /**
  * Removes the legacy Elementor blog container and inserts a mount slot for the
- * native HomeBlogRotator. Returns one contiguous HTML fragment (balanced divs).
+ * native home-blog slot. Returns one contiguous HTML fragment (balanced divs).
  */
 export function replaceLegacyBlogWithSlot(
   bodyHtml: string,

@@ -31,7 +31,7 @@
 |-----------|----------|
 | `HomePromo` | Дубли CTA / `menu-item-3206`; hero play/hotspot/icon row |
 | `SiteHeader` | Elementor HF + secondary `section` в `#masthead` (все локали); спейсеры `8141f77` / `3f45d89`; `menu-item-3206` |
-| `SiteFooter` | `#colophon`, `.main_footer`, WPML footer |
+| `SiteFooter` | WPML footer switcher; `#colophon` kept visible for Elementor social links (hybrid footer) |
 
 Elementor `#masthead` **сохраняется** — внутри hero и контент главной.
 

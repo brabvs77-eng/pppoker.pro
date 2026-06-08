@@ -5,7 +5,9 @@
     "openMenu": "Кушодани меню",
     "home": "Асосӣ",
     "blog": "Блог",
-    "manager": "Менеҷер"
+    "manager": "Менеҷер",
+    "channel": "Канали Telegram",
+    "whatsapp": "WhatsApp"
   },
   "homePromo": {
     "ariaLabel": "Покери онлайнӣ дар PPPoker",

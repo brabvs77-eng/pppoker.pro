@@ -122,8 +122,14 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 ## Homepage blog (RU)
 
 - Legacy Elementor blog section removed at build time; mount slot `#native-home-blog-slot` in body HTML
-- Static export injects `home-blog` markup into the slot (`npm run inject:home-blog`)
-- Client rotator (`ssr: false`) portals into the slot for rotation every 8s
+- Static `home-blog` markup injected into the slot before Next build (`npm run inject:home-blog-body`)
+- Daily post rotation via build-time offset in `scripts/lib/home-blog-static-html.mjs`
+
+## Sprint 15 features
+
+- **Header contacts** — Telegram channel and WhatsApp links in `SiteHeader` (`siteContacts` in `config/site.ts`)
+- **Dead code cleanup** — removed unused `HomeBlogRotator*` client components (static blog only)
+- **`verify:site-contacts`** — CI check for manager/channel/WhatsApp URLs in homepage output
 
 ## Sprint 14 features
 

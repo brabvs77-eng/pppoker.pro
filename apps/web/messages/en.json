@@ -5,7 +5,9 @@
     "openMenu": "Open menu",
     "home": "Home",
     "blog": "Blog",
-    "manager": "Manager"
+    "manager": "Manager",
+    "channel": "Telegram channel",
+    "whatsapp": "WhatsApp"
   },
   "homePromo": {
     "ariaLabel": "Play poker for real money on PPPoker",

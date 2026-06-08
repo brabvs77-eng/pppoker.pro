@@ -10,16 +10,8 @@ export const hideLegacyBlogSectionRoutes = ['/'] as const;
 export const homepageLegacyBlogSectionElementId = '39311d7';
 export const homepageBlogLoopElementId = '39eeae8';
 
-/** Native rotating blog block on the RU homepage. */
-export const homepageRotatingBlogRoutes = ['/'] as const;
-
 /** DOM mount point inside #wordpress-page-root (see homepageBodySlot). */
 export const nativeHomeBlogSlotId = 'native-home-blog-slot';
-
-export const homeBlogRotatorConfig = {
-  visibleCount: 6,
-  rotationIntervalMs: 8_000,
-} as const;
 
 /** Duplicate “manager bonus” items in Elementor nav (hidden when HomePromo is shown). */
 export const duplicateManagerMenuItemClass = 'menu-item-3206';
@@ -69,8 +61,8 @@ export const homepageDuplicateCtaElementIds = [
 
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
-  telegramChannel: 'https://t.me/pppoker_pro',
-  whatsapp: 'https://wa.me/message/KIXDUQ7TC2ULM1',
+  telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
+  whatsapp: 'https://wa.clck.bar/995592934850',
 } as const;
 
 const FLAG_BASE = '/assets/vendor/sitepress-multilingual-cms/res/flags';

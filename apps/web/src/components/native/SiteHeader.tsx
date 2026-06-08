@@ -41,6 +41,12 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
             <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
               {t('manager')}
             </a>
+            <a href={siteContacts.telegramChannel} target="_blank" rel="noopener noreferrer">
+              {t('channel')}
+            </a>
+            <a href={siteContacts.whatsapp} target="_blank" rel="noopener noreferrer">
+              {t('whatsapp')}
+            </a>
           </nav>
         </details>
 
@@ -49,6 +55,12 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
           <Link href={blog}>{t('blog')}</Link>
           <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
             {t('manager')}
+          </a>
+          <a href={siteContacts.telegramChannel} target="_blank" rel="noopener noreferrer">
+            {t('channel')}
+          </a>
+          <a href={siteContacts.whatsapp} target="_blank" rel="noopener noreferrer">
+            {t('whatsapp')}
           </a>
         </nav>
 

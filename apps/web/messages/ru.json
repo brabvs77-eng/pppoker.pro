@@ -5,7 +5,9 @@
     "openMenu": "Открыть меню",
     "home": "Главная",
     "blog": "Блог",
-    "manager": "Менеджер"
+    "manager": "Менеджер",
+    "channel": "Telegram-канал",
+    "whatsapp": "WhatsApp"
   },
   "homePromo": {
     "ariaLabel": "Онлайн-покер на деньги в PPPoker",

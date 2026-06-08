@@ -5,7 +5,9 @@
     "openMenu": "Բացել մենյու",
     "home": "Գլխավոր",
     "blog": "Բլոգ",
-    "manager": "Մենեջեր"
+    "manager": "Մենեջեր",
+    "channel": "Telegram ալիք",
+    "whatsapp": "WhatsApp"
   },
   "homePromo": {
     "ariaLabel": "Օնլայն պոկեր PPPoker-ում",

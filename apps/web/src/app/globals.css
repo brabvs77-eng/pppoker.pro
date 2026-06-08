@@ -9,7 +9,7 @@ body {
   min-height: 100vh;
 }
 
-/* Hide legacy Elementor blog section on RU homepage (replaced by HomeBlogRotator). */
+/* Hide legacy Elementor blog section on RU homepage (replaced by native home-blog slot). */
 #wordpress-page-root[data-hide-legacy-blog] .elementor-element-39311d7,
 #wordpress-page-root[data-hide-legacy-blog] .elementor-element-39eeae8 {
   display: none !important;

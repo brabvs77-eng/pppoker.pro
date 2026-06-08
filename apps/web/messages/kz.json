@@ -5,7 +5,9 @@
     "openMenu": "Мәзірді ашу",
     "home": "Басты",
     "blog": "Блог",
-    "manager": "Менеджер"
+    "manager": "Менеджер",
+    "channel": "Telegram арнасы",
+    "whatsapp": "WhatsApp"
   },
   "homePromo": {
     "ariaLabel": "PPPoker-де ақшаға онлайн покер",

@@ -5,7 +5,9 @@
     "openMenu": "Menyuni ochish",
     "home": "Bosh sahifa",
     "blog": "Blog",
-    "manager": "Menejer"
+    "manager": "Menejer",
+    "channel": "Telegram kanal",
+    "whatsapp": "WhatsApp"
   },
   "homePromo": {
     "ariaLabel": "PPPoker’da pulga onlayn poker",
