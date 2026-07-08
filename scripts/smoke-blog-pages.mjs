@@ -10,14 +10,30 @@ const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9877;
 
 const BLOG_SMOKE_PAGES = [
-  { label: 'RU archive', urlPath: '/blog/', shell: '.blog-archive', title: '#blog-archive-title' },
-  { label: 'EN archive', urlPath: '/en/blog/', shell: '.blog-archive', title: '#blog-archive-title' },
+  {
+    label: 'RU archive',
+    urlPath: '/blog/',
+    surface: '.blog-surface',
+    shell: '.blog-archive',
+    title: '#blog-archive-title',
+    minBreadcrumbLinks: 1,
+  },
+  {
+    label: 'EN archive',
+    urlPath: '/en/blog/',
+    surface: '.blog-surface',
+    shell: '.blog-archive',
+    title: '#blog-archive-title',
+    minBreadcrumbLinks: 1,
+  },
   {
     label: 'RU post',
     urlPath: '/blog-chto-takoe-ev-v-pokere/',
+    surface: '.blog-surface',
     shell: '.post-article',
     title: '.post-article__header h1',
     heroImage: '.post-article__hero-image',
+    minBreadcrumbLinks: 2,
   },
 ];
 
@@ -42,31 +58,40 @@ function isDarkBackground(rgb) {
   return r <= 60 && g <= 60 && b <= 80;
 }
 
-async function smokeBlogPage(page, { label, urlPath, shell, title, heroImage }) {
+async function smokeBlogPage(page, { label, urlPath, surface, shell, title, heroImage, minBreadcrumbLinks = 0 }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'networkidle',
     timeout: 90_000,
   });
 
-  const state = await page.evaluate(({ shell, title, heroImage }) => {
+  const state = await page.evaluate(({ surface, shell, title, heroImage, minBreadcrumbLinks }) => {
+    const surfaceEl = document.querySelector(surface);
     const root = document.querySelector(shell);
     const heading = document.querySelector(title);
-    if (!root || !heading) {
-      return { missing: !root ? shell : title };
+    if (!surfaceEl || !root || !heading) {
+      return { missing: !surfaceEl ? surface : !root ? shell : title };
     }
 
+    const surfaceStyle = getComputedStyle(surfaceEl);
+    const surfaceRect = surfaceEl.getBoundingClientRect();
+    const viewportWidth = document.documentElement.clientWidth;
     const rootStyle = getComputedStyle(root);
     const titleStyle = getComputedStyle(heading);
     const hero = heroImage ? document.querySelector(heroImage) : null;
+    const breadcrumbLinks = document.querySelectorAll('.blog-breadcrumbs a').length;
     return {
+      surfaceBg: surfaceStyle.backgroundColor,
+      surfaceFullWidth: surfaceRect.width >= viewportWidth * 0.98,
       rootBg: rootStyle.backgroundColor,
       titleColor: titleStyle.color,
       hasPostContent: !!document.querySelector('.post-article__content p'),
       heroSrc: hero?.getAttribute('src') ?? null,
       heroVisible: hero ? hero.getBoundingClientRect().height > 0 : false,
+      breadcrumbLinks,
+      minBreadcrumbLinks,
     };
-  }, { shell, title, heroImage });
+  }, { surface, shell, title, heroImage, minBreadcrumbLinks });
 
   if (state.missing) {
     violations.push(`[${label}] Missing element ${state.missing}`);
@@ -74,13 +99,21 @@ async function smokeBlogPage(page, { label, urlPath, shell, title, heroImage }) 
   }
 
   const titleRgb = parseRgb(state.titleColor);
-  const bgRgb = parseRgb(state.rootBg);
+  const bgRgb = parseRgb(state.surfaceBg);
 
   if (!titleRgb || !(shell === '.blog-archive' ? isAccentHeading(titleRgb) : isLightText(titleRgb))) {
     violations.push(`[${label}] Heading text not readable on dark background: ${state.titleColor}`);
   }
   if (!bgRgb || !isDarkBackground(bgRgb)) {
-    violations.push(`[${label}] Shell background not dark enough: ${state.rootBg}`);
+    violations.push(`[${label}] Blog surface background not dark enough: ${state.surfaceBg}`);
+  }
+  if (!state.surfaceFullWidth) {
+    violations.push(`[${label}] Blog surface does not span full viewport width`);
+  }
+  if (state.breadcrumbLinks < state.minBreadcrumbLinks) {
+    violations.push(
+      `[${label}] Expected at least ${state.minBreadcrumbLinks} breadcrumb links, found ${state.breadcrumbLinks}`,
+    );
   }
 
   if (shell === '.post-article') {
@@ -140,7 +173,7 @@ async function main() {
   }
 
   console.log(
-    `Blog page smoke passed for ${BLOG_SMOKE_PAGES.length} routes + HY blog link (dark theme, hero image).`,
+    `Blog page smoke passed for ${BLOG_SMOKE_PAGES.length} routes + HY blog link (full-width dark surface, breadcrumbs, hero image).`,
   );
 }
 

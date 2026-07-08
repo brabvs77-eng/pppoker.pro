@@ -41,6 +41,16 @@ function assertDarkThemeBlock(css, selector, violations) {
   if (!block.includes(DARK_BG)) {
     violations.push(`${selector} must use background ${DARK_BG}`);
   }
+}
+
+function assertLightTextBlock(css, selector, violations) {
+  const blockMatch = css.match(new RegExp(`\\${selector}\\{[^}]+\\}`));
+  if (!blockMatch) {
+    violations.push(`Missing ${selector} rules in exported CSS`);
+    return;
+  }
+
+  const block = blockMatch[0];
   if (!block.includes(LIGHT_TEXT)) {
     violations.push(`${selector} must use color ${LIGHT_TEXT}`);
   }
@@ -50,18 +60,22 @@ async function main() {
   const violations = [];
   const globals = await fs.readFile(globalsPath, 'utf8');
 
-  for (const selector of ['.post-article', '.blog-archive']) {
+  for (const selector of ['.blog-surface', '.post-article', '.blog-archive']) {
     const block = globals.match(new RegExp(`${selector.replace('.', '\\.')}\\s*\\{[^}]+\\}`));
     if (!block) {
       violations.push(`Missing ${selector} in globals.css`);
       continue;
     }
-    if (!block[0].includes(DARK_BG)) {
-      violations.push(`${selector} in globals.css must use dark background ${DARK_BG}`);
+    if (selector === '.blog-surface' && !block[0].includes(DARK_BG)) {
+      violations.push(`${selector} in globals.css must use full-width dark background ${DARK_BG}`);
     }
-    if (!block[0].includes(LIGHT_TEXT)) {
+    if (selector !== '.blog-surface' && !block[0].includes(LIGHT_TEXT)) {
       violations.push(`${selector} in globals.css must use light text ${LIGHT_TEXT}`);
     }
+  }
+
+  if (!globals.includes('.blog-breadcrumbs')) {
+    violations.push('globals.css must style .blog-breadcrumbs');
   }
 
   if (!globals.includes('.post-article__hero-image')) {
@@ -75,8 +89,9 @@ async function main() {
 
   const bundlePath = await findNextCssBundle();
   const bundleCss = await fs.readFile(bundlePath, 'utf8');
-  assertDarkThemeBlock(bundleCss, '.post-article', violations);
-  assertDarkThemeBlock(bundleCss, '.blog-archive', violations);
+  assertDarkThemeBlock(bundleCss, '.blog-surface', violations);
+  assertLightTextBlock(bundleCss, '.post-article', violations);
+  assertLightTextBlock(bundleCss, '.blog-archive', violations);
 
   for (const route of ['/blog/', ...SAMPLE_POST_ROUTES]) {
     const outputPath = outputPathForRoute(route);
@@ -89,8 +104,14 @@ async function main() {
     }
 
     const shellClass = route.endsWith('/blog/') ? 'blog-archive' : 'post-article';
+    if (!html.includes('class="blog-surface"')) {
+      violations.push(`${route} missing full-width blog-surface wrapper`);
+    }
     if (!html.includes(`class="${shellClass}"`)) {
       violations.push(`${route} missing native ${shellClass} shell`);
+    }
+    if (!html.includes('class="blog-breadcrumbs"')) {
+      violations.push(`${route} missing blog breadcrumbs`);
     }
   }
 

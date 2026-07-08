@@ -18,6 +18,8 @@
   },
   "blog": {
     "title": "Блог",
+    "breadcrumbHome": "Басты бет",
+    "breadcrumbsLabel": "Навигация",
     "readMore": "Оқу",
     "pageOf": "Бет {page} / {total}",
     "previous": "Артқа",

@@ -154,6 +154,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 32** — RSS `<head>` link verify on homepages; smoke checks RSS on RU/EN/UZ/KZ
 - **Sprint 33** — `verify:blog-text-colors` (regression guard for dark-on-light blog CSS); HY/TJ blog links + redirects → `/blog/`; `smoke:blog-pages`
 - **Sprint 34** — Native review snippets with fake star ratings on 5 homepages; replaces Elementor `ccad702` carousel; `inject:review-snippets`; `verify:review-snippets`; JSON-LD `AggregateRating`
+- **Sprint 35** — `BlogBreadcrumbs` on blog archive + structured posts; full-width `.blog-surface` removes white side gutters
 
 ## Sprint 18–20 features
 
