@@ -108,7 +108,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 32)
+## Current native coverage (Sprint 33)
 
 | Feature | Status |
 |---------|--------|
@@ -116,7 +116,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | HomePromo | All 6 homepages; `verify:home-promo`; smoke all 6 |
 | Structured posts | 29 posts — RU, EN, UZ, KZ |
 | Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
-| Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive` |
+| Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
+| Blog text colors | Dark on white — `verify:blog-text-colors`; `smoke:blog-pages` |
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
@@ -129,7 +130,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 1. ~~Home blog on `/en/`~~ — done (Sprint 21)
 2. `NativePage` for locale-specific legal URLs when HTML exports exist (UZ/KZ/HY/TJ)
 3. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
-4. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export
+4. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
 5. More Elementor sections → native components
 
 ## Adding or updating content

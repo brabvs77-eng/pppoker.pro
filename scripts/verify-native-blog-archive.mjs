@@ -14,7 +14,7 @@ function outputPathForRoute(route) {
 function isBlogArchiveRoute(route) {
   if (route === '/blog/') return true;
   if (/^\/blog\/page\/\d+\/$/.test(route)) return true;
-  return /^\/(en|uz|kz|hy|tj)\/blog(\/page\/\d+)?\/?$/.test(route);
+  return /^\/(en|uz|kz)\/blog(\/page\/\d+)?\/?$/.test(route);
 }
 
 async function main() {
