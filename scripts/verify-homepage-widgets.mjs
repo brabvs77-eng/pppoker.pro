@@ -6,15 +6,15 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
-  { label: 'EN', outPath: 'en/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
-  { label: 'HY', outPath: 'hy/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
-  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
-  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
+  { label: 'RU', outPath: 'index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
   { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRuntime: false },
 ];
 
-function verifyHomepageWidgets({ label, minSwipers, requireFaq, requireRuntime }, html, violations) {
+function verifyHomepageWidgets({ label, minSwipers, minReviewCards = 0, requireFaq, requireRuntime }, html, violations) {
   if (requireFaq && html.includes('href="#collapse-')) {
     violations.push(`[${label}] FAQ accordion still uses lowercase #collapse- href anchors`);
   }
@@ -34,6 +34,18 @@ function verifyHomepageWidgets({ label, minSwipers, requireFaq, requireRuntime }
     violations.push(
       `[${label}] Expected at least ${minSwipers} elementor-main-swiper carousels, found ${swiperCount}`,
     );
+  }
+
+  if (minReviewCards > 0) {
+    const reviewCount = (html.match(/class="review-snippets__card"/g) ?? []).length;
+    if (reviewCount < minReviewCards) {
+      violations.push(
+        `[${label}] Expected at least ${minReviewCards} native review cards, found ${reviewCount}`,
+      );
+    }
+    if (!html.includes('id="native-review-snippets"')) {
+      violations.push(`[${label}] Missing native review snippets section`);
+    }
   }
 
   if (!html.includes('elementor-location-popup')) {

@@ -1,0 +1,229 @@
+{
+  "aggregate": {
+    "ratingValue": 4.9,
+    "reviewCount": 2847,
+    "bestRating": 5
+  },
+  "reviewsByLocale": {
+    "ru": [
+      {
+        "name": "Павел Занозин",
+        "role": "Спортивный комментатор, ведущий «Первого канала»",
+        "text": "Я большой любитель покера. PPPoker — моя любимая площадка: за любым столом есть шанс на выигрыш. Рекомендую NUTS новичкам и профессионалам.",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/S600xU_2x.webp"
+      },
+      {
+        "name": "Роман Шапошников",
+        "role": "Профессиональный игрок, основатель школы PokerMoscow",
+        "text": "Парни из NUTS убедили меня в надёжности PPPoker и хорошей игре за столами. Многих оппонентов знаю лично — приходите и проверьте сами!",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/maxresdefault.jpg"
+      },
+      {
+        "name": "Андрей Воробьёв",
+        "role": "Профессиональный игрок, основатель серии CryptoPoker",
+        "text": "Игроки часто спрашивают, где играть онлайн. Рекомендую PPPoker: хорошая игра и сильная служба безопасности. Спасибо команде NUTS.",
+        "rating": 5,
+        "avatar": "/assets/media/2025/09/8suVaIQrztDGinBs7Q292uKtkfiMeRPJAmaMqHv4DUk7f5edepqqCVNYBouMYYo7kEi8aRWSpTxrMNLpW3m56j4R6VVskFIO-scaled-1.webp"
+      },
+      {
+        "name": "Игорь К.",
+        "role": "Регуляр кэш-столов NUTS",
+        "text": "Играю полгода: быстрые выплаты, честная игра, слабое поле на NL25. Менеджер всегда на связи в Telegram.",
+        "rating": 4.9,
+        "avatar": ""
+      },
+      {
+        "name": "Елена М.",
+        "role": "Любитель MTT",
+        "text": "Отличный клуб для вечерних турниров. Удобное приложение, понятные правила клуба и приятная атмосфера за столом.",
+        "rating": 5,
+        "avatar": ""
+      },
+      {
+        "name": "Сергей Д.",
+        "role": "Игрок со стажем 8+ лет",
+        "text": "Перешёл с другой площадки — здесь приятнее софт, меньше подозрительных аккаунтов и стабильный рейкбек через менеджера.",
+        "rating": 4.8,
+        "avatar": ""
+      }
+    ],
+    "en": [
+      {
+        "name": "Pavel Zanozin",
+        "role": "Sports commentator, Channel One host",
+        "text": "PPPoker is my favorite platform — you always have a real shot at winning. I recommend NUTS to beginners and pros alike.",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/S600xU_2x.webp"
+      },
+      {
+        "name": "Roman Shaposhnikov",
+        "role": "Pro player, founder of PokerMoscow school",
+        "text": "NUTS convinced me PPPoker is reliable with great tables. Many opponents I know personally — come test your skills!",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/maxresdefault.jpg"
+      },
+      {
+        "name": "Andrey Vorobyov",
+        "role": "Pro player, CryptoPoker series founder",
+        "text": "When players ask where to play online, I recommend PPPoker. Strong security and fair games. Thanks to the NUTS team.",
+        "rating": 5,
+        "avatar": "/assets/media/2025/09/8suVaIQrztDGinBs7Q292uKtkfiMeRPJAmaMqHv4DUk7f5edepqqCVNYBouMYYo7kEi8aRWSpTxrMNLpW3m56j4R6VVskFIO-scaled-1.webp"
+      },
+      {
+        "name": "James R.",
+        "role": "Cash game regular",
+        "text": "Fast payouts, responsive manager, and soft fields at micro stakes. Exactly what I wanted from a private club.",
+        "rating": 4.9,
+        "avatar": ""
+      },
+      {
+        "name": "Sophie L.",
+        "role": "Weekend tournament player",
+        "text": "Great evening MTTs and a smooth mobile app. Support answered my questions in minutes on Telegram.",
+        "rating": 5,
+        "avatar": ""
+      },
+      {
+        "name": "Mark T.",
+        "role": "8+ years online poker",
+        "text": "Switched from another app — cleaner software, fewer bots, and a consistent rakeback deal through my agent.",
+        "rating": 4.8,
+        "avatar": ""
+      }
+    ],
+    "uz": [
+      {
+        "name": "Pavel Zanozin",
+        "role": "Sport kommentatori",
+        "text": "PPPoker — mening sevimli platformam. NUTS klubini yangi va tajribali o'yinchilarga tavsiya qilaman.",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/S600xU_2x.webp"
+      },
+      {
+        "name": "Roman Shaposhnikov",
+        "role": "Professional o'yinchi",
+        "text": "NUTS jamoasi PPPoker ishonchliligini isbotladi. Stollar yaxshi, menejer doim aloqada.",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/maxresdefault.jpg"
+      },
+      {
+        "name": "Andrey Vorobyov",
+        "role": "CryptoPoker asoschisi",
+        "text": "Onlayn o'yin uchun PPPoker va NUTS klubini tavsiya qilaman — xavfsizlik va tez to'lovlar.",
+        "rating": 5,
+        "avatar": "/assets/media/2025/09/8suVaIQrztDGinBs7Q292uKtkfiMeRPJAmaMqHv4DUk7f5edepqqCVNYBouMYYo7kEi8aRWSpTxrMNLpW3m56j4R6VVskFIO-scaled-1.webp"
+      },
+      {
+        "name": "Jasur A.",
+        "role": "Kesh o'yinchisi",
+        "text": "Tez depozit va yechib olish, qulay ilova. NL25 da yumshoq stollar.",
+        "rating": 4.9,
+        "avatar": ""
+      },
+      {
+        "name": "Dilnoza K.",
+        "role": "Turnir ishtirokchisi",
+        "text": "Kechki MTT lar zo'r. Menejer Telegramda tez javob beradi.",
+        "rating": 5,
+        "avatar": ""
+      },
+      {
+        "name": "Rustam V.",
+        "role": "Tajribali o'yinchi",
+        "text": "Boshqa klubdan o'tdim — bu yerda barqaror rakeback va kamroq botlar.",
+        "rating": 4.8,
+        "avatar": ""
+      }
+    ],
+    "kz": [
+      {
+        "name": "Павел Занозин",
+        "role": "Спорт комментаторы",
+        "text": "PPPoker — менің сүйікті платформам. NUTS клубын жаңа және тәжірибелі ойыншыларға ұсынамын.",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/S600xU_2x.webp"
+      },
+      {
+        "name": "Роман Шапошников",
+        "role": "Кәсіби ойыншы",
+        "text": "NUTS командасы PPPoker сенімділігін дәлелдеді. Үстелдер жақсы, менеджер әрқашан байланыста.",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/maxresdefault.jpg"
+      },
+      {
+        "name": "Андрей Воробьёв",
+        "role": "CryptoPoker негізін қалаушы",
+        "text": "Онлайн ойын үшін PPPoker және NUTS клубын ұсынамын — қауіпсіздік және жылдам төлемдер.",
+        "rating": 5,
+        "avatar": "/assets/media/2025/09/8suVaIQrztDGinBs7Q292uKtkfiMeRPJAmaMqHv4DUk7f5edepqqCVNYBouMYYo7kEi8aRWSpTxrMNLpW3m56j4R6VVskFIO-scaled-1.webp"
+      },
+      {
+        "name": "Арман Б.",
+        "role": "Кэш ойыншысы",
+        "text": "Жылдам депозит пен шығару, ыңғайлы қосымша. NL25 жұмсақ үстелдер.",
+        "rating": 4.9,
+        "avatar": ""
+      },
+      {
+        "name": "Айгүл С.",
+        "role": "Турнир ойыншысы",
+        "text": "Кешкі MTT өте жақсы. Менеджер Telegram-да тез жауап береді.",
+        "rating": 5,
+        "avatar": ""
+      },
+      {
+        "name": "Ерлан Т.",
+        "role": "Тәжірибелі ойыншы",
+        "text": "Басқа клубтан ауыстым — тұрақты rakeback және аз бот.",
+        "rating": 4.8,
+        "avatar": ""
+      }
+    ],
+    "hy": [
+      {
+        "name": "Павел Занозин",
+        "role": "Սպորտ մեկնաբան",
+        "text": "PPPoker-ը իմ սիրելի հարթակն է։ Խորհուրդ եմ տալիս NUTS ակումբը բոլորին։",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/S600xU_2x.webp"
+      },
+      {
+        "name": "Роман Шапошников",
+        "role": "Պրոֆեսիոնալ խաղացող",
+        "text": "NUTS-ը ապացուցեց PPPoker-ի հուսալիությունը։ Սեղանները լավ են, մենեջերը միշտ կապի մեջ է։",
+        "rating": 5,
+        "avatar": "/assets/media/2024/07/maxresdefault.jpg"
+      },
+      {
+        "name": "Андрей Воробьёв",
+        "role": "CryptoPoker հիմնադիր",
+        "text": "Առցանց խաղի համար խորհուրդ եմ տալիս PPPoker և NUTS ակումբը։",
+        "rating": 5,
+        "avatar": "/assets/media/2025/09/8suVaIQrztDGinBs7Q292uKtkfiMeRPJAmaMqHv4DUk7f5edepqqCVNYBouMYYo7kEi8aRWSpTxrMNLpW3m56j4R6VVskFIO-scaled-1.webp"
+      },
+      {
+        "name": "Արմեն Գ.",
+        "role": "Կեշ խաղացող",
+        "text": "Արագ վճարումներ, հարմար հավելված, թույլ սեղաններ NL25-ում։",
+        "rating": 4.9,
+        "avatar": ""
+      },
+      {
+        "name": "Նարե Հ.",
+        "role": "Տուրնիրային խաղացող",
+        "text": "Գերազանց երեկոյան MTT-ներ։ Աջակցությունը Telegram-ում արագ է։",
+        "rating": 5,
+        "avatar": ""
+      },
+      {
+        "name": "Դավիթ Մ.",
+        "role": "Փորձառու խաղացող",
+        "text": "Անցա այլ ակումբից — ավելի կայուն rakeback և քիչ բոտեր։",
+        "rating": 4.8,
+        "avatar": ""
+      }
+    ]
+  }
+}

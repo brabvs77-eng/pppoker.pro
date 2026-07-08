@@ -6,6 +6,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const bodiesDir = path.join(rootDir, 'content/bodies');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotHtml = '<div id="native-home-blog-slot"></div>';
+const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -31,18 +32,24 @@ function findMatchingDivClose(html, divStart) {
   return -1;
 }
 
-function replaceLegacyBlogWithSlot(bodyHtml, legacySectionId) {
-  const classNeedle = `elementor-element-${legacySectionId}`;
+function replaceElementorSectionWithSlot(bodyHtml, elementId, slotMarkup) {
+  const classNeedle = `elementor-element-${elementId}`;
   const classIndex = bodyHtml.indexOf(classNeedle);
-  if (classIndex === -1) return null;
+  if (classIndex === -1) return bodyHtml;
 
   const divStart = bodyHtml.lastIndexOf('<div', classIndex);
-  if (divStart === -1) return null;
+  if (divStart === -1) return bodyHtml;
 
   const divEnd = findMatchingDivClose(bodyHtml, divStart);
-  if (divEnd === -1) return null;
+  if (divEnd === -1) return bodyHtml;
 
-  return `${bodyHtml.slice(0, divStart)}${slotHtml}${bodyHtml.slice(divEnd)}`;
+  return `${bodyHtml.slice(0, divStart)}${slotMarkup}${bodyHtml.slice(divEnd)}`;
+}
+
+function replaceLegacyBlogWithSlot(bodyHtml, legacySectionId) {
+  const classNeedle = `elementor-element-${legacySectionId}`;
+  if (!bodyHtml.includes(classNeedle)) return null;
+  return replaceElementorSectionWithSlot(bodyHtml, legacySectionId, slotHtml);
 }
 
 function divTagBalance(html) {
@@ -52,7 +59,11 @@ function divTagBalance(html) {
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
+  const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
+  const reviewRoutes = new Set(
+    (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
+  );
 
   for (const { fileId, route, legacyBlogSectionId } of homeRoutes) {
     const legacySectionId = legacyBlogSectionId ?? defaultLegacySectionId;
@@ -75,15 +86,20 @@ async function main() {
       continue;
     }
 
-    const balance = divTagBalance(withSlot);
+    const withReviewSlot =
+      reviewsSectionId && reviewRoutes.has(route)
+        ? replaceElementorSectionWithSlot(withSlot, reviewsSectionId, reviewSlotHtml)
+        : withSlot;
+
+    const balance = divTagBalance(withReviewSlot);
     if (balance !== 0) {
       console.error(`Homepage body for ${route} has unbalanced div tags: ${balance}`);
       process.exitCode = 1;
       continue;
     }
 
-    await fs.writeFile(outputPath, withSlot, 'utf8');
-    console.log(`Prepared ${route} body with blog slot (${withSlot.length} bytes)`);
+    await fs.writeFile(outputPath, withReviewSlot, 'utf8');
+    console.log(`Prepared ${route} body with blog slot (${withReviewSlot.length} bytes)`);
   }
 }
 

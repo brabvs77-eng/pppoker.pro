@@ -39,6 +39,10 @@ async function main() {
   const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
   const defaultLegacyLoopId = chrome.legacyBlogSectionIds[1];
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
+  const reviewRoutes = new Set(
+    (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const violations = [];
 
   for (const {
@@ -60,6 +64,15 @@ async function main() {
       legacyBlogSectionId: legacyBlogSectionId ?? defaultLegacySectionId,
       legacyBlogLoopElementId: legacyBlogLoopElementId ?? defaultLegacyLoopId,
     }, violations);
+
+    if (reviewRoutes.has(route)) {
+      if (!html.includes('id="native-review-snippets-slot"') && !html.includes('id="native-review-snippets"')) {
+        violations.push(`[${route}] Missing native review snippets slot or section`);
+      }
+      if (reviewsSectionId && html.includes(`elementor-element-${reviewsSectionId}`)) {
+        violations.push(`[${route}] Legacy reviews section ${reviewsSectionId} still present`);
+      }
+    }
   }
 
   if (violations.length) {
