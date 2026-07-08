@@ -10,12 +10,12 @@ const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 3 },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 3 },
-  { label: 'EN', urlPath: '/en/', minSwipers: 3 },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 3 },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 3 },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0 },
+  { label: 'RU', urlPath: '/', minSwipers: 3, minHomeBlogCards: 6 },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 3, minHomeBlogCards: 6 },
+  { label: 'EN', urlPath: '/en/', minSwipers: 3, minHomeBlogCards: 2 },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 3, minHomeBlogCards: 2 },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 3, minHomeBlogCards: 1 },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0 },
 ];
 
 function contentType(filePath) {
@@ -52,7 +52,7 @@ function startStaticServer() {
   });
 }
 
-async function smokeHomepage(page, { label, urlPath, minSwipers }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0 }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'networkidle',
@@ -72,6 +72,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers }) {
       if (!el) return null;
       return getComputedStyle(el).display === 'none';
     })(),
+    homeBlogCards: document.querySelectorAll('.home-blog__card').length,
   }));
 
   if (state.swiperInitialized < minSwipers) {
@@ -85,6 +86,11 @@ async function smokeHomepage(page, { label, urlPath, minSwipers }) {
   if (!state.homePromo) violations.push(`[${label}] Missing HomePromo strip`);
   if (state.hiddenPlayCta === false) {
     violations.push(`[${label}] Legacy play CTA (d014ade) is still visible — HomePromo dedupe failed`);
+  }
+  if (minHomeBlogCards > 0 && state.homeBlogCards < minHomeBlogCards) {
+    violations.push(
+      `[${label}] Expected at least ${minHomeBlogCards} home-blog cards, found ${state.homeBlogCards}`,
+    );
   }
 
   return violations;
@@ -116,7 +122,7 @@ async function main() {
     }
 
     console.log(
-      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, HomePromo dedupe).`,
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, HomePromo dedupe, home blog).`,
     );
   } finally {
     await browser.close();
