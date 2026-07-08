@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
+import { BlogJsonLdBlock } from '@/components/native/BlogJsonLdBlock';
 import { HomePromo } from '@/components/native/HomePromo';
 import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
@@ -41,11 +42,18 @@ export function PageShell({
   const hasElementorFooter = useLegacyBody && bodyHtml.includes('id="colophon"');
   const loadPageStyles = useLegacyBody || Boolean(structuredPost) || Boolean(nativePage);
   const loadElementorRuntime = useLegacyBody && page.needsElementorRuntime;
+  const useNativeBlogJsonLd = Boolean(nativeBlog || structuredPost);
 
   return (
     <>
       {loadPageStyles ? <WordPressHead page={page} /> : null}
-      <JsonLd blocks={page.jsonLd} />
+      <JsonLd blocks={useNativeBlogJsonLd ? [] : page.jsonLd} />
+      {nativeBlog ? (
+        <BlogJsonLdBlock locale={page.locale as AppLocale} route={page.route} />
+      ) : null}
+      {structuredPost ? (
+        <BlogJsonLdBlock locale={page.locale as AppLocale} post={structuredPost} />
+      ) : null}
       {showHomePromo ? (
         <ReviewSnippetsJsonLd locale={page.locale as AppLocale} />
       ) : null}
