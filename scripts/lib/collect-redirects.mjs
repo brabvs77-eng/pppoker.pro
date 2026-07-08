@@ -24,6 +24,11 @@ export function collectRedirects(manifest) {
     { source: '/user-agreement', destination: '/en/user-agreement' },
     { source: '/privacy-policy', destination: '/en/privacy-policy' },
     { source: '/tag/pppoker-2', destination: '/tag/pppoker' },
+    { source: '/__qs', destination: '/' },
+    {
+      source: '/mastermega-content/mastermega-content-megamenu-menuitem',
+      destination: '/',
+    },
   ];
 
   const wildcards = [{ source: '/ru/*', destination: '/:splat' }];
