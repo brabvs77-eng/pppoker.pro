@@ -12,6 +12,9 @@ const port = 9876;
 const HOME_SMOKE_PAGES = [
   { label: 'RU', urlPath: '/', minSwipers: 3 },
   { label: 'HY', urlPath: '/hy/', minSwipers: 3 },
+  { label: 'EN', urlPath: '/en/', minSwipers: 3 },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 3 },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 3 },
 ];
 
 function contentType(filePath) {
