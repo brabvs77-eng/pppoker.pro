@@ -9,6 +9,7 @@ Files already live in this repository:
 | File | Destination |
 |------|-------------|
 | `scripts/patches/known-legacy-issues.mjs` | `scripts/patches/known-legacy-issues.mjs` |
+| `scripts/patches/kz-home-locale-content.mjs` | `scripts/patches/kz-home-locale-content.mjs` |
 | `scripts/patches/fix-legacy-html.mjs` | `scripts/patches/fix-legacy-html.mjs` |
 | `patches/manual-steps.md` | `patches/manual-steps.md` |
 | `patches/pppoker-patches.md` | `patches/pppoker-patches.md` |
@@ -34,6 +35,7 @@ npm run build
 - KZ flag: `/assets/media/flags/kz.png` → WPML vendor path
 - `but-back.png` / `but-back-300x96.png` → WebP (including sitemaps)
 - Duplicate `robots` meta tags (robotext)
+- KZ homepage Russian promo blocks → Kazakh (`kz/index.html`)
 
 ## What needs human review
 
