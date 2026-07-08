@@ -34,3 +34,4 @@ npm run emit:cloudflare   # copies into apps/web/out (after build)
 - Legacy HTML in the repo root (`index.html`, `blog/`, …) is the **extract source**, not the deploy artifact.
 - `content/` and `apps/web/out/` are build artifacts (gitignored); Cloudflare must run the full build on each deploy.
 - Trailing slashes: Next export uses `trailingSlash: true`; prefer linking to paths with a trailing `/`.
+- Playwright smoke (`npm run smoke:homepage`) runs in GitHub Actions after `npm run build`, not inside the build script — Cloudflare Pages does not need Playwright.

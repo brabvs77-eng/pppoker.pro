@@ -18,7 +18,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 |-------|------|
 | **Native React** | `SiteHeader`, `SiteFooter`, `HomePromo`, `StructuredPost`, `NativeBlogArchive`, static `home-blog` |
 | **Legacy Elementor** | Full page HTML in `content/bodies/*.html`; runtime JS only when `needsElementorRuntime` is true |
-| **Build** | `npm run build` = extract → split/inject → Next build → verify → smoke |
+| **Build** | `npm run build` = export + verify; smoke is a separate step (GHA / local with Playwright) |
 
 ### Key paths
 
@@ -73,7 +73,7 @@ Defined in `apps/web/src/config/site.ts` → `siteContacts`:
 
 ```bash
 # Full production build (required before merge)
-npm ci && npm --prefix apps/web ci && npx playwright install chromium && npm run build
+npm ci && npm --prefix apps/web ci && npx playwright install chromium && npm run build && npm run smoke:homepage
 
 # Local dev
 npm run dev
