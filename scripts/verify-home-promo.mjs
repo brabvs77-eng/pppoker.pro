@@ -2,6 +2,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { siteContacts } from './lib/site-contacts.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
@@ -41,7 +43,7 @@ async function main() {
       violations.push(`[${label}] Missing data-home-promo on #wordpress-page-root`);
     }
 
-    if (!html.includes('https://t.me/NUTSsup')) {
+    if (!html.includes(siteContacts.telegramManager)) {
       violations.push(`[${label}] Missing manager link in HomePromo`);
     }
 

@@ -108,7 +108,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 31)
+## Current native coverage (Sprint 32)
 
 | Feature | Status |
 |---------|--------|
@@ -118,7 +118,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive` |
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
-| Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml` |
+| Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
 | Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |
 | Cloudflare build | `npm run build` Playwright-free; `prebuild` installs `apps/web`; `verify:build-pipeline` |
