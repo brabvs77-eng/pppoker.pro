@@ -8,20 +8,12 @@ import {
   isBlogArchiveRoute,
 } from './lib/elementor-runtime-budget.mjs';
 import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.mjs';
+import { POPUP_ONLY_LANDING_ROUTES } from './lib/landing-pages.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
 const bodiesDir = path.join(rootDir, 'content/bodies');
 const outDir = path.join(rootDir, 'apps/web/out');
-
-/** Legacy pages whose body only embeds global Elementor popups — no interactive widgets. */
-const POPUP_ONLY_LANDING_ROUTES = [
-  '/spasibo/',
-  '/uz/thanks/',
-  '/uz/uzs/',
-  '/__qs/',
-  '/mastermega-content/mastermega-content-megamenu-menuitem/',
-];
 
 function outputPathForRoute(route) {
   if (route === '/') return path.join(outDir, 'index.html');
