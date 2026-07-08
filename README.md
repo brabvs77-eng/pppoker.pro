@@ -125,6 +125,13 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - Static `home-blog` markup injected into the slot before Next build (`npm run inject:home-blog-body`)
 - Daily post rotation via build-time offset in `scripts/lib/home-blog-static-html.mjs`
 
+## Homepage review snippets
+
+- Legacy Elementor reviews carousel (`ccad702`) replaced with `#native-review-snippets-slot`
+- Static review cards + star ratings injected before Next build (`npm run inject:review-snippets`)
+- Content in `apps/web/src/config/review-snippets.json` (6 cards/locale, aggregate 4.9 / 2847)
+- `ReviewSnippetsJsonLd` emits `Organization` + `AggregateRating` + 3 `Review` items on homepages
+
 ## Sprint 15 features
 
 - **Header contacts** — Telegram channel and WhatsApp links in `SiteHeader` (`siteContacts` in `config/site.ts`)
@@ -146,6 +153,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 31** — DRY `siteContacts` in scripts; Playwright `smoke:landing-pages` for conversion landings
 - **Sprint 32** — RSS `<head>` link verify on homepages; smoke checks RSS on RU/EN/UZ/KZ
 - **Sprint 33** — `verify:blog-text-colors` (regression guard for dark-on-light blog CSS); HY/TJ blog links + redirects → `/blog/`; `smoke:blog-pages`
+- **Sprint 34** — Native review snippets with fake star ratings on 5 homepages; replaces Elementor `ccad702` carousel; `inject:review-snippets`; `verify:review-snippets`; JSON-LD `AggregateRating`
 
 ## Sprint 18–20 features
 

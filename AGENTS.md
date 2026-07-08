@@ -16,7 +16,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 
 | Layer | Role |
 |-------|------|
-| **Native React** | `SiteHeader`, `SiteFooter`, `HomePromo`, `StructuredPost`, `NativeBlogArchive`, static `home-blog` |
+| **Native React** | `SiteHeader`, `SiteFooter`, `HomePromo`, `StructuredPost`, `NativeBlogArchive`, static `home-blog`, static `review-snippets` |
 | **Legacy Elementor** | Full page HTML in `content/bodies/*.html`; runtime JS only when `needsElementorRuntime` is true |
 | **Build** | `npm run build` = export + verify; smoke is a separate step (GHA / local with Playwright) |
 
@@ -27,13 +27,15 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 | `apps/web/src/components/native/` | Native UI replacements |
 | `apps/web/src/components/PageShell.tsx` | Composes chrome + body (legacy / structured post / blog archive) |
 | `apps/web/src/config/site.ts` | Routes, contacts, chrome constants |
-| `apps/web/src/config/elementor-chrome.json` | Elementor IDs, `homeBlogSlotRoutes` — single source for chrome CSS |
+| `apps/web/src/config/elementor-chrome.json` | Elementor IDs, `homeBlogSlotRoutes`, `homeReviewSlotRoutes` — single source for chrome CSS |
+| `apps/web/src/config/review-snippets.json` | Fake review cards + aggregate rating per locale |
 | `content/manifest.json` | Generated page index (do not hand-edit) |
 | `content/posts/*.json` | Structured post bodies for `StructuredPost` |
 | `scripts/extract-content.mjs` | HTML → manifest, bodies, `needsElementorRuntime` |
 | `scripts/lib/elementor-runtime-budget.mjs` | Shared runtime detection + taxonomy redirect skip |
-| `scripts/split-homepage-body.mjs` | Replaces legacy blog section with `#native-home-blog-slot` |
+| `scripts/split-homepage-body.mjs` | Replaces legacy blog + reviews sections with native slots |
 | `scripts/inject-home-blog-into-body.mjs` | Injects static home-blog HTML before Next build |
+| `scripts/inject-review-snippets-into-body.mjs` | Injects static review cards + stars before Next build |
 
 ### Locales
 
@@ -44,7 +46,8 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 1. **Structured post** (`hasStructuredPost`) → `StructuredPost`, no Elementor body/runtime
 2. **Blog archive route** (`/blog/`, `/blog/page/N/`, locale variants) → `NativeBlogArchive`, no Elementor runtime
 3. **Home blog slot** (`hideLegacyBlogSectionRoutes`) → static HTML in body; no client portal
-4. **Everything else** → `WordPressBody` + Elementor CSS; load runtime only if `needsElementorRuntime`
+4. **Home review slot** (`homeReviewSlotRoutes`) → static review cards + `ReviewSnippetsJsonLd`; no client portal
+5. **Everything else** → `WordPressBody` + Elementor CSS; load runtime only if `needsElementorRuntime`
 
 `needsElementorRuntime` is false when body has no interactive widgets (swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, taxonomy redirect, or a static landing page that only embeds global Elementor popups.
 
@@ -108,7 +111,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 33)
+## Current native coverage (Sprint 34)
 
 | Feature | Status |
 |---------|--------|
@@ -119,6 +122,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
 | Blog text colors | Dark site theme (`#131b2b`) — `verify:blog-text-colors`; `smoke:blog-pages` |
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
+| Review snippets | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 6 cards + fake stars; `verify:review-snippets`; JSON-LD `AggregateRating` |
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
 | Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |

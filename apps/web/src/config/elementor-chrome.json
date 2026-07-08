@@ -32,5 +32,13 @@
   "duplicateManagerMenuItemClass": "menu-item-3206",
   "homepageHeroRootElementId": "23c91dc",
   "legacyHeaderSpacerElementIds": ["8141f77", "3f45d89"],
-  "homepageDuplicateCtaElementIds": ["d014ade", "404896e", "b5a91f5"]
+  "homepageDuplicateCtaElementIds": ["d014ade", "404896e", "b5a91f5"],
+  "legacyReviewsSectionElementId": "ccad702",
+  "homeReviewSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" }
+  ]
 }

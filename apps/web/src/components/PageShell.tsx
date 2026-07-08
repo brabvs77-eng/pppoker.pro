@@ -4,6 +4,7 @@ import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
 import { HomePromo } from '@/components/native/HomePromo';
+import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
 import { NativePage } from '@/components/native/NativePage';
 import { StructuredPost } from '@/components/native/StructuredPost';
@@ -45,6 +46,9 @@ export function PageShell({
     <>
       {loadPageStyles ? <WordPressHead page={page} /> : null}
       <JsonLd blocks={page.jsonLd} />
+      {showHomePromo ? (
+        <ReviewSnippetsJsonLd locale={page.locale as AppLocale} />
+      ) : null}
       <SiteHeader page={page} />
       {showHomePromo ? <HomePromo locale={page.locale} /> : null}
       {children ??

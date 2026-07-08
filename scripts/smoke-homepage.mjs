@@ -11,15 +11,15 @@ const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 3, minHomeBlogCards: 6, feedHref: '/feed.xml' },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 3, minHomeBlogCards: 6 },
-  { label: 'EN', urlPath: '/en/', minSwipers: 3, minHomeBlogCards: 2, feedHref: '/en/feed.xml' },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 3, minHomeBlogCards: 2, feedHref: '/uz/feed.xml' },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 3, minHomeBlogCards: 1, feedHref: '/kz/feed.xml' },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0 },
+  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml' },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6 },
+  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/en/feed.xml' },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/uz/feed.xml' },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, feedHref: '/kz/feed.xml' },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0, minReviewCards: 0 },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, feedHref }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'networkidle',
@@ -40,6 +40,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
       return getComputedStyle(el).display === 'none';
     })(),
     homeBlogCards: document.querySelectorAll('.home-blog__card').length,
+    reviewCards: document.querySelectorAll('.review-snippets__card').length,
+    reviewStars: document.querySelectorAll('.review-stars').length,
     rssLink: feedHref
       ? !!document.querySelector(
           `link[rel="alternate"][type="application/rss+xml"][href="${feedHref}"]`,
@@ -67,6 +69,14 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     violations.push(
       `[${label}] Expected at least ${minHomeBlogCards} home-blog cards, found ${state.homeBlogCards}`,
     );
+  }
+  if (minReviewCards > 0 && state.reviewCards < minReviewCards) {
+    violations.push(
+      `[${label}] Expected at least ${minReviewCards} review cards, found ${state.reviewCards}`,
+    );
+  }
+  if (minReviewCards > 0 && state.reviewStars < 1) {
+    violations.push(`[${label}] Missing review star markup`);
   }
   if (feedHref && !state.rssLink) {
     violations.push(`[${label}] Missing RSS alternate link ${feedHref}`);
