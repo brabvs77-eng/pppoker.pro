@@ -73,6 +73,11 @@ export const EN_POPUP_MARKERS = [
   'The jackpot is not unusual',
 ];
 
+/** Placeholder / lorem-style text accidentally left in production pages. */
+export const RUDIMENT_TEXT_PATTERNS = [
+  'Идейные соображения высшего порядка',
+];
+
 /**
  * Legacy HTML must not contain these substrings after fix:legacy-html runs.
  * @type {readonly { id: string; needle: string; hint: string }[]}
@@ -89,6 +94,13 @@ export const FORBIDDEN_LEGACY_NEEDLES = [
     hint: 'Run npm run fix:legacy-html — button image should be WebP',
   },
 ];
+
+/** @type {readonly { id: string; needle: string; hint: string }[]} */
+export const FORBIDDEN_RUDIMENT_NEEDLES = RUDIMENT_TEXT_PATTERNS.map((pattern) => ({
+  id: 'rudiment-text',
+  needle: pattern,
+  hint: 'Run npm run fix:legacy-html — remove placeholder export text',
+}));
 
 /**
  * @param {string} relativePath

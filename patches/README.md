@@ -11,6 +11,8 @@ Files already live in this repository:
 | `scripts/patches/known-legacy-issues.mjs` | `scripts/patches/known-legacy-issues.mjs` |
 | `scripts/patches/kz-home-locale-content.mjs` | `scripts/patches/kz-home-locale-content.mjs` |
 | `scripts/patches/fix-legacy-html.mjs` | `scripts/patches/fix-legacy-html.mjs` |
+| `scripts/patches/fix-promo-video-blocks.mjs` | `scripts/patches/fix-promo-video-blocks.mjs` |
+| `scripts/patches/fix-orphaned-popup-duplicates.mjs` | `scripts/patches/fix-orphaned-popup-duplicates.mjs` |
 | `patches/manual-steps.md` | `patches/manual-steps.md` |
 | `patches/pppoker-patches.md` | `patches/pppoker-patches.md` |
 
@@ -27,6 +29,8 @@ No manual copy step is required when working from a clone of this repo.
 
 ```bash
 npm run fix:legacy-html
+npm run fix:orphaned-popup-duplicates
+npm run fix:promo-video-blocks
 npm run build
 ```
 
@@ -35,8 +39,9 @@ npm run build
 - KZ flag: `/assets/media/flags/kz.png` → WPML vendor path
 - `but-back.png` / `but-back-300x96.png` → WebP (including sitemaps)
 - Duplicate `robots` meta tags (robotext)
+- Orphaned popup DOM duplicates on RU pages (`fix-orphaned-popup-duplicates`)
+- CRASH / Russian poker promo video autoplay, poster, column widths (`fix-promo-video-blocks`)
 - KZ homepage Russian promo blocks → Kazakh (`kz/index.html`)
-- KZ promo layout classes + CRASH video poster/autoplay (manual in `kz/index.html`, guarded by `verify:kz-home-locale`)
 
 ## What needs human review
 

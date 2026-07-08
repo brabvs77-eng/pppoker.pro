@@ -3,18 +3,59 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { glob } from 'glob';
+import { load } from 'cheerio';
 
 import {
   AUTO_FIX_REGEX,
   AUTO_FIXES,
   LEGACY_GLOBS,
   LEGACY_IGNORE,
+  RUDIMENT_TEXT_PATTERNS,
   detectEnglishPopupsOnRu,
 } from './known-legacy-issues.mjs';
 import { KZ_HOME_LOCALE_REPLACEMENTS } from './kz-home-locale-content.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const checkOnly = process.argv.includes('--check');
+
+/**
+ * @param {string} html
+ * @returns {{ html: string; count: number }}
+ */
+function stripRudimentNodes(html) {
+  if (!RUDIMENT_TEXT_PATTERNS.some((phrase) => html.includes(phrase))) {
+    return { html, count: 0 };
+  }
+
+  let next = html;
+  let removed = 0;
+  const $ = load(html, { decodeEntities: false });
+
+  for (const phrase of RUDIMENT_TEXT_PATTERNS) {
+    $('h1,h2,h3,h4,h5,h6,p').each((_, el) => {
+      const text = $(el).text().trim();
+      if (text.includes(phrase)) {
+        $(el).remove();
+        removed += 1;
+      }
+    });
+  }
+
+  next = $.html();
+
+  for (const phrase of RUDIMENT_TEXT_PATTERNS) {
+    if (!next.includes(phrase)) continue;
+    const headingPattern = new RegExp(
+      `<h[1-6][^>]*>[\\s\\S]*?${phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?</h[1-6]>`,
+      'gi',
+    );
+    const before = next;
+    next = next.replace(headingPattern, '');
+    if (next !== before) removed += 1;
+  }
+
+  return { html: next, count: removed };
+}
 
 /**
  * @param {string} original
@@ -87,10 +128,15 @@ async function main() {
   for (const relativePath of uniqueFiles) {
     const fullPath = path.join(rootDir, relativePath);
     const original = await fs.readFile(fullPath, 'utf8');
-    const autoResult = applyAutoFixes(original);
+    const rudimentResult = stripRudimentNodes(original);
+    const autoResult = applyAutoFixes(rudimentResult.html);
     const localeResult = applyLocaleFileFixes(relativePath, autoResult.next);
     const next = localeResult.next;
-    const fixes = [...autoResult.fixes, ...localeResult.fixes];
+    const fixes = [
+      ...(rudimentResult.count ? [`rudiment-text (${rudimentResult.count})`] : []),
+      ...autoResult.fixes,
+      ...localeResult.fixes,
+    ];
 
     if (fixes.length) {
       if (checkOnly) {
