@@ -131,6 +131,15 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Dead code cleanup** — removed unused `HomeBlogRotator*` client components (static blog only)
 - **`verify:site-contacts`** — CI check for manager/channel/WhatsApp URLs in homepage output
 
+## Sprint 21–26 features
+
+- **Sprint 21** — Native home blog on `/en/`
+- **Sprint 22** — Native home blog on `/uz/`, `/kz/` (TJ blocked — no legacy blog section in export)
+- **Sprint 23** — Homepage smoke + structured-post verify for EN/UZ/KZ
+- **Sprint 24** — `verify:site-contacts` and `verify:homepage-widgets` on all 6 homepages; TJ smoke
+- **Sprint 25** — Locale RSS feeds (`/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`)
+- **Sprint 26** — Category/tag archive URLs 301 → native blog; drop legacy `/category/blog/page/N/` route; updated agent docs
+
 ## Sprint 18–20 features
 
 - **Sprint 18** — HomePromo smoke on RU + HY; `verify:home-promo` on all 6 homepages; Playwright checks CTA dedupe (`d014ade` hidden)

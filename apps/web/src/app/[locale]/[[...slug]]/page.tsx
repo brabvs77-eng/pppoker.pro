@@ -11,6 +11,7 @@ import {
   slugParamsFromPage,
 } from '@/lib/content';
 import { buildPageMetadata } from '@/lib/seo';
+import { shouldRedirectToNativeBlog } from '@/lib/taxonomyRedirects';
 
 type PageProps = {
   params: Promise<{ locale: string; slug?: string[] }>;
@@ -25,7 +26,8 @@ export async function generateStaticParams() {
       if (
         page.type === 'blog' ||
         page.route.match(/\/blog\/page\/\d+\/$/) ||
-        page.route.match(/\/category\/blog\/page\/\d+\/$/)
+        page.route.match(/\/category\/blog\/page\/\d+\/$/) ||
+        shouldRedirectToNativeBlog(page.route, locale as AppLocale)
       ) {
         continue;
       }

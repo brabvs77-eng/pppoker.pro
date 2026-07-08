@@ -82,6 +82,8 @@ npm run audit:rudiments
 npm run verify:structured-posts
 npm run verify:native-blog-archive
 npm run verify:home-blog
+npm run verify:rss
+npm run verify:taxonomy-redirects
 npm run smoke:homepage
 ```
 
@@ -102,24 +104,27 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 20)
+## Current native coverage (Sprint 26)
 
 | Feature | Status |
 |---------|--------|
 | Header / footer / languages | All pages |
-| HomePromo | All 6 homepages; `verify:home-promo`; smoke RU + HY |
-| RU posts | `StructuredPost` |
-| EN blog posts (2) | `StructuredPost` |
-| Legal / about | `NativePage` — see `config/native-pages.json` |
+| HomePromo | All 6 homepages; `verify:home-promo`; smoke all 6 |
+| Structured posts | 29 posts — RU, EN, UZ, KZ |
+| Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive` |
-| Home blog inject | RU `/`, HY `/hy/` |
+| Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
+| Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml` |
+| Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
 | Elementor runtime budget | `needsElementorRuntime` in manifest |
 
 ## Planned work (backlog)
 
-1. Home blog on `/en/`
-2. `NativePage` for locale-specific legal URLs when HTML exports exist
-3. More Elementor sections → native components
+1. ~~Home blog on `/en/`~~ — done (Sprint 21)
+2. `NativePage` for locale-specific legal URLs when HTML exports exist (UZ/KZ/HY/TJ)
+3. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
+4. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export
+5. More Elementor sections → native components
 
 ## Adding or updating content
 
