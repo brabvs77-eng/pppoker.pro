@@ -46,7 +46,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 3. **Home blog slot** (`hideLegacyBlogSectionRoutes`) → static HTML in body; no client portal
 4. **Everything else** → `WordPressBody` + Elementor CSS; load runtime only if `needsElementorRuntime`
 
-`needsElementorRuntime` is false when body has no interactive widgets (popup, swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, or taxonomy redirect.
+`needsElementorRuntime` is false when body has no interactive widgets (swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, taxonomy redirect, or a static landing page that only embeds global Elementor popups.
 
 ## Hard constraints (CI will fail)
 
@@ -106,7 +106,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 27)
+## Current native coverage (Sprint 28)
 
 | Feature | Status |
 |---------|--------|

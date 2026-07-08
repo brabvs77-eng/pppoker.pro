@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   bodyNeedsElementorRuntime,
+  ELEMENTOR_POPUP_MARKER,
   isBlogArchiveRoute,
 } from './lib/elementor-runtime-budget.mjs';
 import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.mjs';
@@ -11,6 +12,21 @@ import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.m
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
 const bodiesDir = path.join(rootDir, 'content/bodies');
+const outDir = path.join(rootDir, 'apps/web/out');
+
+/** Legacy pages whose body only embeds global Elementor popups — no interactive widgets. */
+const POPUP_ONLY_LANDING_ROUTES = [
+  '/spasibo/',
+  '/uz/thanks/',
+  '/uz/uzs/',
+  '/__qs/',
+  '/mastermega-content/mastermega-content-megamenu-menuitem/',
+];
+
+function outputPathForRoute(route) {
+  if (route === '/') return path.join(outDir, 'index.html');
+  return path.join(outDir, route.replace(/^\//, ''), 'index.html');
+}
 
 function routeToFileId(route) {
   if (route === '/') return '_root';
@@ -59,8 +75,36 @@ async function main() {
 
     if (!bodyNeedsElementorRuntime(bodyHtml)) {
       violations.push(
-        `Page ${page.route} has needsElementorRuntime=true but body has no interactive markers`,
+        `Page ${page.route} has needsElementorRuntime=true but body has no interactive widgets`,
       );
+    }
+  }
+
+  for (const route of POPUP_ONLY_LANDING_ROUTES) {
+    const page = manifest.pages.find((entry) => entry.route === route && !entry.isRedirect);
+    if (!page) {
+      violations.push(`Missing manifest entry for popup-only landing ${route}`);
+      continue;
+    }
+
+    if (page.needsElementorRuntime !== false) {
+      violations.push(`Popup-only landing ${route} must not need Elementor runtime`);
+      continue;
+    }
+
+    const bodyHtml = await fs.readFile(path.join(bodiesDir, `${routeToFileId(route)}.html`), 'utf8');
+    const hasPopup = bodyHtml.includes(ELEMENTOR_POPUP_MARKER);
+    if (hasPopup && bodyNeedsElementorRuntime(bodyHtml)) {
+      violations.push(`Popup-only landing ${route} has additional interactive widgets`);
+    }
+
+    try {
+      const html = await fs.readFile(outputPathForRoute(route), 'utf8');
+      if (html.includes('elementor-frontend-js')) {
+        violations.push(`Elementor runtime still loaded on popup-only landing ${route}`);
+      }
+    } catch {
+      violations.push(`Missing export for popup-only landing ${route}`);
     }
   }
 
@@ -75,7 +119,7 @@ async function main() {
   }
 
   console.log(
-    `Verified Elementor runtime budget: ${runtimeTrue} pages load runtime, ${runtimeFalse} skip it.`,
+    `Verified Elementor runtime budget: ${runtimeTrue} pages load runtime, ${runtimeFalse} skip it (${POPUP_ONLY_LANDING_ROUTES.length} popup-only landings).`,
   );
 }
 

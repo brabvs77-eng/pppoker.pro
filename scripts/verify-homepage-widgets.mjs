@@ -6,20 +6,24 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', minSwipers: 3, requireFaq: true },
-  { label: 'EN', outPath: 'en/index.html', minSwipers: 3, requireFaq: true },
-  { label: 'HY', outPath: 'hy/index.html', minSwipers: 3, requireFaq: true },
-  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 3, requireFaq: true },
-  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 3, requireFaq: true },
-  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false },
+  { label: 'RU', outPath: 'index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 3, requireFaq: true, requireRuntime: true },
+  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRuntime: false },
 ];
 
-function verifyHomepageWidgets({ label, minSwipers, requireFaq }, html, violations) {
+function verifyHomepageWidgets({ label, minSwipers, requireFaq, requireRuntime }, html, violations) {
   if (requireFaq && html.includes('href="#collapse-')) {
     violations.push(`[${label}] FAQ accordion still uses lowercase #collapse- href anchors`);
   }
 
-  if (!html.includes('LegacyElementorBoot') && !html.includes('elementorFrontend')) {
+  if (
+    requireRuntime &&
+    !html.includes('LegacyElementorBoot') &&
+    !html.includes('elementorFrontend')
+  ) {
     if (!html.includes('elementor-frontend-js')) {
       violations.push(`[${label}] Missing elementor-frontend-js on homepage`);
     }
