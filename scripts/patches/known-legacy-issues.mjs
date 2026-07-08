@@ -42,6 +42,12 @@ export const AUTO_FIXES = [
     search: '/assets/media/2024/07/but-back-300x96.png',
     replace: '/assets/media/2024/07/but-back-300x96.webp',
   },
+  {
+    id: 'testimonial-photo-webp',
+    description: 'Roman Shaposhnikov testimonial photo JPG → WebP',
+    search: '/assets/media/2024/07/maxresdefault.jpg',
+    replace: '/assets/media/2024/07/maxresdefault.webp',
+  },
 ];
 
 /**
@@ -92,6 +98,11 @@ export const FORBIDDEN_LEGACY_NEEDLES = [
     id: 'but-back-png',
     needle: 'but-back.png',
     hint: 'Run npm run fix:legacy-html — button image should be WebP',
+  },
+  {
+    id: 'maxresdefault-jpg',
+    needle: '/assets/media/2024/07/maxresdefault.jpg',
+    hint: 'Run npm run fix:legacy-html — testimonial photo should be WebP',
   },
 ];
 
