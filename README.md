@@ -141,6 +141,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 26** — Category/tag archive URLs 301 → native blog; drop legacy `/category/blog/page/N/` route; updated agent docs
 - **Sprint 27** — Elementor runtime budget: taxonomy redirect routes skip JS; `verify:elementor-runtime-budget`
 - **Sprint 28** — Popup-only landing pages skip Elementor JS; redirects for `/__qs/`, mastermega junk URL
+- **Sprint 29** — `verify:build-pipeline` (Cloudflare-safe build); Playwright smoke checks home-blog cards on RU/HY/EN/UZ/KZ
 
 ## Sprint 18–20 features
 
