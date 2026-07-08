@@ -3,30 +3,58 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const homepagePath = path.join(rootDir, 'apps/web/out/index.html');
+const outDir = path.join(rootDir, 'apps/web/out');
 
-async function main() {
-  const html = await fs.readFile(homepagePath, 'utf8');
-  const violations = [];
+const HOME_PAGES = [
+  { label: 'RU', outPath: 'index.html', minSwipers: 3, requireFaq: true },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 3, requireFaq: true },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 3, requireFaq: true },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 3, requireFaq: true },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 3, requireFaq: true },
+  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false },
+];
 
-  if (html.includes('href="#collapse-')) {
-    violations.push('FAQ accordion still uses lowercase #collapse- href anchors');
+function verifyHomepageWidgets({ label, minSwipers, requireFaq }, html, violations) {
+  if (requireFaq && html.includes('href="#collapse-')) {
+    violations.push(`[${label}] FAQ accordion still uses lowercase #collapse- href anchors`);
   }
 
   if (!html.includes('LegacyElementorBoot') && !html.includes('elementorFrontend')) {
-    // Static export inlines scripts; ensure Elementor runtime is present.
     if (!html.includes('elementor-frontend-js')) {
-      violations.push('Missing elementor-frontend-js on homepage');
+      violations.push(`[${label}] Missing elementor-frontend-js on homepage`);
     }
   }
 
   const swiperCount = (html.match(/class="[^"]*elementor-main-swiper[^"]*"/g) ?? []).length;
-  if (swiperCount < 3) {
-    violations.push(`Expected at least 3 elementor-main-swiper carousels, found ${swiperCount}`);
+  if (swiperCount < minSwipers) {
+    violations.push(
+      `[${label}] Expected at least ${minSwipers} elementor-main-swiper carousels, found ${swiperCount}`,
+    );
   }
 
   if (!html.includes('elementor-location-popup')) {
-    violations.push('Missing elementor-location-popup markup on homepage');
+    violations.push(`[${label}] Missing elementor-location-popup markup on homepage`);
+  }
+}
+
+async function main() {
+  const violations = [];
+  const checked = [];
+
+  for (const page of HOME_PAGES) {
+    const filePath = path.join(outDir, page.outPath);
+    let html;
+    try {
+      html = await fs.readFile(filePath, 'utf8');
+    } catch {
+      violations.push(`[${page.label}] Missing homepage output: ${page.outPath}`);
+      continue;
+    }
+
+    verifyHomepageWidgets(page, html, violations);
+    if (!violations.some((line) => line.startsWith(`[${page.label}]`))) {
+      checked.push(page.label);
+    }
   }
 
   if (violations.length) {
@@ -36,7 +64,9 @@ async function main() {
     return;
   }
 
-  console.log('Verified homepage widget markup (FAQ anchors, carousels, popups).');
+  console.log(
+    `Verified homepage widget markup on ${checked.join(', ')} (FAQ, carousels, popups).`,
+  );
 }
 
 main().catch((error) => {
