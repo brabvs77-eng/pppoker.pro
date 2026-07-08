@@ -11,6 +11,7 @@ import {
   LEGACY_IGNORE,
   detectEnglishPopupsOnRu,
 } from './known-legacy-issues.mjs';
+import { KZ_HOME_LOCALE_REPLACEMENTS } from './kz-home-locale-content.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const checkOnly = process.argv.includes('--check');
@@ -47,6 +48,28 @@ function applyAutoFixes(original) {
   return { next, fixes };
 }
 
+/**
+ * @param {string} relativePath
+ * @param {string} original
+ * @returns {{ next: string; fixes: string[] }}
+ */
+function applyLocaleFileFixes(relativePath, original) {
+  if (relativePath !== 'kz/index.html') {
+    return { next: original, fixes: [] };
+  }
+
+  let next = original;
+  const fixes = [];
+
+  for (const replacement of KZ_HOME_LOCALE_REPLACEMENTS) {
+    if (!next.includes(replacement.from)) continue;
+    next = next.split(replacement.from).join(replacement.to);
+    fixes.push(replacement.id);
+  }
+
+  return { next, fixes };
+}
+
 async function main() {
   const files = (
     await Promise.all(
@@ -64,7 +87,10 @@ async function main() {
   for (const relativePath of uniqueFiles) {
     const fullPath = path.join(rootDir, relativePath);
     const original = await fs.readFile(fullPath, 'utf8');
-    const { next, fixes } = applyAutoFixes(original);
+    const autoResult = applyAutoFixes(original);
+    const localeResult = applyLocaleFileFixes(relativePath, autoResult.next);
+    const next = localeResult.next;
+    const fixes = [...autoResult.fixes, ...localeResult.fixes];
 
     if (fixes.length) {
       if (checkOnly) {
