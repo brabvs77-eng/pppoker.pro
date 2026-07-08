@@ -46,9 +46,12 @@ async function main() {
     '/en/pppoker-review-2026/',
     '/en/know-your-poker-opponents-secrets-of-winning-strategies/',
   ];
-  for (const route of enBlogRoutes) {
+  const uzBlogRoutes = ['/uz/pppoker-2026/'];
+  const kzBlogRoutes = ['/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/'];
+
+  for (const route of [...enBlogRoutes, ...uzBlogRoutes, ...kzBlogRoutes]) {
     if (!posts.some((p) => p.route === route)) {
-      violations.push(`Missing EN structured blog post in manifest: ${route}`);
+      violations.push(`Missing structured blog post in manifest: ${route}`);
     }
   }
 
@@ -63,8 +66,10 @@ async function main() {
   }
 
   const enCount = posts.filter((p) => p.locale === 'en').length;
+  const uzCount = posts.filter((p) => p.locale === 'uz').length;
+  const kzCount = posts.filter((p) => p.locale === 'kz').length;
   console.log(
-    `Verified ${checked} structured post pages (incl. ${enCount} EN) use native article layout.`,
+    `Verified ${checked} structured post pages (incl. ${enCount} EN, ${uzCount} UZ, ${kzCount} KZ) use native article layout.`,
   );
 }
 
