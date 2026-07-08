@@ -117,7 +117,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Structured posts | 29 posts — RU, EN, UZ, KZ |
 | Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
-| Blog text colors | Dark on white — `verify:blog-text-colors`; `smoke:blog-pages` |
+| Blog text colors | Dark site theme (`#131b2b`) — `verify:blog-text-colors`; `smoke:blog-pages` |
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |

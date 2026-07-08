@@ -439,65 +439,97 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
-  background: #fff;
-  color: #1a1a1a;
+  background: #131b2b;
+  color: #e8ecf4;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .post-article__header h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
-  color: #111;
+  color: #fff;
+  line-height: 1.25;
 }
 
 .post-article__header time {
-  color: #555;
+  color: #9aa8c7;
   font-size: 0.9rem;
+}
+
+.post-article__hero {
+  margin: 1.5rem 0 0;
+}
+
+.post-article__hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(253, 230, 97, 0.15);
 }
 
 .post-article__content {
   margin-top: 1.5rem;
   line-height: 1.65;
   font-size: 1rem;
-  color: #1a1a1a;
+  color: #e8ecf4;
 }
 
 .post-article__content h2,
 .post-article__content h3 {
   margin-top: 1.75rem;
   margin-bottom: 0.75rem;
-  color: #111;
+  color: #fde661;
 }
 
 .post-article__content p {
   margin: 0 0 1rem;
-  color: #1a1a1a;
+  color: #e8ecf4;
 }
 
 .post-article__content li,
 .post-article__content td,
 .post-article__content th,
 .post-article__content span {
-  color: #1a1a1a;
+  color: #e8ecf4;
 }
 
 .post-article__content a {
-  color: #1565c0;
+  color: #fde661;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.post-article__content a:hover {
+  color: #fff;
 }
 
 .post-article__content img {
+  display: block;
   max-width: 100%;
   height: auto;
+  margin: 1.25rem auto;
   border-radius: 8px;
+  border: 1px solid rgba(253, 230, 97, 0.12);
 }
 
-/* Elementor article HTML still loads legacy CSS with light-on-dark tokens */
+.post-article__content b,
+.post-article__content strong {
+  color: #fff;
+}
+
+/* Elementor article HTML may load legacy tokens — keep dark-surface readability */
 .post-article__content .elementor-widget-container,
-.post-article__content .elementor-widget-container :where(p, li, span, td, th, h1, h2, h3, h4, h5, h6, b, strong, em) {
-  color: #1a1a1a !important;
+.post-article__content .elementor-widget-container :where(p, li, span, td, th, b, strong, em) {
+  color: #e8ecf4 !important;
+}
+
+.post-article__content .elementor-widget-container :where(h1, h2, h3, h4, h5, h6) {
+  color: #fde661 !important;
 }
 
 .post-article__content .elementor-widget-container a {
-  color: #1565c0 !important;
+  color: #fde661 !important;
 }
 
 .native-page {
@@ -553,37 +585,38 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
-  background: #fff;
-  color: #1a1a1a;
+  background: #131b2b;
+  color: #e8ecf4;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .blog-archive__header h1 {
   font-size: 2rem;
   margin: 0;
-  color: #111;
+  color: #fde661;
 }
 
 .blog-archive__meta {
-  color: #555;
+  color: #9aa8c7;
   font-size: 0.95rem;
   margin: 0.5rem 0 0;
 }
 
 .blog-archive__empty {
-  color: #555;
+  color: #9aa8c7;
   margin: 2rem 0;
 }
 
 .blog-archive__read-more {
   display: inline-block;
   margin-top: 0.5rem;
-  color: #1565c0;
+  color: #fde661;
   font-size: 0.9rem;
 }
 
 .blog-archive__list time {
   display: block;
-  color: #555;
+  color: #9aa8c7;
   font-size: 0.9rem;
   margin-top: 0.35rem;
 }
@@ -597,17 +630,17 @@ body {
 .blog-archive__list li {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(253, 230, 97, 0.12);
 }
 
 .blog-archive__list a {
-  color: #111;
+  color: #fff;
   font-size: 1.25rem;
   text-decoration: none;
 }
 
 .blog-archive__list a:hover {
-  color: #1565c0;
+  color: #fde661;
 }
 
 .blog-archive__list h2 {
@@ -615,7 +648,7 @@ body {
 }
 
 .blog-archive__list p {
-  color: #444;
+  color: #9aa8c7;
   margin: 0.5rem 0 0;
 }
 
@@ -623,9 +656,9 @@ body {
   display: flex;
   gap: 1rem;
   align-items: center;
-  color: #1a1a1a;
+  color: #e8ecf4;
 }
 
 .blog-archive__pagination a {
-  color: #1565c0;
+  color: #fde661;
 }

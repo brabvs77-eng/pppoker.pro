@@ -40,6 +40,10 @@ async function main() {
     if (html.includes('elementor-frontend-js')) {
       violations.push(`Elementor runtime still loaded on structured post ${page.route}`);
     }
+
+    if (page.ogImage && !html.includes('post-article__hero-image')) {
+      violations.push(`Missing featured image on ${page.route}`);
+    }
   }
 
   const enBlogRoutes = [

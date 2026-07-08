@@ -17,6 +17,7 @@ const BLOG_SMOKE_PAGES = [
     urlPath: '/blog-chto-takoe-ev-v-pokere/',
     shell: '.post-article',
     title: '.post-article__header h1',
+    heroImage: '.post-article__hero-image',
   },
 ];
 
@@ -26,24 +27,29 @@ function parseRgb(color) {
   return [Number(match[1]), Number(match[2]), Number(match[3])];
 }
 
-function isDarkText(rgb) {
+function isLightText(rgb) {
   const [r, g, b] = rgb;
-  return r <= 80 && g <= 80 && b <= 80;
+  return r >= 180 && g >= 180 && b >= 180;
 }
 
-function isLightBackground(rgb) {
+function isAccentHeading(rgb) {
   const [r, g, b] = rgb;
-  return r >= 200 && g >= 200 && b >= 200;
+  return (r >= 200 && g >= 200 && b >= 200) || (r >= 240 && g >= 200 && b <= 130);
 }
 
-async function smokeBlogPage(page, { label, urlPath, shell, title }) {
+function isDarkBackground(rgb) {
+  const [r, g, b] = rgb;
+  return r <= 60 && g <= 60 && b <= 80;
+}
+
+async function smokeBlogPage(page, { label, urlPath, shell, title, heroImage }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'networkidle',
     timeout: 90_000,
   });
 
-  const state = await page.evaluate(({ shell, title }) => {
+  const state = await page.evaluate(({ shell, title, heroImage }) => {
     const root = document.querySelector(shell);
     const heading = document.querySelector(title);
     if (!root || !heading) {
@@ -52,12 +58,15 @@ async function smokeBlogPage(page, { label, urlPath, shell, title }) {
 
     const rootStyle = getComputedStyle(root);
     const titleStyle = getComputedStyle(heading);
+    const hero = heroImage ? document.querySelector(heroImage) : null;
     return {
       rootBg: rootStyle.backgroundColor,
       titleColor: titleStyle.color,
       hasPostContent: !!document.querySelector('.post-article__content p'),
+      heroSrc: hero?.getAttribute('src') ?? null,
+      heroVisible: hero ? hero.getBoundingClientRect().height > 0 : false,
     };
-  }, { shell, title });
+  }, { shell, title, heroImage });
 
   if (state.missing) {
     violations.push(`[${label}] Missing element ${state.missing}`);
@@ -67,21 +76,27 @@ async function smokeBlogPage(page, { label, urlPath, shell, title }) {
   const titleRgb = parseRgb(state.titleColor);
   const bgRgb = parseRgb(state.rootBg);
 
-  if (!titleRgb || !isDarkText(titleRgb)) {
-    violations.push(`[${label}] Heading text not dark enough: ${state.titleColor}`);
+  if (!titleRgb || !(shell === '.blog-archive' ? isAccentHeading(titleRgb) : isLightText(titleRgb))) {
+    violations.push(`[${label}] Heading text not readable on dark background: ${state.titleColor}`);
   }
-  if (!bgRgb || !isLightBackground(bgRgb)) {
-    violations.push(`[${label}] Shell background not light enough: ${state.rootBg}`);
+  if (!bgRgb || !isDarkBackground(bgRgb)) {
+    violations.push(`[${label}] Shell background not dark enough: ${state.rootBg}`);
   }
 
-  if (shell === '.post-article' && state.hasPostContent) {
-    const paragraphColor = await page.evaluate(() => {
-      const paragraph = document.querySelector('.post-article__content p');
-      return paragraph ? getComputedStyle(paragraph).color : null;
-    });
-    const paragraphRgb = paragraphColor ? parseRgb(paragraphColor) : null;
-    if (!paragraphRgb || !isDarkText(paragraphRgb)) {
-      violations.push(`[${label}] Body text not dark enough: ${paragraphColor}`);
+  if (shell === '.post-article') {
+    if (!state.heroSrc || !state.heroVisible) {
+      violations.push(`[${label}] Featured hero image missing or not visible`);
+    }
+
+    if (state.hasPostContent) {
+      const paragraphColor = await page.evaluate(() => {
+        const paragraph = document.querySelector('.post-article__content p');
+        return paragraph ? getComputedStyle(paragraph).color : null;
+      });
+      const paragraphRgb = paragraphColor ? parseRgb(paragraphColor) : null;
+      if (!paragraphRgb || !isLightText(paragraphRgb)) {
+        violations.push(`[${label}] Body text not light enough: ${paragraphColor}`);
+      }
     }
   }
 
@@ -125,7 +140,7 @@ async function main() {
   }
 
   console.log(
-    `Blog page smoke passed for ${BLOG_SMOKE_PAGES.length} routes + HY blog link fallback (readable dark-on-light text).`,
+    `Blog page smoke passed for ${BLOG_SMOKE_PAGES.length} routes + HY blog link (dark theme, hero image).`,
   );
 }
 

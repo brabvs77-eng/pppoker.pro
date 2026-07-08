@@ -48,6 +48,7 @@ export type PostRecord = {
   title: string;
   description: string;
   publishedAt: string;
+  image?: string;
   html: string;
 };
 
