@@ -1,9 +1,10 @@
-import { createServer } from 'node:http';
-import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { chromium } from 'playwright';
+
+import { siteContacts } from './lib/site-contacts.mjs';
+import { startStaticServer } from './lib/smoke-static-server.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
@@ -18,40 +19,6 @@ const HOME_SMOKE_PAGES = [
   { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0 },
 ];
 
-function contentType(filePath) {
-  if (filePath.endsWith('.html')) return 'text/html; charset=utf-8';
-  if (filePath.endsWith('.js')) return 'application/javascript';
-  if (filePath.endsWith('.css')) return 'text/css';
-  if (filePath.endsWith('.webp')) return 'image/webp';
-  if (filePath.endsWith('.png')) return 'image/png';
-  if (filePath.endsWith('.json')) return 'application/json';
-  return 'application/octet-stream';
-}
-
-function startStaticServer() {
-  return new Promise((resolve) => {
-    const server = createServer(async (req, res) => {
-      try {
-        let urlPath = req.url?.split('?')[0] ?? '/';
-        if (urlPath.endsWith('/')) urlPath += 'index.html';
-        const filePath = path.join(outDir, decodeURIComponent(urlPath));
-        if (!filePath.startsWith(outDir)) {
-          res.statusCode = 403;
-          res.end('forbidden');
-          return;
-        }
-        const data = await fs.readFile(filePath);
-        res.setHeader('Content-Type', contentType(filePath));
-        res.end(data);
-      } catch {
-        res.statusCode = 404;
-        res.end('not found');
-      }
-    });
-    server.listen(port, '127.0.0.1', () => resolve(server));
-  });
-}
-
 async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0 }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
@@ -60,12 +27,12 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
   });
   await page.waitForTimeout(5000);
 
-  const state = await page.evaluate(() => ({
+  const state = await page.evaluate(({ channel, whatsapp }) => ({
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
-    channelLink: !!document.querySelector('a[href="https://t.me/+Sj5sG5o0aqJkMTBi"]'),
-    whatsappLink: !!document.querySelector('a[href="https://wa.clck.bar/995592934850"]'),
+    channelLink: !!document.querySelector(`a[href="${channel}"]`),
+    whatsappLink: !!document.querySelector(`a[href="${whatsapp}"]`),
     homePromo: !!document.querySelector('.home-promo'),
     hiddenPlayCta: (() => {
       const el = document.querySelector('.elementor-element-d014ade');
@@ -73,7 +40,10 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
       return getComputedStyle(el).display === 'none';
     })(),
     homeBlogCards: document.querySelectorAll('.home-blog__card').length,
-  }));
+  }), {
+    channel: siteContacts.telegramChannel,
+    whatsapp: siteContacts.whatsapp,
+  });
 
   if (state.swiperInitialized < minSwipers) {
     violations.push(
@@ -97,7 +67,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
 }
 
 async function main() {
-  const server = await startStaticServer();
+  const server = await startStaticServer(outDir, port);
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const errors = [];
