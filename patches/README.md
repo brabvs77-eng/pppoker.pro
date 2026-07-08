@@ -36,6 +36,7 @@ npm run build
 - `but-back.png` / `but-back-300x96.png` → WebP (including sitemaps)
 - Duplicate `robots` meta tags (robotext)
 - KZ homepage Russian promo blocks → Kazakh (`kz/index.html`)
+- KZ promo layout classes + CRASH video poster/autoplay (manual in `kz/index.html`, guarded by `verify:kz-home-locale`)
 
 ## What needs human review
 

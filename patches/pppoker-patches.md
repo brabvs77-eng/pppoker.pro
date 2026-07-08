@@ -10,6 +10,7 @@ Codemods and CI guards for defects found during the **Проверка сайт�
 | `but-back.png` not migrated to WebP | 6 homepages + Yoast sitemaps | **Auto-fix** |
 | Duplicate / stray `robots` meta (robotext) | Occasional re-exports | **Auto-fix** |
 | Russian copy leaked onto KZ homepage | `kz/index.html` (CRASH + Russian poker blocks) | **Auto-fix** |
+| KZ promo blocks typography / video layout | `kz/index.html` + `globals.css` | **Manual + CI guard** |
 | English Elementor popups on RU pages | `/`, `/blog/`, posts, etc. | **Report only** |
 
 ## File layout
@@ -61,9 +62,48 @@ Simply Static / WPML re-exports sometimes copy **Russian** promo blocks onto the
 **CI guard:** `npm run verify:kz-home-locale` fails if:
 
 - forbidden Russian markers reappear;
-- required Kazakh markers are missing.
+- required Kazakh markers are missing;
+- `kz-promo-update` / `kz-promo-update__heading` layout classes are missing;
+- CRASH video lacks `poster="/assets/media/2025/12/turbo.webp"` or `kz-promo-update__video` autoplay markup.
 
-**Manual layout** (typography, video poster/autoplay) lives in `kz/index.html` + `apps/web/src/app/globals.css` — not re-applied by the codemod on re-export.
+### 5. KZ promo block layout (manual)
+
+After locale text is fixed, promo blocks still need **manual** HTML/CSS so Kazakh copy fits the media column and the CRASH video shows a preview or autoplays.
+
+**Elementor containers (page 3116, `/kz/`):**
+
+| Block | Container | Heading | Media |
+|-------|-----------|---------|-------|
+| CRASH | `db11841` | `d0c3511` | video `2dc7ec4` |
+| Russian poker | `8982bde` | `b1fd9ad` | image `33a8a61` |
+
+**Markup classes on `kz/index.html`:**
+
+- `kz-promo-update` — grid container
+- `kz-promo-update__text` — heading column
+- `kz-promo-update__heading` — unified `<h2>` typography (both blocks)
+- `kz-promo-update__media` — image/video column
+- `kz-promo-update__video` — CRASH hosted video
+
+**CRASH video** (`/assets/media/2025/12/video_2025-12-06_19-00-19.mp4`):
+
+```html
+<video class="elementor-video kz-promo-update__video"
+  src="…mp4"
+  poster="/assets/media/2025/12/turbo.webp"
+  autoplay muted loop playsinline controls …></video>
+```
+
+Remove Optimization Detective lazy attributes (`od-lazy-video`, `data-od-removed-autoplay`) — they block autoplay.
+
+**CSS** (`apps/web/src/app/globals.css`, scoped to `#wordpress-page-root[data-route='/kz/']`):
+
+- 2-column grid: text | media (max 360×560px)
+- Shared font: Roboto, `clamp(11px, 0.82vw, 13px)`, line-height 1.36
+- Text column vertically centered, `overflow: hidden` — no top/bottom spill
+- Media: `object-fit: cover`, matching aspect ratio
+
+Not re-applied by `fix:legacy-html` on WordPress re-export — re-check after each import.
 
 ## Report-only: English popups on RU pages
 
@@ -112,3 +152,4 @@ npm run verify:kz-home-locale
 |--------|-------|
 | **38** | KZ flag, but-back WebP, robots meta, EN popup report-only, `audit:rudiments` needles |
 | **39** | KZ homepage Kazakh locale (`kz-home-locale-content.mjs`, `verify:kz-home-locale`) |
+| **40** | KZ promo layout: unified typography, grid fit, CRASH video poster/autoplay |
