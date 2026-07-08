@@ -13,6 +13,10 @@ function normalizeDestination(route) {
   return route.replace(/\/$/, '') || '/';
 }
 
+import {
+  collectTaxonomyBlogRedirects,
+} from './taxonomy-blog-redirects.mjs';
+
 /** @returns {{ static: Array<{source: string, destination: string}>, wildcards: Array<{source: string, destination: string}> }} */
 export function collectRedirects(manifest) {
   const staticRedirects = [
@@ -35,6 +39,12 @@ export function collectRedirects(manifest) {
     if (source === destination) continue;
     if (seen.has(source)) continue;
 
+    seen.add(source);
+    staticRedirects.push({ source, destination });
+  }
+
+  for (const { source, destination } of collectTaxonomyBlogRedirects(manifest)) {
+    if (seen.has(source)) continue;
     seen.add(source);
     staticRedirects.push({ source, destination });
   }
