@@ -3,7 +3,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const homepagePath = path.join(rootDir, 'apps/web/out/index.html');
+const outDir = path.join(rootDir, 'apps/web/out');
+
+const HOME_PAGES = [
+  { label: 'RU', outPath: 'index.html' },
+  { label: 'EN', outPath: 'en/index.html' },
+  { label: 'HY', outPath: 'hy/index.html' },
+  { label: 'UZ', outPath: 'uz/index.html' },
+  { label: 'KZ', outPath: 'kz/index.html' },
+  { label: 'TJ', outPath: 'tj/index.html' },
+];
 
 const expected = {
   telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
@@ -12,12 +21,27 @@ const expected = {
 };
 
 async function main() {
-  const html = await fs.readFile(homepagePath, 'utf8');
   const violations = [];
+  const checked = [];
 
-  for (const [key, url] of Object.entries(expected)) {
-    if (!html.includes(url)) {
-      violations.push(`Missing ${key} link in homepage output: ${url}`);
+  for (const { label, outPath } of HOME_PAGES) {
+    const filePath = path.join(outDir, outPath);
+    let html;
+    try {
+      html = await fs.readFile(filePath, 'utf8');
+    } catch {
+      violations.push(`[${label}] Missing homepage output: ${outPath}`);
+      continue;
+    }
+
+    for (const [key, url] of Object.entries(expected)) {
+      if (!html.includes(url)) {
+        violations.push(`[${label}] Missing ${key} link in homepage output: ${url}`);
+      }
+    }
+
+    if (!violations.some((line) => line.startsWith(`[${label}]`))) {
+      checked.push(label);
     }
   }
 
@@ -28,7 +52,7 @@ async function main() {
     return;
   }
 
-  console.log('Verified site contact links in homepage output.');
+  console.log(`Verified site contact links on ${checked.join(', ')} homepages.`);
 }
 
 main().catch((error) => {

@@ -15,6 +15,7 @@ const HOME_SMOKE_PAGES = [
   { label: 'EN', urlPath: '/en/', minSwipers: 3 },
   { label: 'UZ', urlPath: '/uz/', minSwipers: 3 },
   { label: 'KZ', urlPath: '/kz/', minSwipers: 3 },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0 },
 ];
 
 function contentType(filePath) {
