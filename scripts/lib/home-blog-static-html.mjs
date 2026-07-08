@@ -48,6 +48,8 @@ export function loadHomeBlogLabels(locale = 'ru') {
 const homeBlogPostsByLocale = {
   ru: 'ruHomeBlogPosts.json',
   en: 'enHomeBlogPosts.json',
+  uz: 'uzHomeBlogPosts.json',
+  kz: 'kzHomeBlogPosts.json',
 };
 
 export function loadHomeBlogPosts(locale = 'ru') {

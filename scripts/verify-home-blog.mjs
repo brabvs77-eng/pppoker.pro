@@ -6,6 +6,13 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const generatedDir = path.join(rootDir, 'apps/web/src/generated');
 
+const homeBlogPostsFile = {
+  ru: 'ruHomeBlogPosts.json',
+  en: 'enHomeBlogPosts.json',
+  uz: 'uzHomeBlogPosts.json',
+  kz: 'kzHomeBlogPosts.json',
+};
+
 const homepages = [
   {
     label: 'RU',
@@ -29,10 +36,26 @@ const homepages = [
     locale: 'en',
     legacyBlogLoopElementId: '97d6258',
   },
+  {
+    label: 'UZ',
+    path: path.join(rootDir, 'apps/web/out/uz/index.html'),
+    footerMarker: 'class="site-footer"',
+    extraMarkers: [],
+    locale: 'uz',
+    legacyBlogLoopElementId: '97d6258',
+  },
+  {
+    label: 'KZ',
+    path: path.join(rootDir, 'apps/web/out/kz/index.html'),
+    footerMarker: 'class="site-footer"',
+    extraMarkers: [],
+    locale: 'kz',
+    legacyBlogLoopElementId: 'b37be6f',
+  },
 ];
 
 function expectedCardCount(locale) {
-  const fileName = locale === 'en' ? 'enHomeBlogPosts.json' : 'ruHomeBlogPosts.json';
+  const fileName = homeBlogPostsFile[locale] ?? homeBlogPostsFile.ru;
   try {
     const posts = JSON.parse(
       readFileSync(path.join(generatedDir, fileName), 'utf8'),

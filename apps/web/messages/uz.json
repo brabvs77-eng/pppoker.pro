@@ -25,6 +25,13 @@
     "empty": "Hozircha e'lon qilingan maqolalar yo'q.",
     "paginationLabel": "Blog sahifalari"
   },
+  "homeBlog": {
+    "title": "Nuts blogi",
+    "subtitle": "Poker, strategiya va klub haqida yangi maqolalar — tanlov avtomatik yangilanadi",
+    "readMore": "Maqolani o'qish",
+    "allPosts": "Barcha maqolalar",
+    "category": "Blog"
+  },
   "siteFooter": {
     "languageLabel": "Til",
     "navLabel": "Navigatsiya",

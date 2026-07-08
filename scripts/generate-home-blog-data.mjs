@@ -19,6 +19,22 @@ const localeConfigs = [
     stripTitleSuffix: (title) =>
       title.replace(/\s*-\s*Online poker club pppoker Nuts\s*$/i, '').trim(),
   },
+  {
+    locale: 'uz',
+    outputFile: 'uzHomeBlogPosts.json',
+    stripTitleSuffix: (title) =>
+      title
+        .replace(/\s*-\s*Онлайн покер клуби Узбекистонда — PPPoker Nuts, Тошкент\s*$/i, '')
+        .trim(),
+  },
+  {
+    locale: 'kz',
+    outputFile: 'kzHomeBlogPosts.json',
+    stripTitleSuffix: (title) =>
+      title
+        .replace(/\s*-\s*Қазақстандағы онлайн покер клубы — pppoker Nuts, Астана\s*$/i, '')
+        .trim(),
+  },
 ];
 
 async function main() {
