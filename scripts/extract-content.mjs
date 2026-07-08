@@ -157,6 +157,12 @@ function extractPostArticleHtml($) {
   return null;
 }
 
+function extractPostFeaturedImage($, ogImage = '') {
+  if (ogImage) return ogImage;
+  const src = $('.elementor-widget-theme-post-featured-image img').first().attr('src');
+  return src ? normalizeUrls(src) : '';
+}
+
 function extractRedirectTarget($) {
   const meta = $('head meta[http-equiv="refresh" i]').attr('content');
   if (!meta) return null;
@@ -306,6 +312,7 @@ async function main() {
           title: entry.title,
           description: entry.description,
           publishedAt: extractPublishedTime($),
+          image: extractPostFeaturedImage($, entry.ogImage) || undefined,
           html: articleHtml,
         });
       }

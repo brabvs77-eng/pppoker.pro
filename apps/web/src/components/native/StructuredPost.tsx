@@ -26,6 +26,19 @@ export function StructuredPost({ post }: StructuredPostProps) {
           <time dateTime={post.publishedAt}>{formattedDate}</time>
         ) : null}
       </header>
+      {post.image ? (
+        <figure className="post-article__hero">
+          <img
+            className="post-article__hero-image"
+            src={post.image}
+            alt=""
+            width={1200}
+            height={675}
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      ) : null}
       <div
         className="post-article__content"
         dangerouslySetInnerHTML={{ __html: post.html }}

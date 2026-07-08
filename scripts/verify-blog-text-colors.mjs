@@ -4,14 +4,15 @@ import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const globalsPath = path.join(rootDir, 'apps/web/src/app/globals.css');
+const manifestPath = path.join(rootDir, 'content/manifest.json');
+const postsDir = path.join(rootDir, 'content/posts');
 const outDir = path.join(rootDir, 'apps/web/out');
 
-const DARK_TEXT = '#1a1a1a';
-const WHITE_BG = '#fff';
+const DARK_BG = '#131b2b';
+const LIGHT_TEXT = '#e8ecf4';
+const ACCENT_TEXT = '#fde661';
 
-const SAMPLE_ROUTES = [
-  '/blog/',
-  '/en/blog/',
+const SAMPLE_POST_ROUTES = [
   '/blog-chto-takoe-ev-v-pokere/',
   '/en/pppoker-review-2026/',
 ];
@@ -29,7 +30,7 @@ async function findNextCssBundle() {
   return path.join(cssDir, bundle);
 }
 
-function assertDarkOnLightBlock(css, selector, violations) {
+function assertDarkThemeBlock(css, selector, violations) {
   const blockMatch = css.match(new RegExp(`\\${selector}\\{[^}]+\\}`));
   if (!blockMatch) {
     violations.push(`Missing ${selector} rules in exported CSS`);
@@ -37,14 +38,11 @@ function assertDarkOnLightBlock(css, selector, violations) {
   }
 
   const block = blockMatch[0];
-  if (!block.includes(`background:${WHITE_BG}`) && !block.includes(`background: ${WHITE_BG}`)) {
-    violations.push(`${selector} must use background ${WHITE_BG}`);
+  if (!block.includes(DARK_BG)) {
+    violations.push(`${selector} must use background ${DARK_BG}`);
   }
-  if (!block.includes(`color:${DARK_TEXT}`) && !block.includes(`color: ${DARK_TEXT}`)) {
-    violations.push(`${selector} must use color ${DARK_TEXT}`);
-  }
-  if (block.includes('color:#fff') || block.includes('color: #fff')) {
-    violations.push(`${selector} must not use white text on a light surface`);
+  if (!block.includes(LIGHT_TEXT)) {
+    violations.push(`${selector} must use color ${LIGHT_TEXT}`);
   }
 }
 
@@ -52,23 +50,35 @@ async function main() {
   const violations = [];
   const globals = await fs.readFile(globalsPath, 'utf8');
 
-  for (const selector of ['.blog-archive', '.post-article', '.native-page']) {
+  for (const selector of ['.post-article', '.blog-archive']) {
     const block = globals.match(new RegExp(`${selector.replace('.', '\\.')}\\s*\\{[^}]+\\}`));
     if (!block) {
       violations.push(`Missing ${selector} in globals.css`);
       continue;
     }
-    if (block[0].includes('color: #fff') || block[0].includes('color:#fff')) {
-      violations.push(`${selector} in globals.css must not set color: #fff`);
+    if (!block[0].includes(DARK_BG)) {
+      violations.push(`${selector} in globals.css must use dark background ${DARK_BG}`);
     }
+    if (!block[0].includes(LIGHT_TEXT)) {
+      violations.push(`${selector} in globals.css must use light text ${LIGHT_TEXT}`);
+    }
+  }
+
+  if (!globals.includes('.post-article__hero-image')) {
+    violations.push('globals.css must style .post-article__hero-image');
+  }
+
+  const accentBlock = globals.match(/\.post-article__content h2[\s\S]*?\{[^}]+\}/);
+  if (!accentBlock || !accentBlock[0].includes(ACCENT_TEXT)) {
+    violations.push(`post-article headings must use accent color ${ACCENT_TEXT}`);
   }
 
   const bundlePath = await findNextCssBundle();
   const bundleCss = await fs.readFile(bundlePath, 'utf8');
-  assertDarkOnLightBlock(bundleCss, '.blog-archive', violations);
-  assertDarkOnLightBlock(bundleCss, '.post-article', violations);
+  assertDarkThemeBlock(bundleCss, '.post-article', violations);
+  assertDarkThemeBlock(bundleCss, '.blog-archive', violations);
 
-  for (const route of SAMPLE_ROUTES) {
+  for (const route of ['/blog/', ...SAMPLE_POST_ROUTES]) {
     const outputPath = outputPathForRoute(route);
     let html;
     try {
@@ -78,11 +88,40 @@ async function main() {
       continue;
     }
 
-    const shellClass = route.includes('/blog/') && !route.includes('-')
-      ? 'blog-archive'
-      : 'post-article';
+    const shellClass = route.endsWith('/blog/') ? 'blog-archive' : 'post-article';
     if (!html.includes(`class="${shellClass}"`)) {
       violations.push(`${route} missing native ${shellClass} shell`);
+    }
+  }
+
+  const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
+
+  for (const route of SAMPLE_POST_ROUTES) {
+    const page = manifest.pages.find((entry) => entry.route === route);
+    if (!page) {
+      violations.push(`Missing manifest entry for ${route}`);
+      continue;
+    }
+
+    let post;
+    try {
+      post = JSON.parse(await fs.readFile(path.join(postsDir, `${page.fileId}.json`), 'utf8'));
+    } catch {
+      violations.push(`Missing post JSON for ${route} (${page.fileId}.json)`);
+      continue;
+    }
+
+    if (!post.image) {
+      violations.push(`${route} post JSON must include featured image`);
+      continue;
+    }
+
+    const html = await fs.readFile(outputPathForRoute(route), 'utf8');
+    if (!html.includes('post-article__hero-image')) {
+      violations.push(`${route} export must render post-article__hero-image`);
+    }
+    if (!html.includes(post.image)) {
+      violations.push(`${route} export must include image src ${post.image}`);
     }
   }
 
@@ -94,7 +133,7 @@ async function main() {
   }
 
   console.log(
-    `Verified blog text colors: ${SAMPLE_ROUTES.length} sample routes, dark text on white in CSS bundle.`,
+    `Verified blog dark theme + featured images on ${SAMPLE_POST_ROUTES.length} sample posts.`,
   );
 }
 
