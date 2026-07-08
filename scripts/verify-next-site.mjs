@@ -2,6 +2,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
@@ -21,6 +23,7 @@ async function main() {
   for (const page of manifest.pages) {
     if (page.isRedirect) continue;
     if (page.route.includes('/apps/web/')) continue;
+    if (taxonomyBlogRedirectDestination(page.route, page.locale)) continue;
 
     const outputPath = outputPathForRoute(page.route);
 
@@ -38,7 +41,12 @@ async function main() {
     return;
   }
 
-  const active = manifest.pages.filter((p) => !p.isRedirect && !p.route.includes('/apps/web/')).length;
+  const active = manifest.pages.filter(
+    (p) =>
+      !p.isRedirect &&
+      !p.route.includes('/apps/web/') &&
+      !taxonomyBlogRedirectDestination(p.route, p.locale),
+  ).length;
   console.log(`Verified ${active} routes in apps/web/out`);
 }
 
