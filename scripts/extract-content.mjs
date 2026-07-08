@@ -7,6 +7,7 @@ import { load } from 'cheerio';
 import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
 import { assertNoHekler, normalizeUrls } from '../src/lib/normalizeUrls.mjs';
 import { computeCssBudget } from './compute-css-budget.mjs';
+import { isBlogArchiveRoute, needsElementorRuntime } from './lib/elementor-runtime-budget.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = path.join(rootDir, 'content');
@@ -31,27 +32,6 @@ function detectLocale(route) {
   const segment = route.split('/').filter(Boolean)[0];
   if (['en', 'uz', 'kz', 'hy', 'tj'].includes(segment)) return segment;
   return 'ru';
-}
-
-function isBlogArchiveRoute(route) {
-  if (route === '/blog/') return true;
-  if (/^\/blog\/page\/\d+\/$/.test(route)) return true;
-  return /^\/(en|uz|kz|hy|tj)\/blog(\/page\/\d+)?\/?$/.test(route);
-}
-
-function needsElementorRuntime(type, bodyHtml, hasStructuredPost, hasNativePage, route) {
-  if (hasStructuredPost) return false;
-  if (hasNativePage) return false;
-  if (isBlogArchiveRoute(route)) return false;
-
-  return (
-    bodyHtml.includes('elementor-location-popup') ||
-    bodyHtml.includes('elementor-main-swiper') ||
-    bodyHtml.includes('elementskit-accordion') ||
-    bodyHtml.includes('elementor-widget-slides') ||
-    bodyHtml.includes('elementor-widget-testimonial-carousel') ||
-    bodyHtml.includes('elementor-widget-loop-grid')
-  );
 }
 
 function isNativePageRoute(route, nativePageRoutes) {
@@ -331,13 +311,13 @@ async function main() {
       }
     }
 
-    entry.needsElementorRuntime = needsElementorRuntime(
-      type,
+    entry.needsElementorRuntime = needsElementorRuntime({
+      route: entry.route,
+      locale: entry.locale,
       bodyHtml,
-      entry.hasStructuredPost,
-      entry.hasNativePage,
-      entry.route,
-    );
+      hasStructuredPost: entry.hasStructuredPost,
+      hasNativePage: entry.hasNativePage,
+    });
 
     manifestPages.push(entry);
   }

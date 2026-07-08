@@ -139,6 +139,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 24** — `verify:site-contacts` and `verify:homepage-widgets` on all 6 homepages; TJ smoke
 - **Sprint 25** — Locale RSS feeds (`/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`)
 - **Sprint 26** — Category/tag archive URLs 301 → native blog; drop legacy `/category/blog/page/N/` route; updated agent docs
+- **Sprint 27** — Elementor runtime budget: taxonomy redirect routes skip JS; `verify:elementor-runtime-budget`
 
 ## Sprint 18–20 features
 
