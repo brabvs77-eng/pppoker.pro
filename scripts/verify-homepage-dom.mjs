@@ -10,17 +10,22 @@ function divTagBalance(html) {
   return (html.match(/<div/gi) ?? []).length - (html.match(/<\/div>/gi) ?? []).length;
 }
 
-function verifySlottedBody(label, html, violations) {
+function verifySlottedBody(
+  label,
+  html,
+  { legacyBlogSectionId, legacyBlogLoopElementId },
+  violations,
+) {
   if (!html.includes('id="native-home-blog-slot"')) {
     violations.push(`[${label}] Missing native-home-blog-slot in slotted homepage body`);
   }
 
-  if (html.includes('elementor-element-39311d7')) {
-    violations.push(`[${label}] Legacy blog container 39311d7 still present`);
+  if (html.includes(`elementor-element-${legacyBlogSectionId}`)) {
+    violations.push(`[${label}] Legacy blog container ${legacyBlogSectionId} still present`);
   }
 
-  if (html.includes('data-id="39eeae8"')) {
-    violations.push(`[${label}] Legacy blog loop widget 39eeae8 still present`);
+  if (html.includes(`data-id="${legacyBlogLoopElementId}"`)) {
+    violations.push(`[${label}] Legacy blog loop widget ${legacyBlogLoopElementId} still present`);
   }
 
   const balance = divTagBalance(html);
@@ -31,10 +36,17 @@ function verifySlottedBody(label, html, violations) {
 
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
+  const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
+  const defaultLegacyLoopId = chrome.legacyBlogSectionIds[1];
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const violations = [];
 
-  for (const { fileId, route } of homeRoutes) {
+  for (const {
+    fileId,
+    route,
+    legacyBlogSectionId,
+    legacyBlogLoopElementId,
+  } of homeRoutes) {
     const slotBodyPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
     let html;
     try {
@@ -44,7 +56,10 @@ async function main() {
       continue;
     }
 
-    verifySlottedBody(route, html, violations);
+    verifySlottedBody(route, html, {
+      legacyBlogSectionId: legacyBlogSectionId ?? defaultLegacySectionId,
+      legacyBlogLoopElementId: legacyBlogLoopElementId ?? defaultLegacyLoopId,
+    }, violations);
   }
 
   if (violations.length) {

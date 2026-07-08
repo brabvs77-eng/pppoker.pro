@@ -17,17 +17,18 @@ const slotPattern = new RegExp(`<div id="${slotId}"></div>`);
 const localeByRoute = {
   '/': 'ru',
   '/hy/': 'hy',
+  '/en/': 'en',
 };
 
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
-  const posts = loadHomeBlogPosts();
 
   for (const { fileId, route } of homeRoutes) {
     const bodyPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
     const bodyHtml = await fs.readFile(bodyPath, 'utf8');
     const locale = localeByRoute[route] ?? 'ru';
+    const posts = loadHomeBlogPosts(locale === 'hy' ? 'ru' : locale);
     const labels = loadHomeBlogLabels(locale);
 
     if (!slotPattern.test(bodyHtml)) {
@@ -44,6 +45,7 @@ async function main() {
     const blogHtml = renderHomeBlogSection({
       posts,
       labels,
+      locale,
       blogArchiveHref: locale === 'ru' ? '/blog/' : `/${locale}/blog/`,
     });
 

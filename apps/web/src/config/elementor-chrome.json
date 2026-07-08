@@ -1,9 +1,15 @@
 {
   "homeBlogSlotRoutes": [
     { "fileId": "_root", "route": "/" },
-    { "fileId": "hy", "route": "/hy/" }
+    { "fileId": "hy", "route": "/hy/" },
+    {
+      "fileId": "en",
+      "route": "/en/",
+      "legacyBlogSectionId": "cd2276a",
+      "legacyBlogLoopElementId": "97d6258"
+    }
   ],
-  "legacyBlogSectionIds": ["39311d7", "39eeae8"],
+  "legacyBlogSectionIds": ["39311d7", "39eeae8", "cd2276a", "97d6258"],
   "duplicateManagerMenuItemClass": "menu-item-3206",
   "homepageHeroRootElementId": "23c91dc",
   "legacyHeaderSpacerElementIds": ["8141f77", "3f45d89"],

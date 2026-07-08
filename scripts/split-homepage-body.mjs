@@ -51,10 +51,11 @@ function divTagBalance(html) {
 
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
-  const legacySectionId = chrome.legacyBlogSectionIds[0];
+  const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
 
-  for (const { fileId, route } of homeRoutes) {
+  for (const { fileId, route, legacyBlogSectionId } of homeRoutes) {
+    const legacySectionId = legacyBlogSectionId ?? defaultLegacySectionId;
     const bodyPath = path.join(bodiesDir, `${fileId}.html`);
     const outputPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
 

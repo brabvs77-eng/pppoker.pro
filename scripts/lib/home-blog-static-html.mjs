@@ -45,15 +45,22 @@ export function loadHomeBlogLabels(locale = 'ru') {
   return messages.homeBlog ?? messages.blog;
 }
 
-export function loadHomeBlogPosts() {
+const homeBlogPostsByLocale = {
+  ru: 'ruHomeBlogPosts.json',
+  en: 'enHomeBlogPosts.json',
+};
+
+export function loadHomeBlogPosts(locale = 'ru') {
+  const fileName = homeBlogPostsByLocale[locale] ?? homeBlogPostsByLocale.ru;
   return JSON.parse(
-    readFileSync(path.join(rootDir, 'apps/web/src/generated/ruHomeBlogPosts.json'), 'utf8'),
+    readFileSync(path.join(rootDir, 'apps/web/src/generated', fileName), 'utf8'),
   );
 }
 
 export function renderHomeBlogSection({
   posts,
   labels,
+  locale = 'ru',
   offset = getDailyRotationOffset(posts.length),
   visibleCount = 6,
   blogArchiveHref = '/blog/',
@@ -70,7 +77,7 @@ export function renderHomeBlogSection({
         ? `<p class="home-blog__excerpt">${escapeHtml(post.description)}</p>`
         : '';
 
-      return `<li><article class="home-blog__card"><a class="home-blog__card-link" href="${escapeHtml(post.route)}">${image}<div class="home-blog__body"><time class="home-blog__date" datetime="${escapeHtml(post.publishedAt)}">${escapeHtml(formatDate(post.publishedAt))}</time><h3 class="home-blog__card-title">${escapeHtml(post.title)}</h3>${excerpt}<span class="home-blog__meta">${escapeHtml(labels.category)}</span><span class="home-blog__more">${escapeHtml(labels.readMore)}</span></div></a></article></li>`;
+      return `<li><article class="home-blog__card"><a class="home-blog__card-link" href="${escapeHtml(post.route)}">${image}<div class="home-blog__body"><time class="home-blog__date" datetime="${escapeHtml(post.publishedAt)}">${escapeHtml(formatDate(post.publishedAt, locale))}</time><h3 class="home-blog__card-title">${escapeHtml(post.title)}</h3>${excerpt}<span class="home-blog__meta">${escapeHtml(labels.category)}</span><span class="home-blog__more">${escapeHtml(labels.readMore)}</span></div></a></article></li>`;
     })
     .join('');
 
