@@ -25,6 +25,13 @@
     "empty": "No published posts yet.",
     "paginationLabel": "Blog pagination"
   },
+  "homeBlog": {
+    "title": "Nuts Blog",
+    "subtitle": "Fresh articles on poker, strategy, and the club — the selection updates automatically",
+    "readMore": "Read article",
+    "allPosts": "All articles",
+    "category": "Blog"
+  },
   "siteFooter": {
     "languageLabel": "Language",
     "navLabel": "Footer navigation",

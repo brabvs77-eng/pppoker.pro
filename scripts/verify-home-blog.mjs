@@ -1,8 +1,10 @@
+import { readFileSync } from 'node:fs';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const generatedDir = path.join(rootDir, 'apps/web/src/generated');
 
 const homepages = [
   {
@@ -10,16 +12,43 @@ const homepages = [
     path: path.join(rootDir, 'apps/web/out/index.html'),
     footerMarker: 'id="colophon"',
     extraMarkers: ['instagram.com'],
+    locale: 'ru',
   },
   {
     label: 'HY',
     path: path.join(rootDir, 'apps/web/out/hy/index.html'),
     footerMarker: 'class="site-footer"',
     extraMarkers: [],
+    locale: 'ru',
+  },
+  {
+    label: 'EN',
+    path: path.join(rootDir, 'apps/web/out/en/index.html'),
+    footerMarker: 'class="site-footer"',
+    extraMarkers: [],
+    locale: 'en',
+    legacyBlogLoopElementId: '97d6258',
   },
 ];
 
-function verifyHomeBlogHtml({ label, footerMarker, extraMarkers }, html, violations) {
+function expectedCardCount(locale) {
+  const fileName = locale === 'en' ? 'enHomeBlogPosts.json' : 'ruHomeBlogPosts.json';
+  try {
+    const posts = JSON.parse(
+      readFileSync(path.join(generatedDir, fileName), 'utf8'),
+    );
+    return Math.min(6, posts.length);
+  } catch {
+    return 6;
+  }
+}
+
+function verifyHomeBlogHtml(
+  { label, footerMarker, extraMarkers, legacyBlogLoopElementId = '39eeae8' },
+  html,
+  expectedCards,
+  violations,
+) {
   if (!html.includes('data-hide-legacy-blog')) {
     violations.push(`[${label}] Missing data-hide-legacy-blog on homepage`);
   }
@@ -40,12 +69,16 @@ function verifyHomeBlogHtml({ label, footerMarker, extraMarkers }, html, violati
   }
 
   const cardCount = (html.match(/<article class="home-blog__card"/g) ?? []).length;
-  if (cardCount !== 6) {
-    violations.push(`[${label}] Expected exactly 6 home-blog cards, found ${cardCount}`);
+  if (cardCount !== expectedCards) {
+    violations.push(
+      `[${label}] Expected exactly ${expectedCards} home-blog cards, found ${cardCount}`,
+    );
   }
 
-  if (html.includes('data-id="39eeae8"')) {
-    violations.push(`[${label}] Legacy Elementor blog loop widget (39eeae8) still in homepage HTML`);
+  if (html.includes(`data-id="${legacyBlogLoopElementId}"`)) {
+    violations.push(
+      `[${label}] Legacy Elementor blog loop widget (${legacyBlogLoopElementId}) still in homepage HTML`,
+    );
   }
 
   const slotIndex = html.indexOf('id="native-home-blog-slot"');
@@ -83,7 +116,8 @@ async function main() {
       continue;
     }
 
-    const cardCount = verifyHomeBlogHtml(homepage, html, violations);
+    const expectedCards = expectedCardCount(homepage.locale);
+    const cardCount = verifyHomeBlogHtml(homepage, html, expectedCards, violations);
     if (!violations.some((line) => line.startsWith(`[${homepage.label}]`))) {
       summaries.push(`${homepage.label}: ${cardCount} cards`);
     }
