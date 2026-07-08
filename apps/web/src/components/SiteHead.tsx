@@ -1,5 +1,21 @@
+import type { AppLocale } from '@/i18n/routing';
+
+const RSS_FEED_HREF: Partial<Record<AppLocale, string>> = {
+  ru: '/feed.xml',
+  en: '/en/feed.xml',
+  uz: '/uz/feed.xml',
+  kz: '/kz/feed.xml',
+};
+
+type SiteHeadProps = {
+  locale: AppLocale;
+  rssFeedTitle?: string;
+};
+
 /** Global head tags shared across all locale layouts. */
-export function SiteHead() {
+export function SiteHead({ locale, rssFeedTitle }: SiteHeadProps) {
+  const rssHref = RSS_FEED_HREF[locale];
+
   return (
     <>
       <meta charSet="utf-8" />
@@ -18,12 +34,14 @@ export function SiteHead() {
         rel="apple-touch-icon"
         href="/assets/media/2024/07/cropped-photo_2022-09-21_22-05-12-180x180.jpg"
       />
-      <link
-        rel="alternate"
-        type="application/rss+xml"
-        title="Nuts PPPoker — блог"
-        href="/feed.xml"
-      />
+      {rssHref && rssFeedTitle ? (
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title={rssFeedTitle}
+          href={rssHref}
+        />
+      ) : null}
     </>
   );
 }

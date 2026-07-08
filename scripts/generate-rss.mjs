@@ -9,8 +9,41 @@ const postsDir = path.join(rootDir, 'content/posts');
 const publicDir = path.join(rootDir, 'apps/web/public');
 
 const SITE_URL = 'https://pppoker.pro';
-const FEED_TITLE = 'Nuts PPPoker — блог';
-const FEED_DESCRIPTION = 'Статьи о покере, стратегии и клубе Nuts на PPPoker';
+
+const FEEDS = [
+  {
+    locale: 'ru',
+    publicPath: 'feed.xml',
+    language: 'ru-RU',
+    title: 'Nuts PPPoker — блог',
+    description: 'Статьи о покере, стратегии и клубе Nuts на PPPoker',
+    blogLink: '/blog/',
+  },
+  {
+    locale: 'en',
+    publicPath: 'en/feed.xml',
+    language: 'en-US',
+    title: 'Nuts PPPoker — Blog',
+    description: 'Articles on poker, strategy, and the Nuts club on PPPoker',
+    blogLink: '/en/blog/',
+  },
+  {
+    locale: 'uz',
+    publicPath: 'uz/feed.xml',
+    language: 'uz-UZ',
+    title: 'Nuts PPPoker — Blog',
+    description: 'Poker, strategiya va Nuts klubi haqida maqolalar',
+    blogLink: '/uz/blog/',
+  },
+  {
+    locale: 'kz',
+    publicPath: 'kz/feed.xml',
+    language: 'kk-KZ',
+    title: 'Nuts PPPoker — Блог',
+    description: 'Покер, стратегия және Nuts клубы туралы мақалалар',
+    blogLink: '/kz/blog/',
+  },
+];
 
 function escapeXml(value) {
   return value
@@ -34,53 +67,78 @@ function absolutePostUrl(route) {
   return `${SITE_URL}${pathPart}/`;
 }
 
-async function main() {
-  const files = await glob('*.json', { cwd: postsDir, nodir: true });
-  const posts = [];
-
-  for (const file of files) {
-    const post = JSON.parse(await fs.readFile(path.join(postsDir, file), 'utf8'));
-    if (post.locale !== 'ru' || !post.publishedAt) continue;
-    posts.push(post);
-  }
-
-  posts.sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
-
+function buildFeedXml({ title, description, language, blogLink, feedUrl, posts }) {
   const items = posts
     .slice(0, 30)
     .map((post) => {
       const link = absolutePostUrl(post.route);
-      const description = escapeXml(post.description || stripHtml(post.html).slice(0, 280));
+      const itemDescription = escapeXml(post.description || stripHtml(post.html).slice(0, 280));
       return `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${link}</link>
       <guid isPermaLink="true">${link}</guid>
       <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
-      <description>${description}</description>
+      <description>${itemDescription}</description>
     </item>`;
     })
     .join('\n');
 
   const updated = new Date().toUTCString();
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>${escapeXml(FEED_TITLE)}</title>
-    <link>${SITE_URL}/blog/</link>
-    <description>${escapeXml(FEED_DESCRIPTION)}</description>
-    <language>ru-RU</language>
+    <title>${escapeXml(title)}</title>
+    <link>${SITE_URL}${blogLink}</link>
+    <description>${escapeXml(description)}</description>
+    <language>${language}</language>
     <lastBuildDate>${updated}</lastBuildDate>
-    <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="${feedUrl}" rel="self" type="application/rss+xml"/>
 ${items}
   </channel>
 </rss>
 `;
+}
+
+async function main() {
+  const files = await glob('*.json', { cwd: postsDir, nodir: true });
+  const postsByLocale = new Map();
+
+  for (const file of files) {
+    const post = JSON.parse(await fs.readFile(path.join(postsDir, file), 'utf8'));
+    if (!post.publishedAt) continue;
+    const bucket = postsByLocale.get(post.locale) ?? [];
+    bucket.push(post);
+    postsByLocale.set(post.locale, bucket);
+  }
 
   await fs.mkdir(publicDir, { recursive: true });
-  await fs.writeFile(path.join(publicDir, 'feed.xml'), xml, 'utf8');
-  await fs.writeFile(path.join(rootDir, 'feed.xml'), xml, 'utf8');
+  const summaries = [];
 
-  console.log(`Generated RSS feed with ${Math.min(posts.length, 30)} posts -> apps/web/public/feed.xml`);
+  for (const feed of FEEDS) {
+    const posts = (postsByLocale.get(feed.locale) ?? []).sort(
+      (a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt),
+    );
+
+    if (posts.length === 0) {
+      console.log(`Skipped ${feed.locale.toUpperCase()} RSS feed — no published posts`);
+      continue;
+    }
+
+    const feedUrl = `${SITE_URL}/${feed.publicPath}`;
+    const xml = buildFeedXml({ ...feed, feedUrl, posts });
+    const outputPath = path.join(publicDir, feed.publicPath);
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.writeFile(outputPath, xml, 'utf8');
+
+    if (feed.locale === 'ru') {
+      await fs.writeFile(path.join(rootDir, 'feed.xml'), xml, 'utf8');
+    }
+
+    summaries.push(`${feed.locale.toUpperCase()}: ${Math.min(posts.length, 30)} posts -> ${feed.publicPath}`);
+  }
+
+  console.log(`Generated RSS feeds: ${summaries.join('; ')}`);
 }
 
 main().catch((error) => {

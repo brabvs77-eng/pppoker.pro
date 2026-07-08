@@ -17,7 +17,7 @@
     "prepare:public": "node scripts/prepare-next-public.mjs",
     "audit:rudiments": "node scripts/audit-rudiments.mjs",
     "flatten:ru": "node scripts/flatten-ru-export.mjs",
-    "build:next": "rm -rf apps/web/out content && npm run strip:hekler && npm run extract:content && npm run split:homepage-body && npm run verify:homepage-dom && npm run generate:home-blog && npm run inject:home-blog-body && npm run generate:rss && npm run sync:redirects && npm run verify:redirects && npm run verify:links && npm run audit:rudiments && npm run emit:chrome-css && npm run prepare:public && npm --prefix apps/web run build && npm run flatten:ru && npm run emit:cloudflare && npm run verify:next && npm run verify:home-blog && npm run verify:home-promo && npm run verify:cloudflare && npm run verify:no-hekler && npm run verify:homepage-widgets && npm run verify:site-contacts && npm run verify:structured-posts && npm run verify:native-blog-archive && npm run verify:native-pages && npm run smoke:homepage",
+    "build:next": "rm -rf apps/web/out content && npm run strip:hekler && npm run extract:content && npm run split:homepage-body && npm run verify:homepage-dom && npm run generate:home-blog && npm run inject:home-blog-body && npm run generate:rss && npm run sync:redirects && npm run verify:redirects && npm run verify:links && npm run audit:rudiments && npm run emit:chrome-css && npm run prepare:public && npm --prefix apps/web run build && npm run flatten:ru && npm run emit:cloudflare && npm run verify:next && npm run verify:home-blog && npm run verify:home-promo && npm run verify:cloudflare && npm run verify:no-hekler && npm run verify:homepage-widgets && npm run verify:site-contacts && npm run verify:structured-posts && npm run verify:native-blog-archive && npm run verify:native-pages && npm run verify:rss && npm run smoke:homepage",
     "build": "npm run build:next",
     "dev": "npm run extract:content && npm run split:homepage-body && npm run generate:home-blog && npm run inject:home-blog-body && npm run prepare:public && npm --prefix apps/web run dev",
     "verify:next": "node scripts/verify-next-site.mjs",
@@ -33,6 +33,7 @@
     "verify:structured-posts": "node scripts/verify-structured-posts.mjs",
     "verify:native-blog-archive": "node scripts/verify-native-blog-archive.mjs",
     "verify:native-pages": "node scripts/verify-native-pages.mjs",
+    "verify:rss": "node scripts/verify-rss.mjs",
     "smoke:homepage": "node scripts/smoke-homepage.mjs"
   },
   "dependencies": {

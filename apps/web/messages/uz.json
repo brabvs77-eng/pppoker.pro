@@ -32,6 +32,9 @@
     "allPosts": "Barcha maqolalar",
     "category": "Blog"
   },
+  "rss": {
+    "feedTitle": "Nuts PPPoker — Blog"
+  },
   "siteFooter": {
     "languageLabel": "Til",
     "navLabel": "Navigatsiya",
