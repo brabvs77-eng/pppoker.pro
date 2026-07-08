@@ -177,7 +177,7 @@ See [deploy/cloudflare/README.md](deploy/cloudflare/README.md).
 
 | Setting | Value |
 |---------|--------|
-| Build command | `npm ci && npm --prefix apps/web ci && npm run build` |
+| Build command | `npm run build` |
 | Output directory | `apps/web/out` |
 | Node.js | `20` |
 

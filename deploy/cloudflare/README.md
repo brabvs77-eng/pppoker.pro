@@ -6,7 +6,7 @@ Production deploy target for **pppoker.pro**.
 
 | Setting | Value |
 |---------|--------|
-| **Build command** | `npm ci && npm --prefix apps/web ci && npm run build` |
+| **Build command** | `npm run build` |
 | **Build output directory** | `apps/web/out` |
 | **Node.js version** | `20` (see repo `.nvmrc`) |
 
@@ -35,3 +35,4 @@ npm run emit:cloudflare   # copies into apps/web/out (after build)
 - `content/` and `apps/web/out/` are build artifacts (gitignored); Cloudflare must run the full build on each deploy.
 - Trailing slashes: Next export uses `trailingSlash: true`; prefer linking to paths with a trailing `/`.
 - Playwright smoke (`npm run smoke:homepage`) runs in GitHub Actions after `npm run build`, not inside the build script — Cloudflare Pages does not need Playwright.
+- `prebuild` runs `npm --prefix apps/web ci` automatically before `npm run build`, so Cloudflare only needs the root `npm ci` (automatic) plus `npm run build`.

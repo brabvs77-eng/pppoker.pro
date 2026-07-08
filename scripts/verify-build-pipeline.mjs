@@ -32,6 +32,10 @@ if (!cloudflareReadme.toLowerCase().includes('playwright')) {
   violations.push('deploy/cloudflare/README.md must note Playwright smoke is GHA-only');
 }
 
+if (!pkg.scripts.prebuild?.includes('apps/web ci')) {
+  violations.push('prebuild must run npm --prefix apps/web ci (Cloudflare only installs root deps)');
+}
+
 if (violations.length) {
   console.error('Build pipeline verification failed:');
   violations.forEach((line) => console.error(`  - ${line}`));
