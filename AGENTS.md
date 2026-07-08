@@ -78,6 +78,10 @@ Defined in `apps/web/src/config/site.ts` → `siteContacts`:
 # Full production build (required before merge)
 npm ci && npm --prefix apps/web ci && npx playwright install chromium && npm run build && npm run smoke:homepage && npm run smoke:landing-pages
 
+# Fix known defects in legacy HTML export (also runs at start of build)
+npm run fix:legacy-html
+npm run fix:legacy-html:check   # dry-run: fail if auto-fixable issues remain
+
 # Local dev
 npm run dev
 
@@ -122,6 +126,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
 | Blog text colors | Full-width `.blog-surface` dark theme; `BlogBreadcrumbs` on archive + posts |
 | Blog JSON-LD | `BreadcrumbList` + `BlogPosting` + `Organization`/`WebSite` with absolute URLs; `verify:json-ld` |
+| Legacy HTML codemod | `fix:legacy-html` — KZ flag, but-back WebP, robots meta; `audit:rudiments` guards regression |
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
 | Review snippets | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 6 cards + fake stars; `verify:review-snippets`; JSON-LD `AggregateRating` |
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |
