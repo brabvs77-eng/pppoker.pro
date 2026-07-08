@@ -145,6 +145,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 30** — `verify:landing-pages` for `/spasibo/`, `/uz/thanks/`, `/uz/uzs/`; CF deploy fixes (`prebuild`, Playwright split)
 - **Sprint 31** — DRY `siteContacts` in scripts; Playwright `smoke:landing-pages` for conversion landings
 - **Sprint 32** — RSS `<head>` link verify on homepages; smoke checks RSS on RU/EN/UZ/KZ
+- **Sprint 33** — `verify:blog-text-colors` (regression guard for dark-on-light blog CSS); HY/TJ blog links + redirects → `/blog/`; `smoke:blog-pages`
 
 ## Sprint 18–20 features
 

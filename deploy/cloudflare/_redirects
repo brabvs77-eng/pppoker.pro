@@ -14,6 +14,7 @@
 /en/elementor-hf/shapka-2 / 301
 /en/tag/poker-en /en/blog 301
 /en/tag/pppoker-en /en/blog 301
+/hy/blog /blog 301
 /hy/category/bez-kategorii /blog 301
 /kz/category/blog-kz /kz/blog 301
 /kz/elementor-hf/podval / 301
@@ -39,6 +40,7 @@
 /team/laura / 301
 /team/stasdorohov / 301
 /team/steepfellow / 301
+/tj/blog /blog 301
 /user-agreement /en/user-agreement 301
 /uz/category/blog-en-uz /uz/blog 301
 /uz/elementor-hf/podval / 301
@@ -46,3 +48,5 @@
 /uz/tag/poker-uz /uz/blog 301
 /uz/tag/pppoker /uz/blog 301
 /ru/* /:splat 301
+/hy/blog/* /blog/:splat 301
+/tj/blog/* /blog/:splat 301

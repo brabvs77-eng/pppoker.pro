@@ -37,3 +37,6 @@ jobs:
 
       - name: Landing page smoke (Playwright)
         run: npm run smoke:landing-pages
+
+      - name: Blog page smoke (Playwright)
+        run: npm run smoke:blog-pages

@@ -29,9 +29,16 @@ export function collectRedirects(manifest) {
       source: '/mastermega-content/mastermega-content-megamenu-menuitem',
       destination: '/',
     },
+    // HY/TJ have no native blog export — send legacy URLs to RU archive.
+    { source: '/hy/blog', destination: '/blog' },
+    { source: '/tj/blog', destination: '/blog' },
   ];
 
-  const wildcards = [{ source: '/ru/*', destination: '/:splat' }];
+  const wildcards = [
+    { source: '/ru/*', destination: '/:splat' },
+    { source: '/hy/blog/*', destination: '/blog/:splat' },
+    { source: '/tj/blog/*', destination: '/blog/:splat' },
+  ];
 
   const seen = new Set(staticRedirects.map((entry) => entry.source));
 
