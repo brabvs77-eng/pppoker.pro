@@ -439,16 +439,18 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
-  color: #fff;
+  background: #fff;
+  color: #1a1a1a;
 }
 
 .post-article__header h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  color: #111;
 }
 
 .post-article__header time {
-  color: #9aa8c7;
+  color: #555;
   font-size: 0.9rem;
 }
 
@@ -456,22 +458,30 @@ body {
   margin-top: 1.5rem;
   line-height: 1.65;
   font-size: 1rem;
+  color: #1a1a1a;
 }
 
 .post-article__content h2,
 .post-article__content h3 {
   margin-top: 1.75rem;
   margin-bottom: 0.75rem;
-  color: #fde661;
+  color: #111;
 }
 
 .post-article__content p {
   margin: 0 0 1rem;
-  color: #e8ecf4;
+  color: #1a1a1a;
+}
+
+.post-article__content li,
+.post-article__content td,
+.post-article__content th,
+.post-article__content span {
+  color: #1a1a1a;
 }
 
 .post-article__content a {
-  color: #fde661;
+  color: #1565c0;
 }
 
 .post-article__content img {
@@ -480,44 +490,57 @@ body {
   border-radius: 8px;
 }
 
+/* Elementor article HTML still loads legacy CSS with light-on-dark tokens */
+.post-article__content .elementor-widget-container,
+.post-article__content .elementor-widget-container :where(p, li, span, td, th, h1, h2, h3, h4, h5, h6, b, strong, em) {
+  color: #1a1a1a !important;
+}
+
+.post-article__content .elementor-widget-container a {
+  color: #1565c0 !important;
+}
+
 .native-page {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
-  color: #fff;
+  background: #fff;
+  color: #1a1a1a;
 }
 
 .native-page__header h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  color: #111;
 }
 
 .native-page__content {
   margin-top: 1.5rem;
   line-height: 1.65;
   font-size: 1rem;
+  color: #1a1a1a;
 }
 
 .native-page__content h2,
 .native-page__content h3 {
   margin-top: 1.75rem;
   margin-bottom: 0.75rem;
-  color: #fde661;
+  color: #111;
 }
 
 .native-page__content p {
   margin: 0 0 1rem;
-  color: #e8ecf4;
+  color: #1a1a1a;
 }
 
 .native-page__content a {
-  color: #fde661;
+  color: #1565c0;
 }
 
 .native-page__content ul,
 .native-page__content ol {
   margin: 0 0 1rem 1.25rem;
-  color: #e8ecf4;
+  color: #1a1a1a;
 }
 
 .native-page__content img {
@@ -530,35 +553,37 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
-  color: #fff;
+  background: #fff;
+  color: #1a1a1a;
 }
 
 .blog-archive__header h1 {
   font-size: 2rem;
   margin: 0;
+  color: #111;
 }
 
 .blog-archive__meta {
-  color: #9aa8c7;
+  color: #555;
   font-size: 0.95rem;
   margin: 0.5rem 0 0;
 }
 
 .blog-archive__empty {
-  color: #9aa8c7;
+  color: #555;
   margin: 2rem 0;
 }
 
 .blog-archive__read-more {
   display: inline-block;
   margin-top: 0.5rem;
-  color: #fde661;
+  color: #1565c0;
   font-size: 0.9rem;
 }
 
 .blog-archive__list time {
   display: block;
-  color: #9aa8c7;
+  color: #555;
   font-size: 0.9rem;
   margin-top: 0.35rem;
 }
@@ -572,17 +597,25 @@ body {
 .blog-archive__list li {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .blog-archive__list a {
-  color: #fde661;
+  color: #111;
   font-size: 1.25rem;
   text-decoration: none;
 }
 
+.blog-archive__list a:hover {
+  color: #1565c0;
+}
+
+.blog-archive__list h2 {
+  color: inherit;
+}
+
 .blog-archive__list p {
-  color: #9aa8c7;
+  color: #444;
   margin: 0.5rem 0 0;
 }
 
@@ -590,8 +623,9 @@ body {
   display: flex;
   gap: 1rem;
   align-items: center;
+  color: #1a1a1a;
 }
 
 .blog-archive__pagination a {
-  color: #fde661;
+  color: #1565c0;
 }
