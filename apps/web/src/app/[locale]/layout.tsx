@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
@@ -9,6 +9,8 @@ import { localeHtmlLang } from '@/i18n/localeHtmlLang';
 import { routing, type AppLocale } from '@/i18n/routing';
 
 import '../globals.css';
+
+const RSS_FEED_LOCALES = new Set<AppLocale>(['ru', 'en', 'uz', 'kz']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -27,14 +29,16 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages();
-
   const appLocale = locale as AppLocale;
+  const messages = await getMessages();
+  const rssFeedTitle = RSS_FEED_LOCALES.has(appLocale)
+    ? (await getTranslations({ locale, namespace: 'rss' }))('feedTitle')
+    : undefined;
 
   return (
     <html lang={localeHtmlLang[appLocale]} suppressHydrationWarning>
       <head>
-        <SiteHead />
+        <SiteHead locale={appLocale} rssFeedTitle={rssFeedTitle} />
         <CoreStylesheets />
       </head>
       <body suppressHydrationWarning>

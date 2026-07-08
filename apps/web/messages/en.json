@@ -32,6 +32,9 @@
     "allPosts": "All articles",
     "category": "Blog"
   },
+  "rss": {
+    "feedTitle": "Nuts PPPoker — Blog"
+  },
   "siteFooter": {
     "languageLabel": "Language",
     "navLabel": "Footer navigation",

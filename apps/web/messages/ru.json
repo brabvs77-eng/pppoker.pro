@@ -32,6 +32,9 @@
     "allPosts": "Все статьи",
     "category": "Блог"
   },
+  "rss": {
+    "feedTitle": "Nuts PPPoker — блог"
+  },
   "siteFooter": {
     "languageLabel": "Выбор языка",
     "navLabel": "Навигация в подвале",
