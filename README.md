@@ -156,6 +156,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 34** — Native review snippets with fake star ratings on 5 homepages; replaces Elementor `ccad702` carousel; `inject:review-snippets`; `verify:review-snippets`; JSON-LD `AggregateRating`
 - **Sprint 35** — `BlogBreadcrumbs` on blog archive + structured posts; full-width `.blog-surface` removes white side gutters
 - **Sprint 36** — Native blog JSON-LD (`BreadcrumbList`, `BlogPosting`, `Organization`, `WebSite`); replaces Yoast blocks on native blog routes; `verify:json-ld`
+- **Sprint 37** — Full-width dark shell for `html`/`body`, header, footer (fixes white side gutters on chrome)
 
 ## Sprint 18–20 features
 
