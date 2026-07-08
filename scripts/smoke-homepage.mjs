@@ -11,15 +11,15 @@ const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 3, minHomeBlogCards: 6 },
+  { label: 'RU', urlPath: '/', minSwipers: 3, minHomeBlogCards: 6, feedHref: '/feed.xml' },
   { label: 'HY', urlPath: '/hy/', minSwipers: 3, minHomeBlogCards: 6 },
-  { label: 'EN', urlPath: '/en/', minSwipers: 3, minHomeBlogCards: 2 },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 3, minHomeBlogCards: 2 },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 3, minHomeBlogCards: 1 },
+  { label: 'EN', urlPath: '/en/', minSwipers: 3, minHomeBlogCards: 2, feedHref: '/en/feed.xml' },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 3, minHomeBlogCards: 2, feedHref: '/uz/feed.xml' },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 3, minHomeBlogCards: 1, feedHref: '/kz/feed.xml' },
   { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0 },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0 }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, feedHref }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'networkidle',
@@ -27,7 +27,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
   });
   await page.waitForTimeout(5000);
 
-  const state = await page.evaluate(({ channel, whatsapp }) => ({
+  const state = await page.evaluate(({ channel, whatsapp, feedHref }) => ({
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
@@ -40,9 +40,15 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
       return getComputedStyle(el).display === 'none';
     })(),
     homeBlogCards: document.querySelectorAll('.home-blog__card').length,
+    rssLink: feedHref
+      ? !!document.querySelector(
+          `link[rel="alternate"][type="application/rss+xml"][href="${feedHref}"]`,
+        )
+      : true,
   }), {
     channel: siteContacts.telegramChannel,
     whatsapp: siteContacts.whatsapp,
+    feedHref,
   });
 
   if (state.swiperInitialized < minSwipers) {
@@ -61,6 +67,9 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     violations.push(
       `[${label}] Expected at least ${minHomeBlogCards} home-blog cards, found ${state.homeBlogCards}`,
     );
+  }
+  if (feedHref && !state.rssLink) {
+    violations.push(`[${label}] Missing RSS alternate link ${feedHref}`);
   }
 
   return violations;
@@ -92,7 +101,7 @@ async function main() {
     }
 
     console.log(
-      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, HomePromo dedupe, home blog).`,
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, HomePromo dedupe, home blog, RSS).`,
     );
   } finally {
     await browser.close();
