@@ -31,6 +31,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 | `content/manifest.json` | Generated page index (do not hand-edit) |
 | `content/posts/*.json` | Structured post bodies for `StructuredPost` |
 | `scripts/extract-content.mjs` | HTML → manifest, bodies, `needsElementorRuntime` |
+| `scripts/lib/elementor-runtime-budget.mjs` | Shared runtime detection + taxonomy redirect skip |
 | `scripts/split-homepage-body.mjs` | Replaces legacy blog section with `#native-home-blog-slot` |
 | `scripts/inject-home-blog-into-body.mjs` | Injects static home-blog HTML before Next build |
 
@@ -45,7 +46,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 3. **Home blog slot** (`hideLegacyBlogSectionRoutes`) → static HTML in body; no client portal
 4. **Everything else** → `WordPressBody` + Elementor CSS; load runtime only if `needsElementorRuntime`
 
-`needsElementorRuntime` is false when body has no interactive widgets (popup, swiper, FAQ accordion, slides, testimonials, loop-grid).
+`needsElementorRuntime` is false when body has no interactive widgets (popup, swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, or taxonomy redirect.
 
 ## Hard constraints (CI will fail)
 
@@ -81,6 +82,7 @@ npm run dev
 npm run audit:rudiments
 npm run verify:structured-posts
 npm run verify:native-blog-archive
+npm run verify:elementor-runtime-budget
 npm run verify:home-blog
 npm run verify:rss
 npm run verify:taxonomy-redirects
@@ -104,7 +106,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 26)
+## Current native coverage (Sprint 27)
 
 | Feature | Status |
 |---------|--------|
@@ -116,7 +118,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml` |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
-| Elementor runtime budget | `needsElementorRuntime` in manifest |
+| Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |
 
 ## Planned work (backlog)
 
