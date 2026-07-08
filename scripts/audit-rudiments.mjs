@@ -4,6 +4,12 @@ import { fileURLToPath } from 'node:url';
 
 import { glob } from 'glob';
 
+import {
+  FORBIDDEN_LEGACY_NEEDLES,
+  LEGACY_GLOBS,
+  LEGACY_IGNORE,
+} from './patches/known-legacy-issues.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 /** Paths that must not exist after cleanup. */
@@ -57,6 +63,27 @@ async function main() {
   for (const script of ['build:legacy-react', 'migrate:react']) {
     if (rootPkg.scripts?.[script]) {
       violations.push(`Legacy npm script still present: ${script}`);
+    }
+  }
+
+  if (!rootPkg.scripts?.['fix:legacy-html']) {
+    violations.push('package.json must define fix:legacy-html (legacy HTML codemod)');
+  }
+
+  const legacyFiles = (
+    await Promise.all(
+      LEGACY_GLOBS.map((pattern) =>
+        glob(pattern, { cwd: rootDir, nodir: true, ignore: [...LEGACY_IGNORE] }),
+      ),
+    )
+  ).flat();
+
+  for (const relativePath of [...new Set(legacyFiles)]) {
+    const content = await fs.readFile(path.join(rootDir, relativePath), 'utf8');
+    for (const rule of FORBIDDEN_LEGACY_NEEDLES) {
+      if (content.includes(rule.needle)) {
+        violations.push(`Legacy export ${relativePath} still contains "${rule.needle}" (${rule.hint})`);
+      }
     }
   }
 
