@@ -84,6 +84,7 @@ npm run verify:structured-posts
 npm run verify:native-blog-archive
 npm run verify:elementor-runtime-budget
 npm run verify:build-pipeline
+npm run verify:landing-pages
 npm run verify:home-blog
 npm run verify:rss
 npm run verify:taxonomy-redirects
@@ -107,7 +108,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 29)
+## Current native coverage (Sprint 30)
 
 | Feature | Status |
 |---------|--------|
@@ -120,7 +121,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml` |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
 | Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |
-| Cloudflare build | `npm run build` Playwright-free; `verify:build-pipeline`; smoke in GHA |
+| Cloudflare build | `npm run build` Playwright-free; `prebuild` installs `apps/web`; `verify:build-pipeline` |
+| Conversion landings | `/spasibo/`, `/uz/thanks/`, `/uz/uzs/` — `verify:landing-pages` |
 
 ## Planned work (backlog)
 
