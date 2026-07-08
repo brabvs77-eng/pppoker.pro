@@ -18,6 +18,8 @@
   },
   "blog": {
     "title": "Блог",
+    "breadcrumbHome": "Асосӣ",
+    "breadcrumbsLabel": "Навигатсия",
     "readMore": "Хондан",
     "pageOf": "Саҳифа {page} аз {total}",
     "previous": "Қаблӣ",

@@ -18,6 +18,8 @@
   },
   "blog": {
     "title": "Blog",
+    "breadcrumbHome": "Bosh sahifa",
+    "breadcrumbsLabel": "Navigatsiya",
     "readMore": "O'qish",
     "pageOf": "Sahifa {page} / {total}",
     "previous": "Oldingi",

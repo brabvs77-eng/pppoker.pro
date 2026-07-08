@@ -111,7 +111,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 34)
+## Current native coverage (Sprint 35)
 
 | Feature | Status |
 |---------|--------|
@@ -120,7 +120,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Structured posts | 29 posts — RU, EN, UZ, KZ |
 | Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
-| Blog text colors | Dark site theme (`#131b2b`) — `verify:blog-text-colors`; `smoke:blog-pages` |
+| Blog text colors | Full-width `.blog-surface` dark theme; `BlogBreadcrumbs` on archive + posts |
 | Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
 | Review snippets | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 6 cards + fake stars; `verify:review-snippets`; JSON-LD `AggregateRating` |
 | Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |

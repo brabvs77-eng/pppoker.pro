@@ -18,6 +18,8 @@
   },
   "blog": {
     "title": "Բլոգ",
+    "breadcrumbHome": "Գլխավոր",
+    "breadcrumbsLabel": "Նավիգացիա",
     "readMore": "Կարդալ",
     "pageOf": "Էջ {page} / {total}",
     "previous": "Նախորդ",

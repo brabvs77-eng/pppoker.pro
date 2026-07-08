@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 
+import { BlogBreadcrumbs } from '@/components/native/BlogBreadcrumbs';
 import type { AppLocale } from '@/i18n/routing';
 import { blogArchiveHref } from '@/lib/blogArchive';
 import type { BlogArchiveSlice } from '@/lib/blogArchive';
@@ -25,7 +26,9 @@ export async function NativeBlogArchive({ locale, archive }: NativeBlogArchivePr
   const { posts, pageNumber, totalPages } = archive;
 
   return (
-    <section className="blog-archive" aria-labelledby="blog-archive-title">
+    <div className="blog-surface">
+      <BlogBreadcrumbs locale={locale} current={t('title')} variant="archive" />
+      <section className="blog-archive" aria-labelledby="blog-archive-title">
       <header className="blog-archive__header">
         <h1 id="blog-archive-title">{t('title')}</h1>
         {totalPages > 1 ? (
@@ -70,5 +73,6 @@ export async function NativeBlogArchive({ locale, archive }: NativeBlogArchivePr
         </nav>
       ) : null}
     </section>
+    </div>
   );
 }

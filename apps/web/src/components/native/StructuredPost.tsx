@@ -1,5 +1,8 @@
 import type { PostRecord } from '@/lib/types';
 
+import { BlogBreadcrumbs } from '@/components/native/BlogBreadcrumbs';
+import type { AppLocale } from '@/i18n/routing';
+
 type StructuredPostProps = {
   post: PostRecord;
 };
@@ -15,34 +18,38 @@ function formatDate(iso: string, locale: string): string {
 }
 
 /** Native article layout for posts extracted to content/posts/*.json */
-export function StructuredPost({ post }: StructuredPostProps) {
+export async function StructuredPost({ post }: StructuredPostProps) {
   const formattedDate = post.publishedAt ? formatDate(post.publishedAt, post.locale) : '';
+  const locale = post.locale as AppLocale;
 
   return (
-    <article className="post-article" data-route={post.route}>
-      <header className="post-article__header">
-        <h1>{post.title}</h1>
-        {formattedDate ? (
-          <time dateTime={post.publishedAt}>{formattedDate}</time>
+    <div className="blog-surface">
+      <BlogBreadcrumbs locale={locale} current={post.title} variant="post" />
+      <article className="post-article" data-route={post.route}>
+        <header className="post-article__header">
+          <h1>{post.title}</h1>
+          {formattedDate ? (
+            <time dateTime={post.publishedAt}>{formattedDate}</time>
+          ) : null}
+        </header>
+        {post.image ? (
+          <figure className="post-article__hero">
+            <img
+              className="post-article__hero-image"
+              src={post.image}
+              alt=""
+              width={1200}
+              height={675}
+              loading="eager"
+              decoding="async"
+            />
+          </figure>
         ) : null}
-      </header>
-      {post.image ? (
-        <figure className="post-article__hero">
-          <img
-            className="post-article__hero-image"
-            src={post.image}
-            alt=""
-            width={1200}
-            height={675}
-            loading="eager"
-            decoding="async"
-          />
-        </figure>
-      ) : null}
-      <div
-        className="post-article__content"
-        dangerouslySetInnerHTML={{ __html: post.html }}
-      />
-    </article>
+        <div
+          className="post-article__content"
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
+      </article>
+    </div>
   );
 }

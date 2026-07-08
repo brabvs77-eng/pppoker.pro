@@ -18,6 +18,8 @@
   },
   "blog": {
     "title": "Блог",
+    "breadcrumbHome": "Главная",
+    "breadcrumbsLabel": "Навигационная цепочка",
     "readMore": "Читать",
     "pageOf": "Страница {page} из {total}",
     "previous": "Назад",
