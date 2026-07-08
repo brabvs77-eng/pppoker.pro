@@ -39,7 +39,8 @@
     "verify:landing-pages": "node scripts/verify-landing-pages.mjs",
     "verify:native-pages": "node scripts/verify-native-pages.mjs",
     "verify:rss": "node scripts/verify-rss.mjs",
-    "smoke:homepage": "node scripts/smoke-homepage.mjs"
+    "smoke:homepage": "node scripts/smoke-homepage.mjs",
+    "smoke:landing-pages": "node scripts/smoke-landing-pages.mjs"
   },
   "dependencies": {
     "cheerio": "^1.2.0",

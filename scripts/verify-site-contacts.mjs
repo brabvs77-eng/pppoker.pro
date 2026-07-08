@@ -2,6 +2,8 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { siteContacts } from './lib/site-contacts.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
 
@@ -13,12 +15,6 @@ const HOME_PAGES = [
   { label: 'KZ', outPath: 'kz/index.html' },
   { label: 'TJ', outPath: 'tj/index.html' },
 ];
-
-const expected = {
-  telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
-  whatsapp: 'https://wa.clck.bar/995592934850',
-  telegramManager: 'https://t.me/NUTSsup',
-};
 
 async function main() {
   const violations = [];
@@ -34,7 +30,7 @@ async function main() {
       continue;
     }
 
-    for (const [key, url] of Object.entries(expected)) {
+    for (const [key, url] of Object.entries(siteContacts)) {
       if (!html.includes(url)) {
         violations.push(`[${label}] Missing ${key} link in homepage output: ${url}`);
       }

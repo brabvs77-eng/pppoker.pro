@@ -24,6 +24,10 @@ if (!workflow.includes('npm run smoke:homepage')) {
   violations.push('GitHub Actions workflow must run smoke:homepage after npm run build');
 }
 
+if (!workflow.includes('npm run smoke:landing-pages')) {
+  violations.push('GitHub Actions workflow must run smoke:landing-pages after npm run build');
+}
+
 if (!cloudflareReadme.includes('npm run build')) {
   violations.push('deploy/cloudflare/README.md must document npm run build for Cloudflare Pages');
 }

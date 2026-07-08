@@ -73,7 +73,7 @@ Defined in `apps/web/src/config/site.ts` → `siteContacts`:
 
 ```bash
 # Full production build (required before merge)
-npm ci && npm --prefix apps/web ci && npx playwright install chromium && npm run build && npm run smoke:homepage
+npm ci && npm --prefix apps/web ci && npx playwright install chromium && npm run build && npm run smoke:homepage && npm run smoke:landing-pages
 
 # Local dev
 npm run dev
@@ -108,7 +108,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 30)
+## Current native coverage (Sprint 31)
 
 | Feature | Status |
 |---------|--------|
@@ -122,7 +122,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
 | Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |
 | Cloudflare build | `npm run build` Playwright-free; `prebuild` installs `apps/web`; `verify:build-pipeline` |
-| Conversion landings | `/spasibo/`, `/uz/thanks/`, `/uz/uzs/` — `verify:landing-pages` |
+| Conversion landings | `/spasibo/`, `/uz/thanks/`, `/uz/uzs/` — `verify:landing-pages`; `smoke:landing-pages` |
 
 ## Planned work (backlog)
 

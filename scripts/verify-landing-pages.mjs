@@ -3,15 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { CONVERSION_LANDING_ROUTES } from './lib/landing-pages.mjs';
+import { siteContacts } from './lib/site-contacts.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
-
-const CONTACT_LINKS = {
-  telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
-  whatsapp: 'https://wa.clck.bar/995592934850',
-};
 
 async function main() {
   const manifest = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
@@ -50,7 +46,8 @@ async function main() {
       violations.push(`[${label}] Elementor runtime still loaded`);
     }
 
-    for (const [key, url] of Object.entries(CONTACT_LINKS)) {
+    for (const [key, url] of Object.entries(siteContacts)) {
+      if (key === 'telegramManager') continue;
       if (!html.includes(url)) {
         violations.push(`[${label}] Missing ${key} link: ${url}`);
       }
