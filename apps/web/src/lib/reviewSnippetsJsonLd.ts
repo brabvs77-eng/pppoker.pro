@@ -1,5 +1,8 @@
 import reviewSnippetsConfig from '@/config/review-snippets.json';
+import { siteBranding, siteContacts } from '@/config/site';
 import type { AppLocale } from '@/i18n/routing';
+import { homeHref } from '@/lib/navigation';
+import { absoluteUrl } from '@/lib/jsonLd/urls';
 
 type ReviewSnippet = {
   name: string;
@@ -17,12 +20,27 @@ export function buildReviewSnippetsJsonLd(locale: AppLocale): string {
     : 'ru') as ReviewLocale;
   const reviews = reviewSnippetsConfig.reviewsByLocale[reviewLocale];
   const { aggregate } = reviewSnippetsConfig;
+  const siteUrl = absoluteUrl(homeHref(locale));
 
   const graph = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': `${siteUrl}#organization`,
     name: 'Nuts PPPoker Club',
-    url: 'https://pppoker.pro/',
+    alternateName: ['Nuts', 'pppoker.pro'],
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: absoluteUrl(siteBranding.logoSrc),
+    },
+    sameAs: [siteContacts.telegramChannel],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        url: siteContacts.telegramManager,
+      },
+    ],
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: String(aggregate.ratingValue),
