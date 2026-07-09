@@ -25,7 +25,8 @@
     "previous": "Артқа",
     "next": "Алға",
     "empty": "Әзірге жарияланған мақалалар жоқ.",
-    "paginationLabel": "Блог беттері"
+    "paginationLabel": "Блог беттері",
+    "relatedTitle": "Ұқсас мақалалар"
   },
   "homeBlog": {
     "title": "Nuts блогы",

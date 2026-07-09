@@ -25,7 +25,8 @@
     "previous": "Previous",
     "next": "Next",
     "empty": "No published posts yet.",
-    "paginationLabel": "Blog pagination"
+    "paginationLabel": "Blog pagination",
+    "relatedTitle": "Related articles"
   },
   "homeBlog": {
     "title": "Nuts Blog",

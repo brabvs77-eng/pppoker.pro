@@ -25,7 +25,8 @@
     "previous": "Oldingi",
     "next": "Keyingi",
     "empty": "Hozircha e'lon qilingan maqolalar yo'q.",
-    "paginationLabel": "Blog sahifalari"
+    "paginationLabel": "Blog sahifalari",
+    "relatedTitle": "O'xshash maqolalar"
   },
   "homeBlog": {
     "title": "Nuts blogi",

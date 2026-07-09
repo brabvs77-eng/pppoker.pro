@@ -25,7 +25,8 @@
     "previous": "Назад",
     "next": "Вперёд",
     "empty": "Пока нет опубликованных статей.",
-    "paginationLabel": "Навигация по страницам блога"
+    "paginationLabel": "Навигация по страницам блога",
+    "relatedTitle": "Похожие статьи"
   },
   "homeBlog": {
     "title": "Блог Nuts",

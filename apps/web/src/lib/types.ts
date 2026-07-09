@@ -20,6 +20,7 @@ export type PageEntry = {
   lang: string;
   publishedAt?: string;
   ogImage?: string;
+  tags?: string[];
   hreflang: HreflangEntry[];
   stylesheets: string[];
   headInlineStyles: string[];
@@ -49,6 +50,7 @@ export type PostRecord = {
   description: string;
   publishedAt: string;
   image?: string;
+  tags?: string[];
   html: string;
 };
 

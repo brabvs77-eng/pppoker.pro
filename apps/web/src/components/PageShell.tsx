@@ -16,6 +16,7 @@ import { WordPressHead } from '@/components/WordPressHead';
 import { WordPressRuntimeScripts } from '@/components/WordPressRuntimeScripts';
 import { homePromoRoutes } from '@/config/site';
 import type { BlogArchiveSlice } from '@/lib/blogArchive';
+import type { BlogPostCard } from '@/lib/blogRotation';
 import type { AppLocale } from '@/i18n/routing';
 import type { PageEntry, PageRecord, PostRecord } from '@/lib/types';
 
@@ -23,6 +24,7 @@ type PageShellProps = {
   page: PageEntry;
   bodyHtml: string;
   structuredPost?: PostRecord | null;
+  relatedPosts?: BlogPostCard[];
   nativePage?: PageRecord | null;
   nativeBlog?: BlogArchiveSlice | null;
   children?: ReactNode;
@@ -32,6 +34,7 @@ export function PageShell({
   page,
   bodyHtml,
   structuredPost,
+  relatedPosts,
   nativePage,
   nativeBlog,
   children,
@@ -65,7 +68,7 @@ export function PageShell({
         ) : nativePage ? (
           <NativePage page={nativePage} />
         ) : structuredPost ? (
-          <StructuredPost post={structuredPost} />
+          <StructuredPost post={structuredPost} relatedPosts={relatedPosts} />
         ) : (
           <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
         ))}

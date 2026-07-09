@@ -918,9 +918,1035 @@ main().catch((error) => {
 
 ---
 
-## 8. Дополнения в репозитории (после P0-бандла)
+## 8. Закрываю дыру в CI — новый файл `scripts/patches/verify-assets-exist.mjs`
 
-| Скрипт | Назначение |
-|--------|------------|
-| `fix:legacy-html` | + robots meta dedupe, KZ locale (`kz-home-locale-content.mjs`) |
-| `verify:kz-home-locale` | CI: казахский текст на `/kz/` |
+Прочитал существующий `scripts/verify-internal-links.mjs` — он **явно
+пропускает** всё, что начинается с `/assets/` и `/includes/`
+(`SKIP_PREFIXES`). То есть ни одна из находок этого аудита (флаг KZ, but-back.png/webp,
+видео CRASH/Русский покер) в принципе не могла бы попасться существующей
+проверке ссылок — она нацелена на страницы (`/blog/…`), а не на статику.
+
+Новый скрипт закрывает именно этот пробел: собирает все `/assets/...`
+из `src`/`href`/`poster`/`srcset`/CSS `url()` в извлечённых телах страниц
+(`content/bodies/*.html`) и проверяет, что каждая ссылка реально существует
+в `apps/web/public/` — той же папке, из которой собирается прод.
+
+```bash
+npm run extract:content && npm run prepare:public   # если ещё не запускали
+node scripts/patches/verify-assets-exist.mjs
+```
+
+```js
+/**
+ * CI guard: verify:links (scripts/verify-internal-links.mjs) explicitly SKIPS
+ * anything under /assets/ or /includes/ — see its own `SKIP_PREFIXES`. That's
+ * exactly the category of reference where the real breakage in this project
+ * lives (the KZ flag path, the but-back.png/webp split, and the CRASH/Russian
+ * Poker videos below the FAQ, none of which exist anywhere in this
+ * repository as of this audit — verify manually whether those particular
+ * .mp4 files exist on the production media library outside of git, since
+ * that can't be confirmed from the repo alone).
+ *
+ * This script closes that specific gap: it collects every `/assets/...`
+ * reference (img src/srcset, video/source src, link href, CSS url()) found
+ * in the extracted page bodies, and checks that each one resolves to a real
+ * file under apps/web/public/ (the actual deploy artifact — same directory
+ * verify:cloudflare and the Next export read from).
+ *
+ * Run AFTER `npm run extract:content` and `npm run prepare:public` (needs
+ * content/bodies/*.html and apps/web/public/assets to both exist).
+ *
+ * Usage:
+ *   node scripts/patches/verify-assets-exist.mjs
+ */
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { glob } from 'glob';
+
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const bodiesDir = path.join(rootDir, 'content/bodies');
+const publicDir = path.join(rootDir, 'apps/web/public');
+
+const ASSET_REF_PATTERN = /(?:src|href|poster)="(\/assets\/[^"?#]+)"|url\((\/assets\/[^)?#'"]+)\)/g;
+
+const existsCache = new Map();
+async function fileExists(relativePath) {
+  if (existsCache.has(relativePath)) return existsCache.get(relativePath);
+  try {
+    await fs.access(path.join(publicDir, relativePath));
+    existsCache.set(relativePath, true);
+    return true;
+  } catch {
+    existsCache.set(relativePath, false);
+    return false;
+  }
+}
+
+async function main() {
+  let bodyFiles;
+  try {
+    bodyFiles = await glob('*.html', { cwd: bodiesDir });
+  } catch {
+    console.error('content/bodies not found — run npm run extract:content first.');
+    process.exitCode = 1;
+    return;
+  }
+
+  try {
+    await fs.access(path.join(publicDir, 'assets'));
+  } catch {
+    console.error('apps/web/public/assets not found — run npm run prepare:public first.');
+    process.exitCode = 1;
+    return;
+  }
+
+  const missing = [];
+  let refCount = 0;
+
+  for (const file of bodyFiles) {
+    const html = await fs.readFile(path.join(bodiesDir, file), 'utf8');
+    const refs = new Set();
+    for (const match of html.matchAll(ASSET_REF_PATTERN)) {
+      refs.add(match[1] || match[2]);
+    }
+    // srcset can hold multiple comma-separated candidates in one attribute.
+    for (const match of html.matchAll(/srcset="([^"]+)"/g)) {
+      for (const candidate of match[1].split(',')) {
+        const url = candidate.trim().split(/\s+/)[0];
+        if (url?.startsWith('/assets/')) refs.add(url);
+      }
+    }
+
+    for (const ref of refs) {
+      refCount += 1;
+      const relative = ref.replace(/^\//, '');
+      if (!(await fileExists(relative))) {
+        missing.push({ file, ref });
+      }
+    }
+  }
+
+  if (missing.length) {
+    console.error(`Found ${missing.length} /assets/ references with no matching file (out of ${refCount} checked):`);
+    missing.slice(0, 40).forEach(({ file, ref }) => console.error(`  ${file}: ${ref}`));
+    if (missing.length > 40) console.error(`  ... and ${missing.length - 40} more`);
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log(`Verified ${refCount} /assets/ references across ${bodyFiles.length} body files — all resolve to real files.`);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
+```
+
+Добавить в `package.json` и в `build:next` (после `verify:links`):
+```diff
+     "verify:links": "node scripts/verify-internal-links.mjs",
++    "verify:assets-exist": "node scripts/patches/verify-assets-exist.mjs",
+```
+```diff
+- ... && npm run verify:links && npm run audit:rudiments && ...
++ ... && npm run verify:links && npm run verify:assets-exist && npm run audit:rudiments && ...
+```
+
+---
+
+## 9. Новая функциональность: теги постов + «Похожие статьи» + карточки-зигзаг с пагинацией в архиве блога
+
+Это не багфикс, а фича — сборка того, что мы обсуждали в дизайн-макетах
+(`Блог — варианты.dc.html`, опции 4a/4b). Раскопал, где в статическом
+экспорте реально живут теги постов, и подключил их сквозь весь пайплайн:
+extract → manifest → архив блога → страница статьи.
+
+### Где на самом деле лежат теги (важно)
+
+- Одиночная страница поста (`pravila-tehasskogo-holdema/index.html`) **не
+  содержит тегов** — ни в `<body class>`, ни ссылками «Метки:» внизу текста.
+- Классы `tag-poker`/`tag-shkola-pokera`, которые я цитировал в переписке
+  раньше — это классы `data-elementor-type="loop-item"` **на странице
+  `/blog/`**, но их резать регуляркой из минифицированной атрибутной строки
+  ненадёжно, и есть только у постов, попавших в текущую выдачу архива.
+- Настоящий надёжный источник — архивные страницы `/tag/<slug>/` (и их
+  пагинация `/tag/<slug>/page/N/`). Они используют простой, стабильный
+  шаблон:
+  ```html
+  <h1 class="entry-title">Метка: <span>Школа покера</span></h1>
+  ...
+  <article class="post"><h2 class="entry-title"><a href="/vpip/">VPIP</a></h2>…
+  ```
+  Проверил вручную `/tag/poker/` и `/tag/shkola-pokera/` — они реально
+  перечисляют по 6-7 постов каждая, включая все 6 постов из архива блога.
+  **Поправка к моим более ранним дизайн-макетам**: там я показал VPIP только
+  с тегом «Покер» — при сверке с `/tag/shkola-pokera/` оказалось, что VPIP
+  тоже входит в «Школа покера». В реальных данных (ниже) это уже верно.
+
+### Новый файл: `scripts/lib/post-tags.mjs`
+
+```js
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+
+import { load } from 'cheerio';
+import { glob } from 'glob';
+
+/**
+ * Tags only exist in this static export on the /tag/<slug>/ (and paginated
+ * /tag/<slug>/page/N/) archive pages — verified by hand: a single post page
+ * (e.g. pravila-tehasskogo-holdema/index.html) carries no tag-* body class
+ * and no inline "Метки:" links, and the /blog/ loop-grid's tag-* classes are
+ * unreliable to parse from minified attribute soup. The /tag/* archive uses
+ * a simple, stable template instead:
+ *   <h1 class="entry-title">Метка: <span>ИМЯ ТЕГА</span></h1>
+ *   <article class="post"><h2 class="entry-title"><a href="/slug/">Title</a></h2>...
+ *
+ * Walks every RU tag archive page and inverts it into a route -> tag-slugs
+ * map, plus a slug -> display-name map.
+ *
+ * Caveat: scoped to RU tag pages only (tag/*). EN/UZ/KZ tag archives (if any
+ * exist under en/tag/, uz/tag/, kz/tag/) would need the same treatment —
+ * not verified in this pass since the 6 sample posts audited are RU.
+ */
+export async function buildPostTagsIndex(rootDir) {
+  const tagFiles = await glob('tag/*/index.html', { cwd: rootDir });
+  const pagedTagFiles = await glob('tag/*/page/*/index.html', { cwd: rootDir });
+
+  const routeTags = new Map(); // route -> Set<slug>
+  const tagNames = new Map(); // slug -> display name
+
+  for (const relativePath of [...tagFiles, ...pagedTagFiles]) {
+    const slug = relativePath.split('/')[1];
+    const html = await fs.readFile(path.join(rootDir, relativePath), 'utf8');
+    const $ = load(html, { decodeEntities: false });
+
+    const displayName = $('h1.entry-title span').first().text().trim();
+    if (displayName && !tagNames.has(slug)) {
+      tagNames.set(slug, displayName);
+    }
+
+    $('article.post').each((_, article) => {
+      const href = $(article).find('h2.entry-title a').first().attr('href');
+      if (!href) return;
+      if (!routeTags.has(href)) routeTags.set(href, new Set());
+      routeTags.get(href).add(slug);
+    });
+  }
+
+  const routeTagsPlain = {};
+  for (const [route, slugs] of routeTags) {
+    routeTagsPlain[route] = [...slugs].sort();
+  }
+
+  return {
+    routeTags: routeTagsPlain,
+    tagNames: Object.fromEntries(tagNames),
+  };
+}
+```
+
+### Правка `scripts/extract-content.mjs`
+
+```diff
+ import { load } from 'cheerio';
+
++import { buildPostTagsIndex } from './lib/post-tags.mjs';
+ import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
+ import { assertNoHekler, normalizeUrls } from '../src/lib/normalizeUrls.mjs';
+ import { computeCssBudget } from './compute-css-budget.mjs';
+ import { isBlogArchiveRoute, needsElementorRuntime } from './lib/elementor-runtime-budget.mjs';
+```
+
+```diff
+   const nativePageRoutes = loadNativePageRoutes();
++  const { routeTags, tagNames } = await buildPostTagsIndex(rootDir);
+   const pages = await discoverWordPressPages(rootDir);
+   const manifestPages = [];
+```
+
+```diff
+       publishedAt: type === 'post' ? extractPublishedTime($) : '',
+       ogImage: normalizeUrls($('meta[property="og:image"]').first().attr('content') ?? ''),
++      tags: type === 'post' ? (routeTags[page.route] ?? []) : undefined,
+       hreflang: extractHreflang($),
+```
+
+```diff
+         entry.hasStructuredPost = true;
+         await writePostRecord(fileId, {
+           route: entry.route,
+           locale: entry.locale,
+           title: entry.title,
+           description: entry.description,
+           publishedAt: extractPublishedTime($),
+           image: extractPostFeaturedImage($, entry.ogImage) || undefined,
++          tags: entry.tags ?? [],
+         });
+```
+
+```diff
+   const manifestJson = JSON.stringify(manifest, null, 2);
+   assertNoHekler(manifestJson, 'manifest.json');
+
+   await fs.writeFile(path.join(contentDir, 'manifest.json'), `${manifestJson}\n`, 'utf8');
++
++  const tagNamesJson = JSON.stringify(tagNames, null, 2);
++  assertNoHekler(tagNamesJson, 'tag-names.json');
++  await fs.writeFile(path.join(contentDir, 'tag-names.json'), `${tagNamesJson}\n`, 'utf8');
++
+   await generateLlmsTxt(budget.pages);
+```
+
+### Правка `apps/web/src/lib/types.ts`
+
+```diff
+   publishedAt?: string;
+   ogImage?: string;
++  tags?: string[];
+   hreflang: HreflangEntry[];
+```
+
+```diff
+ export type PostRecord = {
+   route: string;
+   locale: string;
+   title: string;
+   description: string;
+   publishedAt: string;
+   image?: string;
++  tags?: string[];
+   html: string;
+ };
+```
+
+### Правка `apps/web/src/lib/blogRotation.ts`
+
+```diff
+ export type BlogPostCard = {
+   route: string;
+   title: string;
+   description: string;
+   publishedAt: string;
+   image?: string;
++  tags?: string[];
+ };
+```
+
+### Правка `apps/web/src/lib/content.ts` (`getBlogArchivePosts`)
+
+```diff
+     .map((page) => ({
+       route: page.route,
+       title: stripTitleSuffix(page.title),
+       description: page.description,
+       publishedAt: page.publishedAt!,
+       image: page.ogImage || undefined,
++      tags: page.tags ?? [],
+     }));
+```
+
+### Правка `apps/web/src/lib/blogPosts.ts` (`getBlogPostCards`)
+
+```diff
+     .map((page) => ({
+       route: page.route,
+       title: page.title,
+       description: page.description,
+       publishedAt: page.publishedAt!,
+       image: page.ogImage,
++      tags: page.tags ?? [],
+     }));
+```
+
+### Новый файл: `apps/web/src/lib/tagNames.ts`
+
+```ts
+import { promises as fs } from 'fs';
+import path from 'path';
+
+const contentRoot = path.join(process.cwd(), '..', '..', 'content');
+
+let cache: Record<string, string> | null = null;
+
+/** slug -> display name (e.g. "shkola-pokera" -> "Школа покера"), from content/tag-names.json. */
+export async function getTagNames(): Promise<Record<string, string>> {
+  if (cache) return cache;
+  try {
+    const raw = await fs.readFile(path.join(contentRoot, 'tag-names.json'), 'utf8');
+    cache = JSON.parse(raw) as Record<string, string>;
+  } catch {
+    cache = {};
+  }
+  return cache;
+}
+
+export async function getTagDisplayName(slug: string): Promise<string> {
+  const names = await getTagNames();
+  return names[slug] ?? slug;
+}
+```
+
+### Новый файл: `apps/web/src/lib/relatedPosts.ts`
+
+```ts
+import type { BlogPostCard } from './blogRotation';
+
+/**
+ * Related-by-tag ranking: shared tag count desc, then recency desc.
+ * Posts with zero shared tags are excluded — no false "related" matches
+ * just to fill 3 slots (e.g. VPIP/OFC never appear under a post that only
+ * shares "poker" with them once another candidate shares both tags).
+ */
+export function getRelatedPosts(
+  current: Pick<BlogPostCard, 'route' | 'tags'>,
+  allPosts: BlogPostCard[],
+  count = 3,
+): BlogPostCard[] {
+  const currentTags = new Set(current.tags ?? []);
+  if (currentTags.size === 0) return [];
+
+  return allPosts
+    .filter((post) => post.route !== current.route)
+    .map((post) => ({
+      post,
+      shared: (post.tags ?? []).filter((tag) => currentTags.has(tag)).length,
+    }))
+    .filter((entry) => entry.shared > 0)
+    .sort((a, b) => {
+      if (b.shared !== a.shared) return b.shared - a.shared;
+      return Date.parse(b.post.publishedAt) - Date.parse(a.post.publishedAt);
+    })
+    .slice(0, count)
+    .map((entry) => entry.post);
+}
+```
+
+### Переписать `apps/web/src/components/native/NativeBlogArchive.tsx`
+
+Зигзаг-карточки (изображение слева/справа поочерёдно) + тег-пилюли + пронумерованная пагинация, вместо текстового списка:
+
+```tsx
+import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+
+import { BlogBreadcrumbs } from '@/components/native/BlogBreadcrumbs';
+import type { AppLocale } from '@/i18n/routing';
+import { blogArchiveHref } from '@/lib/blogArchive';
+import type { BlogArchiveSlice } from '@/lib/blogArchive';
+import { getTagNames } from '@/lib/tagNames';
+
+type NativeBlogArchiveProps = {
+  locale: AppLocale;
+  archive: BlogArchiveSlice;
+};
+
+function formatDate(iso: string, locale: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return '';
+  return new Intl.DateTimeFormat(locale, {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }).format(date);
+}
+
+export async function NativeBlogArchive({ locale, archive }: NativeBlogArchiveProps) {
+  const t = await getTranslations({ locale, namespace: 'blog' });
+  const tagNames = await getTagNames();
+  const { posts, pageNumber, totalPages } = archive;
+
+  return (
+    <div className="blog-surface">
+      <BlogBreadcrumbs locale={locale} current={t('title')} variant="archive" />
+      <section className="blog-archive" aria-labelledby="blog-archive-title">
+        <header className="blog-archive__header">
+          <h1 id="blog-archive-title">{t('title')}</h1>
+          {totalPages > 1 ? (
+            <p className="blog-archive__meta">{t('pageOf', { page: pageNumber, total: totalPages })}</p>
+          ) : null}
+        </header>
+
+        {posts.length === 0 ? (
+          <p className="blog-archive__empty">{t('empty')}</p>
+        ) : (
+          <ul className="blog-archive__rows" role="list">
+            {posts.map((post, index) => (
+              <li key={post.route} className={index % 2 === 1 ? 'blog-archive__row--reverse' : ''}>
+                <Link href={post.route} className="blog-archive__row">
+                  {post.image ? (
+                    <span className="blog-archive__row-image">
+                      <img src={post.image} alt="" loading="lazy" />
+                    </span>
+                  ) : (
+                    <span className="blog-archive__row-image blog-archive__row-image--placeholder" />
+                  )}
+                  <span className="blog-archive__row-body">
+                    {post.tags && post.tags.length > 0 ? (
+                      <span className="blog-archive__tags">
+                        {post.tags.map((tag) => (
+                          <span key={tag} className="blog-archive__tag">
+                            {tagNames[tag] ?? tag}
+                          </span>
+                        ))}
+                      </span>
+                    ) : null}
+                    <h2>{post.title}</h2>
+                    {post.description ? <p>{post.description}</p> : null}
+                    <span className="blog-archive__row-meta">
+                      {post.publishedAt ? (
+                        <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, locale)}</time>
+                      ) : null}
+                      <span className="blog-archive__read-more">{t('readMore')}</span>
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {totalPages > 1 ? (
+          <nav className="blog-archive__pagination" aria-label={t('paginationLabel')}>
+            {pageNumber > 1 ? (
+              <Link href={blogArchiveHref(locale, pageNumber - 1)} className="blog-archive__pagination-arrow">
+                {t('previous')}
+              </Link>
+            ) : (
+              <span className="blog-archive__pagination-arrow blog-archive__pagination-arrow--disabled">
+                {t('previous')}
+              </span>
+            )}
+
+            <span className="blog-archive__pagination-pages">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                page === pageNumber ? (
+                  <span key={page} className="blog-archive__pagination-page blog-archive__pagination-page--current">
+                    {page}
+                  </span>
+                ) : (
+                  <Link key={page} href={blogArchiveHref(locale, page)} className="blog-archive__pagination-page">
+                    {page}
+                  </Link>
+                )
+              ))}
+            </span>
+
+            {pageNumber < totalPages ? (
+              <Link href={blogArchiveHref(locale, pageNumber + 1)} className="blog-archive__pagination-arrow blog-archive__pagination-arrow--primary">
+                {t('next')}
+              </Link>
+            ) : (
+              <span className="blog-archive__pagination-arrow blog-archive__pagination-arrow--disabled">
+                {t('next')}
+              </span>
+            )}
+          </nav>
+        ) : null}
+      </section>
+    </div>
+  );
+}
+```
+
+Пагинация нумерует все страницы — для 4 страниц это нормально; если позже
+страниц станет много (>10), стоит добавить усечение (`1 … 4 5 6 … 12`), но
+пока не усложняю без необходимости.
+
+### Заменить блок `.blog-archive*` в `apps/web/src/app/globals.css`
+
+```diff
+-.blog-archive__list time {
+-  display: block;
+-  color: #9aa8c7;
+-  font-size: 0.9rem;
+-  margin-top: 0.35rem;
+-}
+-
+-.blog-archive__list {
+-  list-style: none;
+-  padding: 0;
+-  margin: 2rem 0;
+-}
+-
+-.blog-archive__list li {
+-  margin-bottom: 1.5rem;
+-  padding-bottom: 1.5rem;
+-  border-bottom: 1px solid rgba(253, 230, 97, 0.12);
+-}
+-
+-.blog-archive__list a {
+-  color: #fff;
+-  font-size: 1.25rem;
+-  text-decoration: none;
+-}
+-
+-.blog-archive__list a:hover {
+-  color: #fde661;
+-}
+-
+-.blog-archive__list h2 {
+-  color: inherit;
+-}
+-
+-.blog-archive__list p {
+-  color: #9aa8c7;
+-  margin: 0.5rem 0 0;
+-}
+-
+-.blog-archive__pagination {
+-  display: flex;
+-  gap: 1rem;
+-  align-items: center;
+-  color: #e8ecf4;
+-}
+-
+-.blog-archive__pagination a {
+-  color: #fde661;
+-}
++.blog-archive__rows {
++  list-style: none;
++  padding: 0;
++  margin: 2rem 0;
++  display: flex;
++  flex-direction: column;
++  gap: 1.5rem;
++}
++
++.blog-archive__rows li {
++  border-bottom: 1px solid rgba(253, 230, 97, 0.08);
++  padding-bottom: 1.5rem;
++}
++
++.blog-archive__row {
++  display: flex;
++  gap: 1.5rem;
++  align-items: center;
++  text-decoration: none;
++  color: inherit;
++}
++
++.blog-archive__row--reverse .blog-archive__row {
++  flex-direction: row-reverse;
++}
++
++.blog-archive__row-image {
++  flex-shrink: 0;
++  width: 220px;
++  height: 145px;
++  border-radius: 14px;
++  overflow: hidden;
++  display: block;
++}
++
++.blog-archive__row-image img {
++  width: 100%;
++  height: 100%;
++  object-fit: cover;
++  display: block;
++}
++
++.blog-archive__row-image--placeholder {
++  background: linear-gradient(135deg, #232a3d 0%, #1a2744 100%);
++}
++
++.blog-archive__tags {
++  display: flex;
++  gap: 0.4rem;
++  margin-bottom: 0.6rem;
++}
++
++.blog-archive__tag {
++  font-size: 0.7rem;
++  font-weight: 700;
++  padding: 0.25rem 0.6rem;
++  border-radius: 999px;
++  background: rgba(97, 206, 112, 0.15);
++  color: #61ce70;
++}
++
++.blog-archive__row-body h2 {
++  margin: 0 0 0.5rem;
++  font-size: 1.35rem;
++  color: #fff;
++  line-height: 1.3;
++}
++
++.blog-archive__row:hover .blog-archive__row-body h2 {
++  color: #fde661;
++}
++
++.blog-archive__row-body p {
++  margin: 0 0 0.6rem;
++  color: #9aa8c7;
++  font-size: 0.9rem;
++  line-height: 1.5;
++}
++
++.blog-archive__row-meta {
++  display: flex;
++  gap: 1rem;
++  align-items: center;
++  font-size: 0.8rem;
++  color: #7b8db2;
++}
++
++.blog-archive__pagination {
++  display: flex;
++  justify-content: space-between;
++  align-items: center;
++  margin-top: 1rem;
++  padding-top: 1.5rem;
++  border-top: 1px solid rgba(253, 230, 97, 0.12);
++}
++
++.blog-archive__pagination-arrow {
++  padding: 0.6rem 1.1rem;
++  border-radius: 10px;
++  background: #131b2b;
++  border: 1px solid rgba(253, 230, 97, 0.15);
++  color: #e8ecf4;
++  font-size: 0.85rem;
++  font-weight: 700;
++  text-decoration: none;
++}
++
++.blog-archive__pagination-arrow--primary {
++  background: #fde661;
++  color: #131b2b;
++  border-color: transparent;
++}
++
++.blog-archive__pagination-arrow--disabled {
++  color: #4a5570;
++}
++
++.blog-archive__pagination-pages {
++  display: flex;
++  gap: 0.4rem;
++}
++
++.blog-archive__pagination-page {
++  width: 30px;
++  height: 30px;
++  border-radius: 8px;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  font-size: 0.8rem;
++  font-weight: 700;
++  background: #131b2b;
++  color: #9aa8c7;
++  text-decoration: none;
++}
++
++.blog-archive__pagination-page--current {
++  background: #fde661;
++  color: #131b2b;
++}
++
++@media (max-width: 640px) {
++  .blog-archive__row,
++  .blog-archive__row--reverse .blog-archive__row {
++    flex-direction: column;
++    align-items: stretch;
++  }
++
++  .blog-archive__row-image {
++    width: 100%;
++    height: 190px;
++  }
++}
+```
+
+### Правка `apps/web/src/components/native/StructuredPost.tsx`
+
+Добавить теги под заголовком и блок «Похожие статьи» внизу:
+
+```diff
+ import type { PostRecord } from '@/lib/types';
+
+ import { BlogBreadcrumbs } from '@/components/native/BlogBreadcrumbs';
+ import type { AppLocale } from '@/i18n/routing';
++import type { BlogPostCard } from '@/lib/blogRotation';
++import { getTagNames } from '@/lib/tagNames';
++import { getTranslations } from 'next-intl/server';
+
+ type StructuredPostProps = {
+   post: PostRecord;
++  relatedPosts?: BlogPostCard[];
+ };
+```
+
+```diff
+-export async function StructuredPost({ post }: StructuredPostProps) {
++export async function StructuredPost({ post, relatedPosts = [] }: StructuredPostProps) {
+   const formattedDate = post.publishedAt ? formatDate(post.publishedAt, post.locale) : '';
+   const locale = post.locale as AppLocale;
++  const tagNames = await getTagNames();
++  const t = await getTranslations({ locale, namespace: 'blog' });
+```
+
+```diff
+       <article className="post-article" data-route={post.route}>
+         <header className="post-article__header">
++          {post.tags && post.tags.length > 0 ? (
++            <div className="post-article__tags">
++              {post.tags.map((tag) => (
++                <span key={tag} className="post-article__tag">
++                  {tagNames[tag] ?? tag}
++                </span>
++              ))}
++            </div>
++          ) : null}
+           <h1>{post.title}</h1>
+```
+
+```diff
+         <div
+           className="post-article__content"
+           dangerouslySetInnerHTML={{ __html: post.html }}
+         />
++
++        {relatedPosts.length > 0 ? (
++          <aside className="post-article__related">
++            <h2>{t('relatedTitle')}</h2>
++            <div className="post-article__related-grid">
++              {relatedPosts.map((related) => (
++                <a key={related.route} href={related.route} className="post-article__related-card">
++                  {related.image ? <img src={related.image} alt="" loading="lazy" /> : null}
++                  <span>{related.title}</span>
++                </a>
++              ))}
++            </div>
++          </aside>
++        ) : null}
+       </article>
+```
+
+Добавить в `apps/web/messages/ru.json` (и остальные локали) ключ
+`blog.relatedTitle`, например `"Похожие статьи"`.
+
+Соответствующий CSS в `globals.css` (добавить, не заменяет ничего):
+
+```css
+.post-article__tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-article__tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(97, 206, 112, 0.15);
+  color: #61ce70;
+}
+
+.post-article__related {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(253, 230, 97, 0.12);
+}
+
+.post-article__related h2 {
+  margin: 0 0 1rem;
+  color: #fde661;
+  font-size: 1.15rem;
+}
+
+.post-article__related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.post-article__related-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #131b2b;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.post-article__related-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.post-article__related-card span {
+  padding: 0.65rem 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .post-article__related-grid {
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+### Правка `apps/web/src/app/[locale]/[[...slug]]/page.tsx` — передать `relatedPosts`
+
+```diff
+ import { PageShell } from '@/components/PageShell';
+ import { routing, type AppLocale } from '@/i18n/routing';
+ import {
+   getBodyHtml,
++  getBlogArchivePosts,
+   getPageBySlug,
+   getPageRecord,
+   getPagesByLocale,
+   getPostRecord,
+   slugParamsFromPage,
+ } from '@/lib/content';
++import { getRelatedPosts } from '@/lib/relatedPosts';
+```
+
+```diff
+   const structuredPost =
+     !nativePage && page.type === 'post' && page.hasStructuredPost
+       ? await getPostRecord(page)
+       : null;
+   const bodyHtml = structuredPost || nativePage ? '' : await getBodyHtml(page);
++
++  const relatedPosts = structuredPost
++    ? getRelatedPosts(structuredPost, await getBlogArchivePosts(appLocale))
++    : [];
+
+   return (
+     <PageShell
+       page={page}
+       bodyHtml={bodyHtml}
+       structuredPost={structuredPost}
++      relatedPosts={relatedPosts}
+       nativePage={nativePage}
+     />
+   );
+```
+
+И проброс через `PageShell` (`apps/web/src/components/PageShell.tsx`):
+
+```diff
+ type PageShellProps = {
+   page: PageEntry;
+   bodyHtml: string;
+   structuredPost?: PostRecord | null;
++  relatedPosts?: BlogPostCard[];
+   nativePage?: PageRecord | null;
+   nativeBlog?: BlogArchiveSlice | null;
+   children?: ReactNode;
+ };
+```
+
+```diff
+ export function PageShell({
+   page,
+   bodyHtml,
+   structuredPost,
++  relatedPosts,
+   nativePage,
+   nativeBlog,
+   children,
+ }: PageShellProps) {
+```
+
+```diff
+         ) : structuredPost ? (
+-          <StructuredPost post={structuredPost} />
++          <StructuredPost post={structuredPost} relatedPosts={relatedPosts} />
+         ) : (
+```
+
+(добавить `import type { BlogPostCard } from '@/lib/blogRotation';` к импортам `PageShell.tsx`)
+
+### Чек-лист внедрения раздела 9 (по порядку)
+
+Весь код уже приведён выше — здесь порядок, в котором его применять, и что
+проверить на каждом шаге.
+
+1. **`scripts/lib/post-tags.mjs`** — новый файл, скопировать как есть.
+2. **`scripts/extract-content.mjs`** — 4 диффа (импорт, вызов `buildPostTagsIndex`,
+   запись `tags` в `manifestPages`/`writePostRecord`, запись `content/tag-names.json`).
+   Прогнать `npm run extract:content` и проверить, что `content/tag-names.json`
+   создался и `content/manifest.json` у постов содержит непустой `tags: […]`
+   хотя бы для постов из `/tag/poker/` и `/tag/shkola-pokera/`.
+3. **Типы** — `apps/web/src/lib/types.ts`: добавить `tags?: string[]` в `PageEntry`
+   и `PostRecord`.
+4. **`apps/web/src/lib/blogRotation.ts`** — добавить `tags?: string[]` в `BlogPostCard`.
+5. **Данные постов** — `apps/web/src/lib/content.ts` (`getBlogArchivePosts`) и
+   `apps/web/src/lib/blogPosts.ts` (`getBlogPostCards`): прокинуть `tags: page.tags ?? []`
+   в возвращаемый объект каждой карточки. Без этого шага теги долетят до
+   manifest, но не попадут в компоненты.
+6. **`apps/web/src/lib/tagNames.ts`** — новый файл, читает `content/tag-names.json`
+   (slug → человекочитаемое имя тега для вывода на UI).
+7. **`apps/web/src/lib/relatedPosts.ts`** — новый файл, функция `getRelatedPosts()`:
+   ранжирует по числу общих тегов, затем по свежести; посты без общих тегов
+   не показывает вообще (не «дотягивает» до 3 карточек искусственно).
+8. **`apps/web/src/components/native/NativeBlogArchive.tsx`** — заменить целиком
+   на версию из патча: зигзаг-карточки (изображение слева/справа поочерёдно),
+   тег-пилюли, пронумерованная пагинация вместо текущего текстового списка.
+   Компонент уже получает `archive: BlogArchiveSlice` — эта сигнатура не меняется,
+   меняется только то, что он рендерит.
+9. **`apps/web/src/components/native/StructuredPost.tsx`** — добавить проп
+   `relatedPosts` и вывод: тег-пилюли под заголовком, блок «Похожие статьи»
+   внизу статьи (рендерится только если `relatedPosts.length > 0`).
+10. **`apps/web/src/app/[locale]/[[...slug]]/page.tsx`** — на уровне страницы
+    вызвать `getRelatedPosts(structuredPost, await getBlogArchivePosts(appLocale))`
+    и передать результат в `PageShell` → `StructuredPost`. Это единственное
+    место, где рекомендации реально вычисляются — компоненты сами данные не тянут.
+11. **`apps/web/src/components/PageShell.tsx`** — прокинуть новый проп
+    `relatedPosts` дальше в `StructuredPost` (просто передаточное звено).
+12. **`apps/web/src/app/globals.css`** — заменить блок `.blog-archive__list*`
+    на `.blog-archive__rows/__row/__tag/__pagination*` (диффы выше) и добавить
+    новый блок `.post-article__tags/__related*`. Ничего в остальном файле не трогать.
+13. **Локализация** — добавить ключ `blog.relatedTitle` (например «Похожие статьи»)
+    в `apps/web/messages/ru.json` и аналогичный перевод в `en.json`/`uz.json`/
+    `kz.json`/`hy.json`/`tj.json` — иначе `getTranslations` упадёт на нерусских
+    локалях, где ключа ещё нет.
+
+### Что нельзя автоматизировать / решить за разработчика
+
+- **Проверка на нерусских локалях.** Весь раздел 9 построен и проверен на
+  RU-архиве тегов (`/tag/poker/`, `/tag/shkola-pokera/` и ещё 4). Если у
+  `/en/`, `/uz/`, `/kz/`, `/hy/`, `/tj/` есть свои `tag/*` архивы — нужно
+  вручную проверить, что `post-tags.mjs` находит и их (сейчас скрипт вообще
+  не фильтрует по локали, просто читает `tag/*/index.html` из корня — если
+  локализованные теговые архивы лежат по другим путям типа `en/tag/*`, скрипт
+  их не увидит и для этих локалей `tags` будет пустым, `relatedPosts` — тоже).
+- **Число тегов на страницах пагинации `/tag/<slug>/page/N/`.** Скрипт их
+  учитывает, но я не проверял вручную, что паттерн `article.post` одинаковый
+  на второй+ странице архива тега — сверить на реальном файле перед мёржем.
+- **Порог "0 общих тегов — не показывать".** Сейчас `getRelatedPosts` просто
+  ничего не возвращает, если пересечений нет — тогда блок «Похожие статьи»
+  не рисуется вообще. Если хотите, чтобы блок был всегда (с fallback на
+  «просто свежие посты»), это отдельное решение — не стал добавлять
+  самовольно, это меняет поведение UI, а не чинит баг.
+
+### ⚠ Важно проверить руками: видео CRASH/Русский покер не нашлись в репозитории вообще
+
+Пока писал этот скрипт, поискал по всему репозиторию любые `.mp4` — **ни
+одного** файла с расширением `.mp4` нет нигде в git (не только в
+`assets/media/2025/09` и `/12`, где ожидались эти четыре ролика). Это может
+значить одно из двух:
+1. видеофайлы весят больше лимита GitHub/git и физически не попали в этот
+   репозиторий, хотя на проде (например, через прямую загрузку в WordPress)
+   они существуют — тогда сайт работает, а этот git-снэпшот просто неполный;
+2. либо файлов действительно нет и на проде — тогда все четыре `<video>`
+   в блоке CRASH/Русский покер (раздел 5) отдают 404 прямо сейчас.
+
+Из репозитория это различить нельзя. Прогоните `verify:assets-exist` на
+реальной проверке (после `prepare:public`, куда попадает содержимое
+`assets/`, каким оно приезжает из деплоя) — если ролики 404-ят и там, это
+самая срочная находка всего аудита.

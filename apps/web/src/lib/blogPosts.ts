@@ -18,5 +18,6 @@ export async function getBlogPostCards(locale: AppLocale): Promise<BlogPostCard[
       description: page.description,
       publishedAt: page.publishedAt!,
       image: page.ogImage,
+      tags: page.tags ?? [],
     }));
 }

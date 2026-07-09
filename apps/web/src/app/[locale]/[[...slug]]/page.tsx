@@ -4,12 +4,14 @@ import { PageShell } from '@/components/PageShell';
 import { routing, type AppLocale } from '@/i18n/routing';
 import {
   getBodyHtml,
+  getBlogArchivePosts,
   getPageBySlug,
   getPageRecord,
   getPagesByLocale,
   getPostRecord,
   slugParamsFromPage,
 } from '@/lib/content';
+import { getRelatedPosts } from '@/lib/relatedPosts';
 import { buildPageMetadata } from '@/lib/seo';
 import { shouldRedirectToNativeBlog } from '@/lib/taxonomyRedirects';
 
@@ -68,11 +70,16 @@ export default async function CatchAllPage({ params }: PageProps) {
       : null;
   const bodyHtml = structuredPost || nativePage ? '' : await getBodyHtml(page);
 
+  const relatedPosts = structuredPost
+    ? getRelatedPosts(structuredPost, await getBlogArchivePosts(appLocale))
+    : [];
+
   return (
     <PageShell
       page={page}
       bodyHtml={bodyHtml}
       structuredPost={structuredPost}
+      relatedPosts={relatedPosts}
       nativePage={nativePage}
     />
   );
