@@ -42,6 +42,12 @@ export const AUTO_FIXES = [
     search: '/assets/media/2024/07/but-back-300x96.png',
     replace: '/assets/media/2024/07/but-back-300x96.webp',
   },
+  {
+    id: 'testimonial-photo-webp',
+    description: 'Roman Shaposhnikov testimonial photo JPG → WebP',
+    search: '/assets/media/2024/07/maxresdefault.jpg',
+    replace: '/assets/media/2024/07/maxresdefault.webp',
+  },
 ];
 
 /**
@@ -73,6 +79,11 @@ export const EN_POPUP_MARKERS = [
   'The jackpot is not unusual',
 ];
 
+/** Placeholder / lorem-style text accidentally left in production pages. */
+export const RUDIMENT_TEXT_PATTERNS = [
+  'Идейные соображения высшего порядка',
+];
+
 /**
  * Legacy HTML must not contain these substrings after fix:legacy-html runs.
  * @type {readonly { id: string; needle: string; hint: string }[]}
@@ -88,7 +99,19 @@ export const FORBIDDEN_LEGACY_NEEDLES = [
     needle: 'but-back.png',
     hint: 'Run npm run fix:legacy-html — button image should be WebP',
   },
+  {
+    id: 'maxresdefault-jpg',
+    needle: '/assets/media/2024/07/maxresdefault.jpg',
+    hint: 'Run npm run fix:legacy-html — testimonial photo should be WebP',
+  },
 ];
+
+/** @type {readonly { id: string; needle: string; hint: string }[]} */
+export const FORBIDDEN_RUDIMENT_NEEDLES = RUDIMENT_TEXT_PATTERNS.map((pattern) => ({
+  id: 'rudiment-text',
+  needle: pattern,
+  hint: 'Run npm run fix:legacy-html — remove placeholder export text',
+}));
 
 /**
  * @param {string} relativePath

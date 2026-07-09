@@ -6,6 +6,7 @@ import { glob } from 'glob';
 
 import {
   FORBIDDEN_LEGACY_NEEDLES,
+  FORBIDDEN_RUDIMENT_NEEDLES,
   LEGACY_GLOBS,
   LEGACY_IGNORE,
 } from './patches/known-legacy-issues.mjs';
@@ -80,7 +81,7 @@ async function main() {
 
   for (const relativePath of [...new Set(legacyFiles)]) {
     const content = await fs.readFile(path.join(rootDir, relativePath), 'utf8');
-    for (const rule of FORBIDDEN_LEGACY_NEEDLES) {
+    for (const rule of [...FORBIDDEN_LEGACY_NEEDLES, ...FORBIDDEN_RUDIMENT_NEEDLES]) {
       if (content.includes(rule.needle)) {
         violations.push(`Legacy export ${relativePath} still contains "${rule.needle}" (${rule.hint})`);
       }

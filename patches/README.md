@@ -9,7 +9,11 @@ Files already live in this repository:
 | File | Destination |
 |------|-------------|
 | `scripts/patches/known-legacy-issues.mjs` | `scripts/patches/known-legacy-issues.mjs` |
+| `scripts/patches/kz-home-locale-content.mjs` | `scripts/patches/kz-home-locale-content.mjs` |
 | `scripts/patches/fix-legacy-html.mjs` | `scripts/patches/fix-legacy-html.mjs` |
+| `scripts/patches/fix-promo-video-blocks.mjs` | `scripts/patches/fix-promo-video-blocks.mjs` |
+| `scripts/patches/fix-orphaned-popup-duplicates.mjs` | `scripts/patches/fix-orphaned-popup-duplicates.mjs` |
+| `scripts/patches/audit-unused-stylesheets.mjs` | `scripts/patches/audit-unused-stylesheets.mjs` |
 | `patches/manual-steps.md` | `patches/manual-steps.md` |
 | `patches/pppoker-patches.md` | `patches/pppoker-patches.md` |
 
@@ -26,6 +30,9 @@ No manual copy step is required when working from a clone of this repo.
 
 ```bash
 npm run fix:legacy-html
+npm run fix:orphaned-popup-duplicates
+npm run fix:promo-video-blocks
+npm run fix:unused-stylesheets
 npm run build
 ```
 
@@ -33,7 +40,12 @@ npm run build
 
 - KZ flag: `/assets/media/flags/kz.png` → WPML vendor path
 - `but-back.png` / `but-back-300x96.png` → WebP (including sitemaps)
+- `maxresdefault.jpg` → WebP (testimonial photo on homepages)
 - Duplicate `robots` meta tags (robotext)
+- Orphaned popup DOM duplicates on RU pages (`fix-orphaned-popup-duplicates`)
+- CRASH / Russian poker promo video autoplay, poster, column widths (`fix-promo-video-blocks`)
+- Unused plugin CSS (`slick`, `imagehover`, `flipclock`, mega-menu) on locale pages (`fix:unused-stylesheets`)
+- KZ homepage Russian promo blocks → Kazakh (`kz/index.html`)
 
 ## What needs human review
 
