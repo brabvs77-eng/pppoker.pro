@@ -21,6 +21,16 @@ const PROMO_BLOCK_SETS = [
     crashVideoWidgetId: '4b1e144',
     rusPokerContainerId: 'bdac5ec',
     rusPokerVideoWidgetIds: ['12fb3b3', 'cf08ea1'],
+    /** DOM order: heading then video (EN/UZ). */
+    crashMediaFirst: false,
+  },
+  /** RU/HY home template — video before CRASH text; rus-poker text before image. */
+  {
+    crashContainerId: '3e378e0',
+    crashVideoWidgetId: '3947f6a',
+    rusPokerContainerId: '5fb647f',
+    rusPokerVideoWidgetIds: ['99a8a38', 'd742303'],
+    crashMediaFirst: true,
   },
   /** KZ home template (page 3116). */
   {
@@ -28,6 +38,7 @@ const PROMO_BLOCK_SETS = [
     crashVideoWidgetId: '2dc7ec4',
     rusPokerContainerId: '8982bde',
     rusPokerVideoWidgetIds: [],
+    crashMediaFirst: false,
   },
 ];
 
@@ -36,9 +47,11 @@ const CRASH_POSTER = '/assets/media/2025/12/turbo.webp';
 const SCOPED_STYLE_ID = 'promo-video-block-fix';
 
 function scopedStyleFor(set) {
-  const { crashContainerId, rusPokerContainerId } = set;
+  const { crashContainerId, rusPokerContainerId, crashMediaFirst } = set;
+  const crashHeadingOrder = crashMediaFirst ? 2 : 1;
+  const crashVideoOrder = crashMediaFirst ? 1 : 2;
+
   return `
-<style id="${SCOPED_STYLE_ID}">
   .elementor-element-${crashContainerId} .e-con-inner,
   .elementor-element-${rusPokerContainerId} .e-con-inner {
     display: flex;
@@ -70,7 +83,48 @@ function scopedStyleFor(set) {
     border-radius: 12px;
     display: block;
   }
-</style>`;
+
+  @media (max-width: 767px) {
+    .elementor-element-${crashContainerId} .e-con-inner,
+    .elementor-element-${rusPokerContainerId} .e-con-inner {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 1.5rem;
+    }
+    .elementor-element-${crashContainerId} .elementor-widget-heading,
+    .elementor-element-${rusPokerContainerId} .elementor-widget-heading,
+    .elementor-element-${crashContainerId} .elementor-widget-video,
+    .elementor-element-${rusPokerContainerId} .elementor-widget-video,
+    .elementor-element-${rusPokerContainerId} .elementor-widget-image {
+      flex: 0 0 auto;
+      max-width: 100%;
+      width: 100%;
+    }
+    .elementor-element-${crashContainerId} .elementor-widget-heading { order: ${crashHeadingOrder}; }
+    .elementor-element-${crashContainerId} .elementor-widget-video { order: ${crashVideoOrder}; }
+    .elementor-element-${rusPokerContainerId} {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(253, 230, 97, 0.12);
+    }
+    .elementor-element-${rusPokerContainerId} .elementor-widget-image { order: 1; }
+    .elementor-element-${rusPokerContainerId} .elementor-widget-heading { order: 2; }
+    .elementor-element-${rusPokerContainerId} .elementor-widget-video { order: 3; }
+  }`;
+}
+
+function combinedScopedStyle(matchingSets) {
+  return `<style id="${SCOPED_STYLE_ID}">${matchingSets.map(scopedStyleFor).join('\n')}\n</style>`;
+}
+
+function injectScopedStyle($, matchingSets) {
+  $(`#${SCOPED_STYLE_ID}`).remove();
+  const firstContainer = matchingSets
+    .map((set) => $(`.elementor-element-${set.crashContainerId}`).first())
+    .find((el) => el.length);
+  if (!firstContainer?.length) return false;
+  firstContainer.before(combinedScopedStyle(matchingSets));
+  return true;
 }
 
 async function findLegacyHtmlFiles() {
@@ -128,16 +182,6 @@ function fixRusPokerVideos($, set) {
   return changed;
 }
 
-function injectScopedStyle($, set) {
-  if ($(`#${SCOPED_STYLE_ID}`).length) return false;
-  const container = $(
-    `.elementor-element-${set.crashContainerId}, .elementor-element-${set.rusPokerContainerId}`,
-  ).first();
-  if (!container.length) return false;
-  container.before(scopedStyleFor(set));
-  return true;
-}
-
 function fileHasPromoBlocks(html) {
   return PROMO_BLOCK_SETS.some(
     (set) =>
@@ -160,10 +204,18 @@ async function main() {
     let rusFixed = false;
     let styleInjected = false;
 
-    for (const set of PROMO_BLOCK_SETS) {
+    const matchingSets = PROMO_BLOCK_SETS.filter(
+      (set) =>
+        original.includes(set.crashContainerId) || original.includes(set.rusPokerContainerId),
+    );
+
+    for (const set of matchingSets) {
       if (fixCrashVideo($, set, notes)) crashFixed = true;
       if (fixRusPokerVideos($, set)) rusFixed = true;
-      if (injectScopedStyle($, set)) styleInjected = true;
+    }
+
+    if (matchingSets.length && injectScopedStyle($, matchingSets)) {
+      styleInjected = true;
     }
 
     if (crashFixed || rusFixed || styleInjected) {
