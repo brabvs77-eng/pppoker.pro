@@ -102,6 +102,7 @@ export async function getBlogArchivePosts(locale: AppLocale): Promise<BlogPostCa
       description: page.description,
       publishedAt: page.publishedAt!,
       image: page.ogImage || undefined,
+      tags: page.tags ?? [],
     }));
 }
 

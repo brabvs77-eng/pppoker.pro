@@ -25,7 +25,8 @@
     "previous": "Қаблӣ",
     "next": "Баъдӣ",
     "empty": "Ҳоло мақолаҳои нашршуда нест.",
-    "paginationLabel": "Саҳифабандии блог"
+    "paginationLabel": "Саҳифабандии блог",
+    "relatedTitle": "Мақолаҳои монанд"
   },
   "siteFooter": {
     "languageLabel": "Забон",

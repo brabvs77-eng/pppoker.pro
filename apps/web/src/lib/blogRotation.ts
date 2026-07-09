@@ -4,6 +4,7 @@ export type BlogPostCard = {
   description: string;
   publishedAt: string;
   image?: string;
+  tags?: string[];
 };
 
 /** Starting offset for homepage rotation (changes daily). */

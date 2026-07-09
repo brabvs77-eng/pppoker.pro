@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { load } from 'cheerio';
 
+import { buildPostTagsIndex } from './lib/post-tags.mjs';
 import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
 import { assertNoHekler, normalizeUrls } from '../src/lib/normalizeUrls.mjs';
 import { computeCssBudget } from './compute-css-budget.mjs';
@@ -250,6 +251,7 @@ async function main() {
   await fs.mkdir(bodiesDir, { recursive: true });
 
   const nativePageRoutes = loadNativePageRoutes();
+  const { routeTags, tagNames } = await buildPostTagsIndex(rootDir);
   const pages = await discoverWordPressPages(rootDir);
   const manifestPages = [];
 
@@ -279,6 +281,7 @@ async function main() {
       lang: $('html').attr('lang') ?? '',
       publishedAt: type === 'post' ? extractPublishedTime($) : '',
       ogImage: normalizeUrls($('meta[property="og:image"]').first().attr('content') ?? ''),
+      tags: type === 'post' ? (routeTags[page.route] ?? []) : undefined,
       hreflang: extractHreflang($),
       stylesheets,
       headInlineStyles: extractHeadInlineStyles($),
@@ -320,6 +323,7 @@ async function main() {
           description: entry.description,
           publishedAt: extractPublishedTime($),
           image: extractPostFeaturedImage($, entry.ogImage) || undefined,
+          tags: entry.tags ?? [],
           html: articleHtml,
         });
       }
@@ -352,6 +356,11 @@ async function main() {
   assertNoHekler(manifestJson, 'manifest.json');
 
   await fs.writeFile(path.join(contentDir, 'manifest.json'), `${manifestJson}\n`, 'utf8');
+
+  const tagNamesJson = JSON.stringify(tagNames, null, 2);
+  assertNoHekler(tagNamesJson, 'tag-names.json');
+  await fs.writeFile(path.join(contentDir, 'tag-names.json'), `${tagNamesJson}\n`, 'utf8');
+
   await generateLlmsTxt(budget.pages);
 
   console.log(`Extracted ${budget.pages.length} pages to content/`);

@@ -42,6 +42,30 @@ export const AUTO_FIXES = [
     search: '/assets/media/2024/07/but-back-300x96.png',
     replace: '/assets/media/2024/07/but-back-300x96.webp',
   },
+  {
+    id: 'testimonial-photo-webp',
+    description: 'Roman Shaposhnikov testimonial photo JPG → WebP',
+    search: '/assets/media/2024/07/maxresdefault.jpg',
+    replace: '/assets/media/2024/07/maxresdefault.webp',
+  },
+  {
+    id: 'rus-poker-video-mp4',
+    description: 'Missing 1212-2-1.mp4 → existing Russian Poker clip in repo',
+    search: '/assets/media/2025/12/1212-2-1.mp4',
+    replace: '/assets/media/2025/12/video_2025-12-06_19-00-19.mp4',
+  },
+  {
+    id: 'hy-turbo-thumb-webp',
+    description: 'Elementor thumb PNG → WebP sibling (HY homepage turbo block)',
+    search: '/assets/media/elementor/thumbs/turbo-rfpvvde70baxs2bn03t8cay7kcycahc678ci7akrg8.png',
+    replace: '/assets/media/elementor/thumbs/turbo-rfpvvde70baxs2bn03t8cay7kcycahc678ci7akrg8.webp',
+  },
+  {
+    id: 'hy-4-1-1-thumb-webp',
+    description: 'Elementor thumb PNG → WebP sibling (HY homepage)',
+    search: '/assets/media/elementor/thumbs/4-1-1-rfpvvec18whoke7mfdgazu9lsu6z1ukj68dsq85nog.png',
+    replace: '/assets/media/elementor/thumbs/4-1-1-rfpvvec18whoke7mfdgazu9lsu6z1ukj68dsq85nog.webp',
+  },
 ];
 
 /**
@@ -73,6 +97,11 @@ export const EN_POPUP_MARKERS = [
   'The jackpot is not unusual',
 ];
 
+/** Placeholder / lorem-style text accidentally left in production pages. */
+export const RUDIMENT_TEXT_PATTERNS = [
+  'Идейные соображения высшего порядка',
+];
+
 /**
  * Legacy HTML must not contain these substrings after fix:legacy-html runs.
  * @type {readonly { id: string; needle: string; hint: string }[]}
@@ -88,7 +117,19 @@ export const FORBIDDEN_LEGACY_NEEDLES = [
     needle: 'but-back.png',
     hint: 'Run npm run fix:legacy-html — button image should be WebP',
   },
+  {
+    id: 'maxresdefault-jpg',
+    needle: '/assets/media/2024/07/maxresdefault.jpg',
+    hint: 'Run npm run fix:legacy-html — testimonial photo should be WebP',
+  },
 ];
+
+/** @type {readonly { id: string; needle: string; hint: string }[]} */
+export const FORBIDDEN_RUDIMENT_NEEDLES = RUDIMENT_TEXT_PATTERNS.map((pattern) => ({
+  id: 'rudiment-text',
+  needle: pattern,
+  hint: 'Run npm run fix:legacy-html — remove placeholder export text',
+}));
 
 /**
  * @param {string} relativePath

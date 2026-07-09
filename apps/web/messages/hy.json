@@ -25,7 +25,8 @@
     "previous": "Նախորդ",
     "next": "Հաջորդ",
     "empty": "Դեռ հրապարակված հոդվածներ չկան։",
-    "paginationLabel": "Բլոգի էջավորում"
+    "paginationLabel": "Բլոգի էջավորում",
+    "relatedTitle": "Նման հոդվածներ"
   },
   "homeBlog": {
     "title": "Nuts բլոգ",
