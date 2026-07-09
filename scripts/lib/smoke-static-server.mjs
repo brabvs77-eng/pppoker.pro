@@ -8,8 +8,14 @@ function contentType(filePath) {
   if (filePath.endsWith('.css')) return 'text/css';
   if (filePath.endsWith('.webp')) return 'image/webp';
   if (filePath.endsWith('.png')) return 'image/png';
+  if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) return 'image/jpeg';
+  if (filePath.endsWith('.mp4')) return 'video/mp4';
   if (filePath.endsWith('.json')) return 'application/json';
   return 'application/octet-stream';
+}
+
+function isBinaryAsset(filePath) {
+  return /\.(mp4|webp|png|jpe?g|gif|woff2?|ico|svg)$/i.test(filePath);
 }
 
 export function startStaticServer(outDir, port = 9876) {
@@ -24,7 +30,9 @@ export function startStaticServer(outDir, port = 9876) {
           res.end('forbidden');
           return;
         }
-        const data = await fs.readFile(filePath, 'utf8');
+        const data = isBinaryAsset(filePath)
+          ? await fs.readFile(filePath)
+          : await fs.readFile(filePath, 'utf8');
         res.setHeader('Content-Type', contentType(filePath));
         res.end(data);
       } catch {

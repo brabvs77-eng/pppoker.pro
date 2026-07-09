@@ -8,13 +8,13 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 
-const HOME_PROMO_PAGES = [
-  { label: 'RU', outPath: 'index.html', hideDuplicateCtas: true },
-  { label: 'EN', outPath: 'en/index.html', hideDuplicateCtas: true },
-  { label: 'HY', outPath: 'hy/index.html', hideDuplicateCtas: true },
-  { label: 'UZ', outPath: 'uz/index.html', hideDuplicateCtas: true },
-  { label: 'KZ', outPath: 'kz/index.html', hideDuplicateCtas: true },
-  { label: 'TJ', outPath: 'tj/index.html', hideDuplicateCtas: false },
+const HOME_PAGES = [
+  { label: 'RU', outPath: 'index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'EN', outPath: 'en/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'HY', outPath: 'hy/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'UZ', outPath: 'uz/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'KZ', outPath: 'kz/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'TJ', outPath: 'tj/index.html', hideDuplicateCtas: false, checkHeroCtas: false, checkCrashVideo: false },
 ];
 
 async function main() {
@@ -23,7 +23,7 @@ async function main() {
   const violations = [];
   let checked = 0;
 
-  for (const { label, outPath, hideDuplicateCtas } of HOME_PROMO_PAGES) {
+  for (const { label, outPath, hideDuplicateCtas, checkHeroCtas, checkCrashVideo } of HOME_PAGES) {
     const filePath = path.join(outDir, outPath);
     let html;
     try {
@@ -35,16 +35,26 @@ async function main() {
 
     checked += 1;
 
-    if (!html.includes('class="home-promo"')) {
-      violations.push(`[${label}] Missing native HomePromo section`);
+    if (html.includes('class="home-promo"')) {
+      violations.push(`[${label}] Native HomePromo strip should be removed`);
+    }
+
+    if (checkHeroCtas) {
+      if (!html.includes('hero-cta-group')) {
+        violations.push(`[${label}] Missing hero CTA button group`);
+      }
+
+      if (!html.includes('hero-cta-btn--telegram') || !html.includes(siteContacts.telegramManager)) {
+        violations.push(`[${label}] Missing Telegram hero CTA`);
+      }
+
+      if (!html.includes('hero-cta-btn--whatsapp') || !html.includes(siteContacts.whatsapp)) {
+        violations.push(`[${label}] Missing WhatsApp hero CTA`);
+      }
     }
 
     if (!html.includes('data-home-promo')) {
       violations.push(`[${label}] Missing data-home-promo on #wordpress-page-root`);
-    }
-
-    if (!html.includes(siteContacts.telegramManager)) {
-      violations.push(`[${label}] Missing manager link in HomePromo`);
     }
 
     if (hideDuplicateCtas) {
@@ -52,6 +62,18 @@ async function main() {
         if (!html.includes(`data-id="${id}"`)) {
           violations.push(`[${label}] Expected legacy CTA ${id} in body for CSS dedupe`);
         }
+      }
+    }
+
+    if (checkCrashVideo) {
+      if (!html.includes('data-promo-crash-autoplay')) {
+        violations.push(`[${label}] CRASH video missing data-promo-crash-autoplay marker`);
+      }
+      if (/<video[^>]*data-promo-crash-autoplay[^>]*\bod-lazy-video\b/i.test(html)) {
+        violations.push(`[${label}] CRASH rocket video tag still has od-lazy-video class`);
+      }
+      if (!html.includes('video_2025-12-06_19-00-19.mp4')) {
+        violations.push(`[${label}] CRASH rocket video src missing from export`);
       }
     }
   }
@@ -67,14 +89,14 @@ async function main() {
   }
 
   if (violations.length) {
-    console.error('HomePromo verification failed:');
+    console.error('Homepage chrome verification failed:');
     violations.forEach((line) => console.error(`  - ${line}`));
     process.exitCode = 1;
     return;
   }
 
   console.log(
-    `Verified HomePromo on ${checked} homepages (promo strip, data-home-promo, CTA dedupe rules).`,
+    `Verified homepage chrome on ${checked} homepages (hero CTAs, no HomePromo strip, CTA dedupe, CRASH video markers).`,
   );
 }
 

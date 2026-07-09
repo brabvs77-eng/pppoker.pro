@@ -1353,7 +1353,12 @@ fbq('track', 'PageView');
 				</div>
 					</div>
 				</div>
-		<style id="promo-video-block-fix">
+		
+
+
+
+
+<style id="promo-video-block-fix">
   .elementor-element-3e378e0 .e-con-inner,
   .elementor-element-5fb647f .e-con-inner {
     display: flex;
@@ -1413,12 +1418,26 @@ fbq('track', 'PageView');
     .elementor-element-5fb647f .elementor-widget-heading { order: 2; }
     .elementor-element-5fb647f .elementor-widget-video { order: 3; }
   }
-</style><div class="elementor-element elementor-element-3e378e0 e-grid e-con-boxed e-con e-parent" data-id="3e378e0" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
+</style>
+<script id="promo-crash-autoplay">
+(function () {
+  function kick(video) {
+    video.muted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    var playPromise = video.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(function () {});
+    }
+  }
+  document.querySelectorAll('video[data-promo-crash-autoplay]').forEach(kick);
+})();
+</script><div class="elementor-element elementor-element-3e378e0 e-grid e-con-boxed e-con e-parent" data-id="3e378e0" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
 					<div class="e-con-inner">
 				<div class="elementor-element elementor-element-3947f6a exad-sticky-section-no exad-glass-effect-no jltma-glass-effect-no elementor-widget elementor-widget-video" data-id="3947f6a" data-element_type="widget" data-settings="{&quot;video_type&quot;:&quot;hosted&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;mute&quot;:&quot;yes&quot;,&quot;controls&quot;:&quot;yes&quot;}" data-widget_type="video.default">
 				<div class="elementor-widget-container">
 							<div class="e-hosted-video elementor-wrapper elementor-open-inline">
-					<video data-od-replaced-class="elementor-video od-lazy-video" data-od-xpath="/HTML/BODY/DIV[@class='elementor elementor-4301 elementor-2']/*[16][self::DIV]/*[1][self::DIV]/*[1][self::DIV]/*[1][self::DIV]/*[1][self::DIV]/*[1][self::VIDEO]" preload="auto" class="elementor-video" src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" controls="" muted="muted" controlslist="nodownload" autoplay="" playsinline="" loop="" poster="/assets/media/2025/12/turbo.webp"></video>
+					<video preload="auto" class="elementor-video" src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" muted="muted" controlslist="nodownload" autoplay="" playsinline="" loop="" poster="/assets/media/2025/12/turbo.webp" data-promo-crash-autoplay=""></video>
 				</div>
 						</div>
 				</div>
@@ -1486,7 +1505,7 @@ fbq('track', 'PageView');
 				<div class="elementor-element elementor-element-99a8a38 exad-sticky-section-no exad-glass-effect-no jltma-glass-effect-no elementor-widget elementor-widget-video" data-id="99a8a38" data-element_type="widget" data-settings="{&quot;video_type&quot;:&quot;hosted&quot;,&quot;controls&quot;:&quot;yes&quot;}" data-widget_type="video.default">
 				<div class="elementor-widget-container">
 							<div class="e-hosted-video elementor-wrapper elementor-open-inline">
-					<video data-od-replaced-class="elementor-video od-lazy-video" data-od-xpath="/HTML/BODY/DIV[@class='elementor elementor-4301 elementor-2']/*[17][self::DIV]/*[1][self::DIV]/*[3][self::DIV]/*[1][self::DIV]/*[1][self::DIV]/*[1][self::DIV]/*[1][self::VIDEO]" class="elementor-video" src="/assets/media/2025/09/rus-poker.mp4" controls="" preload="metadata" controlslist="nodownload" poster="/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp" playsinline=""></video>
+					<video class="elementor-video" src="/assets/media/2025/09/rus-poker.mp4" controls="" preload="metadata" controlslist="nodownload" poster="/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp" playsinline=""></video>
 				</div>
 						</div>
 				</div>
@@ -1494,7 +1513,7 @@ fbq('track', 'PageView');
 				<div class="elementor-element elementor-element-d742303 exad-sticky-section-no exad-glass-effect-no jltma-glass-effect-no elementor-widget elementor-widget-video" data-id="d742303" data-element_type="widget" data-settings="{&quot;video_type&quot;:&quot;hosted&quot;,&quot;controls&quot;:&quot;yes&quot;}" data-widget_type="video.default">
 				<div class="elementor-widget-container">
 							<div class="e-hosted-video elementor-wrapper elementor-open-inline">
-					<video data-od-replaced-class="elementor-video" data-od-xpath="/HTML/BODY/DIV[@class='elementor elementor-4301 elementor-2']/*[17][self::DIV]/*[1][self::DIV]/*[4][self::DIV]/*[1][self::DIV]/*[1][self::DIV]/*[1][self::VIDEO]" class="elementor-video" controls="" preload="metadata" playsinline="" webkit-playsinline="" controlslist="nodownload" poster="/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp"><source src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" type="video/mp4"><source src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" type="video/mp4"><source src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" type="video/mp4">Ваш браузер не поддерживает воспроизведение видео.</video>
+					<video class="elementor-video" controls="" preload="metadata" playsinline="" webkit-playsinline="" controlslist="nodownload" poster="/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp"><source src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" type="video/mp4"><source src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" type="video/mp4"><source src="/assets/media/2025/12/video_2025-12-06_19-00-19.mp4" type="video/mp4">Ваш браузер не поддерживает воспроизведение видео.</video>
 				</div>
 						</div>
 				</div>
@@ -2664,9 +2683,7 @@ var ekit_config = {"ajaxurl":"/wp-admin/admin-ajax.php","nonce":"da48980d85"};
 const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(window._wpemojiSettings=a,"wpEmojiSettingsSupports"),s=["flag","emoji"];function i(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function c(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0);const a=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data);return t.every((e,t)=>e===a[t])}function p(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var n=e.getImageData(16,16,1,1);for(let e=0;e<n.data.length;e++)if(0!==n.data[e])return!1;return!0}function u(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\u1fac8")}return!1}function f(e,t,n,a){let r;const o=(r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):document.createElement("canvas")).getContext("2d",{willReadFrequently:!0}),s=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(e=>{s[e]=t(o,e,n,a)}),s}function r(e){var t=document.createElement("script");t.src=e,t.defer=!0,document.head.appendChild(t)}a.supports={everything:!0,everythingExceptFlag:!0},new Promise(t=>{let n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),c.toString(),p.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"});const r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=e=>{i(n=e.data),r.terminate(),t(n)})}catch(e){}i(n=f(s,u,c,p))}t(n)}).then(e=>{for(const n in e)a.supports[n]=e[n],a.supports.everything=a.supports.everything&&a.supports[n],"flag"!==n&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[n]);var t;a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.supports.everything||((t=a.source||{}).concatemoji?r(t.concatemoji):t.wpemoji&&t.twemoji&&(r(t.twemoji),r(t.wpemoji)))});
 //# sourceURL=/includes/js/wp-emoji-loader.min.js
 </script>
-	<script type="module">
-const lazyVideoObserver=new IntersectionObserver((t=>{for(const e of t)if(e.isIntersecting){const t=e.target;if(t.hasAttribute("data-original-poster")&&t.setAttribute("poster",t.getAttribute("data-original-poster")),t.hasAttribute("data-original-autoplay")&&t.setAttribute("autoplay","autoplay"),t.hasAttribute("data-original-preload")){const e=t.getAttribute("data-original-preload");"default"===e?t.removeAttribute("preload"):t.setAttribute("preload",e)}lazyVideoObserver.unobserve(t)}}),{rootMargin:"100% 0% 100% 0%",threshold:0}),videos=document.querySelectorAll("video.od-lazy-video");for(const t of videos)lazyVideoObserver.observe(t);
-</script>
+	
 <script type="module">
 import detect from "https:\/\/pppoker.pro\/assets\/vendor\/optimization-detective\/detect.min.js"; detect( {"minViewportAspectRatio":0.4,"maxViewportAspectRatio":2.5,"isDebug":false,"extensionModuleUrls":["https:\/\/pppoker.pro\/assets\/vendor\/image-prioritizer\/detect.min.js"],"restApiEndpoint":"https:\/\/pppoker.pro\/hy\/wp-json\/optimization-detective\/v1\/url-metrics:store","currentETag":"ddc60c0d16a2ef7200143cdeb2572d31","currentUrl":"https:\/\/pppoker.pro\/hy\/?simply_static_page=119337","urlMetricSlug":"d751713988987e9331980363e24189ce","cachePurgePostId":4301,"urlMetricHMAC":"9880d94da9823e3993fa850f6b7190f0","urlMetricGroupStatuses":[{"minimumViewportWidth":0,"maximumViewportWidth":480,"complete":false},{"minimumViewportWidth":480,"maximumViewportWidth":600,"complete":false},{"minimumViewportWidth":600,"maximumViewportWidth":782,"complete":false},{"minimumViewportWidth":782,"maximumViewportWidth":null,"complete":false}],"storageLockTTL":60,"freshnessTTL":604800,"webVitalsLibrarySrc":"https:\/\/pppoker.pro\/assets\/vendor\/optimization-detective\/build\/web-vitals.js"} );
 </script>

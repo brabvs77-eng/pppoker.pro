@@ -179,11 +179,10 @@ async function main() {
     const $ = load(original, { decodeEntities: false });
     const notes = [];
     const deduped = dedupeExistingPatch($);
-    const barRemoved = removePromoBar($, notes);
     const buttonsInserted = insertHeroButtons($, locale, notes);
 
-    if (barRemoved || buttonsInserted || deduped) {
-      report.push({ file: relativePath, barRemoved, buttonsInserted, notes });
+    if (buttonsInserted || deduped) {
+      report.push({ file: relativePath, buttonsInserted, notes });
       if (WRITE) {
         await fs.writeFile(fullPath, $.html(), 'utf8');
       }

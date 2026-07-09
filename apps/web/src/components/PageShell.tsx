@@ -4,7 +4,6 @@ import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
 import { BlogJsonLdBlock } from '@/components/native/BlogJsonLdBlock';
-import { HomePromo } from '@/components/native/HomePromo';
 import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
 import { NativePage } from '@/components/native/NativePage';
@@ -61,7 +60,6 @@ export function PageShell({
         <ReviewSnippetsJsonLd locale={page.locale as AppLocale} />
       ) : null}
       <SiteHeader page={page} />
-      {showHomePromo ? <HomePromo locale={page.locale} /> : null}
       {children ??
         (nativeBlog ? (
           <NativeBlogArchive locale={page.locale as AppLocale} archive={nativeBlog} />
