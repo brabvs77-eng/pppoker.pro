@@ -46,6 +46,22 @@ const RUS_POKER_POSTER = '/assets/media/2025/12/photo_2025-12-06_22-22-37-918x10
 const CRASH_POSTER = '/assets/media/2025/12/turbo.webp';
 const CRASH_VIDEO_SRC = '/assets/media/2025/12/video_2025-12-06_19-00-19.mp4';
 const SCOPED_STYLE_ID = 'promo-video-block-fix';
+const AUTOPLAY_SCRIPT_ID = 'promo-crash-autoplay';
+const CRASH_AUTOPLAY_ATTR = 'data-promo-crash-autoplay';
+const AUTOPLAY_SCRIPT = `<script id="${AUTOPLAY_SCRIPT_ID}">
+(function () {
+  function kick(video) {
+    video.muted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    var playPromise = video.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(function () {});
+    }
+  }
+  document.querySelectorAll('video[${CRASH_AUTOPLAY_ATTR}]').forEach(kick);
+})();
+</script>`;
 
 function scopedStyleFor(set) {
   const { crashContainerId, rusPokerContainerId, crashMediaFirst } = set;
@@ -120,11 +136,12 @@ function combinedScopedStyle(matchingSets) {
 
 function injectScopedStyle($, matchingSets) {
   $(`#${SCOPED_STYLE_ID}`).remove();
+  $(`#${AUTOPLAY_SCRIPT_ID}`).remove();
   const firstContainer = matchingSets
     .map((set) => $(`.elementor-element-${set.crashContainerId}`).first())
     .find((el) => el.length);
   if (!firstContainer?.length) return false;
-  firstContainer.before(combinedScopedStyle(matchingSets));
+  firstContainer.before(`${combinedScopedStyle(matchingSets)}\n${AUTOPLAY_SCRIPT}`);
   return true;
 }
 
@@ -137,13 +154,11 @@ async function findLegacyHtmlFiles() {
 }
 
 function cleanOptimizerAttrs(video) {
-  video.removeAttr('data-od-removed-autoplay');
-  video.removeAttr('data-original-autoplay');
-  video.removeAttr('data-original-preload');
-  video.removeAttr('data-od-added-data-original-autoplay');
-  video.removeAttr('data-od-added-data-original-preload');
-  video.removeAttr('data-od-added-preload');
-  video.removeAttr('data-od-replaced-preload');
+  for (const attr of Object.keys(video.attr() ?? {})) {
+    if (attr.startsWith('data-od-') || attr === 'data-original-autoplay' || attr === 'data-original-preload') {
+      video.removeAttr(attr);
+    }
+  }
   video.removeClass('od-lazy-video');
 }
 
@@ -160,6 +175,8 @@ function fixCrashVideo($, set, notes) {
 
   cleanOptimizerAttrs(video);
   normalizeHostedVideo(video, CRASH_VIDEO_SRC);
+  video.removeAttr('controls');
+  video.attr(CRASH_AUTOPLAY_ATTR, '');
   video.attr('autoplay', '');
   video.attr('muted', 'muted');
   video.attr('playsinline', '');
