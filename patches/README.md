@@ -14,6 +14,7 @@ Files already live in this repository:
 | `scripts/patches/fix-promo-video-blocks.mjs` | `scripts/patches/fix-promo-video-blocks.mjs` |
 | `scripts/patches/fix-orphaned-popup-duplicates.mjs` | `scripts/patches/fix-orphaned-popup-duplicates.mjs` |
 | `scripts/patches/audit-unused-stylesheets.mjs` | `scripts/patches/audit-unused-stylesheets.mjs` |
+| `scripts/patches/fix-hero-cta-buttons.mjs` | `scripts/patches/fix-hero-cta-buttons.mjs` |
 | `patches/manual-steps.md` | `patches/manual-steps.md` |
 | `patches/pppoker-patches.md` | `patches/pppoker-patches.md` |
 
@@ -33,6 +34,7 @@ npm run fix:legacy-html
 npm run fix:orphaned-popup-duplicates
 npm run fix:promo-video-blocks
 npm run fix:unused-stylesheets
+npm run fix:hero-cta-buttons
 npm run build
 ```
 
@@ -46,6 +48,7 @@ npm run build
 - CRASH / Russian poker promo video autoplay, poster, column widths (`fix-promo-video-blocks`)
 - Unused plugin CSS (`slick`, `imagehover`, `flipclock`, mega-menu) on locale pages (`fix:unused-stylesheets`)
 - KZ homepage Russian promo blocks → Kazakh (`kz/index.html`)
+- Hero CTA buttons (Telegram + WhatsApp) injected after hero text; legacy promo bar removed when present (`fix:hero-cta-buttons`)
 
 ## What needs human review
 
