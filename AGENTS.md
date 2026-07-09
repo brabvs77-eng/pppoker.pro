@@ -72,22 +72,53 @@ Defined in `apps/web/src/config/site.ts` → `siteContacts`:
 - Telegram channel: `https://t.me/+Sj5sG5o0aqJkMTBi`
 - WhatsApp: `https://wa.clck.bar/995592934850`
 
-## Design skills (Taste Skill)
+## UI design pipeline (Impeccable + Taste Skill)
 
-Installed agent skills for native UI polish — see [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill):
+Orchestrator: **`.agents/skills/ui-design-pipeline/SKILL.md`** — read this for every native UI task.
 
-| Skill | Path | When to use |
-|-------|------|-------------|
-| `design-taste-frontend` | `.agents/skills/design-taste-frontend/SKILL.md` | New landing/portfolio sections; anti-slop defaults |
-| `redesign-existing-projects` | `.agents/skills/redesign-existing-projects/SKILL.md` | Upgrading existing native components (blog, chrome) |
+Context files (Impeccable reads these automatically):
 
-Re-install or update:
+| File | Role |
+|------|------|
+| `PRODUCT.md` | Register, users, brand personality, anti-references |
+| `DESIGN.md` | Colors, typography, native component tokens |
 
-```bash
-npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend" --skill "redesign-existing-projects"
+### Flow
+
+```
+User request
+    ↓
+① Impeccable shape — design brief (reference/shape.md, NO code)
+    ↓
+② UI code — apps/web/src/components/native/ + globals.css + messages
+    ↓
+③ Taste Skill — design read + redesign audit (anti-slop)
+    ↓
+④ Impeccable detect + polish — npm run audit:ui-antipatterns
+    ↓
+⑤ npm run build → ship or iterate
 ```
 
-For **pppoker.pro** native blog/article UI: editorial dark theme, preserve Nuts gold (`#fde661`) accent; dials ~6/4/3 (variance/motion/density).
+### Installed skills
+
+| Skill | Path | Phase |
+|-------|------|-------|
+| `impeccable` | `.cursor/skills/impeccable/SKILL.md` | shape, detect, polish, critique |
+| `ui-design-pipeline` | `.agents/skills/ui-design-pipeline/SKILL.md` | orchestrator |
+| `design-taste-frontend` | `.agents/skills/design-taste-frontend/SKILL.md` | visual pass |
+| `redesign-existing-projects` | `.agents/skills/redesign-existing-projects/SKILL.md` | existing UI upgrades |
+
+Install / update:
+
+```bash
+npx impeccable skills install --providers=cursor --scope=project
+npx skills add https://github.com/Leonxlnx/taste-skill \
+  --skill "design-taste-frontend" --skill "redesign-existing-projects"
+```
+
+Impeccable commands (in Cursor chat): `/impeccable shape …`, `/impeccable detect …`, `/impeccable polish …`.
+
+Native UI defaults: editorial dark theme, Nuts gold `#fde661`, dials ~6/4/3.
 
 ## Commands
 
@@ -103,7 +134,8 @@ npm run fix:legacy-html:check   # dry-run: fail if auto-fixable issues remain
 npm run dev
 
 # Individual checks
-npm run audit:rudiments
+npm run verify:ui-design-pipeline
+npm run audit:ui-antipatterns   # after native UI changes (Impeccable detect)
 npm run verify:structured-posts
 npm run verify:native-blog-archive
 npm run verify:elementor-runtime-budget
