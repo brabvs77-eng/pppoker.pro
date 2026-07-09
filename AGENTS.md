@@ -72,6 +72,23 @@ Defined in `apps/web/src/config/site.ts` → `siteContacts`:
 - Telegram channel: `https://t.me/+Sj5sG5o0aqJkMTBi`
 - WhatsApp: `https://wa.clck.bar/995592934850`
 
+## Design skills (Taste Skill)
+
+Installed agent skills for native UI polish — see [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill):
+
+| Skill | Path | When to use |
+|-------|------|-------------|
+| `design-taste-frontend` | `.agents/skills/design-taste-frontend/SKILL.md` | New landing/portfolio sections; anti-slop defaults |
+| `redesign-existing-projects` | `.agents/skills/redesign-existing-projects/SKILL.md` | Upgrading existing native components (blog, chrome) |
+
+Re-install or update:
+
+```bash
+npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend" --skill "redesign-existing-projects"
+```
+
+For **pppoker.pro** native blog/article UI: editorial dark theme, preserve Nuts gold (`#fde661`) accent; dials ~6/4/3 (variance/motion/density).
+
 ## Commands
 
 ```bash
