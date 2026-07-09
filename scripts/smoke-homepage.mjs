@@ -10,7 +10,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
-const WHATSAPP_MARKERS = ['wa.clck.bar', 'hero-cta-btn--whatsapp'];
+const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_SMOKE_PAGES = [
   { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true },

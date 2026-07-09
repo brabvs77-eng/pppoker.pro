@@ -7,7 +7,7 @@ import { siteContacts } from './lib/site-contacts.mjs';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
 
-const WHATSAPP_MARKERS = ['wa.clck.bar', 'hero-cta-btn--whatsapp'];
+const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_PAGES = [
   { label: 'RU', outPath: 'index.html' },

@@ -86,6 +86,16 @@ async function findLegacyHtmlFiles() {
   });
 }
 
+function refreshHeroStyle($) {
+  $(`style#${STYLE_ID}`).remove();
+  const anchor = $(`.${HERO_ANCHOR_CLASS}`).first();
+  if (anchor.length) {
+    anchor.before(STYLE_BLOCK);
+    return true;
+  }
+  return false;
+}
+
 function insertHeroButtons($, locale, notes) {
   const anchor = $(`.${HERO_ANCHOR_CLASS}`).first();
   if (!anchor.length) {
@@ -94,6 +104,7 @@ function insertHeroButtons($, locale, notes) {
   }
 
   $('.hero-cta-btn--whatsapp').remove();
+  refreshHeroStyle($);
 
   const existingGroup = anchor.nextAll('.hero-cta-group').first();
   if (existingGroup.length) {
@@ -101,10 +112,7 @@ function insertHeroButtons($, locale, notes) {
     return true;
   }
 
-  if ($(`#${STYLE_ID}`).length) return false;
-
   anchor.after(buttonsHtml(locale));
-  anchor.before(STYLE_BLOCK);
 
   const oldHotspot = $(`.${OLD_HOTSPOT_CLASS}`);
   if (oldHotspot.length) {
