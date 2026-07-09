@@ -207,6 +207,18 @@ function fixRusPokerVideos($, set) {
   return changed;
 }
 
+function stripDeadLazyVideoScript($) {
+  let removed = false;
+  $('script').each((_, el) => {
+    const text = $(el).html() ?? '';
+    if (text.includes('lazyVideoObserver') && text.includes('video.od-lazy-video')) {
+      $(el).remove();
+      removed = true;
+    }
+  });
+  return removed;
+}
+
 function fileHasPromoBlocks(html) {
   return PROMO_BLOCK_SETS.some(
     (set) =>
@@ -221,30 +233,32 @@ async function main() {
   for (const relativePath of files) {
     const fullPath = path.join(rootDir, relativePath);
     const original = await fs.readFile(fullPath, 'utf8');
-    if (!fileHasPromoBlocks(original)) continue;
 
     const $ = load(original, { decodeEntities: false });
     const notes = [];
     let crashFixed = false;
     let rusFixed = false;
     let styleInjected = false;
+    let lazyScriptRemoved = stripDeadLazyVideoScript($);
 
-    const matchingSets = PROMO_BLOCK_SETS.filter(
-      (set) =>
-        original.includes(set.crashContainerId) || original.includes(set.rusPokerContainerId),
-    );
+    if (fileHasPromoBlocks(original)) {
+      const matchingSets = PROMO_BLOCK_SETS.filter(
+        (set) =>
+          original.includes(set.crashContainerId) || original.includes(set.rusPokerContainerId),
+      );
 
-    for (const set of matchingSets) {
-      if (fixCrashVideo($, set, notes)) crashFixed = true;
-      if (fixRusPokerVideos($, set)) rusFixed = true;
+      for (const set of matchingSets) {
+        if (fixCrashVideo($, set, notes)) crashFixed = true;
+        if (fixRusPokerVideos($, set)) rusFixed = true;
+      }
+
+      if (matchingSets.length && injectScopedStyle($, matchingSets)) {
+        styleInjected = true;
+      }
     }
 
-    if (matchingSets.length && injectScopedStyle($, matchingSets)) {
-      styleInjected = true;
-    }
-
-    if (crashFixed || rusFixed || styleInjected) {
-      report.push({ file: relativePath, crashFixed, rusFixed, styleInjected, notes });
+    if (crashFixed || rusFixed || styleInjected || lazyScriptRemoved) {
+      report.push({ file: relativePath, crashFixed, rusFixed, styleInjected, lazyScriptRemoved, notes });
       if (WRITE) {
         await fs.writeFile(fullPath, $.html(), 'utf8');
       }
@@ -262,6 +276,7 @@ async function main() {
     if (row.crashFixed) console.log('    - restored autoplay/muted/playsinline on the CRASH video');
     if (row.rusFixed) console.log('    - added poster + preload=metadata to the Russian Poker videos');
     if (row.styleInjected) console.log('    - injected scoped style to match text/media column widths');
+    if (row.lazyScriptRemoved) console.log('    - removed dead od-lazy-video observer script');
     for (const note of row.notes) console.log(`    - ${note}`);
   }
 
