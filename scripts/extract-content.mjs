@@ -108,6 +108,13 @@ function extractRuntimeScripts($) {
     const type = $(el).attr('type') ?? undefined;
     const id = $(el).attr('id') ?? undefined;
 
+    // JSON-LD is metadata, not runtime JS — already extracted via extractJsonLd.
+    // Re-emitting it here duplicated the Yoast @graph on Elementor-runtime pages
+    // (GSC: "Отзыву назначено несколько общих оценок").
+    if (type === 'application/ld+json') {
+      return;
+    }
+
     if (src) {
       const normalized = normalizeUrls(src);
       if (normalized.includes('googletagmanager.com') || normalized.includes('googleoptimize.com')) {
