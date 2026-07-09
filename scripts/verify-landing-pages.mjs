@@ -47,10 +47,13 @@ async function main() {
     }
 
     for (const [key, url] of Object.entries(siteContacts)) {
-      if (key === 'telegramManager') continue;
       if (!html.includes(url)) {
         violations.push(`[${label}] Missing ${key} link: ${url}`);
       }
+    }
+
+    if (html.includes('wa.clck.bar')) {
+      violations.push(`[${label}] WhatsApp link should be removed`);
     }
 
     if (!violations.some((line) => line.startsWith(`[${label}]`))) {

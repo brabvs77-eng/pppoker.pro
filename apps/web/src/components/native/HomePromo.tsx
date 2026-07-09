@@ -29,14 +29,6 @@ export async function HomePromo({ locale }: HomePromoProps) {
         >
           {t('channel')}
         </a>
-        <a
-          className="home-promo__btn home-promo__btn--ghost"
-          href={siteContacts.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t('whatsapp')}
-        </a>
       </div>
     </aside>
   );

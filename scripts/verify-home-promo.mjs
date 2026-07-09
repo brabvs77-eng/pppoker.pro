@@ -6,24 +6,23 @@ import { siteContacts } from './lib/site-contacts.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
-const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
+
+const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"', "class='hero-cta-btn hero-cta-btn--whatsapp'"];
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'EN', outPath: 'en/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'HY', outPath: 'hy/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'UZ', outPath: 'uz/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'KZ', outPath: 'kz/index.html', hideDuplicateCtas: true, checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'TJ', outPath: 'tj/index.html', hideDuplicateCtas: false, checkHeroCtas: false, checkCrashVideo: false },
+  { label: 'RU', outPath: 'index.html', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'EN', outPath: 'en/index.html', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'HY', outPath: 'hy/index.html', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'UZ', outPath: 'uz/index.html', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'KZ', outPath: 'kz/index.html', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'TJ', outPath: 'tj/index.html', checkHeroCtas: false, checkCrashVideo: false },
 ];
 
 async function main() {
-  const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
-  const ctaIds = chrome.homepageDuplicateCtaElementIds ?? [];
   const violations = [];
   let checked = 0;
 
-  for (const { label, outPath, hideDuplicateCtas, checkHeroCtas, checkCrashVideo } of HOME_PAGES) {
+  for (const { label, outPath, checkHeroCtas, checkCrashVideo } of HOME_PAGES) {
     const filePath = path.join(outDir, outPath);
     let html;
     try {
@@ -39,6 +38,12 @@ async function main() {
       violations.push(`[${label}] Native HomePromo strip should be removed`);
     }
 
+    for (const marker of WHATSAPP_MARKERS) {
+      if (html.includes(marker)) {
+        violations.push(`[${label}] WhatsApp CTA still present (${marker})`);
+      }
+    }
+
     if (checkHeroCtas) {
       if (!html.includes('hero-cta-group')) {
         violations.push(`[${label}] Missing hero CTA button group`);
@@ -47,27 +52,21 @@ async function main() {
       if (!html.includes('hero-cta-btn--telegram') || !html.includes(siteContacts.telegramManager)) {
         violations.push(`[${label}] Missing Telegram hero CTA`);
       }
-
-      if (!html.includes('hero-cta-btn--whatsapp') || !html.includes(siteContacts.whatsapp)) {
-        violations.push(`[${label}] Missing WhatsApp hero CTA`);
-      }
     }
 
     if (!html.includes('data-home-promo')) {
       violations.push(`[${label}] Missing data-home-promo on #wordpress-page-root`);
     }
 
-    if (hideDuplicateCtas) {
-      for (const id of ctaIds) {
-        if (!html.includes(`data-id="${id}"`)) {
-          violations.push(`[${label}] Expected legacy CTA ${id} in body for CSS dedupe`);
-        }
-      }
-    }
-
     if (checkCrashVideo) {
       if (!html.includes('data-promo-crash-autoplay')) {
         violations.push(`[${label}] CRASH video missing data-promo-crash-autoplay marker`);
+      }
+      if (!html.includes('promo-crash-video')) {
+        violations.push(`[${label}] CRASH video missing promo-crash-video class`);
+      }
+      if (!html.includes('promo-crash-autoplay')) {
+        violations.push(`[${label}] CRASH autoplay script missing from export`);
       }
       if (/<video[^>]*data-promo-crash-autoplay[^>]*\bod-lazy-video\b/i.test(html)) {
         violations.push(`[${label}] CRASH rocket video tag still has od-lazy-video class`);
@@ -75,16 +74,6 @@ async function main() {
       if (!html.includes('video_2025-12-06_19-00-19.mp4')) {
         violations.push(`[${label}] CRASH rocket video src missing from export`);
       }
-    }
-  }
-
-  const overrides = await fs.readFile(
-    path.join(rootDir, 'apps/web/src/app/chrome-overrides.css'),
-    'utf8',
-  );
-  for (const id of ctaIds) {
-    if (!overrides.includes(`elementor-element-${id}`)) {
-      violations.push(`chrome-overrides.css missing hide rule for ${id}`);
     }
   }
 
@@ -96,7 +85,7 @@ async function main() {
   }
 
   console.log(
-    `Verified homepage chrome on ${checked} homepages (hero CTAs, no HomePromo strip, CTA dedupe, CRASH video markers).`,
+    `Verified homepage chrome on ${checked} homepages (Telegram hero CTAs, no WhatsApp, CRASH video markers).`,
   );
 }
 

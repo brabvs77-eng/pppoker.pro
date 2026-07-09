@@ -73,7 +73,6 @@ export const homepageDuplicateCtaElementIds = elementorChrome.homepageDuplicateC
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
   telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
-  whatsapp: 'https://wa.clck.bar/995592934850',
 } as const;
 
 const FLAG_BASE = '/assets/vendor/sitepress-multilingual-cms/res/flags';

@@ -7,6 +7,8 @@ import { siteContacts } from './lib/site-contacts.mjs';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(rootDir, 'apps/web/out');
 
+const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
+
 const HOME_PAGES = [
   { label: 'RU', outPath: 'index.html' },
   { label: 'EN', outPath: 'en/index.html' },
@@ -36,6 +38,12 @@ async function main() {
       }
     }
 
+    for (const marker of WHATSAPP_MARKERS) {
+      if (html.includes(marker)) {
+        violations.push(`[${label}] WhatsApp link should be removed (${marker})`);
+      }
+    }
+
     if (!violations.some((line) => line.startsWith(`[${label}]`))) {
       checked.push(label);
     }
@@ -48,7 +56,7 @@ async function main() {
     return;
   }
 
-  console.log(`Verified site contact links on ${checked.join(', ')} homepages.`);
+  console.log(`Verified Telegram contact links and no WhatsApp on ${checked.join(', ')} homepages.`);
 }
 
 main().catch((error) => {

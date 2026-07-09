@@ -51,15 +51,37 @@ const CRASH_AUTOPLAY_ATTR = 'data-promo-crash-autoplay';
 const AUTOPLAY_SCRIPT = `<script id="${AUTOPLAY_SCRIPT_ID}">
 (function () {
   function kick(video) {
+    if (!video || video.tagName !== 'VIDEO') return;
     video.muted = true;
+    video.defaultMuted = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('autoplay', '');
+    video.setAttribute('loop', '');
+    if (!video.getAttribute('src')) {
+      var source = video.querySelector('source[src]');
+      if (source) video.setAttribute('src', source.getAttribute('src'));
+    }
     var playPromise = video.play();
-    if (playPromise && playPromise.catch) {
-      playPromise.catch(function () {});
+    if (playPromise && playPromise.then) {
+      playPromise.then(function () {
+        video.removeAttribute('poster');
+      }).catch(function () {});
     }
   }
-  document.querySelectorAll('video[${CRASH_AUTOPLAY_ATTR}]').forEach(kick);
+  function boot() {
+    document.querySelectorAll('video[${CRASH_AUTOPLAY_ATTR}]').forEach(kick);
+  }
+  boot();
+  document.addEventListener('DOMContentLoaded', boot);
+  window.addEventListener('load', boot);
+  if (window.jQuery) {
+    window.jQuery(window).on('elementor/frontend/init', boot);
+  }
+  [500, 1500, 3500, 6000].forEach(function (delay) {
+    window.setTimeout(boot, delay);
+  });
 })();
 </script>`;
 
@@ -100,6 +122,10 @@ function scopedStyleFor(set) {
     border-radius: 12px;
     display: block;
   }
+  video.promo-crash-video {
+    object-fit: cover;
+    background: #0a0d14;
+  }
 
   @media (max-width: 767px) {
     .elementor-element-${crashContainerId} .e-con-inner,
@@ -136,12 +162,17 @@ function combinedScopedStyle(matchingSets) {
 
 function injectScopedStyle($, matchingSets) {
   $(`#${SCOPED_STYLE_ID}`).remove();
-  $(`#${AUTOPLAY_SCRIPT_ID}`).remove();
   const firstContainer = matchingSets
     .map((set) => $(`.elementor-element-${set.crashContainerId}`).first())
     .find((el) => el.length);
   if (!firstContainer?.length) return false;
-  firstContainer.before(`${combinedScopedStyle(matchingSets)}\n${AUTOPLAY_SCRIPT}`);
+  firstContainer.before(combinedScopedStyle(matchingSets));
+  return true;
+}
+
+function injectAutoplayScript($) {
+  $(`#${AUTOPLAY_SCRIPT_ID}`).remove();
+  $('body').append(AUTOPLAY_SCRIPT);
   return true;
 }
 
@@ -176,6 +207,8 @@ function fixCrashVideo($, set, notes) {
   cleanOptimizerAttrs(video);
   normalizeHostedVideo(video, CRASH_VIDEO_SRC);
   video.removeAttr('controls');
+  video.removeClass('elementor-video');
+  video.addClass('promo-crash-video');
   video.attr(CRASH_AUTOPLAY_ATTR, '');
   video.attr('autoplay', '');
   video.attr('muted', 'muted');
@@ -238,6 +271,7 @@ async function main() {
     let crashFixed = false;
     let rusFixed = false;
     let styleInjected = false;
+    let scriptInjected = false;
     let lazyScriptRemoved = stripDeadLazyVideoScript($);
 
     if (fileHasPromoBlocks(original)) {
@@ -254,10 +288,14 @@ async function main() {
       if (matchingSets.length && injectScopedStyle($, matchingSets)) {
         styleInjected = true;
       }
+
+      if (crashFixed && injectAutoplayScript($)) {
+        scriptInjected = true;
+      }
     }
 
-    if (crashFixed || rusFixed || styleInjected || lazyScriptRemoved) {
-      report.push({ file: relativePath, crashFixed, rusFixed, styleInjected, lazyScriptRemoved, notes });
+    if (crashFixed || rusFixed || styleInjected || scriptInjected || lazyScriptRemoved) {
+      report.push({ file: relativePath, crashFixed, rusFixed, styleInjected, scriptInjected, lazyScriptRemoved, notes });
       if (WRITE) {
         await fs.writeFile(fullPath, $.html(), 'utf8');
       }
@@ -275,6 +313,7 @@ async function main() {
     if (row.crashFixed) console.log('    - restored autoplay/muted/playsinline on the CRASH video');
     if (row.rusFixed) console.log('    - added poster + preload=metadata to the Russian Poker videos');
     if (row.styleInjected) console.log('    - injected scoped style to match text/media column widths');
+    if (row.scriptInjected) console.log('    - appended Elementor-safe CRASH autoplay script to body');
     if (row.lazyScriptRemoved) console.log('    - removed dead od-lazy-video observer script');
     for (const note of row.notes) console.log(`    - ${note}`);
   }
