@@ -36,13 +36,44 @@ function verifyBodyHtml(html, label) {
   assert(cardCount === 6, `${label}: expected 6 review cards, got ${cardCount}`);
 }
 
+function extractJsonLdBlocks(html) {
+  const blocks = [];
+  const pattern = /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi;
+  let match = pattern.exec(html);
+  while (match) {
+    blocks.push(match[1].trim());
+    match = pattern.exec(html);
+  }
+  return blocks;
+}
+
 function verifyExportHtml(html, route) {
   assert(html.includes('id="native-review-snippets"'), `${route}: export missing review section`);
   assert(html.includes("review-snippets__card"), `${route}: export missing cards`);
   assert(html.includes("review-snippets__score"), `${route}: export missing aggregate`);
+
+  const blocks = extractJsonLdBlocks(html);
+
+  // GSC "Отзыву назначено несколько общих оценок": exactly one AggregateRating
+  // JSON-LD entity per page, defined once.
+  const aggBlocks = blocks.filter((block) => block.includes('"AggregateRating"'));
+  assert(aggBlocks.length === 1, `${route}: expected 1 AggregateRating JSON-LD block, got ${aggBlocks.length}`);
+
+  // The legacy Yoast @graph must not be duplicated (used to leak twice via
+  // runtimeScripts on Elementor-runtime homepages).
+  const graphBlocks = blocks.filter((block) => block.includes('"@graph"'));
   assert(
-    html.includes('"@type":"AggregateRating"') || html.includes('"@type": "AggregateRating"'),
-    `${route}: export missing AggregateRating JSON-LD`
+    graphBlocks.length <= 1,
+    `${route}: legacy Yoast @graph JSON-LD duplicated (${graphBlocks.length} copies)`
+  );
+
+  // The review entity must not reuse the Yoast `#organization` @id — merging
+  // the nodes is what confused Google's review-snippet parser.
+  const reviewBlock = aggBlocks[0] ?? "";
+  assert(reviewBlock.includes('#nuts-club'), `${route}: review JSON-LD must use distinct #nuts-club @id`);
+  assert(
+    !/"@id":"[^"]*#organization"[^}]*"aggregateRating"/.test(reviewBlock),
+    `${route}: review JSON-LD must not attach aggregateRating to #organization`
   );
 }
 

@@ -22,10 +22,14 @@ export function buildReviewSnippetsJsonLd(locale: AppLocale): string {
   const { aggregate } = reviewSnippetsConfig;
   const siteUrl = absoluteUrl(homeHref(locale));
 
+  // Distinct @id: the legacy Yoast graph already defines `#organization` on the
+  // same page; sharing that id merges the entities and Google then sees the
+  // aggregate rating attached to a multiply-defined node (GSC review-snippet
+  // error "Отзыву назначено несколько общих оценок").
   const graph = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    '@id': `${siteUrl}#organization`,
+    '@id': `${siteUrl}#nuts-club`,
     name: 'Nuts PPPoker Club',
     alternateName: ['Nuts', 'pppoker.pro'],
     url: siteUrl,
