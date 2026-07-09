@@ -14,7 +14,7 @@ const port = 9877;
 async function smokeLandingPage(page, { label, route }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${route}`, {
-    waitUntil: 'networkidle',
+    waitUntil: 'load',
     timeout: 90_000,
   });
   await page.waitForTimeout(2000);
