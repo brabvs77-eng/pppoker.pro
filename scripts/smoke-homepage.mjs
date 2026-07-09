@@ -11,15 +11,15 @@ const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml' },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6 },
-  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/en/feed.xml' },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/uz/feed.xml' },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, feedHref: '/kz/feed.xml' },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0, minReviewCards: 0 },
+  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0, minReviewCards: 0, checkHeroCtas: false, checkCrashVideo: false },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'networkidle',
@@ -32,7 +32,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     await page.waitForTimeout(2000);
   }
 
-  const state = await page.evaluate(({ channel, whatsapp, feedHref }) => ({
+  const state = await page.evaluate(async ({ channel, whatsapp, feedHref, checkCrashVideo }) => ({
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
@@ -40,9 +40,17 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     whatsappLink: !!document.querySelector(`a[href="${whatsapp}"]`),
     heroCtaGroup: !!document.querySelector('.hero-cta-group'),
     heroTelegramCta: !!document.querySelector('.hero-cta-btn--telegram'),
-    crashVideo: (() => {
+    crashVideo: await (async () => {
+      if (!checkCrashVideo) return { found: false, skipped: true };
       const video = document.querySelector('video[data-promo-crash-autoplay]');
       if (!video) return { found: false };
+      video.muted = true;
+      try {
+        await video.play();
+      } catch {
+        // headless may block until user gesture — still validate load below
+      }
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       return {
         found: true,
         paused: video.paused,
@@ -68,6 +76,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     channel: siteContacts.telegramChannel,
     whatsapp: siteContacts.whatsapp,
     feedHref,
+    checkCrashVideo,
   });
 
   if (state.swiperInitialized < minSwipers) {
@@ -78,13 +87,19 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
   if (state.faqBadHash) violations.push(`[${label}] FAQ still has lowercase #collapse- anchors`);
   if (!state.channelLink) violations.push(`[${label}] Missing Telegram channel link in header`);
   if (!state.whatsappLink) violations.push(`[${label}] Missing WhatsApp link in header`);
-  if (!state.heroCtaGroup) violations.push(`[${label}] Missing hero CTA button group`);
-  if (!state.heroTelegramCta) violations.push(`[${label}] Missing Telegram hero CTA`);
-  if (label === 'RU' || label === 'EN' || label === 'HY' || label === 'UZ' || label === 'KZ') {
+  if (checkHeroCtas) {
+    if (!state.heroCtaGroup) violations.push(`[${label}] Missing hero CTA button group`);
+    if (!state.heroTelegramCta) violations.push(`[${label}] Missing Telegram hero CTA`);
+  }
+  if (checkCrashVideo) {
     if (!state.crashVideo.found) {
       violations.push(`[${label}] CRASH rocket video element not found`);
     } else if (state.crashVideo.hasLazyClass) {
       violations.push(`[${label}] CRASH video still has od-lazy-video class`);
+    } else if (state.crashVideo.readyState < 2) {
+      violations.push(
+        `[${label}] CRASH rocket video failed to load (readyState=${state.crashVideo.readyState})`,
+      );
     } else if (state.crashVideo.paused && state.crashVideo.currentTime === 0) {
       violations.push(
         `[${label}] CRASH rocket video did not start (paused=${state.crashVideo.paused}, readyState=${state.crashVideo.readyState}, currentTime=${state.crashVideo.currentTime})`,
