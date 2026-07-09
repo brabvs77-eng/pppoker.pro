@@ -48,6 +48,24 @@ export const AUTO_FIXES = [
     search: '/assets/media/2024/07/maxresdefault.jpg',
     replace: '/assets/media/2024/07/maxresdefault.webp',
   },
+  {
+    id: 'rus-poker-video-mp4',
+    description: 'Missing 1212-2-1.mp4 → existing Russian Poker clip in repo',
+    search: '/assets/media/2025/12/1212-2-1.mp4',
+    replace: '/assets/media/2025/12/video_2025-12-06_19-00-19.mp4',
+  },
+  {
+    id: 'hy-turbo-thumb-webp',
+    description: 'Elementor thumb PNG → WebP sibling (HY homepage turbo block)',
+    search: '/assets/media/elementor/thumbs/turbo-rfpvvde70baxs2bn03t8cay7kcycahc678ci7akrg8.png',
+    replace: '/assets/media/elementor/thumbs/turbo-rfpvvde70baxs2bn03t8cay7kcycahc678ci7akrg8.webp',
+  },
+  {
+    id: 'hy-4-1-1-thumb-webp',
+    description: 'Elementor thumb PNG → WebP sibling (HY homepage)',
+    search: '/assets/media/elementor/thumbs/4-1-1-rfpvvec18whoke7mfdgazu9lsu6z1ukj68dsq85nog.png',
+    replace: '/assets/media/elementor/thumbs/4-1-1-rfpvvec18whoke7mfdgazu9lsu6z1ukj68dsq85nog.webp',
+  },
 ];
 
 /**
