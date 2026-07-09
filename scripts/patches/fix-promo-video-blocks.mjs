@@ -193,9 +193,8 @@ function fixRusPokerVideos($, set) {
   const container = $(`.elementor-element-${set.rusPokerContainerId}`);
   if (!container.length) return false;
   let changed = false;
-  for (const widgetId of set.rusPokerVideoWidgetIds) {
-    const video = container.find(`.elementor-element-${widgetId} video`).first();
-    if (!video.length) continue;
+  container.find('video').each((_, el) => {
+    const video = $(el);
     cleanOptimizerAttrs(video);
     video.attr('preload', 'metadata');
     if (!video.attr('poster')) {
@@ -203,7 +202,7 @@ function fixRusPokerVideos($, set) {
     }
     video.attr('playsinline', '');
     changed = true;
-  }
+  });
   return changed;
 }
 
