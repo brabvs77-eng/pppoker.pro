@@ -69,13 +69,22 @@ async function main() {
       const relative = ref.replace(/^\//, '');
       if (!(await fileExists(relative))) {
         missing.push({ file, ref });
+        continue;
+      }
+      if (ref.endsWith('.mp4')) {
+        const stat = await fs.stat(path.join(publicDir, relative));
+        if (stat.size < 1024) {
+          missing.push({ file, ref, reason: `corrupt/stub mp4 (${stat.size} bytes)` });
+        }
       }
     }
   }
 
   if (missing.length) {
     console.error(`Found ${missing.length} /assets/ references with no matching file (out of ${refCount} checked):`);
-    missing.slice(0, 40).forEach(({ file, ref }) => console.error(`  ${file}: ${ref}`));
+    missing.slice(0, 40).forEach(({ file, ref, reason }) =>
+      console.error(`  ${file}: ${ref}${reason ? ` (${reason})` : ''}`),
+    );
     if (missing.length > 40) console.error(`  ... and ${missing.length - 40} more`);
     process.exitCode = 1;
     return;

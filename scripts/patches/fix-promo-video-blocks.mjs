@@ -44,6 +44,7 @@ const PROMO_BLOCK_SETS = [
 
 const RUS_POKER_POSTER = '/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp';
 const CRASH_POSTER = '/assets/media/2025/12/turbo.webp';
+const CRASH_VIDEO_SRC = '/assets/media/2025/12/video_2025-12-06_19-00-19.mp4';
 const SCOPED_STYLE_ID = 'promo-video-block-fix';
 
 function scopedStyleFor(set) {
@@ -142,7 +143,13 @@ function cleanOptimizerAttrs(video) {
   video.removeAttr('data-od-added-data-original-autoplay');
   video.removeAttr('data-od-added-data-original-preload');
   video.removeAttr('data-od-added-preload');
+  video.removeAttr('data-od-replaced-preload');
   video.removeClass('od-lazy-video');
+}
+
+function normalizeHostedVideo(video, src) {
+  video.attr('src', src);
+  video.find('source').remove();
 }
 
 function fixCrashVideo($, set, notes) {
@@ -152,6 +159,7 @@ function fixCrashVideo($, set, notes) {
   if (!video.length) return false;
 
   cleanOptimizerAttrs(video);
+  normalizeHostedVideo(video, CRASH_VIDEO_SRC);
   video.attr('autoplay', '');
   video.attr('muted', 'muted');
   video.attr('playsinline', '');
