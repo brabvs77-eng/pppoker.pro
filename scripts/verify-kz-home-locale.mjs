@@ -28,6 +28,22 @@ function main() {
     }
   }
 
+  if (!html.includes('class="elementor-element elementor-element-db11841 kz-promo-update')) {
+    violations.push('Missing kz-promo-update class on CRASH block container');
+  }
+
+  if (!html.includes('kz-promo-update__heading')) {
+    violations.push('Missing unified kz-promo-update__heading class on promo blocks');
+  }
+
+  if (!html.includes('poster="/assets/media/2025/12/turbo.webp"')) {
+    violations.push('CRASH video missing turbo.webp poster');
+  }
+
+  if (!html.includes('class="elementor-video kz-promo-update__video"')) {
+    violations.push('CRASH video missing kz-promo-update__video autoplay markup');
+  }
+
   if (violations.length) {
     console.error('KZ homepage locale verification failed:');
     violations.forEach((line) => console.error(`  - ${line}`));
@@ -35,7 +51,9 @@ function main() {
     return;
   }
 
-  console.log('Verified KZ homepage CRASH and Russian poker blocks are in Kazakh.');
+  console.log(
+    'Verified KZ homepage promo blocks: Kazakh copy, unified layout classes, video poster/autoplay.',
+  );
 }
 
 main();
