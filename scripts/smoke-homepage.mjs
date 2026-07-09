@@ -10,6 +10,8 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 const port = 9876;
 
+const WHATSAPP_MARKERS = ['wa.clck.bar', 'hero-cta-btn--whatsapp'];
+
 const HOME_SMOKE_PAGES = [
   { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
   { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, checkHeroCtas: true, checkCrashVideo: true },
@@ -32,12 +34,12 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     await page.waitForTimeout(2000);
   }
 
-  const state = await page.evaluate(async ({ channel, whatsapp, feedHref, checkCrashVideo }) => ({
+  const state = await page.evaluate(async ({ channel, feedHref, checkCrashVideo, whatsappMarkers }) => ({
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
     channelLink: !!document.querySelector(`a[href="${channel}"]`),
-    whatsappLink: !!document.querySelector(`a[href="${whatsapp}"]`),
+    whatsappLinks: whatsappMarkers.filter((marker) => document.body.innerHTML.includes(marker)).length,
     heroCtaGroup: !!document.querySelector('.hero-cta-group'),
     heroTelegramCta: !!document.querySelector('.hero-cta-btn--telegram'),
     crashVideo: await (async () => {
@@ -57,6 +59,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
         readyState: video.readyState,
         currentTime: video.currentTime,
         hasLazyClass: video.classList.contains('od-lazy-video'),
+        hasPromoClass: video.classList.contains('promo-crash-video'),
       };
     })(),
     hiddenPlayCta: (() => {
@@ -74,9 +77,9 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
       : true,
   }), {
     channel: siteContacts.telegramChannel,
-    whatsapp: siteContacts.whatsapp,
     feedHref,
     checkCrashVideo,
+    whatsappMarkers: WHATSAPP_MARKERS,
   });
 
   if (state.swiperInitialized < minSwipers) {
@@ -86,7 +89,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
   }
   if (state.faqBadHash) violations.push(`[${label}] FAQ still has lowercase #collapse- anchors`);
   if (!state.channelLink) violations.push(`[${label}] Missing Telegram channel link in header`);
-  if (!state.whatsappLink) violations.push(`[${label}] Missing WhatsApp link in header`);
+  if (state.whatsappLinks > 0) violations.push(`[${label}] WhatsApp links still present on page`);
   if (checkHeroCtas) {
     if (!state.heroCtaGroup) violations.push(`[${label}] Missing hero CTA button group`);
     if (!state.heroTelegramCta) violations.push(`[${label}] Missing Telegram hero CTA`);
@@ -96,6 +99,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
       violations.push(`[${label}] CRASH rocket video element not found`);
     } else if (state.crashVideo.hasLazyClass) {
       violations.push(`[${label}] CRASH video still has od-lazy-video class`);
+    } else if (!state.crashVideo.hasPromoClass) {
+      violations.push(`[${label}] CRASH video missing promo-crash-video class`);
     } else if (state.crashVideo.readyState < 2) {
       violations.push(
         `[${label}] CRASH rocket video failed to load (readyState=${state.crashVideo.readyState})`,
@@ -155,7 +160,7 @@ async function main() {
     }
 
     console.log(
-      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, hero CTAs, CRASH video, home blog, RSS).`,
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
     );
   } finally {
     await browser.close();
