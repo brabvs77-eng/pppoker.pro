@@ -24,9 +24,12 @@ const HOME_SMOKE_PAGES = [
 async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
-    waitUntil: 'networkidle',
+    waitUntil: 'load',
     timeout: 90_000,
   });
+  await page.waitForSelector('.elementor-main-swiper, .hero-cta-group, .site-header', {
+    timeout: 30_000,
+  }).catch(() => {});
   await page.waitForTimeout(5000);
   const crashVideo = page.locator('video[data-promo-crash-autoplay]').first();
   if ((await crashVideo.count()) > 0) {

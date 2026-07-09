@@ -19,8 +19,16 @@ const WRITE = process.argv.includes('--write');
 
 const WHATSAPP_HREF_MARKERS = ['wa.clck.bar', 'whatsapp.com', 'api.whatsapp.com'];
 
-/** Elementor footer IDs for the legacy WhatsApp CTA shells. */
-const WHATSAPP_FOOTER_ELEMENT_IDS = ['3b6bf45', '4af2112', '5f4d290'];
+/** Elementor IDs for legacy WhatsApp CTA shells (footer + header). */
+const WHATSAPP_SHELL_ELEMENT_IDS = [
+  '3b6bf45',
+  '4af2112',
+  '5f4d290',
+  'd746ab1',
+  '8fcb7ac',
+  '371db46',
+  '947bb3a',
+];
 
 function hrefIsWhatsapp(href = '') {
   const lower = href.toLowerCase();
@@ -60,7 +68,7 @@ function elementHasMeaningfulContent(el) {
 function removeEmptyWhatsappShells($) {
   let removedShells = 0;
 
-  for (const dataId of WHATSAPP_FOOTER_ELEMENT_IDS) {
+  for (const dataId of WHATSAPP_SHELL_ELEMENT_IDS) {
     $(`.elementor-element[data-id="${dataId}"]`).each((_, el) => {
       $(el).remove();
       removedShells += 1;
@@ -130,7 +138,7 @@ async function main() {
     const hasWhatsappMarkers =
       WHATSAPP_HREF_MARKERS.some((marker) => original.includes(marker))
       || original.includes('whaggtsapp')
-      || WHATSAPP_FOOTER_ELEMENT_IDS.some((id) => original.includes(`data-id="${id}"`));
+      || WHATSAPP_SHELL_ELEMENT_IDS.some((id) => original.includes(`data-id="${id}"`));
 
     if (!hasWhatsappMarkers) {
       continue;

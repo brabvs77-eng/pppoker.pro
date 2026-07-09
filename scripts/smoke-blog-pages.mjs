@@ -61,7 +61,7 @@ function isDarkBackground(rgb) {
 async function smokeBlogPage(page, { label, urlPath, surface, shell, title, heroImage, minBreadcrumbLinks = 0 }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
-    waitUntil: 'networkidle',
+    waitUntil: 'load',
     timeout: 90_000,
   });
 
@@ -149,7 +149,7 @@ async function main() {
 
     if (violations.length === 0) {
       await page.goto(`http://127.0.0.1:${port}/hy/`, {
-        waitUntil: 'networkidle',
+        waitUntil: 'load',
         timeout: 90_000,
       });
       const hyBlogHref = await page.evaluate(() => {
