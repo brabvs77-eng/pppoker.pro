@@ -83,7 +83,7 @@ export function renderReviewSnippetsSection({ locale }) {
   const cards = reviews
     .map((review) => {
       const avatar = review.avatar
-        ? `<img class="review-snippets__avatar" src="${escapeHtml(review.avatar)}" alt="" width="56" height="56" loading="lazy" decoding="async" />`
+        ? `<img class="review-snippets__avatar" src="${escapeHtml(review.avatar)}" alt="${escapeHtml(review.name)}" width="56" height="56" loading="lazy" decoding="async" />`
         : `<div class="review-snippets__avatar review-snippets__avatar--placeholder" aria-hidden="true">${escapeHtml(review.name.slice(0, 1))}</div>`;
 
       return `<li class="review-snippets__card">

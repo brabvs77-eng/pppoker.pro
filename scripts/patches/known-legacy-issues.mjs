@@ -52,7 +52,7 @@ export const AUTO_FIXES = [
     id: 'rus-poker-video-mp4',
     description: 'Missing 1212-2-1.mp4 → existing Russian Poker clip in repo',
     search: '/assets/media/2025/12/1212-2-1.mp4',
-    replace: '/assets/media/2025/12/video_2025-12-06_19-00-19.mp4',
+    replace: '/assets/media/2025/12/video_2025-12-06_19-00-19-v2.mp4',
   },
   {
     id: 'hy-turbo-thumb-webp',
