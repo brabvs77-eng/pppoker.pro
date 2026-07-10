@@ -12,8 +12,6 @@ const COPY_FILES = [
   'sitemap_index.xml',
   'post-sitemap.xml',
   'page-sitemap.xml',
-  'category-sitemap.xml',
-  'post_tag-sitemap.xml',
   'main-sitemap.xsl',
   'llms.txt',
   'feed.xml',

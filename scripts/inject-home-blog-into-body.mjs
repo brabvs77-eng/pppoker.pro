@@ -53,7 +53,10 @@ async function main() {
       posts,
       labels,
       locale,
-      blogArchiveHref: locale === 'ru' ? '/blog/' : `/${locale}/blog/`,
+      // HY/TJ have no native blog export — link straight to the RU archive
+      // instead of routing visitors and crawlers through a 301.
+      blogArchiveHref:
+        locale === 'ru' || locale === 'hy' || locale === 'tj' ? '/blog/' : `/${locale}/blog/`,
     });
 
     if (!blogHtml) {

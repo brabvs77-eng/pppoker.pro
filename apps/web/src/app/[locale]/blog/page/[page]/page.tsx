@@ -40,7 +40,24 @@ export async function generateMetadata({ params }: BlogPaginationProps) {
   const manifestPage = await getPageByRoute(route);
 
   if (!manifestPage) return { title: 'Blog' };
-  return buildPageMetadata(manifestPage);
+
+  const metadata = buildPageMetadata(manifestPage);
+  const pageSuffix = locale === 'ru' ? `— страница ${pageNum}` : `— page ${pageNum}`;
+  const rawTitle = String(metadata.title ?? '');
+  const titleHasPage = /страница|page/i.test(rawTitle);
+  const title = titleHasPage ? rawTitle : `${rawTitle} ${pageSuffix}`;
+  const description = metadata.description
+    ? `${metadata.description} ${pageSuffix}.`
+    : undefined;
+
+  return {
+    ...metadata,
+    title,
+    description,
+    openGraph: metadata.openGraph
+      ? { ...metadata.openGraph, title, description }
+      : undefined,
+  };
 }
 
 export default async function BlogPaginationPage({ params }: BlogPaginationProps) {

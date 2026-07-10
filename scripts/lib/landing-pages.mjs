@@ -3,8 +3,6 @@ export const POPUP_ONLY_LANDING_ROUTES = [
   '/spasibo/',
   '/uz/thanks/',
   '/uz/uzs/',
-  '/__qs/',
-  '/mastermega-content/mastermega-content-megamenu-menuitem/',
 ];
 
 /** User-facing conversion/thank-you landings checked for native chrome. */

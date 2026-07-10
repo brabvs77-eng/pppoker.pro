@@ -22,6 +22,24 @@ const HOME_LANGUAGES: Record<string, string> = {
 };
 
 /**
+ * Кластер переводов обзора PPPoker. ВАЖНО: /rus/ (русский обзор) сюда
+ * сознательно не включён — страница приносит трафик и по договорённости
+ * не модифицируется; hreflang обязан быть взаимным, поэтому кластер
+ * ограничен EN/KK/UZ до отдельного решения по /rus/.
+ */
+const REVIEW_LANGUAGES: Record<string, string> = {
+  en: 'https://pppoker.pro/en/pppoker-review-2026/',
+  kk: 'https://pppoker.pro/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/',
+  uz: 'https://pppoker.pro/uz/pppoker-2026/',
+};
+
+const REVIEW_ROUTES = new Set([
+  '/en/pppoker-review-2026/',
+  '/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/',
+  '/uz/pppoker-2026/',
+]);
+
+/**
  * Страницы, закрытые от индексации. Thank-you страницы (/spasibo/,
  * /uz/thanks/) сюда сознательно НЕ входят — они приносят трафик.
  */
@@ -69,6 +87,13 @@ function buildAlternates(page: PageEntry): Metadata['alternates'] {
     return {
       canonical: absoluteUrl(page.canonical),
       languages: { ...HOME_LANGUAGES },
+    };
+  }
+
+  if (REVIEW_ROUTES.has(page.route)) {
+    return {
+      canonical: absoluteUrl(page.canonical),
+      languages: { ...REVIEW_LANGUAGES },
     };
   }
 
