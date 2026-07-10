@@ -71,7 +71,7 @@ async function main() {
       if (/<video[^>]*data-promo-crash-autoplay[^>]*\bod-lazy-video\b/i.test(html)) {
         violations.push(`[${label}] CRASH rocket video tag still has od-lazy-video class`);
       }
-      if (!html.includes('video_2025-12-06_19-00-19.mp4')) {
+      if (!html.includes('video_2025-12-06_19-00-19-v2.mp4')) {
         violations.push(`[${label}] CRASH rocket video src missing from export`);
       }
     }

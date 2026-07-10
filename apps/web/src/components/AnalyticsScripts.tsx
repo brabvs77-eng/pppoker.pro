@@ -1,15 +1,9 @@
-import Script from 'next/script';
-
-const GTM_ID = 'GTM-K375NJP4';
-
+/**
+ * Third-party analytics scripts.
+ *
+ * Google Optimize was removed: the service was shut down by Google in
+ * September 2023, so the script 404s and only wasted a preload + request.
+ */
 export function AnalyticsScripts() {
-  return (
-    <>
-      <Script
-        id="google-optimize"
-        src={`https://www.googleoptimize.com/optimize.js?id=${GTM_ID}`}
-        strategy="afterInteractive"
-      />
-    </>
-  );
+  return null;
 }

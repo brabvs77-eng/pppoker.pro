@@ -2,16 +2,48 @@ import type { Metadata } from 'next';
 
 import type { PageEntry } from './types';
 
+/** ISO-коды для hreflang: локали проекта -> корректные BCP 47 языки. */
+const HREFLANG_CODE_MAP: Record<string, string> = {
+  kz: 'kk',
+  tj: 'tg',
+};
+
+/** Главные страницы локалей: единый hreflang-кластер со всеми шестью версиями. */
+const HOME_ROUTES = new Set(['/', '/en/', '/kz/', '/uz/', '/hy/', '/tj/']);
+
+const HOME_LANGUAGES: Record<string, string> = {
+  ru: 'https://pppoker.pro/',
+  en: 'https://pppoker.pro/en/',
+  kk: 'https://pppoker.pro/kz/',
+  uz: 'https://pppoker.pro/uz/',
+  hy: 'https://pppoker.pro/hy/',
+  tg: 'https://pppoker.pro/tj/',
+  'x-default': 'https://pppoker.pro/',
+};
+
+/**
+ * Страницы, закрытые от индексации. Thank-you страницы (/spasibo/,
+ * /uz/thanks/) сюда сознательно НЕ входят — они приносят трафик.
+ */
+const NOINDEX_ROUTES = new Set<string>([]);
+
+/** Убирает кавычки-обёртки, попавшие в meta description из WP. */
+function sanitizeDescription(description: string): string {
+  return description.trim().replace(/^["«»\u201C\u201D]+/, '').replace(/["«»\u201C\u201D]+$/, '').trim();
+}
+
 export function buildPageMetadata(page: PageEntry): Metadata {
   const alternates = buildAlternates(page);
+  const description = page.description ? sanitizeDescription(page.description) : undefined;
+  const indexable = !NOINDEX_ROUTES.has(page.route);
 
   return {
     title: page.title,
-    description: page.description || undefined,
+    description,
     alternates,
     openGraph: {
       title: page.title,
-      description: page.description || undefined,
+      description,
       url: page.canonical.startsWith('http') ? page.canonical : `https://pppoker.pro${page.canonical}`,
       locale: page.lang.replace('-', '_'),
       type: page.type === 'post' || page.type === 'blog' ? 'article' : 'website',
@@ -26,20 +58,28 @@ export function buildPageMetadata(page: PageEntry): Metadata {
         : {}),
     },
     robots: {
-      index: true,
+      index: indexable,
       follow: true,
     },
   };
 }
 
 function buildAlternates(page: PageEntry): Metadata['alternates'] {
+  if (HOME_ROUTES.has(page.route)) {
+    return {
+      canonical: absoluteUrl(page.canonical),
+      languages: { ...HOME_LANGUAGES },
+    };
+  }
+
   if (!page.hreflang.length) {
     return { canonical: absoluteUrl(page.canonical) };
   }
 
   const languages: Record<string, string> = {};
   for (const entry of page.hreflang) {
-    languages[entry.hreflang] = absoluteUrl(entry.href);
+    const code = HREFLANG_CODE_MAP[entry.hreflang] ?? entry.hreflang;
+    languages[code] = absoluteUrl(entry.href);
   }
 
   return {

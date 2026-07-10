@@ -44,7 +44,7 @@ const PROMO_BLOCK_SETS = [
 
 const RUS_POKER_POSTER = '/assets/media/2025/12/photo_2025-12-06_22-22-37-918x1024.webp';
 const CRASH_POSTER = '/assets/media/2025/12/turbo.webp';
-const CRASH_VIDEO_SRC = '/assets/media/2025/12/video_2025-12-06_19-00-19.mp4';
+const CRASH_VIDEO_SRC = '/assets/media/2025/12/video_2025-12-06_19-00-19-v2.mp4';
 const SCOPED_STYLE_ID = 'promo-video-block-fix';
 const AUTOPLAY_SCRIPT_ID = 'promo-crash-autoplay';
 const CRASH_AUTOPLAY_ATTR = 'data-promo-crash-autoplay';

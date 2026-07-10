@@ -73,7 +73,7 @@ export function renderHomeBlogSection({
   const cards = visible
     .map((post) => {
       const image = post.image
-        ? `<img class="home-blog__image" src="${escapeHtml(post.image)}" alt="" width="400" height="250" loading="lazy" decoding="async" />`
+        ? `<img class="home-blog__image" src="${escapeHtml(post.image)}" alt="${escapeHtml(post.title)}" width="400" height="250" loading="lazy" decoding="async" />`
         : '<div class="home-blog__image home-blog__image--placeholder" aria-hidden="true"></div>';
       const excerpt = post.description
         ? `<p class="home-blog__excerpt">${escapeHtml(post.description)}</p>`
