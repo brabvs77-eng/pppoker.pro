@@ -18,6 +18,8 @@ export function WordPressRuntimeScripts({ scripts }: WordPressRuntimeScriptsProp
               src={entry.src}
               id={entry.id}
               type={entry.type}
+              defer={entry.defer || undefined}
+              async={entry.async || undefined}
             />
           );
         }

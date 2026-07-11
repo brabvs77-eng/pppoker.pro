@@ -4,7 +4,7 @@ export type HreflangEntry = {
 };
 
 export type RuntimeScriptEntry =
-  | { kind: 'external'; src: string; type?: string; id?: string }
+  | { kind: 'external'; src: string; type?: string; id?: string; defer?: boolean; async?: boolean }
   | { kind: 'inline'; content: string; type?: string; id?: string };
 
 export type PageEntry = {

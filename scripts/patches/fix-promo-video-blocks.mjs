@@ -70,8 +70,24 @@ const AUTOPLAY_SCRIPT = `<script id="${AUTOPLAY_SCRIPT_ID}">
       }).catch(function () {});
     }
   }
+  function watch(video) {
+    if (!video || video.tagName !== 'VIDEO') return;
+    if (!('IntersectionObserver' in window)) { kick(video); return; }
+    if (video.__crashWatched) return;
+    video.__crashWatched = true;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          kick(entry.target);
+        } else if (!entry.target.paused) {
+          entry.target.pause();
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+    io.observe(video);
+  }
   function boot() {
-    document.querySelectorAll('video[${CRASH_AUTOPLAY_ATTR}]').forEach(kick);
+    document.querySelectorAll('video[${CRASH_AUTOPLAY_ATTR}]').forEach(watch);
   }
   boot();
   document.addEventListener('DOMContentLoaded', boot);
@@ -214,7 +230,9 @@ function fixCrashVideo($, set, notes) {
   video.attr('muted', 'muted');
   video.attr('playsinline', '');
   video.attr('loop', '');
-  video.attr('preload', 'auto');
+  // preload=none: the 3.4MB clip is fetched only when the block nears
+  // the viewport (see AUTOPLAY_SCRIPT's IntersectionObserver).
+  video.attr('preload', 'none');
   if (!video.attr('poster')) {
     video.attr('poster', CRASH_POSTER);
     notes.push(`CRASH video poster set to ${CRASH_POSTER}`);
