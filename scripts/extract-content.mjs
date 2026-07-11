@@ -121,7 +121,9 @@ function extractRuntimeScripts($) {
       if (normalized.includes('googletagmanager.com') || normalized.includes('googleoptimize.com')) {
         return;
       }
-      entries.push({ kind: 'external', src: normalized, type, id });
+      const defer = $(el).attr('defer') !== undefined || undefined;
+      const async = $(el).attr('async') !== undefined || undefined;
+      entries.push({ kind: 'external', src: normalized, type, id, defer, async });
       return;
     }
 
