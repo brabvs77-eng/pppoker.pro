@@ -247,7 +247,7 @@ function fixRusPokerVideos($, set) {
   container.find('video').each((_, el) => {
     const video = $(el);
     cleanOptimizerAttrs(video);
-    video.attr('preload', 'metadata');
+    video.attr('preload', 'none');
     if (!video.attr('poster')) {
       video.attr('poster', RUS_POKER_POSTER);
     }
