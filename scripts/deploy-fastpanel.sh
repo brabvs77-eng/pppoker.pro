@@ -43,69 +43,60 @@ ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
 
 SSH_OPTS=(-i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new)
 
-# Heal broken pppoker.pro → nutspoker.store symlink if needed, then resolve
-# a real writable directory for rsync (rsync mkdir on a symlink → EEXIST).
+# Ensure docroot is a REAL directory at pppoker.pro (not a symlink to nutspoker.store).
+# FastPanel / nginx document root is /var/www/pppokerpro/data/www/pppoker.pro.
 REMOTE_PATH=$(
   ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
     "DEPLOY_PATH=$(printf %q "${DEPLOY_PATH:-}") bash -s" <<'EOS'
 set -euo pipefail
 
 WWW="${HOME}/www"
-LINK="${WWW}/pppoker.pro"
+DOCROOT="${DEPLOY_PATH:-${WWW}/pppoker.pro}"
 
-if [ -L "${LINK}" ]; then
-  target=$(readlink "${LINK}")
-  case "${target}" in
-    /*) abs_target="${target}" ;;
-    *) abs_target="${WWW}/${target}" ;;
-  esac
-  if [ ! -e "${abs_target}" ]; then
-    echo "Healing broken symlink ${LINK} -> ${abs_target}" >&2
-    mkdir -p "${abs_target}"
-  fi
-elif [ ! -e "${LINK}" ]; then
-  echo "Creating document root ${LINK}" >&2
-  mkdir -p "${LINK}"
+# If someone set an absolute host path, map it into the site-user home layout.
+case "${DOCROOT}" in
+  /var/www/pppokerpro/data/www/pppoker.pro)
+    DOCROOT="${WWW}/pppoker.pro"
+    ;;
+esac
+
+if [ -L "${DOCROOT}" ]; then
+  echo "Replacing symlink ${DOCROOT} -> $(readlink "${DOCROOT}") with a real directory" >&2
+  rm -f "${DOCROOT}"
 fi
 
-candidates=()
-if [ -n "${DEPLOY_PATH}" ]; then
-  candidates+=("${DEPLOY_PATH}")
+if [ ! -d "${DOCROOT}" ]; then
+  echo "Creating document root ${DOCROOT}" >&2
+  mkdir -p "${DOCROOT}"
 fi
-candidates+=(
-  "${LINK}"
-  "${WWW}/nutspoker.store"
-  "${WWW}/pppoker.pro_orig"
-  "/var/www/pppokerpro/data/www/pppoker.pro"
-  "/var/www/pppokerpro/data/www/nutspoker.store"
-)
 
-for p in "${candidates[@]}"; do
-  if [ ! -e "${p}" ]; then
-    continue
-  fi
-  real=$(readlink -f "${p}" || true)
-  if [ -n "${real}" ] && [ -d "${real}" ]; then
-    printf '%s\n' "${real}"
-    exit 0
-  fi
-  echo "skip ${p} -> ${real:-?}" >&2
-done
+# Refuse to deploy into a symlink (rsync mkdir EEXIST / empty panel view)
+if [ -L "${DOCROOT}" ] || [ ! -d "${DOCROOT}" ]; then
+  echo "Document root is not a real directory: ${DOCROOT}" >&2
+  ls -lad "${DOCROOT}" >&2 || true
+  ls -la "${WWW}" >&2 || true
+  exit 1
+fi
 
-echo "No usable document root among candidates:" >&2
-printf '  %s\n' "${candidates[@]}" >&2
-echo "Remote diagnostics:" >&2
-echo "pwd=$(pwd) HOME=${HOME}" >&2
-ls -la "${WWW}" >&2 || true
-exit 1
+# Print the path as the site user sees it (no readlink -f — that would
+# follow a symlink if one reappears).
+printf '%s\n' "${DOCROOT}"
 EOS
 )
 
 echo "Resolved remote docroot: ${REMOTE_PATH}"
 
+# Verify remotely that the path is a real directory (not a symlink) before sync
+ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
+  "test -d $(printf %q "${REMOTE_PATH}") && ! test -L $(printf %q "${REMOTE_PATH}") && ls -lad $(printf %q "${REMOTE_PATH}")"
+
 rsync -az --delete \
   -e "ssh ${SSH_OPTS[*]}" \
   "${OUT_DIR}/" \
   "${USER}@${HOST}:${REMOTE_PATH}/"
+
+# Confirm files landed in pppoker.pro itself
+ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
+  "ls -lad $(printf %q "${REMOTE_PATH}") && test -f $(printf %q "${REMOTE_PATH}")/index.html && echo OK: index.html present && ls $(printf %q "${REMOTE_PATH}") | head"
 
 echo "Deployed ${OUT_DIR}/ → ${USER}@${HOST}:${REMOTE_PATH}/"
