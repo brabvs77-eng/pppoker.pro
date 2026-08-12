@@ -1,22 +1,10 @@
-# Cloudflare Pages deployment
+# Cloudflare Pages (legacy / optional)
 
-Production deploy target for **pppoker.pro**.
+Production for **pppoker.pro** is **FastPanel** — see [../fastpanel/README.md](../fastpanel/README.md).
 
-## GitHub Actions deploy (preferred)
+This folder still holds `_redirects` / `_headers` emitted into `apps/web/out` for builds that may be served behind Cloudflare. They are not used by FastPanel nginx.
 
-Push / merge to `main` (or **Actions → Build → Run workflow**) builds the site, runs smoke tests, then deploys `apps/web/out` with Wrangler.
-
-Required repository secrets:
-
-| Secret | Description |
-|--------|-------------|
-| `CLOUDFLARE_API_TOKEN` | API token with **Cloudflare Pages — Edit** |
-| `CLOUDFLARE_ACCOUNT_ID` | Account ID from Cloudflare dashboard |
-| `CLOUDFLARE_PROJECT_NAME` | Pages project name (e.g. `pppoker-pro`) |
-
-If you also keep the Cloudflare Pages **Git integration**, turn off automatic builds in the Pages project so only Actions deploys (avoids double builds).
-
-## Dashboard settings (Git-connected Pages, optional)
+## Dashboard settings (optional Pages project)
 
 | Setting | Value |
 |---------|--------|
