@@ -21,7 +21,7 @@ On push / merge to `main` (or **Actions → Build → Run workflow**):
 
 | Secret | Description |
 |--------|-------------|
-| `DEPLOY_SSH_KEY` | Private SSH key for user `pppokerpro` (or a user that can write the document root). Paste the full PEM, including `BEGIN` / `END` lines. |
+| `SSH_KEY_B64` | Private SSH key for `pppokerpro`, **base64-encoded** (`base64 -w0 id_ed25519` / `base64 -w0 id_rsa`). |
 
 ### Optional secrets (override defaults)
 
