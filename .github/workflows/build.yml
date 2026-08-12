@@ -87,8 +87,21 @@ jobs:
 
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s' "$SSH_KEY_B64" | tr -d '\r\n ' | base64 -d > ~/.ssh/deploy_key
+
+          # Accept raw PEM or base64 (with/without whitespace/padding)
+          if printf '%s' "$SSH_KEY_B64" | grep -qE 'BEGIN .*PRIVATE KEY'; then
+            printf '%s\n' "$SSH_KEY_B64" | sed 's/\r$//; s/\\n/\n/g' > ~/.ssh/deploy_key
+          else
+            B64=$(printf '%s' "$SSH_KEY_B64" | tr -d '[:space:]')
+            PAD=$(( (4 - ${#B64} % 4) % 4 ))
+            printf '%s%*s' "$B64" "$PAD" '' | tr ' ' '=' | base64 -di > ~/.ssh/deploy_key
+          fi
           chmod 600 ~/.ssh/deploy_key
+
+          if ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null 2>&1; then
+            echo "SSH_KEY_B64 did not decode to a usable private key"
+            exit 1
+          fi
 
           # Accept host key on first connect (CI); pin thereafter via known_hosts
           ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
