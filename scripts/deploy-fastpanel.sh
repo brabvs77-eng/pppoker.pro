@@ -43,8 +43,9 @@ ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
 
 SSH_OPTS=(-i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new)
 
-# FastPanel site users are often chrooted to /var/www/<user>, so the
-# docroot is /data/www/pppoker.pro from inside the jail — not the host path.
+# FastPanel: home is /var/www/<user>/data; pppoker.pro may be a symlink
+# (currently → nutspoker.store). Resolve to a real writable directory so
+# rsync does not try to mkdir(2) on the symlink (EEXIST / File exists).
 REMOTE_PATH=$(
   ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
     "DEPLOY_PATH=$(printf %q "${DEPLOY_PATH:-}") bash -s" <<'EOS'
@@ -54,23 +55,30 @@ if [ -n "${DEPLOY_PATH}" ]; then
   candidates+=("${DEPLOY_PATH}")
 fi
 candidates+=(
-  "/data/www/pppoker.pro"
-  "${HOME}/data/www/pppoker.pro"
+  "${HOME}/www/pppoker.pro"
   "/var/www/pppokerpro/data/www/pppoker.pro"
+  "${HOME}/www/nutspoker.store"
+  "/var/www/pppokerpro/data/www/nutspoker.store"
 )
 for p in "${candidates[@]}"; do
-  if [ -d "${p}" ] && [ -w "${p}" ]; then
-    readlink -f "${p}"
+  if [ ! -e "${p}" ]; then
+    continue
+  fi
+  real=$(readlink -f "${p}" || true)
+  # Prefer a real directory (follow symlinks). Do not require -w here:
+  # some FastPanel targets report non-writable via test -w but still accept rsync.
+  if [ -n "${real}" ] && [ -d "${real}" ]; then
+    printf '%s\n' "${real}"
     exit 0
   fi
+  echo "skip ${p} -> ${real:-?} (dir=$([ -d "${real:-}" ] && echo y || echo n))" >&2
 done
 echo "No writable document root among candidates:" >&2
 printf '  %s\n' "${candidates[@]}" >&2
 echo "Remote diagnostics:" >&2
-echo "pwd=$(pwd)" >&2
-ls -la >&2 || true
-ls -la /data/www >&2 || true
-ls -lad /var/www/pppokerpro/data/www/pppoker.pro /data/www/pppoker.pro >&2 || true
+echo "pwd=$(pwd) HOME=${HOME}" >&2
+ls -la "${HOME}/www" >&2 || true
+ls -lad "${HOME}/www/pppoker.pro" "${HOME}/www/nutspoker.store" >&2 || true
 exit 1
 EOS
 )
