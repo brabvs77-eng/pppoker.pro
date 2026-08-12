@@ -65,11 +65,13 @@ for p in "${candidates[@]}"; do
     continue
   fi
   real=$(readlink -f "${p}" || true)
-  if [ -n "${real}" ] && [ -d "${real}" ] && [ -w "${real}" ]; then
+  # Prefer a real directory (follow symlinks). Do not require -w here:
+  # some FastPanel targets report non-writable via test -w but still accept rsync.
+  if [ -n "${real}" ] && [ -d "${real}" ]; then
     printf '%s\n' "${real}"
     exit 0
   fi
-  echo "skip ${p} -> ${real:-?} (dir=$([ -d "${real:-}" ] && echo y || echo n) write=$([ -w "${real:-}" ] && echo y || echo n))" >&2
+  echo "skip ${p} -> ${real:-?} (dir=$([ -d "${real:-}" ] && echo y || echo n))" >&2
 done
 echo "No writable document root among candidates:" >&2
 printf '  %s\n' "${candidates[@]}" >&2
