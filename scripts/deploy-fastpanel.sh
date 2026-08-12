@@ -43,42 +43,60 @@ ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
 
 SSH_OPTS=(-i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new)
 
-# FastPanel: home is /var/www/<user>/data; pppoker.pro may be a symlink
-# (currently → nutspoker.store). Resolve to a real writable directory so
-# rsync does not try to mkdir(2) on the symlink (EEXIST / File exists).
+# Heal broken pppoker.pro → nutspoker.store symlink if needed, then resolve
+# a real writable directory for rsync (rsync mkdir on a symlink → EEXIST).
 REMOTE_PATH=$(
   ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
     "DEPLOY_PATH=$(printf %q "${DEPLOY_PATH:-}") bash -s" <<'EOS'
 set -euo pipefail
+
+WWW="${HOME}/www"
+LINK="${WWW}/pppoker.pro"
+
+if [ -L "${LINK}" ]; then
+  target=$(readlink "${LINK}")
+  case "${target}" in
+    /*) abs_target="${target}" ;;
+    *) abs_target="${WWW}/${target}" ;;
+  esac
+  if [ ! -e "${abs_target}" ]; then
+    echo "Healing broken symlink ${LINK} -> ${abs_target}" >&2
+    mkdir -p "${abs_target}"
+  fi
+elif [ ! -e "${LINK}" ]; then
+  echo "Creating document root ${LINK}" >&2
+  mkdir -p "${LINK}"
+fi
+
 candidates=()
 if [ -n "${DEPLOY_PATH}" ]; then
   candidates+=("${DEPLOY_PATH}")
 fi
 candidates+=(
-  "${HOME}/www/pppoker.pro"
+  "${LINK}"
+  "${WWW}/nutspoker.store"
+  "${WWW}/pppoker.pro_orig"
   "/var/www/pppokerpro/data/www/pppoker.pro"
-  "${HOME}/www/nutspoker.store"
   "/var/www/pppokerpro/data/www/nutspoker.store"
 )
+
 for p in "${candidates[@]}"; do
   if [ ! -e "${p}" ]; then
     continue
   fi
   real=$(readlink -f "${p}" || true)
-  # Prefer a real directory (follow symlinks). Do not require -w here:
-  # some FastPanel targets report non-writable via test -w but still accept rsync.
   if [ -n "${real}" ] && [ -d "${real}" ]; then
     printf '%s\n' "${real}"
     exit 0
   fi
-  echo "skip ${p} -> ${real:-?} (dir=$([ -d "${real:-}" ] && echo y || echo n))" >&2
+  echo "skip ${p} -> ${real:-?}" >&2
 done
-echo "No writable document root among candidates:" >&2
+
+echo "No usable document root among candidates:" >&2
 printf '  %s\n' "${candidates[@]}" >&2
 echo "Remote diagnostics:" >&2
 echo "pwd=$(pwd) HOME=${HOME}" >&2
-ls -la "${HOME}/www" >&2 || true
-ls -lad "${HOME}/www/pppoker.pro" "${HOME}/www/nutspoker.store" >&2 || true
+ls -la "${WWW}" >&2 || true
 exit 1
 EOS
 )
