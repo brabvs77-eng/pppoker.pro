@@ -186,9 +186,11 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Manager nav item** — hides `menu-item-3206` on every `data-native-chrome` page
 - **Empty masthead** — zeroes padding on `#masthead` after Elementor chrome is removed
 
-## Deploy (Cloudflare Pages)
+## Deploy (FastPanel)
 
-See [deploy/cloudflare/README.md](deploy/cloudflare/README.md).
+Production: FastPanel at `95.163.222.48`, domain `pppoker.pro`. See [deploy/fastpanel/README.md](deploy/fastpanel/README.md).
+
+GitHub Actions on `main` (after build + smoke) `rsync`s `apps/web/out/` → `/var/www/pppokerpro/data/www/pppoker.pro` as `pppokerpro` (SSH port `2422`). Required secret: `DEPLOY_SSH_KEY`. Optional: `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_PORT`, `DEPLOY_PATH`.
 
 | Setting | Value |
 |---------|--------|
@@ -196,7 +198,7 @@ See [deploy/cloudflare/README.md](deploy/cloudflare/README.md).
 | Output directory | `apps/web/out` |
 | Node.js | `20` |
 
-`npm run build` copies `_redirects` and `_headers` into `apps/web/out/` for Cloudflare edge rules.
+`npm run build` still emits Cloudflare `_redirects` / `_headers` into `apps/web/out/` (ignored by FastPanel nginx).
 
 ## Adding or updating pages
 

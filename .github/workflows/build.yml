@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -40,3 +41,65 @@ jobs:
 
       - name: Blog page smoke (Playwright)
         run: npm run smoke:blog-pages
+
+      - name: Upload static export
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-out
+          path: apps/web/out
+          retention-days: 3
+
+  deploy:
+    name: Deploy FastPanel
+    needs: build
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download static export
+        uses: actions/download-artifact@v4
+        with:
+          name: web-out
+          path: apps/web/out
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync openssh-client
+
+      - name: Deploy to FastPanel via rsync
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+
+          HOST="${DEPLOY_HOST:-95.163.222.48}"
+          USER="${DEPLOY_USER:-pppokerpro}"
+          PORT="${DEPLOY_PORT:-2422}"
+          REMOTE_PATH="${DEPLOY_PATH:-/var/www/pppokerpro/data/www/pppoker.pro}"
+          KEY="${DEPLOY_SSH_KEY:-${SSH_PRIVATE_KEY:-}}"
+
+          if [ -z "${KEY}" ]; then
+            echo "Missing secret DEPLOY_SSH_KEY (or SSH_PRIVATE_KEY) for ${USER}@${HOST}"
+            exit 1
+          fi
+
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          # Normalize literal \n from pasted secrets into real newlines
+          printf '%s\n' "$KEY" | sed 's/\r$//' | sed 's/\\n/\n/g' > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+
+          # Accept host key on first connect (CI); pin thereafter via known_hosts
+          ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
+
+          # Trailing slash: sync contents of out/ into the site document root
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${PORT} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" \
+            apps/web/out/ \
+            "${USER}@${HOST}:${REMOTE_PATH}/"
+
+          echo "Deployed apps/web/out/ → ${USER}@${HOST}:${REMOTE_PATH}/"

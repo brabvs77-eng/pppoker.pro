@@ -1,8 +1,10 @@
-# Cloudflare Pages deployment
+# Cloudflare Pages (legacy / optional)
 
-Production deploy target for **pppoker.pro**.
+Production for **pppoker.pro** is **FastPanel** — see [../fastpanel/README.md](../fastpanel/README.md).
 
-## Dashboard settings
+This folder still holds `_redirects` / `_headers` emitted into `apps/web/out` for builds that may be served behind Cloudflare. They are not used by FastPanel nginx.
+
+## Dashboard settings (optional Pages project)
 
 | Setting | Value |
 |---------|--------|
