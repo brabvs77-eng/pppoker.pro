@@ -71,8 +71,7 @@ jobs:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KEY_B64: ${{ secrets.SSH_KEY_B64 }}
         run: |
           set -euo pipefail
 
@@ -80,17 +79,15 @@ jobs:
           USER="${DEPLOY_USER:-pppokerpro}"
           PORT="${DEPLOY_PORT:-2422}"
           REMOTE_PATH="${DEPLOY_PATH:-/var/www/pppokerpro/data/www/pppoker.pro}"
-          KEY="${DEPLOY_SSH_KEY:-${SSH_PRIVATE_KEY:-}}"
 
-          if [ -z "${KEY}" ]; then
-            echo "Missing secret DEPLOY_SSH_KEY (or SSH_PRIVATE_KEY) for ${USER}@${HOST}"
+          if [ -z "${SSH_KEY_B64:-}" ]; then
+            echo "Missing secret SSH_KEY_B64 (base64-encoded private key) for ${USER}@${HOST}"
             exit 1
           fi
 
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          # Normalize literal \n from pasted secrets into real newlines
-          printf '%s\n' "$KEY" | sed 's/\r$//' | sed 's/\\n/\n/g' > ~/.ssh/deploy_key
+          printf '%s' "$SSH_KEY_B64" | tr -d '\r\n ' | base64 -d > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
 
           # Accept host key on first connect (CI); pin thereafter via known_hosts
