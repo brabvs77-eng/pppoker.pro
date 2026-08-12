@@ -7,8 +7,8 @@ Production target: VPS with **FASTPANEL**.
 | Host | `95.163.222.48` |
 | SSH port | `2422` |
 | Site user | `pppokerpro` |
-| Document root | `/var/www/pppokerpro/data/www/pppoker.pro` → symlink to `…/nutspoker.store` |
-| Site home | `/var/www/pppokerpro/data` (`$HOME/www/…`) |
+| Document root | `$HOME/www/pppoker.pro` → `…/nutspoker.store` (deploy heals broken symlink) |
+| Site home | `/var/www/pppokerpro/data` |
 | Artifact | `apps/web/out/` (Next static export) |
 
 ## GitHub Actions
