@@ -56,6 +56,8 @@ jobs:
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Download static export
         uses: actions/download-artifact@v4
         with:
@@ -73,43 +75,5 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
           SSH_KEY_B64: ${{ secrets.SSH_KEY_B64 }}
         run: |
-          set -euo pipefail
-
-          HOST="${DEPLOY_HOST:-95.163.222.48}"
-          USER="${DEPLOY_USER:-pppokerpro}"
-          PORT="${DEPLOY_PORT:-2422}"
-          REMOTE_PATH="${DEPLOY_PATH:-/var/www/pppokerpro/data/www/pppoker.pro}"
-
-          if [ -z "${SSH_KEY_B64:-}" ]; then
-            echo "Missing secret SSH_KEY_B64 (base64-encoded private key) for ${USER}@${HOST}"
-            exit 1
-          fi
-
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-
-          # Accept raw PEM or base64 (with/without whitespace/padding)
-          if printf '%s' "$SSH_KEY_B64" | grep -qE 'BEGIN .*PRIVATE KEY'; then
-            printf '%s\n' "$SSH_KEY_B64" | sed 's/\r$//; s/\\n/\n/g' > ~/.ssh/deploy_key
-          else
-            B64=$(printf '%s' "$SSH_KEY_B64" | tr -d '[:space:]')
-            PAD=$(( (4 - ${#B64} % 4) % 4 ))
-            printf '%s%*s' "$B64" "$PAD" '' | tr ' ' '=' | base64 -di > ~/.ssh/deploy_key
-          fi
-          chmod 600 ~/.ssh/deploy_key
-
-          if ! ssh-keygen -y -f ~/.ssh/deploy_key >/dev/null 2>&1; then
-            echo "SSH_KEY_B64 did not decode to a usable private key"
-            exit 1
-          fi
-
-          # Accept host key on first connect (CI); pin thereafter via known_hosts
-          ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
-
-          # Trailing slash: sync contents of out/ into the site document root
-          rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${PORT} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" \
-            apps/web/out/ \
-            "${USER}@${HOST}:${REMOTE_PATH}/"
-
-          echo "Deployed apps/web/out/ → ${USER}@${HOST}:${REMOTE_PATH}/"
+          chmod +x scripts/deploy-fastpanel.sh
+          ./scripts/deploy-fastpanel.sh

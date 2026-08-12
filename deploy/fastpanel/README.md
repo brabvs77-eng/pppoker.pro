@@ -7,7 +7,8 @@ Production target: VPS with **FASTPANEL**.
 | Host | `95.163.222.48` |
 | SSH port | `2422` |
 | Site user | `pppokerpro` |
-| Document root | `/var/www/pppokerpro/data/www/pppoker.pro` |
+| Document root (host) | `/var/www/pppokerpro/data/www/pppoker.pro` |
+| Document root (chroot) | `/data/www/pppoker.pro` (site user jail) |
 | Artifact | `apps/web/out/` (Next static export) |
 
 ## GitHub Actions
@@ -30,7 +31,7 @@ On push / merge to `main` (or **Actions → Build → Run workflow**):
 | `DEPLOY_HOST` | `95.163.222.48` |
 | `DEPLOY_USER` | `pppokerpro` |
 | `DEPLOY_PORT` | `2422` |
-| `DEPLOY_PATH` | `/var/www/pppokerpro/data/www/pppoker.pro` |
+| `DEPLOY_PATH` | auto-detect (`/data/www/pppoker.pro` in chroot, else host path) |
 
 ### Server setup (once)
 
