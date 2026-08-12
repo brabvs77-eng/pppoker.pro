@@ -78,7 +78,6 @@ jobs:
           HOST="${DEPLOY_HOST:-95.163.222.48}"
           USER="${DEPLOY_USER:-pppokerpro}"
           PORT="${DEPLOY_PORT:-2422}"
-          REMOTE_PATH="${DEPLOY_PATH:-/var/www/pppokerpro/data/www/pppoker.pro}"
 
           if [ -z "${SSH_KEY_B64:-}" ]; then
             echo "Missing secret SSH_KEY_B64 (base64-encoded private key) for ${USER}@${HOST}"
@@ -106,9 +105,44 @@ jobs:
           # Accept host key on first connect (CI); pin thereafter via known_hosts
           ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
 
+          SSH_OPTS=(-i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new)
+
+          # FastPanel site users are often chrooted to /var/www/<user>, so the
+          # docroot is /data/www/pppoker.pro from inside the jail — not the host path.
+          REMOTE_PATH=$(ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
+            "DEPLOY_PATH=$(printf %q "${DEPLOY_PATH:-}") bash -s" <<'EOS'
+set -euo pipefail
+candidates=()
+if [ -n "${DEPLOY_PATH}" ]; then
+  candidates+=("${DEPLOY_PATH}")
+fi
+candidates+=(
+  "/data/www/pppoker.pro"
+  "${HOME}/data/www/pppoker.pro"
+  "/var/www/pppokerpro/data/www/pppoker.pro"
+)
+for p in "${candidates[@]}"; do
+  if [ -d "${p}" ] && [ -w "${p}" ]; then
+    readlink -f "${p}"
+    exit 0
+  fi
+done
+echo "No writable document root among candidates:" >&2
+printf '  %s\n' "${candidates[@]}" >&2
+echo "Remote diagnostics:" >&2
+echo "pwd=$(pwd)" >&2
+ls -la >&2 || true
+ls -la /data/www >&2 || true
+ls -lad /var/www/pppokerpro/data/www/pppoker.pro /data/www/pppoker.pro >&2 || true
+exit 1
+EOS
+)
+
+          echo "Resolved remote docroot: ${REMOTE_PATH}"
+
           # Trailing slash: sync contents of out/ into the site document root
           rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${PORT} -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" \
+            -e "ssh ${SSH_OPTS[*]}" \
             apps/web/out/ \
             "${USER}@${HOST}:${REMOTE_PATH}/"
 
