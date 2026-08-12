@@ -78,7 +78,7 @@ jobs:
 
           HOST="${DEPLOY_HOST:-95.163.222.48}"
           USER="${DEPLOY_USER:-pppokerpro}"
-          PORT="${DEPLOY_PORT:-22}"
+          PORT="${DEPLOY_PORT:-2422}"
           REMOTE_PATH="${DEPLOY_PATH:-/var/www/pppokerpro/data/www/pppoker.pro}"
           KEY="${DEPLOY_SSH_KEY:-${SSH_PRIVATE_KEY:-}}"
 
