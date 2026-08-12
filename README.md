@@ -190,6 +190,8 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 
 See [deploy/cloudflare/README.md](deploy/cloudflare/README.md).
 
+Production deploys from GitHub Actions on `main` (after build + smoke). Secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_PROJECT_NAME`.
+
 | Setting | Value |
 |---------|--------|
 | Build command | `npm run build` |

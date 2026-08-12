@@ -2,7 +2,21 @@
 
 Production deploy target for **pppoker.pro**.
 
-## Dashboard settings
+## GitHub Actions deploy (preferred)
+
+Push / merge to `main` (or **Actions → Build → Run workflow**) builds the site, runs smoke tests, then deploys `apps/web/out` with Wrangler.
+
+Required repository secrets:
+
+| Secret | Description |
+|--------|-------------|
+| `CLOUDFLARE_API_TOKEN` | API token with **Cloudflare Pages — Edit** |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID from Cloudflare dashboard |
+| `CLOUDFLARE_PROJECT_NAME` | Pages project name (e.g. `pppoker-pro`) |
+
+If you also keep the Cloudflare Pages **Git integration**, turn off automatic builds in the Pages project so only Actions deploys (avoids double builds).
+
+## Dashboard settings (Git-connected Pages, optional)
 
 | Setting | Value |
 |---------|--------|
