@@ -1,0 +1,13 @@
+# Put this as the ENTIRE contents of
+#   /etc/nginx/fastpanel2-sites/pppokerpro/pppoker.pro.includes
+# (FastPanel → site → extra nginx / includes — replace PHP location /)
+#
+# Do NOT also define location / in the main site nginx file.
+
+location = / {
+    try_files /index.html =404;
+}
+
+location / {
+    try_files $uri $uri/index.html =404;
+}
