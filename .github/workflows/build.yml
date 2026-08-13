@@ -6,9 +6,34 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      diagnose_only:
+        description: 'Only SSH-diagnose FastPanel docroot (skip build/deploy)'
+        type: boolean
+        default: false
+
 
 jobs:
+  diagnose:
+    name: Diagnose FastPanel
+    if: github.event_name == 'workflow_dispatch' && inputs.diagnose_only == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install openssh
+        run: sudo apt-get update && sudo apt-get install -y openssh-client
+      - name: Diagnose docroot
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          SSH_KEY_B64: ${{ secrets.SSH_KEY_B64 }}
+        run: |
+          chmod +x scripts/diagnose-fastpanel.sh
+          ./scripts/diagnose-fastpanel.sh
+
   build:
+    if: github.event_name != 'workflow_dispatch' || inputs.diagnose_only != true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,7 +78,7 @@ jobs:
   deploy:
     name: Deploy FastPanel
     needs: build
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || inputs.diagnose_only != true)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
