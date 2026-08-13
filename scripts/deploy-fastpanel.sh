@@ -44,7 +44,6 @@ ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
 SSH_OPTS=(-i ~/.ssh/deploy_key -p "${PORT}" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new)
 
 # Ensure docroot is a REAL directory at pppoker.pro (not a symlink to nutspoker.store).
-# FastPanel / nginx document root is /var/www/pppokerpro/data/www/pppoker.pro.
 REMOTE_PATH=$(
   ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
     "DEPLOY_PATH=$(printf %q "${DEPLOY_PATH:-}") bash -s" <<'EOS'
@@ -53,7 +52,6 @@ set -euo pipefail
 WWW="${HOME}/www"
 DOCROOT="${DEPLOY_PATH:-${WWW}/pppoker.pro}"
 
-# If someone set an absolute host path, map it into the site-user home layout.
 case "${DOCROOT}" in
   /var/www/pppokerpro/data/www/pppoker.pro)
     DOCROOT="${WWW}/pppoker.pro"
@@ -70,7 +68,6 @@ if [ ! -d "${DOCROOT}" ]; then
   mkdir -p "${DOCROOT}"
 fi
 
-# Refuse to deploy into a symlink (rsync mkdir EEXIST / empty panel view)
 if [ -L "${DOCROOT}" ] || [ ! -d "${DOCROOT}" ]; then
   echo "Document root is not a real directory: ${DOCROOT}" >&2
   ls -lad "${DOCROOT}" >&2 || true
@@ -78,15 +75,12 @@ if [ -L "${DOCROOT}" ] || [ ! -d "${DOCROOT}" ]; then
   exit 1
 fi
 
-# Print the path as the site user sees it (no readlink -f — that would
-# follow a symlink if one reappears).
 printf '%s\n' "${DOCROOT}"
 EOS
 )
 
 echo "Resolved remote docroot: ${REMOTE_PATH}"
 
-# Verify remotely that the path is a real directory (not a symlink) before sync
 ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
   "test -d $(printf %q "${REMOTE_PATH}") && ! test -L $(printf %q "${REMOTE_PATH}") && ls -lad $(printf %q "${REMOTE_PATH}")"
 
@@ -95,13 +89,24 @@ rsync -az --delete \
   "${OUT_DIR}/" \
   "${USER}@${HOST}:${REMOTE_PATH}/"
 
-# FastPanel-friendly perms (dirs 755, files 644) — avoids nginx 403
+# 403 "directory index forbidden" → nginx cannot read index.html / traverse parents.
+# Force 755 dirs + 644 files along the site path.
 ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
-  "chmod -R u+rwX,go+rX $(printf %q "${REMOTE_PATH}")"
-
-# Confirm files landed in pppoker.pro itself
-ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
-  "ls -lad $(printf %q "${REMOTE_PATH}") && test -f $(printf %q "${REMOTE_PATH}")/index.html && echo OK: index.html present && ls $(printf %q "${REMOTE_PATH}") | head"
+  "DOC=$(printf %q "${REMOTE_PATH}") bash -s" <<'EOS'
+set -euo pipefail
+chmod 755 "${HOME}" "${HOME}/www" "${DOC}"
+find "${DOC}" -type d -exec chmod 755 {} +
+find "${DOC}" -type f -exec chmod 644 {} +
+echo "=== namei ==="
+namei -l "${DOC}/index.html" || true
+echo "=== index.html ==="
+ls -la "${DOC}/index.html"
+head -c 120 "${DOC}/index.html"; echo
+echo "=== docroot top ==="
+ls -la "${DOC}" | head -25
+test -f "${DOC}/index.html"
+echo "OK: index.html present and readable by site user"
+EOS
 
 echo "Deployed ${OUT_DIR}/ → ${USER}@${HOST}:${REMOTE_PATH}/"
-echo "If HTTPS returns 403: site nginx must be static (no PHP). See deploy/fastpanel/pppoker.pro.nginx.conf"
+echo "If HTTPS still 403: in nginx remove disable_symlinks; includes must use try_files \$uri \$uri/index.html"

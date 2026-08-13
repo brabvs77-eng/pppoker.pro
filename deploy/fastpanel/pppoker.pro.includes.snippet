@@ -1,0 +1,17 @@
+# ENTIRE contents of FastPanel includes for pppoker.pro
+# (replace whatever PHP / try_files $uri $uri/ is there now)
+#
+# Path: /etc/nginx/fastpanel2-sites/pppokerpro/pppoker.pro.includes
+#
+# And in the MAIN server block:
+#   - keep: index index.html;
+#   - REMOVE any other location /
+#   - REMOVE or comment: disable_symlinks if_not_owner …
+
+location = / {
+    try_files /index.html =404;
+}
+
+location / {
+    try_files $uri $uri/index.html =404;
+}
