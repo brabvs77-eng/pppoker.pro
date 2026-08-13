@@ -95,8 +95,13 @@ rsync -az --delete \
   "${OUT_DIR}/" \
   "${USER}@${HOST}:${REMOTE_PATH}/"
 
+# FastPanel-friendly perms (dirs 755, files 644) — avoids nginx 403
+ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
+  "chmod -R u+rwX,go+rX $(printf %q "${REMOTE_PATH}")"
+
 # Confirm files landed in pppoker.pro itself
 ssh "${SSH_OPTS[@]}" "${USER}@${HOST}" \
   "ls -lad $(printf %q "${REMOTE_PATH}") && test -f $(printf %q "${REMOTE_PATH}")/index.html && echo OK: index.html present && ls $(printf %q "${REMOTE_PATH}") | head"
 
 echo "Deployed ${OUT_DIR}/ → ${USER}@${HOST}:${REMOTE_PATH}/"
+echo "If HTTPS returns 403: site nginx must be static (no PHP). See deploy/fastpanel/pppoker.pro.nginx.conf"

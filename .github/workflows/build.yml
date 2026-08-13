@@ -77,3 +77,14 @@ jobs:
         run: |
           chmod +x scripts/deploy-fastpanel.sh
           ./scripts/deploy-fastpanel.sh
+
+      - name: Apply static nginx config (sudo if available)
+        continue-on-error: true
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          SSH_KEY_B64: ${{ secrets.SSH_KEY_B64 }}
+        run: |
+          chmod +x scripts/apply-fastpanel-nginx.sh
+          ./scripts/apply-fastpanel-nginx.sh
