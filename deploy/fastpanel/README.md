@@ -36,13 +36,39 @@ On push / merge to `main` (or **Actions → Build → Run workflow**):
 
 ### Server setup (once)
 
-1. In FastPanel create site `pppoker.pro` owned by `pppokerpro` (static / nginx is enough — no PHP required for this export).
-2. Document root must be a normal directory: `/var/www/pppokerpro/data/www/pppoker.pro` (not a symlink to `nutspoker.store`).
-3. Add the **public** key matching `SSH_KEY_B64` to `~pppokerpro/.ssh/authorized_keys`.
-4. Point DNS A records for `pppoker.pro` / `www` to `95.163.222.48` (if the domain still proxies through Cloudflare, either grey-cloud the A record or change nameservers).
+1. In FastPanel create site `pppoker.pro` owned by `pppokerpro`.
+2. Document root must be a normal directory: `/var/www/pppokerpro/data/www/pppoker.pro` (not a symlink).
+3. **Nginx must be static** — this site is a Next.js export, not PHP. The default FastPanel PHP template causes **403** (`try_files … /index.php` + `fastcgi_pass`).
+   - Sites → `pppoker.pro` → Nginx config → replace with [`pppoker.pro.nginx.conf`](./pppoker.pro.nginx.conf)
+   - Or switch the site handler away from PHP-FPM / disable PHP for this site, then paste the same static `location /` block
+   - `nginx -t` and reload (FastPanel usually does this on Save)
+4. Add the **public** key matching `SSH_KEY_B64` to `~pppokerpro/.ssh/authorized_keys`.
+5. Point DNS A records for `pppoker.pro` / `www` to `95.163.222.48` (grey-cloud if still on Cloudflare).
+
+### Why 403 happens with the PHP template
+
+```nginx
+# BAD for static export:
+location / {
+    index index.php index.html;
+    try_files $uri $uri/ /index.php?$args;  # → PHP-FPM → 403
+}
+location ~ \.php$ {
+    fastcgi_pass unix:/var/run/pppoker.pro.sock;
+}
+```
+
+```nginx
+# GOOD:
+index index.html;
+location / {
+    try_files $uri $uri/ $uri.html =404;
+}
+# no .php / @fallback blocks
+```
 
 ## Notes
 
 - Cloudflare `_redirects` / `_headers` in `apps/web/out` are ignored by nginx; redirects for FastPanel need nginx rules if you still rely on them.
 - Do not deploy the WordPress HTML at the repo root — only `apps/web/out` after `npm run build`.
-- A previous broken symlink `pppoker.pro → nutspoker.store` caused deploys to land in the wrong place; the script now forces a real `pppoker.pro` directory.
+- Deploy replaces a `pppoker.pro → nutspoker.store` symlink with a real directory before rsync.
