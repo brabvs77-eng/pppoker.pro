@@ -9,6 +9,7 @@ import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
 import { assertNoHekler, normalizeUrls } from '../src/lib/normalizeUrls.mjs';
 import { computeCssBudget } from './compute-css-budget.mjs';
 import { isBlogArchiveRoute, needsElementorRuntime } from './lib/elementor-runtime-budget.mjs';
+import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = path.join(rootDir, 'content');
@@ -220,7 +221,33 @@ async function writePageRecord(fileId, record) {
 }
 
 async function generateLlmsTxt(pages) {
-  const active = pages.filter((page) => !page.isRedirect);
+  const active = pages.filter(
+    (page) =>
+      !page.isRedirect &&
+      !taxonomyBlogRedirectDestination(page.route, page.locale) &&
+      page.type !== 'redirect',
+  );
+
+  function absoluteSiteUrl(route) {
+    if (route === '/') return SITE_URL;
+    const normalized = route.startsWith('/') ? route : `/${route}`;
+    return `${SITE_URL}${normalized}`;
+  }
+
+  const pageEntries = active
+    .filter(
+      (page) =>
+        page.type === 'home' ||
+        page.hasNativePage ||
+        isBlogArchiveRoute(page.route) ||
+        page.type === 'page',
+    )
+    .sort((a, b) => a.route.localeCompare(b.route));
+
+  const postEntries = active
+    .filter((page) => page.type === 'post' && (page.hasStructuredPost || page.title))
+    .sort((a, b) => a.route.localeCompare(b.route));
+
   const lines = [
     '# Nuts онлайн покер клуб pppoker россия',
     '',
@@ -231,14 +258,13 @@ async function generateLlmsTxt(pages) {
     '## Страницы',
   ];
 
-  for (const page of active.filter((p) => ['home', 'page'].includes(p.type)).slice(0, 12)) {
-    lines.push(`- [${page.title}](${SITE_URL}${page.route === '/' ? '' : page.route.replace(/^\//, '')})`);
+  for (const page of pageEntries) {
+    lines.push(`- [${page.title}](${absoluteSiteUrl(page.route)})`);
   }
 
   lines.push('', '## Записи блога');
-  for (const page of active.filter((p) => p.type === 'post').slice(0, 20)) {
-    const pathPart = page.route.replace(/^\//, '').replace(/\/$/, '');
-    lines.push(`- [${page.title}](${SITE_URL}/${pathPart}/)`);
+  for (const page of postEntries.slice(0, 32)) {
+    lines.push(`- [${page.title}](${absoluteSiteUrl(page.route)})`);
   }
 
   lines.push('', '## Optional', `- [Sitemap index](${SITE_URL}/sitemap_index.xml)`, '');
