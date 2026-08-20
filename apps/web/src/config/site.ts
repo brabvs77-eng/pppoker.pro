@@ -21,6 +21,17 @@ export const hideLegacyBlogSectionRoutes = elementorChrome.homeBlogSlotRoutes.ma
   (entry) => entry.route,
 ) as readonly string[];
 
+/** Homepages whose body HTML is post-processed in split-homepage-body.mjs. */
+export const preparedHomepageBodyRoutes = [
+  ...elementorChrome.homeBlogSlotRoutes.map((entry) => entry.route),
+  ...elementorChrome.stripLegacyFooterRoutes
+    .filter(
+      (entry) =>
+        !elementorChrome.homeBlogSlotRoutes.some((home) => home.route === entry.route),
+    )
+    .map((entry) => entry.route),
+] as readonly string[];
+
 /** Elementor containers for the static blog grid on homepages. */
 export const homepageLegacyBlogSectionElementId = elementorChrome.legacyBlogSectionIds[0];
 export const homepageBlogLoopElementId = elementorChrome.legacyBlogSectionIds[1];
@@ -73,6 +84,10 @@ export const homepageDuplicateCtaElementIds = elementorChrome.homepageDuplicateC
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
   telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
+} as const;
+
+export const siteSocial = {
+  instagram: 'https://www.instagram.com/pppoker_union_nuts/',
 } as const;
 
 /** Yandex Metrika + Google Tag (Site Kit) — same IDs as legacy WordPress export. */

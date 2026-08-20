@@ -13,7 +13,7 @@ body {
   min-height: 100vh;
 }
 
-/* Elementor footer (#colophon) stays visible — social links and layout live there. */
+/* Legacy pages may still ship Elementor #colophon — native homepages strip it in split-homepage-body.mjs. */
 
 .site-footer[data-variant='locale-only'] {
   padding: 1rem 1.25rem 1.5rem;
