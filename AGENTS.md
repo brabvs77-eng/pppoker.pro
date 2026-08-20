@@ -144,7 +144,9 @@ npm run verify:landing-pages
 npm run verify:home-blog
 npm run verify:rss
 npm run verify:taxonomy-redirects
+npm run verify:below-fold-images
 npm run smoke:homepage
+npm run lighthouse:budget
 ```
 
 Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
@@ -164,7 +166,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 - **No over-engineering** — no extra abstractions for one-off logic
 - **Tests/verify scripts** — add verify scripts for invariant behavior, not trivial unit tests
 
-## Current native coverage (Sprint 36)
+## Current native coverage (Sprint 41 — C-track complete)
 
 | Feature | Status |
 |---------|--------|
@@ -183,6 +185,13 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |
 | Cloudflare build | `npm run build` Playwright-free; `prebuild` installs `apps/web`; `verify:build-pipeline` |
 | Conversion landings | `/spasibo/`, `/uz/thanks/`, `/uz/uzs/` — `verify:landing-pages`; `smoke:landing-pages` |
+| Dynamic sitemap | `scripts/generate-sitemap.mjs` from manifest; `verify:sitemap`; Yoast files replaced at build |
+| hreflang BCP 47 | `apps/web/src/config/hreflang.json` (`kz→kk`, `tj→tg`); `verify:hreflang` |
+| llms.txt | `/llms.txt` + head link; `verify:llms` |
+| Analytics on native pages | `AnalyticsScripts` when Elementor runtime skipped; `verify:analytics` in GHA |
+| Native footer social | Telegram channel + Instagram in `SiteFooter`; `#colophon` stripped on home; smoke checks |
+| Lighthouse CI | `lighthouse:budget` in GHA after smoke — LCP ≤ 4500ms, CLS ≤ 0.10 on 5 homepages |
+| Homepage performance | `fix:below-fold-images`; CRASH poster preload; `verify:below-fold-images` |
 
 ## Planned work (backlog)
 
