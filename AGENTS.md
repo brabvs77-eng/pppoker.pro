@@ -170,7 +170,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 |---------|--------|
 | Header / footer / languages | All pages |
 | HomePromo | All 6 homepages; `verify:home-promo`; smoke all 6 |
-| Structured posts | 29 posts — RU, EN, UZ, KZ |
+| Structured posts | 29 posts — RU, EN, UZ, KZ; HY/TJ pipeline ready (`structured-post-routes.json`), awaiting post HTML in export |
 | Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
 | Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
 | Blog text colors | Full-width `.blog-surface` dark theme; `BlogBreadcrumbs` on archive + posts |
@@ -190,7 +190,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 2. `NativePage` for locale-specific legal URLs when HTML exports exist (UZ/KZ/HY/TJ)
 3. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
 4. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
-5. More Elementor sections → native components
+5. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
+6. More Elementor sections → native components
 
 ## Adding or updating content
 

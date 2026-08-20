@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -5,10 +6,39 @@ import { fileURLToPath } from 'node:url';
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
 const outDir = path.join(rootDir, 'apps/web/out');
+const expectedRoutesPath = path.join(
+  rootDir,
+  'apps/web/src/config/structured-post-routes.json',
+);
+
+/** @type {Record<string, string[]>} */
+const expectedRoutesByLocale = JSON.parse(readFileSync(expectedRoutesPath, 'utf8'));
 
 function outputPathForRoute(route) {
   if (route === '/') return path.join(outDir, 'index.html');
   return path.join(outDir, route.replace(/^\//, ''), 'index.html');
+}
+
+function verifyStructuredPostPage(page, html, violations) {
+  if (!html.includes('class="post-article"')) {
+    violations.push(`No native post-article shell on ${page.route}`);
+  }
+
+  if (html.includes('id="wordpress-page-root"')) {
+    violations.push(`Legacy wordpress-page-root still present on ${page.route}`);
+  }
+
+  if (html.includes('elementor-frontend-js')) {
+    violations.push(`Elementor runtime still loaded on structured post ${page.route}`);
+  }
+
+  if (page.ogImage && !html.includes('post-article__hero-image')) {
+    violations.push(`Missing featured image on ${page.route}`);
+  }
+
+  if (page.needsElementorRuntime !== false) {
+    violations.push(`Structured post ${page.route} must have needsElementorRuntime=false`);
+  }
 }
 
 async function main() {
@@ -28,48 +58,27 @@ async function main() {
     }
 
     checked += 1;
-
-    if (!html.includes('class="post-article"')) {
-      violations.push(`No native post-article shell on ${page.route}`);
-    }
-
-    if (html.includes('id="wordpress-page-root"')) {
-      violations.push(`Legacy wordpress-page-root still present on ${page.route}`);
-    }
-
-    if (html.includes('elementor-frontend-js')) {
-      violations.push(`Elementor runtime still loaded on structured post ${page.route}`);
-    }
-
-    if (page.ogImage && !html.includes('post-article__hero-image')) {
-      violations.push(`Missing featured image on ${page.route}`);
-    }
-
-    if (page.needsElementorRuntime !== false) {
-      violations.push(`Structured post ${page.route} must have needsElementorRuntime=false`);
-    }
+    verifyStructuredPostPage(page, html, violations);
   }
 
-  const enBlogRoutes = [
-    '/en/pppoker-review-2026/',
-    '/en/know-your-poker-opponents-secrets-of-winning-strategies/',
-  ];
-  const uzBlogRoutes = ['/uz/pppoker-2026/'];
-  const kzBlogRoutes = ['/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/'];
-
-  for (const route of [...enBlogRoutes, ...uzBlogRoutes, ...kzBlogRoutes]) {
-    if (!posts.some((p) => p.route === route)) {
-      violations.push(`Missing structured blog post in manifest: ${route}`);
+  for (const [locale, routes] of Object.entries(expectedRoutesByLocale)) {
+    for (const route of routes) {
+      if (!posts.some((p) => p.route === route)) {
+        violations.push(`Missing structured blog post in manifest: ${route} (${locale})`);
+      }
     }
   }
 
   const hyTjPosts = manifest.pages.filter(
     (p) => ['hy', 'tj'].includes(p.locale) && p.type === 'post' && !p.isRedirect,
   );
-  if (hyTjPosts.length > 0) {
-    violations.push(
-      `HY/TJ structured posts not yet supported — found ${hyTjPosts.length} post(s) in export`,
-    );
+
+  for (const page of hyTjPosts) {
+    if (!page.hasStructuredPost) {
+      violations.push(
+        `HY/TJ post ${page.route} is in export but hasStructuredPost=false — check extractPostArticleHtml`,
+      );
+    }
   }
 
   if (violations.length) {
@@ -82,12 +91,20 @@ async function main() {
     return;
   }
 
-  const enCount = posts.filter((p) => p.locale === 'en').length;
-  const uzCount = posts.filter((p) => p.locale === 'uz').length;
-  const kzCount = posts.filter((p) => p.locale === 'kz').length;
-  console.log(
-    `Verified ${checked} structured post pages (incl. ${enCount} EN, ${uzCount} UZ, ${kzCount} KZ) use native article layout.`,
+  const counts = Object.fromEntries(
+    ['en', 'uz', 'kz', 'hy', 'tj'].map((locale) => [
+      locale,
+      posts.filter((p) => p.locale === locale).length,
+    ]),
   );
+
+  console.log(
+    `Verified ${checked} structured post pages (EN ${counts.en}, UZ ${counts.uz}, KZ ${counts.kz}, HY ${counts.hy}, TJ ${counts.tj}).`,
+  );
+
+  if (hyTjPosts.length === 0) {
+    console.log('HY/TJ: no post HTML in static export yet — add routes to structured-post-routes.json after re-export.');
+  }
 }
 
 main().catch((error) => {

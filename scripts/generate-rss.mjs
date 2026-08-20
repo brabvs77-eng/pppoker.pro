@@ -43,6 +43,22 @@ const FEEDS = [
     description: 'Покер, стратегия және Nuts клубы туралы мақалалар',
     blogLink: '/kz/blog/',
   },
+  {
+    locale: 'hy',
+    publicPath: 'hy/feed.xml',
+    language: 'hy-AM',
+    title: 'Nuts PPPoker — Blog',
+    description: 'Պոկեր, стратегия и Nuts клуб — հոդվածներ',
+    blogLink: '/blog/',
+  },
+  {
+    locale: 'tj',
+    publicPath: 'tj/feed.xml',
+    language: 'tg-TJ',
+    title: 'Nuts PPPoker — Блог',
+    description: 'Мақолаҳо дар бораи покер, стратегия ва клуби Nuts',
+    blogLink: '/blog/',
+  },
 ];
 
 function escapeXml(value) {

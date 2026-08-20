@@ -2,7 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { LOCALE_RSS_FEEDS } from './lib/rss-feeds.mjs';
+import { LOCALE_RSS_FEEDS, allLocaleRssFeeds } from './lib/rss-feeds.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = path.join(rootDir, 'apps/web/public');
@@ -40,7 +40,7 @@ async function main() {
   const violations = [];
   const checked = [];
 
-  for (const feed of LOCALE_RSS_FEEDS) {
+  for (const feed of allLocaleRssFeeds()) {
     const publicFile = path.join(publicDir, feed.publicPath);
     const outFile = path.join(outDir, feed.outPath);
     const homepageFile = path.join(outDir, feed.homepageOutPath);
