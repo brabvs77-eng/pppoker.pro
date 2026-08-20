@@ -45,6 +45,7 @@ npm run build
 - `maxresdefault.jpg` → WebP (testimonial photo on homepages)
 - Duplicate `robots` meta tags (robotext)
 - Orphaned popup DOM duplicates on RU pages (`fix-orphaned-popup-duplicates`)
+- Leaked EN Elementor popup templates on RU pages (`fix-english-popups-on-ru`)
 - CRASH / Russian poker promo video autoplay, poster, column widths (`fix-promo-video-blocks`)
 - Unused plugin CSS (`slick`, `imagehover`, `flipclock`, mega-menu) on locale pages (`fix:unused-stylesheets`)
 - KZ homepage Russian promo blocks → Kazakh (`kz/index.html`)
@@ -52,6 +53,8 @@ npm run build
 
 ## What needs human review
 
-English Elementor popups leaked onto RU pages — see [manual-steps.md](./manual-steps.md).
+English Elementor popups on RU pages are removed automatically by `fix-english-popups-on-ru` when the stray EN template IDs (`886`, `834`, `893`, `840`) appear alongside localized popups. Re-export from WordPress may reintroduce them — the build pipeline re-runs the codemod.
+
+If popups still show wrong locale after a build, fix assignments in WordPress (Elementor → Theme Builder → Popups, WPML language) and re-export. See [manual-steps.md](./manual-steps.md) for inspection checklist.
 
 Full spec: [pppoker-patches.md](./pppoker-patches.md).
