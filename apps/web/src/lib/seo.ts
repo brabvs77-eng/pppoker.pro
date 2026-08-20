@@ -1,49 +1,20 @@
 import type { Metadata } from 'next';
 
+import hreflangConfig from '@/config/hreflang.json';
 import type { PageEntry } from './types';
 
-/** ISO-коды для hreflang: локали проекта -> корректные BCP 47 языки. */
-const HREFLANG_CODE_MAP: Record<string, string> = {
-  kz: 'kk',
-  tj: 'tg',
-};
-
-/** Главные страницы локалей: единый hreflang-кластер со всеми шестью версиями. */
-const HOME_ROUTES = new Set(['/', '/en/', '/kz/', '/uz/', '/hy/', '/tj/']);
-
-const HOME_LANGUAGES: Record<string, string> = {
-  ru: 'https://pppoker.pro/',
-  en: 'https://pppoker.pro/en/',
-  kk: 'https://pppoker.pro/kz/',
-  uz: 'https://pppoker.pro/uz/',
-  hy: 'https://pppoker.pro/hy/',
-  tg: 'https://pppoker.pro/tj/',
-  'x-default': 'https://pppoker.pro/',
-};
-
-/**
- * Кластер переводов обзора PPPoker. ВАЖНО: /rus/ (русский обзор) сюда
- * сознательно не включён — страница приносит трафик и по договорённости
- * не модифицируется; hreflang обязан быть взаимным, поэтому кластер
- * ограничен EN/KK/UZ до отдельного решения по /rus/.
- */
-const REVIEW_LANGUAGES: Record<string, string> = {
-  en: 'https://pppoker.pro/en/pppoker-review-2026/',
-  kk: 'https://pppoker.pro/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/',
-  uz: 'https://pppoker.pro/uz/pppoker-2026/',
-};
-
-const REVIEW_ROUTES = new Set([
-  '/en/pppoker-review-2026/',
-  '/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/',
-  '/uz/pppoker-2026/',
-]);
+const HOME_ROUTES = new Set(hreflangConfig.homeRoutes);
+const REVIEW_ROUTES = new Set(hreflangConfig.reviewRoutes);
 
 /**
  * Страницы, закрытые от индексации. Thank-you страницы (/spasibo/,
  * /uz/thanks/) сюда сознательно НЕ входят — они приносят трафик.
  */
 const NOINDEX_ROUTES = new Set<string>([]);
+
+function normalizeHreflangCode(code: string): string {
+  return hreflangConfig.codeMap[code as keyof typeof hreflangConfig.codeMap] ?? code;
+}
 
 /** Убирает кавычки-обёртки, попавшие в meta description из WP. */
 function sanitizeDescription(description: string): string {
@@ -86,14 +57,14 @@ function buildAlternates(page: PageEntry): Metadata['alternates'] {
   if (HOME_ROUTES.has(page.route)) {
     return {
       canonical: absoluteUrl(page.canonical),
-      languages: { ...HOME_LANGUAGES },
+      languages: { ...hreflangConfig.homeLanguages },
     };
   }
 
   if (REVIEW_ROUTES.has(page.route)) {
     return {
       canonical: absoluteUrl(page.canonical),
-      languages: { ...REVIEW_LANGUAGES },
+      languages: { ...hreflangConfig.reviewLanguages },
     };
   }
 
@@ -103,7 +74,7 @@ function buildAlternates(page: PageEntry): Metadata['alternates'] {
 
   const languages: Record<string, string> = {};
   for (const entry of page.hreflang) {
-    const code = HREFLANG_CODE_MAP[entry.hreflang] ?? entry.hreflang;
+    const code = normalizeHreflangCode(entry.hreflang);
     languages[code] = absoluteUrl(entry.href);
   }
 
