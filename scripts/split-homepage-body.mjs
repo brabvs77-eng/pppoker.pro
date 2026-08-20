@@ -46,6 +46,12 @@ function replaceElementorSectionWithSlot(bodyHtml, elementId, slotMarkup) {
   return `${bodyHtml.slice(0, divStart)}${slotMarkup}${bodyHtml.slice(divEnd)}`;
 }
 
+function appendBlogSlotBeforeFooter(bodyHtml) {
+  const colophonStart = bodyHtml.search(/<footer[^>]*\bid="colophon"/i);
+  if (colophonStart === -1) return null;
+  return `${bodyHtml.slice(0, colophonStart)}${slotHtml}${bodyHtml.slice(colophonStart)}`;
+}
+
 function replaceLegacyBlogWithSlot(bodyHtml, legacySectionId) {
   const classNeedle = `elementor-element-${legacySectionId}`;
   if (!bodyHtml.includes(classNeedle)) return null;
@@ -78,7 +84,7 @@ async function main() {
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
   );
 
-  for (const { fileId, route, legacyBlogSectionId } of homeRoutes) {
+  for (const { fileId, route, legacyBlogSectionId, appendBlogSlotWhenMissing } of homeRoutes) {
     const legacySectionId = legacyBlogSectionId ?? defaultLegacySectionId;
     const bodyPath = path.join(bodiesDir, `${fileId}.html`);
     const outputPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
@@ -92,7 +98,13 @@ async function main() {
       continue;
     }
 
-    const withSlot = replaceLegacyBlogWithSlot(bodyHtml, legacySectionId);
+    let withSlot = replaceLegacyBlogWithSlot(bodyHtml, legacySectionId);
+    if (!withSlot && appendBlogSlotWhenMissing) {
+      withSlot = appendBlogSlotBeforeFooter(bodyHtml);
+      if (withSlot) {
+        console.log(`Appended blog slot on ${route} (no legacy blog section)`);
+      }
+    }
     if (!withSlot) {
       console.error(`Failed to insert blog slot on ${route}`);
       process.exitCode = 1;

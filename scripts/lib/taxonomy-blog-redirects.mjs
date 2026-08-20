@@ -1,6 +1,7 @@
 /** Redirect legacy WordPress category/tag archives to native blog routes. */
 
-const NATIVE_BLOG_LOCALES = new Set(['ru', 'en', 'uz', 'kz']);
+/** Locales with native blog archive routes (keep in sync with blogArchive.ts). */
+const NATIVE_BLOG_LOCALES = new Set(['ru', 'en', 'uz', 'kz', 'hy', 'tj']);
 
 export function localeBlogRoot(locale) {
   if (locale === 'ru') return '/blog';

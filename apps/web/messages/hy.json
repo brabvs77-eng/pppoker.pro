@@ -35,6 +35,9 @@
     "allPosts": "Բոլոր հոդվածները",
     "category": "Բլոգ"
   },
+  "rss": {
+    "feedTitle": "Nuts PPPoker — Բլոգ"
+  },
   "llms": {
     "linkTitle": "LLMs.txt — կայքի քարտեզ AI-ի համար"
   },

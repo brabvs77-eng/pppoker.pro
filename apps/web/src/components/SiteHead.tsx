@@ -5,6 +5,8 @@ const RSS_FEED_HREF: Partial<Record<AppLocale, string>> = {
   en: '/en/feed.xml',
   uz: '/uz/feed.xml',
   kz: '/kz/feed.xml',
+  hy: '/hy/feed.xml',
+  tj: '/tj/feed.xml',
 };
 
 type SiteHeadProps = {

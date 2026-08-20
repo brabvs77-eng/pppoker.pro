@@ -12,6 +12,10 @@ const cloudflareReadme = readFileSync(
 
 const violations = [];
 
+if (!pkg.scripts['build:next']?.includes('seed:hy-tj')) {
+  violations.push('build:next must run seed:hy-tj before extract:content');
+}
+
 if (pkg.scripts['build:next']?.includes('smoke:homepage')) {
   violations.push('build:next must not invoke smoke:homepage (Cloudflare Pages has no Playwright)');
 }
