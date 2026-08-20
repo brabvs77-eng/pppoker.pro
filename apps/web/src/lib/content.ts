@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-import { hideLegacyBlogSectionRoutes } from '@/config/site';
+import { preparedHomepageBodyRoutes } from '@/config/site';
 import type { AppLocale } from '@/i18n/routing';
 
 import type { BlogPostCard } from './blogRotation';
@@ -76,7 +76,7 @@ function stripTitleSuffix(title: string): string {
 }
 
 export async function getBodyHtml(page: PageEntry): Promise<string> {
-  if ((hideLegacyBlogSectionRoutes as readonly string[]).includes(page.route)) {
+  if ((preparedHomepageBodyRoutes as readonly string[]).includes(page.route)) {
     try {
       return await fs.readFile(
         path.join(contentRoot, 'bodies', `${page.fileId}-with-blog-slot.html`),

@@ -44,6 +44,10 @@ async function main() {
     if (page.ogImage && !html.includes('post-article__hero-image')) {
       violations.push(`Missing featured image on ${page.route}`);
     }
+
+    if (page.needsElementorRuntime !== false) {
+      violations.push(`Structured post ${page.route} must have needsElementorRuntime=false`);
+    }
   }
 
   const enBlogRoutes = [
@@ -57,6 +61,15 @@ async function main() {
     if (!posts.some((p) => p.route === route)) {
       violations.push(`Missing structured blog post in manifest: ${route}`);
     }
+  }
+
+  const hyTjPosts = manifest.pages.filter(
+    (p) => ['hy', 'tj'].includes(p.locale) && p.type === 'post' && !p.isRedirect,
+  );
+  if (hyTjPosts.length > 0) {
+    violations.push(
+      `HY/TJ structured posts not yet supported — found ${hyTjPosts.length} post(s) in export`,
+    );
   }
 
   if (violations.length) {

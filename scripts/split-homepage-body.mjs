@@ -56,6 +56,16 @@ function divTagBalance(html) {
   return (html.match(/<div/gi) ?? []).length - (html.match(/<\/div>/gi) ?? []).length;
 }
 
+function stripLegacyFooter(bodyHtml) {
+  const colophonStart = bodyHtml.search(/<footer[^>]*\bid="colophon"/i);
+  if (colophonStart === -1) return bodyHtml;
+
+  const footerEnd = bodyHtml.indexOf('</footer>', colophonStart);
+  if (footerEnd === -1) return bodyHtml;
+
+  return `${bodyHtml.slice(0, colophonStart)}${bodyHtml.slice(footerEnd + '</footer>'.length)}`;
+}
+
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
@@ -63,6 +73,9 @@ async function main() {
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const stripFooterRoutes = new Set(
+    (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
   );
 
   for (const { fileId, route, legacyBlogSectionId } of homeRoutes) {
@@ -91,15 +104,44 @@ async function main() {
         ? replaceElementorSectionWithSlot(withSlot, reviewsSectionId, reviewSlotHtml)
         : withSlot;
 
-    const balance = divTagBalance(withReviewSlot);
+    const withoutLegacyFooter = stripFooterRoutes.has(fileId)
+      ? stripLegacyFooter(withReviewSlot)
+      : withReviewSlot;
+
+    const balance = divTagBalance(withoutLegacyFooter);
     if (balance !== 0) {
       console.error(`Homepage body for ${route} has unbalanced div tags: ${balance}`);
       process.exitCode = 1;
       continue;
     }
 
-    await fs.writeFile(outputPath, withReviewSlot, 'utf8');
-    console.log(`Prepared ${route} body with blog slot (${withReviewSlot.length} bytes)`);
+    await fs.writeFile(outputPath, withoutLegacyFooter, 'utf8');
+    console.log(`Prepared ${route} body with blog slot (${withoutLegacyFooter.length} bytes)`);
+  }
+
+  const homeFileIds = new Set(homeRoutes.map((entry) => entry.fileId));
+  for (const { fileId, route } of chrome.stripLegacyFooterRoutes ?? []) {
+    if (homeFileIds.has(fileId)) continue;
+
+    const bodyPath = path.join(bodiesDir, `${fileId}.html`);
+    const outputPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
+
+    let bodyHtml;
+    try {
+      bodyHtml = await fs.readFile(bodyPath, 'utf8');
+    } catch {
+      console.error(`Missing homepage body for ${route}: ${fileId}.html`);
+      process.exitCode = 1;
+      continue;
+    }
+
+    const withoutLegacyFooter = stripLegacyFooter(bodyHtml);
+    if (withoutLegacyFooter === bodyHtml) {
+      console.warn(`No #colophon footer to strip on ${route}`);
+    }
+
+    await fs.writeFile(outputPath, withoutLegacyFooter, 'utf8');
+    console.log(`Prepared ${route} body without legacy footer (${withoutLegacyFooter.length} bytes)`);
   }
 }
 

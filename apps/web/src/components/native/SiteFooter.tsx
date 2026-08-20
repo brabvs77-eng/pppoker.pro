@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
-import { siteContacts } from '@/config/site';
+import { siteContacts, siteSocial } from '@/config/site';
 import { getLocaleAlternates } from '@/lib/localeAlternates';
 import { blogHref, legalHref } from '@/lib/navigation';
 import type { PageEntry } from '@/lib/types';
@@ -34,6 +34,12 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
               <Link href={blogHref(page.locale)}>{t('blog')}</Link>
               <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
                 {t('manager')}
+              </a>
+              <a href={siteContacts.telegramChannel} target="_blank" rel="noopener noreferrer">
+                {t('channel')}
+              </a>
+              <a href={siteSocial.instagram} target="_blank" rel="noopener noreferrer">
+                {t('instagram')}
               </a>
               <a href={legalHref(page.locale, 'user-agreement')}>{t('terms')}</a>
               <a href={legalHref(page.locale, 'privacy-policy')}>{t('privacy')}</a>

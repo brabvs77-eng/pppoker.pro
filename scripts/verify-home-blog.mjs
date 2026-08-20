@@ -17,22 +17,22 @@ const homepages = [
   {
     label: 'RU',
     path: path.join(rootDir, 'apps/web/out/index.html'),
-    footerMarker: 'id="colophon"',
-    extraMarkers: ['instagram.com'],
+    footerMarker: 'class="site-footer"',
+    extraMarkers: ['instagram.com', 't.me/+Sj5sG5o0aqJkMTBi'],
     locale: 'ru',
   },
   {
     label: 'HY',
     path: path.join(rootDir, 'apps/web/out/hy/index.html'),
     footerMarker: 'class="site-footer"',
-    extraMarkers: [],
+    extraMarkers: ['instagram.com'],
     locale: 'ru',
   },
   {
     label: 'EN',
     path: path.join(rootDir, 'apps/web/out/en/index.html'),
     footerMarker: 'class="site-footer"',
-    extraMarkers: [],
+    extraMarkers: ['instagram.com'],
     locale: 'en',
     legacyBlogLoopElementId: '97d6258',
   },
@@ -40,7 +40,7 @@ const homepages = [
     label: 'UZ',
     path: path.join(rootDir, 'apps/web/out/uz/index.html'),
     footerMarker: 'class="site-footer"',
-    extraMarkers: [],
+    extraMarkers: ['instagram.com'],
     locale: 'uz',
     legacyBlogLoopElementId: '97d6258',
   },
@@ -48,9 +48,17 @@ const homepages = [
     label: 'KZ',
     path: path.join(rootDir, 'apps/web/out/kz/index.html'),
     footerMarker: 'class="site-footer"',
-    extraMarkers: [],
+    extraMarkers: ['instagram.com'],
     locale: 'kz',
     legacyBlogLoopElementId: 'b37be6f',
+  },
+  {
+    label: 'TJ',
+    path: path.join(rootDir, 'apps/web/out/tj/index.html'),
+    footerMarker: 'class="site-footer"',
+    extraMarkers: ['instagram.com'],
+    locale: 'ru',
+    skipHomeBlog: true,
   },
 ];
 
@@ -67,11 +75,26 @@ function expectedCardCount(locale) {
 }
 
 function verifyHomeBlogHtml(
-  { label, footerMarker, extraMarkers, legacyBlogLoopElementId = '39eeae8' },
+  { label, footerMarker, extraMarkers, legacyBlogLoopElementId = '39eeae8', skipHomeBlog = false },
   html,
   expectedCards,
   violations,
 ) {
+  if (html.includes('id="colophon"')) {
+    violations.push(`[${label}] Legacy #colophon footer must be stripped from homepage body`);
+  }
+
+  const markers = [footerMarker, ...extraMarkers];
+  for (const marker of markers) {
+    if (!html.includes(marker)) {
+      violations.push(`[${label}] Missing expected homepage marker: ${marker}`);
+    }
+  }
+
+  if (skipHomeBlog) {
+    return 0;
+  }
+
   if (!html.includes('data-hide-legacy-blog')) {
     violations.push(`[${label}] Missing data-hide-legacy-blog on homepage`);
   }
@@ -114,13 +137,6 @@ function verifyHomeBlogHtml(
 
   if (homeBlogIndex !== -1 && footerIndex !== -1 && homeBlogIndex > footerIndex) {
     violations.push(`[${label}] home-blog section renders after footer`);
-  }
-
-  const markers = [footerMarker, 'class="site-footer"', ...extraMarkers];
-  for (const marker of markers) {
-    if (!html.includes(marker)) {
-      violations.push(`[${label}] Missing expected homepage marker: ${marker}`);
-    }
   }
 
   return cardCount;
