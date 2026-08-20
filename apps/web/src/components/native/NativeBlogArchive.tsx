@@ -47,7 +47,7 @@ export async function NativeBlogArchive({ locale, archive }: NativeBlogArchivePr
                 <Link href={post.route} className="blog-archive__row">
                   {post.image ? (
                     <span className="blog-archive__row-image">
-                      <img src={post.image} alt="" loading="lazy" />
+                      <img src={post.image} alt="" width={220} height={145} loading="lazy" decoding="async" />
                     </span>
                   ) : (
                     <span className="blog-archive__row-image blog-archive__row-image--placeholder" />

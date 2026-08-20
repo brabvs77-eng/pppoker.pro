@@ -64,10 +64,8 @@ const AUTOPLAY_SCRIPT = `<script id="${AUTOPLAY_SCRIPT_ID}">
       if (source) video.setAttribute('src', source.getAttribute('src'));
     }
     var playPromise = video.play();
-    if (playPromise && playPromise.then) {
-      playPromise.then(function () {
-        video.removeAttribute('poster');
-      }).catch(function () {});
+    if (playPromise && playPromise.catch) {
+      playPromise.catch(function () {});
     }
   }
   function watch(video) {
@@ -141,6 +139,9 @@ function scopedStyleFor(set) {
   video.promo-crash-video {
     object-fit: cover;
     background: #0a0d14;
+    aspect-ratio: 9 / 16;
+    min-height: 280px;
+    max-height: 480px;
   }
 
   @media (max-width: 767px) {
