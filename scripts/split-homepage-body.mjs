@@ -7,6 +7,7 @@ const bodiesDir = path.join(rootDir, 'content/bodies');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotHtml = '<div id="native-home-blog-slot"></div>';
 const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
+const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -70,9 +71,13 @@ async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
+  const faqSectionId = chrome.legacyFaqSectionElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const faqRoutes = new Set(
+    (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
@@ -104,9 +109,14 @@ async function main() {
         ? replaceElementorSectionWithSlot(withSlot, reviewsSectionId, reviewSlotHtml)
         : withSlot;
 
+    const withFaqSlot =
+      faqSectionId && faqRoutes.has(route)
+        ? replaceElementorSectionWithSlot(withReviewSlot, faqSectionId, faqSlotHtml)
+        : withReviewSlot;
+
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)
-      ? stripLegacyFooter(withReviewSlot)
-      : withReviewSlot;
+      ? stripLegacyFooter(withFaqSlot)
+      : withFaqSlot;
 
     const balance = divTagBalance(withoutLegacyFooter);
     if (balance !== 0) {
