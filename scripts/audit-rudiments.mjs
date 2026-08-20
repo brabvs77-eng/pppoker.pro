@@ -5,8 +5,11 @@ import { fileURLToPath } from 'node:url';
 import { glob } from 'glob';
 
 import {
+  detectEnglishPopupsOnRu,
+  EN_POPUP_MARKERS,
   FORBIDDEN_LEGACY_NEEDLES,
   FORBIDDEN_RUDIMENT_NEEDLES,
+  isRuLegacyPage,
   LEGACY_GLOBS,
   LEGACY_IGNORE,
 } from './patches/known-legacy-issues.mjs';
@@ -84,6 +87,24 @@ async function main() {
     for (const rule of [...FORBIDDEN_LEGACY_NEEDLES, ...FORBIDDEN_RUDIMENT_NEEDLES]) {
       if (content.includes(rule.needle)) {
         violations.push(`Legacy export ${relativePath} still contains "${rule.needle}" (${rule.hint})`);
+      }
+    }
+
+    const enPopupFindings = detectEnglishPopupsOnRu(content, relativePath);
+    if (enPopupFindings.length) {
+      violations.push(
+        `Legacy export ${relativePath} still has EN popups (${enPopupFindings[0]} — run npm run fix:english-popups-on-ru)`,
+      );
+    }
+
+    if (isRuLegacyPage(relativePath)) {
+      for (const phrase of EN_POPUP_MARKERS) {
+        if (content.includes(phrase)) {
+          violations.push(
+            `Legacy export ${relativePath} still contains English popup copy "${phrase}" (run npm run fix:english-popups-on-ru)`,
+          );
+          break;
+        }
       }
     }
   }
