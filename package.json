@@ -67,13 +67,16 @@
     "verify:hreflang": "node scripts/verify-hreflang.mjs",
     "smoke:homepage": "node scripts/smoke-homepage.mjs",
     "smoke:landing-pages": "node scripts/smoke-landing-pages.mjs",
-    "smoke:blog-pages": "node scripts/smoke-blog-pages.mjs"
+    "smoke:blog-pages": "node scripts/smoke-blog-pages.mjs",
+    "lighthouse:budget": "node scripts/lighthouse-budget.mjs"
   },
   "dependencies": {
     "cheerio": "^1.2.0",
     "glob": "^13.0.6"
   },
   "devDependencies": {
+    "chrome-launcher": "^1.1.2",
+    "lighthouse": "^12.6.1",
     "playwright": "^1.52.0"
   }
 }

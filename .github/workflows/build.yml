@@ -61,6 +61,12 @@ jobs:
       - name: Homepage smoke (Playwright)
         run: npm run smoke:homepage
 
+      - name: Verify analytics in export
+        run: npm run verify:analytics
+
+      - name: Lighthouse budget (LCP, CLS)
+        run: npm run lighthouse:budget
+
       - name: Landing page smoke (Playwright)
         run: npm run smoke:landing-pages
 
