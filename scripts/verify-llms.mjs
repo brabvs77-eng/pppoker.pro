@@ -3,14 +3,26 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const outDir = path.join(rootDir, 'apps/web/out');
 const llmsPaths = [
   path.join(rootDir, 'llms.txt'),
   path.join(rootDir, 'apps/web/public/llms.txt'),
-  path.join(rootDir, 'apps/web/out/llms.txt'),
+  path.join(outDir, 'llms.txt'),
+];
+
+const HEAD_LINK_SAMPLES = [
+  { route: '/', label: 'RU homepage' },
+  { route: '/blog/', label: 'RU blog archive (native)' },
+  { route: '/en/user-agreement/', label: 'EN native legal page' },
 ];
 
 /** Broken URL from old generator: https://pppoker.proen/ (missing slash). */
 const BROKEN_LOCALE_URL = /pppoker\.pro(?:en|hy|uz|kz|tj|ru)\//;
+
+function outputPathForRoute(route) {
+  if (route === '/') return path.join(outDir, 'index.html');
+  return path.join(outDir, route.replace(/^\//, ''), 'index.html');
+}
 
 function extractMarkdownLinks(text) {
   const links = [];
@@ -60,6 +72,21 @@ async function main() {
     }
   }
 
+  for (const { route, label } of HEAD_LINK_SAMPLES) {
+    const outputPath = outputPathForRoute(route);
+    let html;
+    try {
+      html = await fs.readFile(outputPath, 'utf8');
+    } catch {
+      violations.push(`[${label}] missing export at ${route}`);
+      continue;
+    }
+
+    if (!html.includes('href="/llms.txt"') || !html.includes('type="text/plain"')) {
+      violations.push(`[${label}] missing llms.txt head link`);
+    }
+  }
+
   if (violations.length) {
     console.error('verify-llms failed:');
     violations.forEach((line) => console.error(`  - ${line}`));
@@ -67,7 +94,7 @@ async function main() {
     return;
   }
 
-  console.log(`verify-llms: OK (${llmsPaths.length} copies)`);
+  console.log(`verify-llms: OK (${llmsPaths.length} copies, ${HEAD_LINK_SAMPLES.length} head links)`);
 }
 
 main().catch((error) => {

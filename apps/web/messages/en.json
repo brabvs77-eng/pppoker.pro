@@ -38,6 +38,9 @@
   "rss": {
     "feedTitle": "Nuts PPPoker — Blog"
   },
+  "llms": {
+    "linkTitle": "LLMs.txt — site map for AI"
+  },
   "siteFooter": {
     "languageLabel": "Language",
     "navLabel": "Footer navigation",

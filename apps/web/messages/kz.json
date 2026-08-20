@@ -38,6 +38,9 @@
   "rss": {
     "feedTitle": "Nuts PPPoker — Блог"
   },
+  "llms": {
+    "linkTitle": "LLMs.txt — AI үшін сайт картасы"
+  },
   "siteFooter": {
     "languageLabel": "Тіл",
     "navLabel": "Навигация",

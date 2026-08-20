@@ -34,11 +34,12 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const rssFeedTitle = RSS_FEED_LOCALES.has(appLocale)
     ? (await getTranslations({ locale, namespace: 'rss' }))('feedTitle')
     : undefined;
+  const llmsLinkTitle = (await getTranslations({ locale, namespace: 'llms' }))('linkTitle');
 
   return (
     <html lang={localeHtmlLang[appLocale]} suppressHydrationWarning>
       <head>
-        <SiteHead locale={appLocale} rssFeedTitle={rssFeedTitle} />
+        <SiteHead locale={appLocale} rssFeedTitle={rssFeedTitle} llmsLinkTitle={llmsLinkTitle} />
         <CoreStylesheets />
       </head>
       <body suppressHydrationWarning>

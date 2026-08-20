@@ -10,10 +10,11 @@ const RSS_FEED_HREF: Partial<Record<AppLocale, string>> = {
 type SiteHeadProps = {
   locale: AppLocale;
   rssFeedTitle?: string;
+  llmsLinkTitle?: string;
 };
 
 /** Global head tags shared across all locale layouts. */
-export function SiteHead({ locale, rssFeedTitle }: SiteHeadProps) {
+export function SiteHead({ locale, rssFeedTitle, llmsLinkTitle }: SiteHeadProps) {
   const rssHref = RSS_FEED_HREF[locale];
 
   return (
@@ -41,6 +42,9 @@ export function SiteHead({ locale, rssFeedTitle }: SiteHeadProps) {
           title={rssFeedTitle}
           href={rssHref}
         />
+      ) : null}
+      {llmsLinkTitle ? (
+        <link rel="alternate" type="text/plain" title={llmsLinkTitle} href="/llms.txt" />
       ) : null}
     </>
   );
