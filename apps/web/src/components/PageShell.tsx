@@ -44,6 +44,7 @@ export function PageShell({
   const hasElementorFooter = useLegacyBody && bodyHtml.includes('id="colophon"');
   const loadPageStyles = useLegacyBody || Boolean(structuredPost) || Boolean(nativePage);
   const loadElementorRuntime = useLegacyBody && page.needsElementorRuntime;
+  const loadNativeAnalytics = !loadElementorRuntime;
   const useNativeBlogJsonLd = Boolean(nativeBlog || structuredPost);
 
   return (
@@ -71,7 +72,7 @@ export function PageShell({
           <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
         ))}
       <SiteFooter page={page} variant={hasElementorFooter ? 'locale-only' : 'full'} />
-      <AnalyticsScripts />
+      {loadNativeAnalytics ? <AnalyticsScripts /> : null}
       {loadElementorRuntime ? (
         <>
           <WordPressRuntimeScripts scripts={page.runtimeScripts ?? []} />

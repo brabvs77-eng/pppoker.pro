@@ -75,6 +75,12 @@ export const siteContacts = {
   telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
 } as const;
 
+/** Yandex Metrika + Google Tag (Site Kit) — same IDs as legacy WordPress export. */
+export const siteAnalytics = {
+  yandexMetrikaId: 98592596,
+  googleTagId: 'GT-KF6XSGPD',
+} as const;
+
 const FLAG_BASE = '/assets/vendor/sitepress-multilingual-cms/res/flags';
 
 export const localeFlags = {
