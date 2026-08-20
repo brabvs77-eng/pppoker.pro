@@ -405,6 +405,14 @@ async function main() {
   if (enPosts.length) {
     console.log(`EN structured posts: ${enPosts.map((p) => p.route).join(', ')}`);
   }
+  for (const locale of ['hy', 'tj']) {
+    const localePosts = structured.filter((p) => p.locale === locale);
+    if (localePosts.length) {
+      console.log(
+        `${locale.toUpperCase()} structured posts: ${localePosts.map((p) => p.route).join(', ')}`,
+      );
+    }
+  }
 }
 
 main().catch((error) => {
