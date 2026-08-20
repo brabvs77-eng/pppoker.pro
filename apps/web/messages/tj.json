@@ -28,6 +28,9 @@
     "paginationLabel": "Саҳифабандии блог",
     "relatedTitle": "Мақолаҳои монанд"
   },
+  "llms": {
+    "linkTitle": "LLMs.txt — хaritaи сайт барои AI"
+  },
   "siteFooter": {
     "languageLabel": "Забон",
     "navLabel": "Навигатсия",

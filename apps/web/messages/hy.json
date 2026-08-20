@@ -35,6 +35,9 @@
     "allPosts": "Բոլոր հոդվածները",
     "category": "Բլոգ"
   },
+  "llms": {
+    "linkTitle": "LLMs.txt — կայքի քարտեզ AI-ի համար"
+  },
   "siteFooter": {
     "languageLabel": "Լեզու",
     "navLabel": "Նավիգացիա",

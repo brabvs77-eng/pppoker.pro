@@ -38,6 +38,9 @@
   "rss": {
     "feedTitle": "Nuts PPPoker — Blog"
   },
+  "llms": {
+    "linkTitle": "LLMs.txt — sayt xaritasi (AI)"
+  },
   "siteFooter": {
     "languageLabel": "Til",
     "navLabel": "Navigatsiya",
