@@ -46,7 +46,7 @@ Stylesheets used on ≥85% of pages (plus homepage/header/footer seeds) are **co
 - **Typed blog routes** — `/blog/`, `/blog/page/N/` (dedicated App Router pages)
 - **Structured posts** — article HTML extracted to `content/posts/*.json` (reserved for RSS/API)
 - **JSON-LD** — Yoast blocks rendered from manifest (`JsonLd` component)
-- **Sitemap** — `app/sitemap.ts` generated from manifest
+- **Sitemap** — dynamic sitemap from manifest (`scripts/generate-sitemap.mjs`; `verify:sitemap`)
 - **Body classes** — applied on `#wordpress-page-root` (no client-side `BodyAttributes`)
 
 ## Sprint 3 features
@@ -157,6 +157,13 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 - **Sprint 35** — `BlogBreadcrumbs` on blog archive + structured posts; full-width `.blog-surface` removes white side gutters
 - **Sprint 36** — Native blog JSON-LD (`BreadcrumbList`, `BlogPosting`, `Organization`, `WebSite`); replaces Yoast blocks on native blog routes; `verify:json-ld`
 - **Sprint 37** — Full-width dark shell for `html`/`body`, header, footer (fixes white side gutters on chrome)
+
+## Sprint 38–41 (C-track)
+
+- **Sprint 38 (A1–A3)** — Analytics on native pages; `/llms.txt` + head link; dynamic sitemap from manifest
+- **Sprint 39 (B4–B5)** — HY/TJ structured-post pipeline; native footer with social links; `#colophon` stripped on home
+- **Sprint 40 (C1–C2)** — hreflang BCP 47 (`kk`/`tg`); Lighthouse LCP/CLS budgets + native footer smoke in GHA
+- **Sprint 41 (C3–C4)** — Homepage perf (`fix:below-fold-images`, CRASH poster preload); `verify:below-fold-images`; docs sync
 
 ## Sprint 18–20 features
 

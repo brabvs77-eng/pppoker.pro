@@ -8,17 +8,12 @@ import { fileURLToPath } from 'node:url';
 
 import { load } from 'cheerio';
 
+import { HOMEPAGE_LEGACY_FILES } from '../lib/homepage-legacy-files.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WRITE = process.argv.includes('--write');
 
-const HOMEPAGE_FILES = [
-  'index.html',
-  'en/index.html',
-  'hy/index.html',
-  'uz/index.html',
-  'kz/index.html',
-  'tj/index.html',
-];
+const HOMEPAGE_FILES = HOMEPAGE_LEGACY_FILES;
 
 const DIMENSION_RE = /-(\d{2,4})x(\d{2,4})(?:-\d+)?\.(?:webp|jpe?g|png|gif)(?:\?|$)/i;
 

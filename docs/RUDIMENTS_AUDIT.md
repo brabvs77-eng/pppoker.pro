@@ -31,7 +31,7 @@
 |-----------|----------|
 | `HomePromo` | Дубли CTA / `menu-item-3206`; hero play/hotspot/icon row |
 | `SiteHeader` | Elementor HF + secondary `section` в `#masthead` (все локали); спейсеры `8141f77` / `3f45d89`; `menu-item-3206` |
-| `SiteFooter` | WPML footer switcher; `#colophon` kept visible for Elementor social links (hybrid footer) |
+| `SiteFooter` | Native footer on all pages; `#colophon` stripped on home (B5); social links in React chrome |
 | `StructuredPost` | Посты из `content/posts/*.json` |
 | `NativePage` | Legal/about из `content/pages/*.json` (`config/native-pages.json`) |
 | `NativeBlogArchive` | Архив блога с пагинацией |
