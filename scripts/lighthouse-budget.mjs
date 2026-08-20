@@ -13,8 +13,7 @@ const port = 9877;
 /** Core Web Vitals budgets for static homepages (legacy Elementor + native chrome). */
 const BUDGET = {
   lcpMs: 4500,
-  /** Allow tiny headless variance above the 0.1 "good" bar until C3 layout-shift fixes land. */
-  cls: 0.11,
+  cls: 0.1,
 };
 
 const PAGES = [
