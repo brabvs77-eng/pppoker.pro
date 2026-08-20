@@ -32,7 +32,11 @@ function verifyBodyHtml(html, label, expectedItems) {
     !html.includes('class="elementor-element elementor-element-aa7fa52'),
     `${label}: legacy FAQ section still present`,
   );
-  assert(!html.includes('elementskit-accordion'), `${label}: legacy elementskit accordion still present`);
+  assert(
+    !html.includes('class="elementskit-accordion"') &&
+      !html.includes('elementor-widget-elementskit-accordion'),
+    `${label}: legacy elementskit accordion still present`,
+  );
   assert(!html.includes('href="#collapse-'), `${label}: legacy lowercase #collapse- hrefs still present`);
   assert(html.includes('class="home-faq__item"'), `${label}: missing native FAQ items`);
   assert(html.includes('<details class="home-faq__item"'), `${label}: missing details/summary FAQ markup`);

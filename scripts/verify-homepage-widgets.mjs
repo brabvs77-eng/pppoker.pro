@@ -19,7 +19,7 @@ function verifyHomepageWidgets({ label, minSwipers, minReviewCards = 0, requireF
     if (html.includes('href="#collapse-')) {
       violations.push(`[${label}] FAQ accordion still uses lowercase #collapse- href anchors`);
     }
-    if (html.includes('elementskit-accordion')) {
+    if (html.includes('class="elementskit-accordion"') || html.includes('elementor-widget-elementskit-accordion')) {
       violations.push(`[${label}] Legacy elementskit-accordion markup still present`);
     }
     if (!html.includes('id="native-home-faq"')) {

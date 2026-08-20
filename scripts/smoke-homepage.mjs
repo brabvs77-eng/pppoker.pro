@@ -43,7 +43,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
     nativeFaq: !!document.querySelector('#native-home-faq'),
     nativeFaqItems: document.querySelectorAll('.home-faq__item').length,
-    legacyFaqAccordion: !!document.querySelector('.elementskit-accordion'),
+    legacyFaqAccordion: !!document.querySelector('.elementskit-accordion, .elementor-widget-elementskit-accordion'),
     channelLink: !!document.querySelector(`a[href="${channel}"]`),
     whatsappLinks: whatsappMarkers.filter((marker) => document.body.innerHTML.includes(marker)).length,
     heroCtaGroup: !!document.querySelector('.hero-cta-group'),
