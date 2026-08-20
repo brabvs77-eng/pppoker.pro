@@ -3,5 +3,15 @@
     "/en/user-agreement/",
     "/en/privacy-policy/",
     "/rus/"
-  ]
+  ],
+  "legalFallback": {
+    "user-agreement": "/en/user-agreement/",
+    "privacy-policy": "/en/privacy-policy/"
+  },
+  "legalByLocale": {
+    "en": {
+      "user-agreement": "/en/user-agreement/",
+      "privacy-policy": "/en/privacy-policy/"
+    }
+  }
 }

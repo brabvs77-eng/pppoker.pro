@@ -196,11 +196,11 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 ## Planned work (backlog)
 
 1. ~~Home blog on `/en/`~~ — done (Sprint 21)
-2. `NativePage` for locale-specific legal URLs when HTML exports exist (UZ/KZ/HY/TJ)
-3. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
-4. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
-5. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
-6. More Elementor sections → native components
+1. ~~NativePage legal URLs (interim)~~ — footer links + redirects → EN until UZ/KZ/HY/TJ HTML export; add routes to `native-pages.json` + `legalByLocale` when export lands
+2. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
+3. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
+4. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
+5. More Elementor sections → native components
 
 ## Adding or updating content
 

@@ -3,6 +3,16 @@
  * Sources are path-only (no trailing slash except `/`).
  */
 
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { collectLegalFallbackRedirects, loadNativePagesConfig } from './legal-routes.mjs';
+import {
+  collectTaxonomyBlogRedirects,
+} from './taxonomy-blog-redirects.mjs';
+
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+
 function normalizeSource(route) {
   if (route === '/') return '/';
   return route.replace(/\/$/, '');
@@ -12,10 +22,6 @@ function normalizeDestination(route) {
   if (route === '/') return '/';
   return route.replace(/\/$/, '') || '/';
 }
-
-import {
-  collectTaxonomyBlogRedirects,
-} from './taxonomy-blog-redirects.mjs';
 
 /** @returns {{ static: Array<{source: string, destination: string}>, wildcards: Array<{source: string, destination: string}> }} */
 export function collectRedirects(manifest) {
@@ -56,6 +62,12 @@ export function collectRedirects(manifest) {
   }
 
   for (const { source, destination } of collectTaxonomyBlogRedirects(manifest)) {
+    if (seen.has(source)) continue;
+    seen.add(source);
+    staticRedirects.push({ source, destination });
+  }
+
+  for (const { source, destination } of collectLegalFallbackRedirects(loadNativePagesConfig(rootDir))) {
     if (seen.has(source)) continue;
     seen.add(source);
     staticRedirects.push({ source, destination });
