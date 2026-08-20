@@ -1,5 +1,7 @@
 import type { AppLocale } from '@/i18n/routing';
 
+import nativePagesConfig from '@/config/native-pages.json';
+
 import { localeBlogRoot } from '@/lib/taxonomyRedirects';
 
 export function homeHref(locale: string): string {
@@ -15,8 +17,10 @@ export function legalHref(
   locale: string,
   slug: 'user-agreement' | 'privacy-policy',
 ): string {
-  if (locale === 'ru') {
-    return slug === 'user-agreement' ? '/en/user-agreement/' : '/en/privacy-policy/';
-  }
-  return `/${locale}/${slug}/`;
+  const byLocale = nativePagesConfig.legalByLocale as
+    | Partial<Record<AppLocale, Partial<Record<'user-agreement' | 'privacy-policy', string>>>>
+    | undefined;
+  const localeRoutes = byLocale?.[locale as AppLocale];
+  if (localeRoutes?.[slug]) return localeRoutes[slug];
+  return nativePagesConfig.legalFallback[slug];
 }
