@@ -1,0 +1,26 @@
+{
+  "codeMap": {
+    "kz": "kk",
+    "tj": "tg"
+  },
+  "homeRoutes": ["/", "/en/", "/kz/", "/uz/", "/hy/", "/tj/"],
+  "homeLanguages": {
+    "ru": "https://pppoker.pro/",
+    "en": "https://pppoker.pro/en/",
+    "kk": "https://pppoker.pro/kz/",
+    "uz": "https://pppoker.pro/uz/",
+    "hy": "https://pppoker.pro/hy/",
+    "tg": "https://pppoker.pro/tj/",
+    "x-default": "https://pppoker.pro/"
+  },
+  "reviewRoutes": [
+    "/en/pppoker-review-2026/",
+    "/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/",
+    "/uz/pppoker-2026/"
+  ],
+  "reviewLanguages": {
+    "en": "https://pppoker.pro/en/pppoker-review-2026/",
+    "kk": "https://pppoker.pro/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/",
+    "uz": "https://pppoker.pro/uz/pppoker-2026/"
+  }
+}

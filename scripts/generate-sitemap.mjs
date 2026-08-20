@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { hreflangAlternatesForPage } from './lib/hreflang-config.mjs';
 import {
   SITE_URL,
   absoluteSitemapUrl,
@@ -30,10 +31,11 @@ function normalizeHref(href) {
   return absoluteSitemapUrl(route);
 }
 
-function buildHreflangLinks(hreflang) {
-  if (!hreflang?.length) return '';
+function buildHreflangLinks(page) {
+  const alternates = hreflangAlternatesForPage(page);
+  if (!alternates.length) return '';
 
-  return hreflang
+  return alternates
     .map((alt) => {
       const href = normalizeHref(alt.href);
       return `\t\t<xhtml:link rel="alternate" hreflang="${escapeXml(alt.hreflang)}" href="${escapeXml(href)}" />`;
@@ -44,7 +46,7 @@ function buildHreflangLinks(hreflang) {
 function buildUrlEntry(page, generatedAt) {
   const loc = absoluteSitemapUrl(page.route);
   const lastmod = sitemapLastmodForPage(page, generatedAt);
-  const hreflang = buildHreflangLinks(page.hreflang);
+  const hreflang = buildHreflangLinks(page);
 
   const lines = [`\t<url>`, `\t\t<loc>${escapeXml(loc)}</loc>`];
   if (hreflang) lines.push(hreflang);
