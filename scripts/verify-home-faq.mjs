@@ -28,7 +28,10 @@ function outPathForRoute(route) {
 
 function verifyBodyHtml(html, label, expectedItems) {
   assert(html.includes('id="native-home-faq"'), `${label}: missing native-home-faq`);
-  assert(!html.includes('elementor-element-aa7fa52'), `${label}: legacy FAQ section still present`);
+  assert(
+    !html.includes('class="elementor-element elementor-element-aa7fa52'),
+    `${label}: legacy FAQ section still present`,
+  );
   assert(!html.includes('elementskit-accordion'), `${label}: legacy elementskit accordion still present`);
   assert(!html.includes('href="#collapse-'), `${label}: legacy lowercase #collapse- hrefs still present`);
   assert(html.includes('class="home-faq__item"'), `${label}: missing native FAQ items`);

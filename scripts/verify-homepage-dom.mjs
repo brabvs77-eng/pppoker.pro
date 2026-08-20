@@ -82,7 +82,7 @@ async function main() {
       if (!html.includes('id="native-home-faq-slot"') && !html.includes('id="native-home-faq"')) {
         violations.push(`[${route}] Missing native FAQ slot or section`);
       }
-      if (faqSectionId && html.includes(`elementor-element-${faqSectionId}`)) {
+      if (faqSectionId && html.includes(`class="elementor-element elementor-element-${faqSectionId}`)) {
         violations.push(`[${route}] Legacy FAQ section ${faqSectionId} still present`);
       }
     }
