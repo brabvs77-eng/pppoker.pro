@@ -13,15 +13,15 @@ const port = 9876;
 const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0, minReviewCards: 0, checkHeroCtas: false, checkCrashVideo: false },
+  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 0, minReviewCards: 0, checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'load',
@@ -78,6 +78,9 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
           `link[rel="alternate"][type="application/rss+xml"][href="${feedHref}"]`,
         )
       : true,
+    nativeFooter: !!document.querySelector('footer.site-footer'),
+    legacyColophon: !!document.querySelector('#colophon'),
+    instagramLink: document.body.innerHTML.includes('instagram.com/pppoker_union_nuts'),
   }), {
     channel: siteContacts.telegramChannel,
     feedHref,
@@ -133,6 +136,11 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
   if (feedHref && !state.rssLink) {
     violations.push(`[${label}] Missing RSS alternate link ${feedHref}`);
   }
+  if (checkNativeFooter) {
+    if (!state.nativeFooter) violations.push(`[${label}] Missing native site footer`);
+    if (state.legacyColophon) violations.push(`[${label}] Legacy #colophon footer still in DOM`);
+    if (!state.instagramLink) violations.push(`[${label}] Missing Instagram link in native footer`);
+  }
 
   return violations;
 }
@@ -163,7 +171,7 @@ async function main() {
     }
 
     console.log(
-      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, native footer, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
     );
   } finally {
     await browser.close();

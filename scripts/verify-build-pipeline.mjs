@@ -28,6 +28,14 @@ if (!workflow.includes('npm run smoke:landing-pages')) {
   violations.push('GitHub Actions workflow must run smoke:landing-pages after npm run build');
 }
 
+if (!workflow.includes('npm run verify:analytics')) {
+  violations.push('GitHub Actions workflow must run verify:analytics after npm run build');
+}
+
+if (!workflow.includes('npm run lighthouse:budget')) {
+  violations.push('GitHub Actions workflow must run lighthouse:budget after npm run build');
+}
+
 if (!cloudflareReadme.includes('npm run build')) {
   violations.push('deploy/cloudflare/README.md must document npm run build for Cloudflare Pages');
 }
