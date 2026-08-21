@@ -42,7 +42,11 @@ async function main() {
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const faqRoutes = new Set(
+    (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
+  const faqSectionId = chrome.legacyFaqSectionElementId;
   const violations = [];
 
   for (const {
@@ -71,6 +75,15 @@ async function main() {
       }
       if (reviewsSectionId && html.includes(`elementor-element-${reviewsSectionId}`)) {
         violations.push(`[${route}] Legacy reviews section ${reviewsSectionId} still present`);
+      }
+    }
+
+    if (faqRoutes.has(route)) {
+      if (!html.includes('id="native-home-faq-slot"') && !html.includes('id="native-home-faq"')) {
+        violations.push(`[${route}] Missing native FAQ slot or section`);
+      }
+      if (faqSectionId && html.includes(`class="elementor-element elementor-element-${faqSectionId}`)) {
+        violations.push(`[${route}] Legacy FAQ section ${faqSectionId} still present`);
       }
     }
   }

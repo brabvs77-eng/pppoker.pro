@@ -13,15 +13,15 @@ const port = 9876;
 const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 2, minReviewCards: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
+  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'load',
@@ -41,6 +41,9 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
+    nativeFaq: !!document.querySelector('#native-home-faq'),
+    nativeFaqItems: document.querySelectorAll('.home-faq__item').length,
+    legacyFaqAccordion: !!document.querySelector('.elementskit-accordion, .elementor-widget-elementskit-accordion'),
     channelLink: !!document.querySelector(`a[href="${channel}"]`),
     whatsappLinks: whatsappMarkers.filter((marker) => document.body.innerHTML.includes(marker)).length,
     heroCtaGroup: !!document.querySelector('.hero-cta-group'),
@@ -94,6 +97,15 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     );
   }
   if (state.faqBadHash) violations.push(`[${label}] FAQ still has lowercase #collapse- anchors`);
+  if (minFaqItems > 0 && !state.nativeFaq) {
+    violations.push(`[${label}] Missing native home FAQ section`);
+  }
+  if (minFaqItems > 0 && state.legacyFaqAccordion) {
+    violations.push(`[${label}] Legacy elementskit-accordion still in DOM`);
+  }
+  if (minFaqItems > 0 && state.nativeFaqItems < minFaqItems) {
+    violations.push(`[${label}] Expected at least ${minFaqItems} native FAQ items, found ${state.nativeFaqItems}`);
+  }
   if (!state.channelLink) violations.push(`[${label}] Missing Telegram channel link in header`);
   if (state.whatsappLinks > 0) violations.push(`[${label}] WhatsApp links still present on page`);
   if (checkHeroCtas) {

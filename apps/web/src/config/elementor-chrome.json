@@ -46,6 +46,14 @@
     { "fileId": "uz", "route": "/uz/" },
     { "fileId": "kz", "route": "/kz/" }
   ],
+  "legacyFaqSectionElementId": "aa7fa52",
+  "homeFaqSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" }
+  ],
   "stripLegacyFooterRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "en", "route": "/en/" },
