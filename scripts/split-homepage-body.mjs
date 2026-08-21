@@ -12,6 +12,7 @@ const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
 const promoBlocksSlotHtml = '<div id="native-home-promo-blocks-slot"></div>';
 const promoModalsSlotHtml = '<div id="native-home-promo-modals-slot"></div>';
+const heroSlotHtml = '<div id="native-home-hero-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -158,6 +159,9 @@ async function main() {
   const promoModalsRoutes = new Set(
     (chrome.homePromoModalsSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const heroRoutes = new Set(
+    (chrome.homeHeroSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
   );
@@ -195,6 +199,14 @@ async function main() {
     }
 
     let processed = withSlot;
+
+    if (heroRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(
+        processed,
+        chrome.homepageHeroRootElementId,
+        heroSlotHtml,
+      );
+    }
 
     if (registrationDesktopSectionId && registrationRoutes.has(route)) {
       processed = replaceElementorSectionWithSlot(

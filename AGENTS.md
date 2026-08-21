@@ -197,6 +197,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Home promo blocks (CRASH / Russian Poker) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — static HTML + autoplay script; `verify:home-promo-blocks` |
 | Home promo modals (bonus / events / jackpot) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — native `<dialog>` + stripped Elementor popups; `verify:home-promo-modals` |
 | Dead homepage markup stripped | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — legacy `#masthead`, Widster, duplicate hero CTAs; `verify:home-dead-markup` |
+| Home hero | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — native static hero + Telegram CTA; `verify:home-hero` |
 | Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime`; empty spacers stripped; `verify:home-shell` |
 
 ## Planned work (backlog)

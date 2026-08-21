@@ -54,6 +54,9 @@ async function main() {
   const promoModalsRoutes = new Set(
     (chrome.homePromoModalsSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const heroRoutes = new Set(
+    (chrome.homeHeroSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -152,6 +155,15 @@ async function main() {
     if (promoModalsRoutes.has(route)) {
       if (!html.includes('id="native-home-promo-modals-slot"') && !html.includes('id="native-home-promo-modals"')) {
         violations.push(`[${route}] Missing native promo modals slot or section`);
+      }
+    }
+
+    if (heroRoutes.has(route)) {
+      if (!html.includes('id="native-home-hero-slot"') && !html.includes('id="native-home-hero"')) {
+        violations.push(`[${route}] Missing native hero slot or section`);
+      }
+      if (chrome.homepageHeroRootElementId && html.includes(`class="elementor-element elementor-element-${chrome.homepageHeroRootElementId}`)) {
+        violations.push(`[${route}] Legacy hero section ${chrome.homepageHeroRootElementId} still present`);
       }
     }
 

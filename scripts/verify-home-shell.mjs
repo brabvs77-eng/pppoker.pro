@@ -57,6 +57,15 @@ function verifyShellHtml(html, label, chrome) {
   assert(html.includes('id="native-home-cash-games"'), `${label}: missing native cash games`);
   assert(html.includes('id="native-review-snippets"'), `${label}: missing native reviews`);
   assert(html.includes('id="native-home-faq"'), `${label}: missing native FAQ`);
+  assert(html.includes('id="native-home-hero"'), `${label}: missing native hero`);
+
+  const heroId = chrome.homepageHeroRootElementId;
+  if (heroId) {
+    assert(
+      !html.includes(`class="elementor-element elementor-element-${heroId}`),
+      `${label}: legacy hero ${heroId} still present`,
+    );
+  }
 }
 
 function main() {

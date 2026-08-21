@@ -1,0 +1,164 @@
+{
+  "heroByLocale": {
+    "ru": {
+      "logoSrc": "/assets/media/2024/07/NUTS.webp",
+      "turboImage": "/assets/media/elementor/thumbs/turbo-rg5s7cldmmlgkbw98se2hgmy8skiuap9bgbkzyuq60.webp",
+      "eyebrow": "ONLINE",
+      "title": "ПОКЕР КЛУБ  PPPOKER",
+      "tagline": ["Вступай в NUTS - крупнейший", "онлайн клуб на платформе PPPoker."],
+      "playerCount": {
+        "main": "50 000 игроков pppoker",
+        "accent": "из Америки, Европы и Азии."
+      },
+      "hobbyistLine": {
+        "main": "Только любители покера.",
+        "accent": "Вступайте в наш клуб и выигрывайте сегодня!"
+      },
+      "bonus": {
+        "startPlayingHeadings": [
+          "НАЧАТЬ ИГРАТЬ\nВ ПОКЕР",
+          "Можно через вашего\nперсонального менеджера Nuts.",
+          "Он все расскажет, поможет\nнастроить приложение pppoker\nи даст...🔥🔥🔥"
+        ],
+        "label": "Бонус",
+        "percent": "150%",
+        "depositLine": "на депозит\nдо 500$",
+        "managerCta": "Написать менеджеру и забрать бонус !!!"
+      },
+      "selfRegister": {
+        "prefix": "Или вы можете ",
+        "linkText": "Зарегистрироваться в pppoker",
+        "suffix": " самостоятельно по нашей подробной инструкции."
+      },
+      "telegramCtaLabel": "Написать в Telegram"
+    },
+    "en": {
+      "logoSrc": "/assets/media/2024/07/NUTS.png",
+      "turboImage": "/assets/media/elementor/thumbs/turbo-rg5tbrnji5xbsp6p89cjp9ght9cptr5qvi77waxam0.webp",
+      "eyebrow": "ONLINE",
+      "title": "poker club pppoker",
+      "tagline": ["The biggest online poker", "club on the PPPoker platform."],
+      "playerCount": {
+        "main": "50 000 pppoker players",
+        "accent": "from Latin America, Europe and Asia."
+      },
+      "hobbyistLine": {
+        "main": "Only poker amateurs.",
+        "accent": "Join our club and get win today!"
+      },
+      "bonus": {
+        "startPlayingHeadings": [
+          "START PLAYING PPPOKER",
+          "You can start through your\npersonal manager.",
+          "We will explain everything, help with setup,\nand provide you with...🔥🔥🔥"
+        ],
+        "label": "bonus",
+        "percent": "150%",
+        "depositLine": "on deposit\nUP to 500$",
+        "managerCta": "Message to manager and claim your bonus now !!!"
+      },
+      "selfRegister": {
+        "prefix": "Or you can ",
+        "linkText": "Register in pppoker",
+        "suffix": " yourself using our detailed guide."
+      },
+      "telegramCtaLabel": "Message on Telegram"
+    },
+    "hy": {
+      "logoSrc": "/assets/media/2024/07/NUTS.png",
+      "turboImage": "/assets/media/elementor/thumbs/turbo-rfpvvde70baxs2bn03t8cay7kcycahc678ci7akrg8.webp",
+      "eyebrow": "առցանց",
+      "title": "ՊՈԿԵՐ ԱԿՈՒՄԲ  PPPOKER",
+      "tagline": ["Միանալ NUTS - ամենամեծ", "առցանց ակումբ հարթակում PPPoker."],
+      "playerCount": {
+        "main": "50,000 խաղացողներ pppoker",
+        "accent": "Ամերիկայից, Եվրոպայից և Ասիայից."
+      },
+      "hobbyistLine": {
+        "main": "Միայն պոկերի սիրահարներ.",
+        "accent": "Միացեք մեր ակումբին և հաղթեք այսօր!"
+      },
+      "bonus": {
+        "startPlayingHeadings": [
+          "ՍԿՍԵՔ ԽԱՂԱԼ\nՊՈԿԵՐ",
+          "Հնարավոր է ձեր միջոցով\nանհատական մենեջեր Nuts.",
+          "Նա կպատմի ամեն ինչ, կօգնի\nկարգավորել հավելվածը pppoker\nԵվ կտա...🔥🔥🔥"
+        ],
+        "label": "Բոնուս",
+        "percent": "150%",
+        "depositLine": "ավանդի վրա\nմինչև 500$",
+        "managerCta": "Գրեք մենեջերին և Վերցրեք բոնուսը !!!"
+      },
+      "selfRegister": {
+        "prefix": "Կամ դուք կարող եք ",
+        "linkText": "Գրանցվել pppoker",
+        "suffix": " ինքնուրույն՝ մեր մանրամասն հրահանգով։"
+      },
+      "telegramCtaLabel": "Գրել Telegram-ում"
+    },
+    "uz": {
+      "logoSrc": "/assets/media/2024/07/NUTS.png",
+      "turboImage": "/assets/media/elementor/thumbs/turbo-rg5tbrnji5xbsp6p89cjp9ght9cptr5qvi77waxam0.webp",
+      "eyebrow": "ONLINE",
+      "title": "poker klubi pppoker",
+      "tagline": ["Dunyodagi eng katta", "platformadagi onlayn klub PPPoker."],
+      "playerCount": {
+        "main": "50 000 o'yinchilar",
+        "accent": "Amerika, Evropa va Osiyodan."
+      },
+      "hobbyistLine": {
+        "main": "Faqat havaskorlar.",
+        "accent": "Bizning klubimizga qo'shiling va bugun g'alaba qozoning!"
+      },
+      "bonus": {
+        "startPlayingHeadings": [
+          "O'YNASHNI BOSHLANG PPPOKER",
+          "Siz orqali mumkin\nshaxsiy menejer.",
+          "U hamma narsani aytib beradi, yordam beradi\nsozlash va beradi 🔥🔥🔥"
+        ],
+        "label": "bonus",
+        "percent": "150%",
+        "depositLine": "depozit uchun\n500$ dollargacha",
+        "managerCta": "Menejerga yozing va bonusni oling !!!"
+      },
+      "selfRegister": {
+        "prefix": "Yoki siz ",
+        "linkText": "Ro'yxatdan o'tish",
+        "suffix": " mumkin — batafsil ko'rsatma bo'yicha."
+      },
+      "telegramCtaLabel": "Telegramga yozish"
+    },
+    "kz": {
+      "logoSrc": "/assets/media/2024/07/NUTS.png",
+      "turboImage": "/assets/media/elementor/thumbs/turbo-rg5tbrnji5xbsp6p89cjp9ght9cptr5qvi77waxam0.webp",
+      "eyebrow": "ONLINE",
+      "title": "ПОКЕР КЛУБЫ",
+      "tagline": ["Әлемдегі ең үлкен", "PPPoker платформasındaғы онлайн клуб."],
+      "playerCount": {
+        "main": "50 000 ойыншы",
+        "accent": "Америкадан, Еуропадан және Азиядан."
+      },
+      "hobbyistLine": {
+        "main": "Тек әуесқойлар.",
+        "accent": "Біздің клубқа қосылыңыз және бүгін жеңіске жетіңіз!"
+      },
+      "bonus": {
+        "startPlayingHeadings": [
+          "ОЙНАУДЫ БАСТАУ",
+          "Сіз арқылы мүмкін болады\nдербес менеджердің.",
+          "Ол бәрін айтып береді, орнатуға\nкөмектеседі және береді 🔥🔥🔥"
+        ],
+        "label": "Бонус",
+        "percent": "150%",
+        "depositLine": "депозитке\nдо 500$",
+        "managerCta": "Менеджерге хат жазып, бонусты алыңыз !!!"
+      },
+      "selfRegister": {
+        "prefix": "Немесе сіз ",
+        "linkText": "Тіркелу",
+        "suffix": " мүмкін — біздің толық нұсқаулық бойынша."
+      },
+      "telegramCtaLabel": "Telegram-ға жазу"
+    }
+  }
+}
