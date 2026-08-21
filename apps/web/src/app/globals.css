@@ -2151,7 +2151,7 @@ body {
 }
 
 .home-promo-modals {
-  display: none;
+  /* Do not use display:none — it prevents <dialog showModal()> from rendering. */
 }
 
 .home-promo-modal {

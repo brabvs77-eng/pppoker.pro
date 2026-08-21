@@ -11,6 +11,7 @@ const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'apps/web/out');
 const BODIES = path.join(ROOT, 'content/bodies');
 const CHROME = path.join(ROOT, 'apps/web/src/config/elementor-chrome.json');
+const GLOBALS_CSS = path.join(ROOT, 'apps/web/src/app/globals.css');
 
 function read(p) {
   return fs.readFileSync(p, 'utf8');
@@ -54,7 +55,17 @@ function verifyBodyHtml(html, label) {
   );
 }
 
+function verifyGlobalsCss(css) {
+  const block = css.match(/\.home-promo-modals\s*\{[^}]*\}/s)?.[0] ?? '';
+  const declarations = block.replace(/\/\*[\s\S]*?\*\//g, '');
+  assert(
+    !/display\s*:\s*none/.test(declarations),
+    'globals.css: .home-promo-modals must not use display:none (breaks dialog showModal)',
+  );
+}
+
 function main() {
+  verifyGlobalsCss(read(GLOBALS_CSS));
   const chrome = JSON.parse(read(CHROME));
   const modalRoutes = chrome.homePromoModalsSlotRoutes ?? [];
 
