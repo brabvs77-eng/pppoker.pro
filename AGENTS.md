@@ -49,7 +49,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 4. **Home review slot** (`homeReviewSlotRoutes`) → static review cards + `ReviewSnippetsJsonLd`; no client portal
 5. **Everything else** → `WordPressBody` + Elementor CSS; load runtime only if `needsElementorRuntime`
 
-`needsElementorRuntime` is false when body has no interactive widgets (swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, taxonomy redirect, or a static landing page that only embeds global Elementor popups.
+`needsElementorRuntime` is false when body has no interactive widgets (swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, taxonomy redirect, native home shell (`/`, `/en/`, `/hy/`, `/uz/`, `/kz/`), or a static landing page that only embeds global Elementor popups.
 
 ## Hard constraints (CI will fail)
 
@@ -191,7 +191,9 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Analytics on native pages | `AnalyticsScripts` when Elementor runtime skipped; `verify:analytics` in GHA |
 | Native footer social | Telegram channel + Instagram in `SiteFooter`; `#colophon` stripped on home; smoke checks |
 | Lighthouse CI | `lighthouse:budget` in GHA after smoke — LCP ≤ 4500ms, CLS ≤ 0.10 on 5 homepages |
-| Homepage performance | `fix:below-fold-images`; CRASH poster preload; `verify:below-fold-images` |
+| Home FAQ accordion | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS `<details>`; `verify:home-faq`; smoke |
+| Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
+| Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime` |
 
 ## Planned work (backlog)
 
@@ -200,7 +202,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 2. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
 3. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
 4. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
-5. More Elementor sections → native components
+5. More Elementor sections → native components (e.g. cash games grid `79d6e08`)
 
 ## Adding or updating content
 

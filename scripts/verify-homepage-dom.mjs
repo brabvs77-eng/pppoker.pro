@@ -45,8 +45,13 @@ async function main() {
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const registrationRoutes = new Set(
+    (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const faqSectionId = chrome.legacyFaqSectionElementId;
+  const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
+  const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
   const violations = [];
 
   for (const {
@@ -84,6 +89,18 @@ async function main() {
       }
       if (faqSectionId && html.includes(`class="elementor-element elementor-element-${faqSectionId}`)) {
         violations.push(`[${route}] Legacy FAQ section ${faqSectionId} still present`);
+      }
+    }
+
+    if (registrationRoutes.has(route)) {
+      if (!html.includes('id="native-home-registration-slot"') && !html.includes('id="native-home-registration"')) {
+        violations.push(`[${route}] Missing native registration slot or section`);
+      }
+      if (registrationDesktopSectionId && html.includes(`class="elementor-element elementor-element-${registrationDesktopSectionId}`)) {
+        violations.push(`[${route}] Legacy registration desktop section ${registrationDesktopSectionId} still present`);
+      }
+      if (registrationMobileSectionId && html.includes(`class="elementor-element elementor-element-${registrationMobileSectionId}`)) {
+        violations.push(`[${route}] Legacy registration mobile section ${registrationMobileSectionId} still present`);
       }
     }
   }

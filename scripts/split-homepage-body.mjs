@@ -8,6 +8,7 @@ const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json
 const slotHtml = '<div id="native-home-blog-slot"></div>';
 const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
 const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
+const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -31,6 +32,20 @@ function findMatchingDivClose(html, divStart) {
   }
 
   return -1;
+}
+
+function stripElementorSection(bodyHtml, elementId) {
+  const classNeedle = `elementor-element-${elementId}`;
+  const classIndex = bodyHtml.indexOf(classNeedle);
+  if (classIndex === -1) return bodyHtml;
+
+  const divStart = bodyHtml.lastIndexOf('<div', classIndex);
+  if (divStart === -1) return bodyHtml;
+
+  const divEnd = findMatchingDivClose(bodyHtml, divStart);
+  if (divEnd === -1) return bodyHtml;
+
+  return `${bodyHtml.slice(0, divStart)}${bodyHtml.slice(divEnd)}`;
 }
 
 function replaceElementorSectionWithSlot(bodyHtml, elementId, slotMarkup) {
@@ -78,12 +93,17 @@ async function main() {
   const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const faqSectionId = chrome.legacyFaqSectionElementId;
+  const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
+  const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
   );
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const registrationRoutes = new Set(
+    (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
@@ -126,9 +146,19 @@ async function main() {
         ? replaceElementorSectionWithSlot(withReviewSlot, faqSectionId, faqSlotHtml)
         : withReviewSlot;
 
+    const withRegistrationSlot =
+      registrationDesktopSectionId && registrationRoutes.has(route)
+        ? replaceElementorSectionWithSlot(withFaqSlot, registrationDesktopSectionId, registrationSlotHtml)
+        : withFaqSlot;
+
+    const withoutMobileRegistration =
+      registrationMobileSectionId && registrationRoutes.has(route)
+        ? stripElementorSection(withRegistrationSlot, registrationMobileSectionId)
+        : withRegistrationSlot;
+
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)
-      ? stripLegacyFooter(withFaqSlot)
-      : withFaqSlot;
+      ? stripLegacyFooter(withoutMobileRegistration)
+      : withoutMobileRegistration;
 
     const balance = divTagBalance(withoutLegacyFooter);
     if (balance !== 0) {

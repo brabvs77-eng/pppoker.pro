@@ -6,6 +6,7 @@ import {
   bodyNeedsElementorRuntime,
   ELEMENTOR_POPUP_MARKER,
   isBlogArchiveRoute,
+  isNativeHomeShellRoute,
 } from './lib/elementor-runtime-budget.mjs';
 import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.mjs';
 import { POPUP_ONLY_LANDING_ROUTES } from './lib/landing-pages.mjs';
@@ -52,6 +53,10 @@ async function main() {
 
     if (taxonomyBlogRedirectDestination(page.route, page.locale) && page.needsElementorRuntime !== false) {
       violations.push(`Taxonomy redirect ${page.route} must not need Elementor runtime`);
+    }
+
+    if (isNativeHomeShellRoute(page.route) && page.needsElementorRuntime !== false) {
+      violations.push(`Native home shell ${page.route} must not need Elementor runtime`);
     }
 
     if (!needsRuntime) continue;

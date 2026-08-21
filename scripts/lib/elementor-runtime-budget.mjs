@@ -23,6 +23,11 @@ export function isBlogArchiveRoute(route) {
   return /^\/(en|uz|kz|hy|tj)\/blog(\/page\/\d+)?\/?$/.test(route);
 }
 
+/** Homepages with native blog/review/FAQ/registration shells — no Elementor JS. */
+export function isNativeHomeShellRoute(route) {
+  return ['/', '/en/', '/hy/', '/uz/', '/kz/'].includes(route);
+}
+
 export function bodyNeedsElementorRuntime(bodyHtml) {
   return INTERACTIVE_RUNTIME_MARKERS.some((marker) => bodyHtml.includes(marker));
 }
@@ -41,6 +46,7 @@ export function needsElementorRuntime({
   if (hasNativePage) return false;
   if (isBlogArchiveRoute(route)) return false;
   if (taxonomyBlogRedirectDestination(route, locale)) return false;
+  if (isNativeHomeShellRoute(route)) return false;
 
   return bodyNeedsElementorRuntime(bodyHtml);
 }

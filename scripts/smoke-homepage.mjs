@@ -13,21 +13,21 @@ const port = 9876;
 const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 2, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'EN', urlPath: '/en/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 2, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 2, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
+  { label: 'RU', urlPath: '/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'EN', urlPath: '/en/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistrationSlides = 0, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'load',
     timeout: 90_000,
   });
-  await page.waitForSelector('.elementor-main-swiper, .hero-cta-group, .site-header', {
+  await page.waitForSelector('.home-reg__slide, .hero-cta-group, .site-header', {
     timeout: 30_000,
   }).catch(() => {});
   await page.waitForTimeout(5000);
@@ -43,6 +43,9 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
     nativeFaq: !!document.querySelector('#native-home-faq'),
     nativeFaqItems: document.querySelectorAll('.home-faq__item').length,
+    nativeRegistration: !!document.querySelector('#native-home-registration'),
+    nativeRegistrationSlides: document.querySelectorAll('.home-reg__slide').length,
+    legacySwiper: document.querySelectorAll('.elementor-main-swiper').length,
     legacyFaqAccordion: !!document.querySelector('.elementskit-accordion, .elementor-widget-elementskit-accordion'),
     channelLink: !!document.querySelector(`a[href="${channel}"]`),
     whatsappLinks: whatsappMarkers.filter((marker) => document.body.innerHTML.includes(marker)).length,
@@ -94,6 +97,17 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minHomeBlogCard
   if (state.swiperInitialized < minSwipers) {
     violations.push(
       `[${label}] Expected ${minSwipers} initialized swipers, got ${state.swiperInitialized}/${state.swiperTotal}`,
+    );
+  }
+  if (minRegistrationSlides > 0 && !state.nativeRegistration) {
+    violations.push(`[${label}] Missing native home registration section`);
+  }
+  if (minRegistrationSlides > 0 && state.legacySwiper > 0) {
+    violations.push(`[${label}] Legacy elementor-main-swiper still in DOM (${state.legacySwiper})`);
+  }
+  if (minRegistrationSlides > 0 && state.nativeRegistrationSlides < minRegistrationSlides) {
+    violations.push(
+      `[${label}] Expected at least ${minRegistrationSlides} native registration slides, found ${state.nativeRegistrationSlides}`,
     );
   }
   if (state.faqBadHash) violations.push(`[${label}] FAQ still has lowercase #collapse- anchors`);
@@ -183,7 +197,7 @@ async function main() {
     }
 
     console.log(
-      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (swiper, FAQ, contacts, native footer, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (registration, FAQ, contacts, native footer, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
     );
   } finally {
     await browser.close();
