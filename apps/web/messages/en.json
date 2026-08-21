@@ -44,10 +44,14 @@
   "siteFooter": {
     "languageLabel": "Language",
     "navLabel": "Footer navigation",
+    "socialLabel": "Social and contacts",
+    "paymentsLabel": "Payment methods",
+    "partnerLabel": "iplanuts partner project",
     "blog": "Blog",
     "manager": "Manager",
     "channel": "Telegram channel",
     "instagram": "Instagram",
+    "youtube": "YouTube channel Life as a poker",
     "terms": "User agreement",
     "privacy": "Privacy policy",
     "tagline": "online poker club"

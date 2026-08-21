@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import { chromium } from 'playwright';
 
-import { siteContacts, siteLegalEntity } from './lib/site-contacts.mjs';
+import { siteContacts, siteLegalEntity, siteSocial, iplanutsHref, FOOTER_PAYMENT_ICON_COUNT } from './lib/site-contacts.mjs';
 import { startStaticServer } from './lib/smoke-static-server.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -21,8 +21,19 @@ const HOME_SMOKE_PAGES = [
   { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minCashGameCards: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
 ];
 
+const LOCALE_BY_LABEL = {
+  RU: 'ru',
+  HY: 'hy',
+  EN: 'en',
+  UZ: 'uz',
+  KZ: 'kz',
+  TJ: 'tj',
+};
+
 async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistrationSlides = 0, minCashGameCards = 0, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
   const violations = [];
+  const locale = LOCALE_BY_LABEL[label] ?? 'ru';
+  const partnerUrl = iplanutsHref(locale);
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'load',
     timeout: 90_000,
@@ -37,7 +48,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     await page.waitForTimeout(2000);
   }
 
-  const state = await page.evaluate(async ({ channel, feedHref, checkCrashVideo, whatsappMarkers, phoneHref }) => ({
+  const state = await page.evaluate(async ({ channel, feedHref, checkCrashVideo, whatsappMarkers, phoneHref, youtubeUrl, partnerUrl }) => ({
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
@@ -91,12 +102,17 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     instagramLink: document.body.innerHTML.includes('instagram.com/pppoker_union_nuts'),
     footerAddress: !!document.querySelector('.site-footer__address'),
     footerPhone: !!document.querySelector(`a.site-footer__phone[href="${phoneHref}"]`),
+    footerYoutube: !!document.querySelector(`a.site-footer__social-card[href="${youtubeUrl}"]`),
+    footerPaymentIcons: document.querySelectorAll('.site-footer__payment img').length,
+    footerPartner: !!document.querySelector(`a.site-footer__partner-link[href="${partnerUrl}"]`),
   }), {
     channel: siteContacts.telegramChannel,
     feedHref,
     checkCrashVideo,
     whatsappMarkers: WHATSAPP_MARKERS,
     phoneHref: siteLegalEntity.phoneHref,
+    youtubeUrl: siteSocial.youtube,
+    partnerUrl,
   });
 
   if (state.swiperInitialized < minSwipers) {
@@ -181,6 +197,13 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     if (!state.instagramLink) violations.push(`[${label}] Missing Instagram link in native footer`);
     if (!state.footerAddress) violations.push(`[${label}] Missing footer address`);
     if (!state.footerPhone) violations.push(`[${label}] Missing footer phone link`);
+    if (!state.footerYoutube) violations.push(`[${label}] Missing footer YouTube link`);
+    if (state.footerPaymentIcons < FOOTER_PAYMENT_ICON_COUNT) {
+      violations.push(
+        `[${label}] Expected ${FOOTER_PAYMENT_ICON_COUNT} footer payment icons, found ${state.footerPaymentIcons}`,
+      );
+    }
+    if (!state.footerPartner) violations.push(`[${label}] Missing footer iplanuts partner link`);
   }
 
   return violations;

@@ -44,10 +44,14 @@
   "siteFooter": {
     "languageLabel": "Выбор языка",
     "navLabel": "Навигация в подвале",
+    "socialLabel": "Соцсети и контакты",
+    "paymentsLabel": "Способы оплаты",
+    "partnerLabel": "iplanuts — партнёрский проект",
     "blog": "Блог",
     "manager": "Менеджер",
     "channel": "Telegram-канал",
     "instagram": "Instagram",
+    "youtube": "YouTube канал «Жизнь как покер»",
     "terms": "Пользовательское соглашение",
     "privacy": "Политика конфиденциальности",
     "tagline": "онлайн покер-клуб"

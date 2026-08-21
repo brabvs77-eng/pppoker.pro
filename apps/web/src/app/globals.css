@@ -210,6 +210,127 @@ body {
   opacity: 0.85;
 }
 
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.site-footer__social-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e8ecf4;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.site-footer__social-card:hover {
+  border-color: rgba(253, 230, 97, 0.35);
+  background: rgba(253, 230, 97, 0.06);
+  color: #fde661;
+}
+
+.site-footer__social-card--compact {
+  padding: 0.35rem 0.6rem;
+}
+
+.site-footer__social-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
+.site-footer__social-label {
+  line-height: 1.2;
+  text-align: left;
+}
+
+.site-footer__payments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.65rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 52rem;
+  padding: 0.75rem 0;
+}
+
+.site-footer__payment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.25rem 0.35rem;
+}
+
+.site-footer__payment img {
+  display: block;
+  max-height: 2.75rem;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.site-footer__payment:hover img {
+  filter: grayscale(100%);
+}
+
+.site-footer__partner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-footer__partner-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.site-footer__partner-link:hover {
+  opacity: 0.85;
+}
+
+.site-footer__partner-link img {
+  display: block;
+  width: 2.75rem;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .site-footer__social-label {
+    font-size: 0.78rem;
+  }
+
+  .site-footer__payment {
+    min-height: 2.75rem;
+  }
+
+  .site-footer__payment img {
+    max-height: 2rem;
+  }
+
+  .site-footer__partner {
+    display: none;
+  }
+}
+
 .locale-switcher__list {
   display: flex;
   flex-wrap: wrap;
