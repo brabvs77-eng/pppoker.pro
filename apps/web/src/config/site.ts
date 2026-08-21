@@ -90,6 +90,15 @@ export const siteSocial = {
   instagram: 'https://www.instagram.com/pppoker_union_nuts/',
 } as const;
 
+/** Legal entity block shown in native SiteFooter (legacy #colophon). */
+export const siteLegalEntity = {
+  associationName: 'International Poker Lovers Association NUTS',
+  copyrightStartYear: 2017,
+  address: "QQ7V+C7G, 34 Chargali St, T'bilisi, Georgia",
+  phoneDisplay: '+995 599 99 59 78',
+  phoneHref: 'tel:+995599995978',
+} as const;
+
 /** Yandex Metrika + Google Tag (Site Kit) — same IDs as legacy WordPress export. */
 export const siteAnalytics = {
   yandexMetrikaId: 98592596,

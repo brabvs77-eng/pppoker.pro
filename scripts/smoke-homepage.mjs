@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import { chromium } from 'playwright';
 
-import { siteContacts } from './lib/site-contacts.mjs';
+import { siteContacts, siteLegalEntity } from './lib/site-contacts.mjs';
 import { startStaticServer } from './lib/smoke-static-server.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -37,7 +37,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     await page.waitForTimeout(2000);
   }
 
-  const state = await page.evaluate(async ({ channel, feedHref, checkCrashVideo, whatsappMarkers }) => ({
+  const state = await page.evaluate(async ({ channel, feedHref, checkCrashVideo, whatsappMarkers, phoneHref }) => ({
     swiperInitialized: document.querySelectorAll('.elementor-main-swiper.swiper-initialized').length,
     swiperTotal: document.querySelectorAll('.elementor-main-swiper').length,
     faqBadHash: !!document.querySelector('a[href^="#collapse-"]'),
@@ -89,11 +89,14 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     nativeFooter: !!document.querySelector('footer.site-footer'),
     legacyColophon: !!document.querySelector('#colophon'),
     instagramLink: document.body.innerHTML.includes('instagram.com/pppoker_union_nuts'),
+    footerAddress: !!document.querySelector('.site-footer__address'),
+    footerPhone: !!document.querySelector(`a.site-footer__phone[href="${phoneHref}"]`),
   }), {
     channel: siteContacts.telegramChannel,
     feedHref,
     checkCrashVideo,
     whatsappMarkers: WHATSAPP_MARKERS,
+    phoneHref: siteLegalEntity.phoneHref,
   });
 
   if (state.swiperInitialized < minSwipers) {
@@ -176,6 +179,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     if (!state.nativeFooter) violations.push(`[${label}] Missing native site footer`);
     if (state.legacyColophon) violations.push(`[${label}] Legacy #colophon footer still in DOM`);
     if (!state.instagramLink) violations.push(`[${label}] Missing Instagram link in native footer`);
+    if (!state.footerAddress) violations.push(`[${label}] Missing footer address`);
+    if (!state.footerPhone) violations.push(`[${label}] Missing footer phone link`);
   }
 
   return violations;

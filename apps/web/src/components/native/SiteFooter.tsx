@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 
-import { siteContacts, siteSocial } from '@/config/site';
+import { siteContacts, siteLegalEntity, siteSocial } from '@/config/site';
 import { getLocaleAlternates } from '@/lib/localeAlternates';
 import { blogHref, legalHref } from '@/lib/navigation';
 import type { PageEntry } from '@/lib/types';
@@ -45,8 +45,18 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
               <a href={legalHref(page.locale, 'privacy-policy')}>{t('privacy')}</a>
             </nav>
 
+            <address className="site-footer__contact" itemScope itemType="https://schema.org/PostalAddress">
+              <span className="site-footer__address" itemProp="streetAddress">
+                {siteLegalEntity.address}
+              </span>
+              <a className="site-footer__phone" href={siteLegalEntity.phoneHref} itemProp="telephone">
+                {siteLegalEntity.phoneDisplay}
+              </a>
+            </address>
+
             <p className="site-footer__copy">
-              © {year} Nuts · PPPoker.pro — {t('tagline')}
+              © {siteLegalEntity.copyrightStartYear}–{year} {siteLegalEntity.associationName} ·{' '}
+              {t('tagline')}
             </p>
           </>
         )}
