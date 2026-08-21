@@ -35,6 +35,15 @@ function verifyBodyHtml(html, label, expectedCards) {
   assert(html.includes('<article class="home-cash__card'), `${label}: missing native cash game cards`);
   const cardCount = (html.match(/<article class="home-cash__card home-cash__card--/g) || []).length;
   assert(cardCount === expectedCards, `${label}: expected ${expectedCards} cash game cards, got ${cardCount}`);
+
+  const variantCount = (html.match(/<li class="home-cash__variant">/g) || []).length;
+  const expectedVariants = loadHomeCashGames('ru').cards.find((card) => card.kind === 'variants')?.items?.length ?? 0;
+  if (expectedVariants > 0) {
+    assert(
+      variantCount === expectedVariants,
+      `${label}: expected ${expectedVariants} cash game variants, got ${variantCount}`,
+    );
+  }
 }
 
 function main() {
