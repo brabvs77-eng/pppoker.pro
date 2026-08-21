@@ -1,4 +1,5 @@
 import elementorChrome from './elementor-chrome.json';
+import footerPaymentIcons from './footer-payment-icons.json';
 import nativePagesConfig from './native-pages.json';
 
 /** Homepages using native React chrome (promo strip, deduped nav). */
@@ -88,7 +89,26 @@ export const siteContacts = {
 
 export const siteSocial = {
   instagram: 'https://www.instagram.com/pppoker_union_nuts/',
+  youtube: 'https://www.youtube.com/@nutsinternationalpokerlovers70',
 } as const;
+
+/** Decorative payment-method icons in native SiteFooter (legacy `.main_footer .shape_figure`). */
+export const siteFooterPaymentIcons = footerPaymentIcons.icons;
+
+/** PNG/WebP icons for footer social cards (legacy `#colophon`). */
+export const siteFooterAssets = {
+  telegramIcon: '/assets/media/2025/02/tg464.png',
+  instagramIcon: '/assets/media/2025/02/Ehrhhr1.png',
+  youtubeIcon: '/assets/media/2025/02/Elligege.png',
+  partnerIcon: '/assets/media/2025/02/Ellipggege.webp',
+} as const;
+
+/** iplanuts partner link — `/eng/` for EN/UZ/KZ, `/ru/` for RU/HY/TJ (legacy export). */
+export function iplanutsHref(locale: string): string {
+  return locale === 'en' || locale === 'uz' || locale === 'kz'
+    ? 'https://iplanuts.com/eng/'
+    : 'https://iplanuts.com/ru/';
+}
 
 /** Legal entity block shown in native SiteFooter (legacy #colophon). */
 export const siteLegalEntity = {
