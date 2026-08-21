@@ -45,6 +45,9 @@ async function main() {
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const cashGamesRoutes = new Set(
+    (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -52,6 +55,7 @@ async function main() {
   const faqSectionId = chrome.legacyFaqSectionElementId;
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
   const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
+  const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
   const violations = [];
 
   for (const {
@@ -101,6 +105,15 @@ async function main() {
       }
       if (registrationMobileSectionId && html.includes(`class="elementor-element elementor-element-${registrationMobileSectionId}`)) {
         violations.push(`[${route}] Legacy registration mobile section ${registrationMobileSectionId} still present`);
+      }
+    }
+
+    if (cashGamesRoutes.has(route)) {
+      if (!html.includes('id="native-home-cash-games-slot"') && !html.includes('id="native-home-cash-games"')) {
+        violations.push(`[${route}] Missing native cash games slot or section`);
+      }
+      if (cashGamesSectionId && html.includes(`class="elementor-element elementor-element-${cashGamesSectionId}`)) {
+        violations.push(`[${route}] Legacy cash games section ${cashGamesSectionId} still present`);
       }
     }
   }

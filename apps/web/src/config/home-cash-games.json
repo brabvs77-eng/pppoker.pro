@@ -1,0 +1,176 @@
+{
+  "icons": {
+    "ru": {
+      "cash": "/assets/media/2024/07/ph_poker-chip-fill.webp",
+      "buyins": "/assets/media/2024/07/material-symbols_poker-chip.webp",
+      "tournaments": "/assets/media/2024/07/Vector.webp"
+    },
+    "default": {
+      "cash": "/assets/media/2024/07/ph_poker-chip-fill.png",
+      "buyins": "/assets/media/2024/07/material-symbols_poker-chip.png",
+      "tournaments": "/assets/media/2024/07/Vector.png"
+    }
+  },
+  "cardsByLocale": {
+    "ru": [
+      {
+        "kind": "variants",
+        "title": "Кэш игры",
+        "subtitle": "Все какие есть",
+        "items": [
+          "NLH",
+          "PLO4",
+          "PLO5",
+          "PLO6",
+          "Short Deck <span class=\"home-cash__muted\">(6+)</span> SEKA",
+          "OFC <span class=\"home-cash__muted\">(Китайский)</span>"
+        ]
+      },
+      {
+        "kind": "buyins",
+        "title": "Бай-ины",
+        "subtitle": "На любой банкролл!",
+        "leadHtml": "Поставить на покерный стол<br> можно от",
+        "min": "0.4$",
+        "connector": "до",
+        "max": "2000$"
+      },
+      {
+        "kind": "tournaments",
+        "title": "Турниры",
+        "subtitle": "Огромные призовые",
+        "lines": ["40 турниров в день"],
+        "guaranteeLabel": "С гарантией до:",
+        "guaranteeAmount": "20000$"
+      }
+    ],
+    "en": [
+      {
+        "kind": "variants",
+        "title": "Cash games",
+        "subtitle": "All variations",
+        "items": [
+          "NLH",
+          "PLO4",
+          "PLO5",
+          "PLO6",
+          "Short Deck <span class=\"home-cash__muted\">(6+)</span> SEKA",
+          "OFC <span class=\"home-cash__muted\">(Chinese)</span>"
+        ]
+      },
+      {
+        "kind": "buyins",
+        "title": "Buy-ins",
+        "subtitle": "For any bankrolls!",
+        "leadHtml": "You can sit<br> on the table with",
+        "min": "0.4$",
+        "connector": "up to",
+        "max": "2000$"
+      },
+      {
+        "kind": "tournaments",
+        "title": "Tournaments",
+        "subtitle": "Massive prize pools!",
+        "lines": ["Up to 40 MTTs everyday"],
+        "guaranteeLabel": "With Guarantees up to:",
+        "guaranteeAmount": "20000$"
+      }
+    ],
+    "hy": [
+      {
+        "kind": "variants",
+        "title": "Քэш խաղեր",
+        "subtitle": "Բոլորը, ինչ կա",
+        "items": [
+          "NLH",
+          "PLO4",
+          "PLO5",
+          "PLO6",
+          "Short Deck <span class=\"home-cash__muted\">(6+)</span> SEKA",
+          "OFC <span class=\"home-cash__muted\">(Չինական)</span>"
+        ]
+      },
+      {
+        "kind": "buyins",
+        "title": "Բայ-իններ",
+        "subtitle": "Ցանկացած բանկռոլի համար!",
+        "leadHtml": "Պոկերի սեղանին դնել<br> Սկսած",
+        "min": "0.4$",
+        "connector": "մինչև",
+        "max": "2000$"
+      },
+      {
+        "kind": "tournaments",
+        "title": "Մրցաշարեր",
+        "subtitle": "Հսկայական մրցանակներ",
+        "lines": ["Օրական 40 մրցաշար"],
+        "guaranteeLabel": "Երաշխավորված մինչև:",
+        "guaranteeAmount": "20000$"
+      }
+    ],
+    "uz": [
+      {
+        "kind": "variants",
+        "title": "Kesh o'yinlari",
+        "subtitle": "Hammasi nima",
+        "items": [
+          "NLH",
+          "PLO4",
+          "PLO5",
+          "PLO6",
+          "Short Deck <span class=\"home-cash__muted\">(6+)</span> SEKA",
+          "OFC <span class=\"home-cash__muted\">(Xitoy)</span>"
+        ]
+      },
+      {
+        "kind": "buyins",
+        "title": "Bay-inlar",
+        "subtitle": "Har qanday bankroll uchun!",
+        "leadHtml": "Stolga qo'ying<br> mumkin",
+        "min": "0.4$",
+        "connector": "oldin",
+        "max": "2000$"
+      },
+      {
+        "kind": "tournaments",
+        "title": "Turnirlar",
+        "subtitle": "Katta sovrinlar!",
+        "lines": ["40 kuniga turnirlar"],
+        "guaranteeLabel": "Kafolat bilan:",
+        "guaranteeAmount": "20000$"
+      }
+    ],
+    "kz": [
+      {
+        "kind": "variants",
+        "title": "Кэш ойындар",
+        "subtitle": "Олардың барлығы бар",
+        "items": [
+          "NLH",
+          "PLO4",
+          "PLO5",
+          "PLO6",
+          "Short Deck <span class=\"home-cash__muted\">(6+)</span> SEKA",
+          "OFC <span class=\"home-cash__muted\">(Қытай)</span>"
+        ]
+      },
+      {
+        "kind": "buyins",
+        "title": "Бай-ины",
+        "subtitle": "Кез келген банкроллға!",
+        "leadHtml": "Үстелге қою<br> бастап болады",
+        "min": "0.4$",
+        "connector": "до",
+        "max": "2000$"
+      },
+      {
+        "kind": "tournaments",
+        "title": "Tурнирлер",
+        "subtitle": "Орасан зор жүлделі орындар!",
+        "lines": ["күніне 40 турнир"],
+        "guaranteeLabel": "Кепілдікпен дейін:",
+        "guaranteeAmount": "20000$"
+      }
+    ]
+  }
+}

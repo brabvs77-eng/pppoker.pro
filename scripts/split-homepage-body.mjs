@@ -9,6 +9,7 @@ const slotHtml = '<div id="native-home-blog-slot"></div>';
 const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
 const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
+const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -95,6 +96,7 @@ async function main() {
   const faqSectionId = chrome.legacyFaqSectionElementId;
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
   const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
+  const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
@@ -104,6 +106,9 @@ async function main() {
   );
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const cashGamesRoutes = new Set(
+    (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
   );
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
@@ -156,9 +161,14 @@ async function main() {
         ? stripElementorSection(withRegistrationSlot, registrationMobileSectionId)
         : withRegistrationSlot;
 
+    const withCashGamesSlot =
+      cashGamesSectionId && cashGamesRoutes.has(route)
+        ? replaceElementorSectionWithSlot(withoutMobileRegistration, cashGamesSectionId, cashGamesSlotHtml)
+        : withoutMobileRegistration;
+
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)
-      ? stripLegacyFooter(withoutMobileRegistration)
-      : withoutMobileRegistration;
+      ? stripLegacyFooter(withCashGamesSlot)
+      : withCashGamesSlot;
 
     const balance = divTagBalance(withoutLegacyFooter);
     if (balance !== 0) {
