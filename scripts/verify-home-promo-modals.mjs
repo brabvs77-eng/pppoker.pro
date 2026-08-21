@@ -11,6 +11,7 @@ const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'apps/web/out');
 const BODIES = path.join(ROOT, 'content/bodies');
 const CHROME = path.join(ROOT, 'apps/web/src/config/elementor-chrome.json');
+const GLOBALS_CSS = path.join(ROOT, 'apps/web/src/app/globals.css');
 
 function read(p) {
   return fs.readFileSync(p, 'utf8');
@@ -29,10 +30,13 @@ function verifyBodyHtml(html, label) {
   assert(html.includes('id="native-home-promo-modals"'), `${label}: missing native-home-promo-modals`);
   assert(!html.includes('elementor-location-popup'), `${label}: legacy Elementor popups still present`);
   assert(!html.includes('data-elementor-type="popup"'), `${label}: legacy popup containers still present`);
-  assert(html.includes('home-promo-modals-boot'), `${label}: missing promo modals boot script`);
   assert(html.includes('data-home-promo-modal="bonus"'), `${label}: missing bonus modal trigger`);
   assert(html.includes('data-home-promo-modal="events"'), `${label}: missing events modal trigger`);
   assert(html.includes('data-home-promo-modal="jackpot"'), `${label}: missing jackpot modal trigger`);
+  assert(html.includes('data-home-promo-card="bonus"'), `${label}: missing bonus card trigger`);
+  assert(html.includes('data-home-promo-card="events"'), `${label}: missing events card trigger`);
+  assert(html.includes('data-home-promo-card="jackpot"'), `${label}: missing jackpot card trigger`);
+  assert(html.includes('home-promo-modal__trigger-img'), `${label}: missing but-back trigger image`);
   assert(html.includes('id="home-promo-modal-bonus"'), `${label}: missing bonus dialog`);
   assert(html.includes('id="home-promo-modal-events"'), `${label}: missing events dialog`);
   assert(html.includes('id="home-promo-modal-jackpot"'), `${label}: missing jackpot dialog`);
@@ -51,7 +55,17 @@ function verifyBodyHtml(html, label) {
   );
 }
 
+function verifyGlobalsCss(css) {
+  const block = css.match(/\.home-promo-modals\s*\{[^}]*\}/s)?.[0] ?? '';
+  const declarations = block.replace(/\/\*[\s\S]*?\*\//g, '');
+  assert(
+    !/display\s*:\s*none/.test(declarations),
+    'globals.css: .home-promo-modals must not use display:none (breaks dialog showModal)',
+  );
+}
+
 function main() {
+  verifyGlobalsCss(read(GLOBALS_CSS));
   const chrome = JSON.parse(read(CHROME));
   const modalRoutes = chrome.homePromoModalsSlotRoutes ?? [];
 

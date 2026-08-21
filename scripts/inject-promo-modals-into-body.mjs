@@ -96,6 +96,35 @@ function stripPopupStyles(bodyHtml, styleIds) {
   return html;
 }
 
+function addDataAttributeToElement(bodyHtml, elementId, attrName, attrValue) {
+  const classNeedle = elementorContainerNeedle(elementId);
+  const classIndex = bodyHtml.indexOf(classNeedle);
+  if (classIndex === -1) return bodyHtml;
+
+  const divStart = bodyHtml.lastIndexOf('<div', classIndex);
+  if (divStart === -1) return bodyHtml;
+
+  const insertAt = bodyHtml.indexOf('>', divStart);
+  if (insertAt === -1) return bodyHtml;
+
+  const openTag = bodyHtml.slice(divStart, insertAt);
+  if (openTag.includes(attrName)) return bodyHtml;
+
+  return `${bodyHtml.slice(0, insertAt)} ${attrName}="${attrValue}"${bodyHtml.slice(insertAt)}`;
+}
+
+function patchCards(bodyHtml, cardElementIds) {
+  let html = bodyHtml;
+
+  for (const key of MODAL_KEYS) {
+    const elementId = cardElementIds[key];
+    if (!elementId) continue;
+    html = addDataAttributeToElement(html, elementId, 'data-home-promo-card', key);
+  }
+
+  return html;
+}
+
 function patchHotspots(bodyHtml, hotspotElementIds, triggers) {
   let html = bodyHtml;
 
@@ -135,7 +164,8 @@ async function main() {
     }
 
     const locale = localeByRoute[route] ?? 'ru';
-    const { hotspotElementIds, popupTemplateStyleIds, triggers } = loadHomePromoModals(locale);
+    const { hotspotElementIds, cardElementIds, popupTemplateStyleIds, triggers } =
+      loadHomePromoModals(locale);
     const sectionHtml = renderHomePromoModalsSection({ locale });
     if (!sectionHtml) {
       console.error(`No promo modal content to inject into ${route}`);
@@ -144,6 +174,7 @@ async function main() {
     }
 
     let patched = patchHotspots(bodyHtml, hotspotElementIds, triggers);
+    patched = patchCards(patched, cardElementIds);
     patched = stripElementorPopups(patched);
     patched = stripPopupStyles(patched, popupTemplateStyleIds);
     patched = patched.replace(slotPattern, sectionHtml);

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
+import { HomePromoModalsBoot } from '@/components/native/HomePromoModalsBoot';
 import { BlogJsonLdBlock } from '@/components/native/BlogJsonLdBlock';
 import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
@@ -72,6 +73,7 @@ export function PageShell({
           <WordPressBody page={page} bodyHtml={bodyHtml} bodyClassName={bodyClass} />
         ))}
       <SiteFooter page={page} variant={hasElementorFooter ? 'locale-only' : 'full'} />
+      {showHomePromo ? <HomePromoModalsBoot /> : null}
       {loadNativeAnalytics ? <AnalyticsScripts /> : null}
       {loadElementorRuntime ? (
         <>
