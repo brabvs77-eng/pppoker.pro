@@ -6,7 +6,8 @@
       "src": "/assets/media/2026/payments/sbp.svg",
       "width": 120,
       "height": 40,
-      "label": "СБП"
+      "label": "СБП",
+      "chip": "inline"
     },
     {
       "id": "mir",
@@ -27,7 +28,8 @@
       "src": "/assets/media/2026/payments/mastercard.svg",
       "width": 120,
       "height": 40,
-      "label": "Mastercard"
+      "label": "Mastercard",
+      "chip": "inline"
     },
     {
       "id": "humo",
@@ -48,7 +50,8 @@
       "src": "/assets/media/2026/payments/bitcoin.svg",
       "width": 120,
       "height": 40,
-      "label": "Bitcoin"
+      "label": "Bitcoin",
+      "chip": "inline"
     }
   ],
   "titleByLocale": {
