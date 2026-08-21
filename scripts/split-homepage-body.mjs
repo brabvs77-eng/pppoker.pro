@@ -10,6 +10,7 @@ const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
 const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
+const promoBlocksSlotHtml = '<div id="native-home-promo-blocks-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -35,8 +36,12 @@ function findMatchingDivClose(html, divStart) {
   return -1;
 }
 
+function elementorContainerNeedle(elementId) {
+  return `class="elementor-element elementor-element-${elementId}`;
+}
+
 function stripElementorSection(bodyHtml, elementId) {
-  const classNeedle = `elementor-element-${elementId}`;
+  const classNeedle = elementorContainerNeedle(elementId);
   const classIndex = bodyHtml.indexOf(classNeedle);
   if (classIndex === -1) return bodyHtml;
 
@@ -50,7 +55,7 @@ function stripElementorSection(bodyHtml, elementId) {
 }
 
 function replaceElementorSectionWithSlot(bodyHtml, elementId, slotMarkup) {
-  const classNeedle = `elementor-element-${elementId}`;
+  const classNeedle = elementorContainerNeedle(elementId);
   const classIndex = bodyHtml.indexOf(classNeedle);
   if (classIndex === -1) return bodyHtml;
 
@@ -70,7 +75,7 @@ function appendBlogSlotBeforeFooter(bodyHtml) {
 }
 
 function replaceLegacyBlogWithSlot(bodyHtml, legacySectionId) {
-  const classNeedle = `elementor-element-${legacySectionId}`;
+  const classNeedle = elementorContainerNeedle(legacySectionId);
   if (!bodyHtml.includes(classNeedle)) return null;
   return replaceElementorSectionWithSlot(bodyHtml, legacySectionId, slotHtml);
 }
@@ -109,6 +114,9 @@ async function main() {
   );
   const cashGamesRoutes = new Set(
     (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const promoBlocksByRoute = new Map(
+    (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => [entry.route, entry]),
   );
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
@@ -171,6 +179,18 @@ async function main() {
       for (const spacerId of chrome.legacyEmptySpacerElementIds ?? []) {
         processed = stripElementorSection(processed, spacerId);
       }
+    }
+
+    const promoEntry = promoBlocksByRoute.get(route);
+    if (promoEntry) {
+      processed = stripElementorSection(
+        replaceElementorSectionWithSlot(
+          processed,
+          promoEntry.legacyCrashPromoSectionElementId,
+          promoBlocksSlotHtml,
+        ),
+        promoEntry.legacyRusPokerPromoSectionElementId,
+      );
     }
 
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)

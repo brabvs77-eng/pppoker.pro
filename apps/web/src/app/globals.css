@@ -1709,3 +1709,122 @@ body {
     order: 2;
   }
 }
+
+/* Native home CRASH / Russian Poker promo blocks (replaces Elementor promo containers). */
+.home-promo-blocks {
+  position: relative;
+  z-index: 7;
+  padding: 2.5rem 1rem 3rem;
+  background: linear-gradient(180deg, #0a0d14 0%, #101624 100%);
+  border-top: 1px solid rgba(253, 230, 97, 0.06);
+}
+
+.home-promo-blocks__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.home-promo-blocks__block {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.home-promo-blocks__copy {
+  flex: 1 1 420px;
+  max-width: 520px;
+}
+
+.home-promo-blocks__heading {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(232, 236, 244, 0.92);
+}
+
+.home-promo-blocks__media {
+  flex: 1 1 320px;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.home-promo-blocks__media--stack {
+  gap: 1rem;
+}
+
+.home-promo-blocks__video,
+.home-promo-blocks__poster {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+.home-promo-blocks__video--crash {
+  object-fit: cover;
+  background: #0a0d14;
+  aspect-ratio: 9 / 16;
+  min-height: 280px;
+  max-height: 480px;
+}
+
+.home-promo-blocks__block--rus-poker {
+  margin-top: 0.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(253, 230, 97, 0.12);
+}
+
+@media (max-width: 767px) {
+  .home-promo-blocks__block {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+  }
+
+  .home-promo-blocks__copy,
+  .home-promo-blocks__media {
+    flex: 0 0 auto;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .home-promo-blocks__block--crash:not(.home-promo-blocks__block--media-first) .home-promo-blocks__copy {
+    order: 1;
+  }
+
+  .home-promo-blocks__block--crash:not(.home-promo-blocks__block--media-first) .home-promo-blocks__media {
+    order: 2;
+  }
+
+  .home-promo-blocks__block--crash.home-promo-blocks__block--media-first .home-promo-blocks__media {
+    order: 1;
+  }
+
+  .home-promo-blocks__block--crash.home-promo-blocks__block--media-first .home-promo-blocks__copy {
+    order: 2;
+  }
+
+  .home-promo-blocks__block--rus-poker .home-promo-blocks__media--stack {
+    display: contents;
+  }
+
+  .home-promo-blocks__block--rus-poker .home-promo-blocks__poster {
+    order: 1;
+  }
+
+  .home-promo-blocks__block--rus-poker .home-promo-blocks__copy {
+    order: 2;
+  }
+
+  .home-promo-blocks__block--rus-poker .home-promo-blocks__video--rus {
+    order: 3;
+  }
+}

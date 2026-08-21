@@ -72,6 +72,38 @@
     { "fileId": "uz", "route": "/uz/" },
     { "fileId": "kz", "route": "/kz/" }
   ],
+  "homePromoBlocksSlotRoutes": [
+    {
+      "fileId": "_root",
+      "route": "/",
+      "legacyCrashPromoSectionElementId": "3e378e0",
+      "legacyRusPokerPromoSectionElementId": "5fb647f"
+    },
+    {
+      "fileId": "hy",
+      "route": "/hy/",
+      "legacyCrashPromoSectionElementId": "3e378e0",
+      "legacyRusPokerPromoSectionElementId": "5fb647f"
+    },
+    {
+      "fileId": "en",
+      "route": "/en/",
+      "legacyCrashPromoSectionElementId": "1d32d75",
+      "legacyRusPokerPromoSectionElementId": "bdac5ec"
+    },
+    {
+      "fileId": "uz",
+      "route": "/uz/",
+      "legacyCrashPromoSectionElementId": "1d32d75",
+      "legacyRusPokerPromoSectionElementId": "bdac5ec"
+    },
+    {
+      "fileId": "kz",
+      "route": "/kz/",
+      "legacyCrashPromoSectionElementId": "db11841",
+      "legacyRusPokerPromoSectionElementId": "8982bde"
+    }
+  ],
   "stripLegacyFooterRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "en", "route": "/en/" },
