@@ -44,7 +44,7 @@ function verifyBodyHtml(html, label, { legacyCrashId, legacyRusId, expectRusVide
   assert(html.includes('home-promo-blocks__block--crash'), `${label}: missing native CRASH block`);
   assert(html.includes('home-promo-blocks__block--rus-poker'), `${label}: missing native Russian Poker block`);
 
-  const rusVideoCount = (html.match(/home-promo-blocks__video--rus/g) || []).length;
+  const rusVideoCount = (html.match(/<video class="home-promo-blocks__video home-promo-blocks__video--rus"/g) || []).length;
   assert(
     rusVideoCount === expectRusVideos,
     `${label}: expected ${expectRusVideos} Russian Poker videos, got ${rusVideoCount}`,
