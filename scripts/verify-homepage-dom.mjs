@@ -51,6 +51,9 @@ async function main() {
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const promoBlocksRoutes = new Set(
+    (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const faqSectionId = chrome.legacyFaqSectionElementId;
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
@@ -122,6 +125,19 @@ async function main() {
         if (html.includes(`class="elementor-element elementor-element-${spacerId}`)) {
           violations.push(`[${route}] Legacy empty spacer ${spacerId} still present`);
         }
+      }
+    }
+
+    if (promoBlocksRoutes.has(route)) {
+      if (!html.includes('id="native-home-promo-blocks-slot"') && !html.includes('id="native-home-promo-blocks"')) {
+        violations.push(`[${route}] Missing native promo blocks slot or section`);
+      }
+      const promoEntry = (chrome.homePromoBlocksSlotRoutes ?? []).find((entry) => entry.route === route);
+      if (promoEntry?.legacyCrashPromoSectionElementId && html.includes(`class="elementor-element elementor-element-${promoEntry.legacyCrashPromoSectionElementId}`)) {
+        violations.push(`[${route}] Legacy CRASH promo section ${promoEntry.legacyCrashPromoSectionElementId} still present`);
+      }
+      if (promoEntry?.legacyRusPokerPromoSectionElementId && html.includes(`class="elementor-element elementor-element-${promoEntry.legacyRusPokerPromoSectionElementId}`)) {
+        violations.push(`[${route}] Legacy Russian Poker promo section ${promoEntry.legacyRusPokerPromoSectionElementId} still present`);
       }
     }
   }
