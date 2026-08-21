@@ -43,6 +43,16 @@ function verifyShellHtml(html, label, chrome) {
     );
   }
 
+  for (const id of chrome.homepageDuplicateCtaElementIds ?? []) {
+    assert(
+      !html.includes(`class="elementor-element elementor-element-${id}`),
+      `${label}: duplicate hero CTA ${id} still present`,
+    );
+  }
+
+  assert(!html.includes('id="masthead"'), `${label}: legacy #masthead still present`);
+  assert(!html.includes('id="widster-'), `${label}: Widster embed still present`);
+
   assert(html.includes('id="native-home-registration"'), `${label}: missing native registration`);
   assert(html.includes('id="native-home-cash-games"'), `${label}: missing native cash games`);
   assert(html.includes('id="native-review-snippets"'), `${label}: missing native reviews`);

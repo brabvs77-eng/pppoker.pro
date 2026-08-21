@@ -38,6 +38,21 @@
   "homepageHeroRootElementId": "23c91dc",
   "legacyHeaderSpacerElementIds": ["8141f77", "3f45d89"],
   "homepageDuplicateCtaElementIds": ["d014ade", "404896e", "b5a91f5"],
+  "legacyWidsterSectionElementIdsByFileId": {
+    "_root": "fe4b64b",
+    "hy": "fe4b64b",
+    "en": "c4c2ecf",
+    "uz": "2a22a17",
+    "kz": "e866654"
+  },
+  "stripLegacyMastheadRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
+  ],
   "legacyReviewsSectionElementId": "ccad702",
   "homeReviewSlotRoutes": [
     { "fileId": "_root", "route": "/" },
