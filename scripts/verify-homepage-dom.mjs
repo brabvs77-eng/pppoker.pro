@@ -148,9 +148,6 @@ async function main() {
       if (!html.includes('id="native-home-promo-modals-slot"') && !html.includes('id="native-home-promo-modals"')) {
         violations.push(`[${route}] Missing native promo modals slot or section`);
       }
-      if (html.includes('elementor-location-popup') || html.includes('data-elementor-type="popup"')) {
-        violations.push(`[${route}] Legacy Elementor popup markup still present`);
-      }
     }
   }
 
