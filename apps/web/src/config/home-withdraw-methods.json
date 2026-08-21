@@ -1,0 +1,61 @@
+{
+  "legacyWhyNutsSectionElementId": "6fdeb4a",
+  "methods": [
+    {
+      "id": "sbp",
+      "src": "/assets/media/2026/payments/sbp.svg",
+      "width": 120,
+      "height": 40,
+      "label": "СБП"
+    },
+    {
+      "id": "mir",
+      "src": "/assets/media/2026/payments/mir.svg",
+      "width": 120,
+      "height": 40,
+      "label": "МИР"
+    },
+    {
+      "id": "visa",
+      "src": "/assets/media/2026/payments/visa.svg",
+      "width": 120,
+      "height": 40,
+      "label": "Visa"
+    },
+    {
+      "id": "mastercard",
+      "src": "/assets/media/2026/payments/mastercard.svg",
+      "width": 120,
+      "height": 40,
+      "label": "Mastercard"
+    },
+    {
+      "id": "humo",
+      "src": "/assets/media/2026/payments/humo.svg",
+      "width": 120,
+      "height": 40,
+      "label": "Humo"
+    },
+    {
+      "id": "kapitalbank",
+      "src": "/assets/media/2026/payments/kapitalbank.svg",
+      "width": 140,
+      "height": 40,
+      "label": "Kapitalbank"
+    },
+    {
+      "id": "bitcoin",
+      "src": "/assets/media/2026/payments/bitcoin.svg",
+      "width": 40,
+      "height": 40,
+      "label": "Bitcoin"
+    }
+  ],
+  "titleByLocale": {
+    "ru": "Как вывести деньги",
+    "en": "How to withdraw money",
+    "hy": "Ինչպես դուրս բերել գումարը",
+    "uz": "Pulni qanday yechib olish mumkin",
+    "kz": "Ақшаны қалай шығаруға болады"
+  }
+}

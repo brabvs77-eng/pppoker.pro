@@ -48,6 +48,9 @@ async function main() {
   const cashGamesRoutes = new Set(
     (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const withdrawMethodsRoutes = new Set(
+    (chrome.homeWithdrawMethodsSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const promoBlocksRoutes = new Set(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -67,6 +70,7 @@ async function main() {
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
   const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
   const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
+  const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
   const violations = [];
 
   for (const {
@@ -125,6 +129,22 @@ async function main() {
       }
       if (cashGamesSectionId && html.includes(`class="elementor-element elementor-element-${cashGamesSectionId}`)) {
         violations.push(`[${route}] Legacy cash games section ${cashGamesSectionId} still present`);
+      }
+    }
+
+    if (withdrawMethodsRoutes.has(route)) {
+      if (!html.includes('id="native-home-withdraw-methods-slot"') && !html.includes('id="native-home-withdraw-methods"')) {
+        violations.push(`[${route}] Missing native withdraw methods slot or section`);
+      }
+      if (whyNutsSectionId && !html.includes(`class="elementor-element elementor-element-${whyNutsSectionId}`)) {
+        violations.push(`[${route}] Why NUTS section ${whyNutsSectionId} missing after withdraw strip`);
+      }
+      const withdrawIndex = html.indexOf('id="native-home-withdraw-methods"');
+      const whyNutsIndex = whyNutsSectionId
+        ? html.indexOf(`class="elementor-element elementor-element-${whyNutsSectionId}`)
+        : -1;
+      if (withdrawIndex !== -1 && whyNutsIndex !== -1 && withdrawIndex > whyNutsIndex) {
+        violations.push(`[${route}] Withdraw methods section must appear before Why NUTS block`);
       }
     }
 

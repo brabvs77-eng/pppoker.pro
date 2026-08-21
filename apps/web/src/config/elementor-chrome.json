@@ -78,7 +78,15 @@
     { "fileId": "uz", "route": "/uz/" },
     { "fileId": "kz", "route": "/kz/" }
   ],
+  "legacyWhyNutsSectionElementId": "6fdeb4a",
   "legacyCashGamesSectionElementId": "79d6e08",
+  "homeWithdrawMethodsSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" }
+  ],
   "legacyEmptySpacerElementIds": ["821dbda", "32273a8", "1eaf67a", "07af73c"],
   "homeCashGamesSlotRoutes": [
     { "fileId": "_root", "route": "/" },

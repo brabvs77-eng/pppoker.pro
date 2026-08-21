@@ -1660,6 +1660,84 @@ body {
   }
 }
 
+/* Native home withdraw methods strip (before Why NUTS section). */
+.home-withdraw {
+  position: relative;
+  z-index: 8;
+  padding: 1.25rem 1rem 1.5rem;
+  background: linear-gradient(180deg, #0d111a 0%, #0a0d14 100%);
+  border-top: 1px solid rgba(253, 230, 97, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.home-withdraw__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.home-withdraw__title {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(232, 236, 244, 0.88);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.home-withdraw__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem 0.75rem;
+  width: 100%;
+}
+
+.home-withdraw__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-withdraw__logo {
+  display: block;
+  width: auto;
+  height: 2rem;
+  max-width: 7.5rem;
+  object-fit: contain;
+  border-radius: 6px;
+  filter: saturate(0.95);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.home-withdraw__item:hover .home-withdraw__logo,
+.home-withdraw__item:focus-within .home-withdraw__logo {
+  transform: translateY(-1px);
+  filter: saturate(1.05) brightness(1.05);
+}
+
+@media (max-width: 640px) {
+  .home-withdraw__logo {
+    height: 1.65rem;
+    max-width: 6.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-withdraw__logo {
+    transition: none;
+  }
+}
+
 /* Native home cash games grid (replaces Elementor 79d6e08 section). */
 .home-cash {
   position: relative;
