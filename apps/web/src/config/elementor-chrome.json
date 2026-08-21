@@ -64,6 +64,7 @@
     { "fileId": "kz", "route": "/kz/" }
   ],
   "legacyCashGamesSectionElementId": "79d6e08",
+  "legacyEmptySpacerElementIds": ["821dbda", "32273a8", "1eaf67a", "07af73c"],
   "homeCashGamesSlotRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },
