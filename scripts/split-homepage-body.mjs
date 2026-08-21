@@ -11,6 +11,7 @@ const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
 const promoBlocksSlotHtml = '<div id="native-home-promo-blocks-slot"></div>';
+const promoModalsSlotHtml = '<div id="native-home-promo-modals-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -72,6 +73,14 @@ function appendBlogSlotBeforeFooter(bodyHtml) {
   const colophonStart = bodyHtml.search(/<footer[^>]*\bid="colophon"/i);
   if (colophonStart === -1) return null;
   return `${bodyHtml.slice(0, colophonStart)}${slotHtml}${bodyHtml.slice(colophonStart)}`;
+}
+
+function appendPromoModalsSlotBeforeFooter(bodyHtml) {
+  const colophonStart = bodyHtml.search(/<footer[^>]*\bid="colophon"/i);
+  if (colophonStart !== -1) {
+    return `${bodyHtml.slice(0, colophonStart)}${promoModalsSlotHtml}${bodyHtml.slice(colophonStart)}`;
+  }
+  return `${bodyHtml}${promoModalsSlotHtml}`;
 }
 
 function replaceLegacyBlogWithSlot(bodyHtml, legacySectionId) {
@@ -145,6 +154,9 @@ async function main() {
   );
   const promoBlocksByRoute = new Map(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => [entry.route, entry]),
+  );
+  const promoModalsRoutes = new Set(
+    (chrome.homePromoModalsSlotRoutes ?? []).map((entry) => entry.route),
   );
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
@@ -224,6 +236,10 @@ async function main() {
         ),
         promoEntry.legacyRusPokerPromoSectionElementId,
       );
+    }
+
+    if (promoModalsRoutes.has(route)) {
+      processed = appendPromoModalsSlotBeforeFooter(processed);
     }
 
     processed = stripDeadHomeMarkup(processed, {
