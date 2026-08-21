@@ -30,7 +30,7 @@ export function renderHomeWithdrawMethodsSection({ locale }) {
   const items = methods
     .map(
       (method) => `<li class="home-withdraw__item">
-  <span class="home-withdraw__chip">
+  <span class="home-withdraw__chip${method.chip === 'inline' ? ' home-withdraw__chip--inline' : ''}">
     <img class="home-withdraw__logo"
       src="${method.src}"
       alt="${escapeHtml(method.label)}"
