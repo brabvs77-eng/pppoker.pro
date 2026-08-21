@@ -53,7 +53,7 @@ function verifyHomepageWidgets(
     if (!html.includes('id="native-home-cash-games"')) {
       violations.push(`[${label}] Missing native home cash games section`);
     }
-    if (!html.includes('class="home-cash__card"')) {
+    if (!html.includes('<article class="home-cash__card')) {
       violations.push(`[${label}] Missing native cash game cards`);
     }
   }

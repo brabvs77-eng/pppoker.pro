@@ -32,8 +32,8 @@ function verifyBodyHtml(html, label, expectedCards) {
     !html.includes('class="elementor-element elementor-element-79d6e08'),
     `${label}: legacy cash games section still present`,
   );
-  assert(html.includes('class="home-cash__card"'), `${label}: missing native cash game cards`);
-  const cardCount = (html.match(/class="home-cash__card home-cash__card--/g) || []).length;
+  assert(html.includes('<article class="home-cash__card'), `${label}: missing native cash game cards`);
+  const cardCount = (html.match(/<article class="home-cash__card home-cash__card--/g) || []).length;
   assert(cardCount === expectedCards, `${label}: expected ${expectedCards} cash game cards, got ${cardCount}`);
 }
 
