@@ -37,7 +37,18 @@ function verifyBodyHtml(html, label) {
   assert(html.includes('id="home-promo-modal-events"'), `${label}: missing events dialog`);
   assert(html.includes('id="home-promo-modal-jackpot"'), `${label}: missing jackpot dialog`);
   assert(!html.includes('popup:open'), `${label}: legacy popup hotspot links still present`);
-  assert(!html.includes('elementor-element-4b0f657'), `${label}: legacy bonus hotspot widget still present`);
+  assert(
+    !html.includes('class="elementor-element elementor-element-4b0f657'),
+    `${label}: legacy bonus hotspot widget still present`,
+  );
+  assert(
+    !html.includes('class="elementor-element elementor-element-0f49f23'),
+    `${label}: legacy events hotspot widget still present`,
+  );
+  assert(
+    !html.includes('class="elementor-element elementor-element-4dc426c'),
+    `${label}: legacy jackpot hotspot widget still present`,
+  );
 }
 
 function main() {
