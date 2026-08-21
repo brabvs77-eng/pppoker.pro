@@ -178,6 +178,32 @@ body {
   text-decoration: underline;
 }
 
+.site-footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin: 0;
+  font-style: normal;
+  line-height: 1.45;
+  color: #7b8db2;
+}
+
+.site-footer__address {
+  font-size: 0.82rem;
+}
+
+.site-footer__phone {
+  color: #e8ecf4;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-footer__phone:hover {
+  color: #fde661;
+  text-decoration: underline;
+}
+
 .site-footer__copy {
   margin: 0;
   font-size: 0.8rem;
