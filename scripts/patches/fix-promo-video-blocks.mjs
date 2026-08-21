@@ -20,7 +20,8 @@ const PROMO_BLOCK_SETS = [
     crashContainerId: '1d32d75',
     crashVideoWidgetId: '4b1e144',
     rusPokerContainerId: 'bdac5ec',
-    rusPokerVideoWidgetIds: ['12fb3b3', 'cf08ea1'],
+    rusPokerVideoWidgetIds: ['12fb3b3'],
+    rusPokerDuplicateVideoWidgetIds: ['cf08ea1'],
     /** DOM order: heading then video (EN/UZ). */
     crashMediaFirst: false,
   },
@@ -29,7 +30,8 @@ const PROMO_BLOCK_SETS = [
     crashContainerId: '3e378e0',
     crashVideoWidgetId: '3947f6a',
     rusPokerContainerId: '5fb647f',
-    rusPokerVideoWidgetIds: ['99a8a38', 'd742303'],
+    rusPokerVideoWidgetIds: ['99a8a38'],
+    rusPokerDuplicateVideoWidgetIds: ['d742303'],
     crashMediaFirst: true,
   },
   /** KZ home template (page 3116). */
@@ -241,10 +243,39 @@ function fixCrashVideo($, set, notes) {
   return true;
 }
 
+function videoSrc(video) {
+  return video.attr('src') || video.find('source[src]').first().attr('src') || '';
+}
+
+function removeDuplicateRusPokerCrashVideos($, set) {
+  const container = $(`.elementor-element-${set.rusPokerContainerId}`);
+  if (!container.length) return false;
+
+  let removed = false;
+  for (const widgetId of set.rusPokerDuplicateVideoWidgetIds ?? []) {
+    const widget = container.find(`.elementor-element-${widgetId}`);
+    if (widget.length) {
+      widget.remove();
+      removed = true;
+    }
+  }
+
+  container.find('.elementor-widget-video').each((_, el) => {
+    const widget = $(el);
+    const src = videoSrc(widget.find('video').first());
+    if (src === CRASH_VIDEO_SRC) {
+      widget.remove();
+      removed = true;
+    }
+  });
+
+  return removed;
+}
+
 function fixRusPokerVideos($, set) {
   const container = $(`.elementor-element-${set.rusPokerContainerId}`);
   if (!container.length) return false;
-  let changed = false;
+  let changed = removeDuplicateRusPokerCrashVideos($, set);
   container.find('video').each((_, el) => {
     const video = $(el);
     cleanOptimizerAttrs(video);
@@ -330,7 +361,7 @@ async function main() {
   for (const row of report) {
     console.log(`  ${row.file}`);
     if (row.crashFixed) console.log('    - restored autoplay/muted/playsinline on the CRASH video');
-    if (row.rusFixed) console.log('    - added poster + preload=metadata to the Russian Poker videos');
+    if (row.rusFixed) console.log('    - removed duplicate CRASH clip from Russian Poker + poster/preload on remaining video');
     if (row.styleInjected) console.log('    - injected scoped style to match text/media column widths');
     if (row.scriptInjected) console.log('    - appended Elementor-safe CRASH autoplay script to body');
     if (row.lazyScriptRemoved) console.log('    - removed dead od-lazy-video observer script');
