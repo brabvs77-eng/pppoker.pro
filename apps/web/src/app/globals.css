@@ -1828,3 +1828,144 @@ body {
     order: 3;
   }
 }
+
+/* Native promo modals (bonus / events / jackpot) — replaces Elementor popups on home shell. */
+.home-promo-modal__trigger-wrap {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 4;
+}
+
+.elementor-element-44201aa,
+.elementor-element-874d4b0,
+.elementor-element-938716b {
+  position: relative;
+}
+
+.home-promo-modal__trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0.45rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fde661 0%, #d4b82a 100%);
+  color: #131b2b;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.home-promo-modal__trigger:hover {
+  filter: brightness(1.05);
+}
+
+.home-promo-modals {
+  display: none;
+}
+
+.home-promo-modal {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  max-width: min(720px, calc(100vw - 2rem));
+  width: 100%;
+  color: #e8ecf4;
+}
+
+.home-promo-modal::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.home-promo-modal__panel {
+  position: relative;
+  padding: 2rem 1.5rem 1.75rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    url('/assets/media/2024/07/Ellipse-8-opt.webp') top left / 46% auto no-repeat,
+    linear-gradient(160deg, rgba(16, 22, 34, 0.98) 0%, rgba(35, 42, 61, 0.98) 100%);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.home-promo-modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.home-promo-modal__head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.home-promo-modal__icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+}
+
+.home-promo-modal__title {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.home-promo-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-height: min(70vh, 560px);
+  overflow: auto;
+}
+
+.home-promo-modal__para {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(232, 236, 244, 0.92);
+}
+
+.home-promo-modal__para h2 {
+  margin: 0.35rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.home-promo-modal__emph {
+  color: #fde661;
+}
+
+@media (max-width: 767px) {
+  .home-promo-modal__panel {
+    padding: 1.5rem 1rem 1.25rem;
+    border-radius: 18px;
+    background-size: 100% auto;
+  }
+
+  .home-promo-modal__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

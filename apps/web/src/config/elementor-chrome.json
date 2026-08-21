@@ -104,6 +104,13 @@
       "legacyRusPokerPromoSectionElementId": "8982bde"
     }
   ],
+  "homePromoModalsSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" }
+  ],
   "stripLegacyFooterRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "en", "route": "/en/" },

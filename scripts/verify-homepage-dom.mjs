@@ -51,6 +51,9 @@ async function main() {
   const promoBlocksRoutes = new Set(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const promoModalsRoutes = new Set(
+    (chrome.homePromoModalsSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -138,6 +141,15 @@ async function main() {
       }
       if (promoEntry?.legacyRusPokerPromoSectionElementId && html.includes(`class="elementor-element elementor-element-${promoEntry.legacyRusPokerPromoSectionElementId}`)) {
         violations.push(`[${route}] Legacy Russian Poker promo section ${promoEntry.legacyRusPokerPromoSectionElementId} still present`);
+      }
+    }
+
+    if (promoModalsRoutes.has(route)) {
+      if (!html.includes('id="native-home-promo-modals-slot"') && !html.includes('id="native-home-promo-modals"')) {
+        violations.push(`[${route}] Missing native promo modals slot or section`);
+      }
+      if (html.includes('elementor-location-popup') || html.includes('data-elementor-type="popup"')) {
+        violations.push(`[${route}] Legacy Elementor popup markup still present`);
       }
     }
   }

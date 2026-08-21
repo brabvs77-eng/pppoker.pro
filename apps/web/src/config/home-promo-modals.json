@@ -1,0 +1,135 @@
+{
+  "hotspotElementIds": {
+    "bonus": "4b0f657",
+    "events": "0f49f23",
+    "jackpot": "4dc426c"
+  },
+  "popupTemplateStyleIds": [
+    "886",
+    "834",
+    "893",
+    "840"
+  ],
+  "modalsByLocale": {
+    "ru": {
+      "triggers": {
+        "bonus": "ПОДРОБНЕЕ",
+        "events": "ПОДРОБНЕЕ",
+        "jackpot": "ПОДРОБНЕЕ"
+      },
+      "modals": {
+        "bonus": {
+          "titleHtml": "Бонус на первый депозит 150% до 500 долларов",
+          "iconSrc": "/assets/media/2024/07/rivet-icons_money.webp",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Внесите депозит в клубе в первый раз, получите 10% от суммы первого\nдепозита сразу и 150% от общей суммы по мере накопления баллов за любую активность в руме!</p>\n<p class=\"home-promo-modal__para\">Напишите промо-код оператору</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">и получите доступ к бонусу!</p>\n<p class=\"home-promo-modal__para\">Условия:</p>\n<p class=\"home-promo-modal__para\">Бонус начисляется только на ПЕРВЫЙ депозит</p>\n<p class=\"home-promo-modal__para\">Во время участия в турнирах бонус накапливается медленно</p>\n<p class=\"home-promo-modal__para\">Бонус выплачивается раз в неделю. Чем больше раздач вы разыгрываете в неделю, тем быстрее происходит отыгрыш.</p>\n<p class=\"home-promo-modal__para\">Вы можете узнать текущий статус вашего бонуса у оператора в любое время</p>\n<p class=\"home-promo-modal__para\">Бонус в размере 150% и другие бонусы/условия не суммируются!!!</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Бонус накапливается во время игры</strong> и это зависит от следующих параметров:</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Тип игры</strong> (медленнее в OFC и NLH, быстрее в PLO)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Лимит</strong> (чем выше лимит, тем быстрее)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Активность</strong> (чем выше VPIP, тем быстрее)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Количество рук</strong> (чем больше, тем быстрее)</p>"
+        },
+        "events": {
+          "titleHtml": "Акции",
+          "iconSrc": "",
+          "bodyHtml": "<h2 class=\"home-promo-modal__para\">Бонус на первый депозит 150% до 500 долларов</h2>\n<p class=\"home-promo-modal__para\">Внесите депозит в клубе в первый раз, получите 10% от суммы первого депозита сразу и 150% в общей сложности по мере накопления баллов за любую активность в руме!</p>\n<p class=\"home-promo-modal__para\">Напишите оператору промокод</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">и получите доступ к бонусу!</p>\n<h2 class=\"home-promo-modal__para\">Акция<br>\n\"Двойной шанс\"</h2>\n<p class=\"home-promo-modal__para\">За второй депозит в нашем руме мы подарим вам билет на турнир с гарантией до 5000 долларов!</p>\n<p class=\"home-promo-modal__para\">Напишите оператору промокод</p>\n<p class=\"home-promo-modal__para\">DOUBLE</p>\n<p class=\"home-promo-modal__para\">перед внесением второго депозита</p>\n<h2 class=\"home-promo-modal__para\">Акция<br>\n\"Воин\"</h2>\n<p class=\"home-promo-modal__para\">Сыграйте 500 раздач в нашем руме в любой кэш-игре на любом лимите и получите 50 долларов на свой баланс.</p>\n<p class=\"home-promo-modal__para\">Руки начнут отсчет с того момента, как вы оформите свой заказ.</p>\n<p class=\"home-promo-modal__para\">промокод для оператора</p>\n<p class=\"home-promo-modal__para\">FIGHT</p>\n<h2 class=\"home-promo-modal__para\">Фрироллы только для игроков клуба NUTS</h2>\n<p class=\"home-promo-modal__para\">Иногда мы проводим частные бесплатные турниры только для членов нашего клуба. Вы получите уведомление от своего персонального менеджера.</p>"
+        },
+        "jackpot": {
+          "titleHtml": "Джекпот",
+          "iconSrc": "/assets/media/2024/08/solar_cup-star-bold.webp",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Играя в кэш-игры в Nuts,\nвы можете выиграть джекпот.</p>\n<p class=\"home-promo-modal__para\">В PPPOKER есть два вида джекпотов</p>\n<h2 class=\"home-promo-modal__para\">1</h2>\n<h2 class=\"home-promo-modal__para\">Кулер</h2>\n<p class=\"home-promo-modal__para\">Если на шоудауне игроки раскроют карты \"четыре в одном\" против \"четырех в одном\" или выше (так называемая ситуация \"Кулер\"), все участники раздачи, включая тех, кто сбросил карты, получат долю джекпота \"Кулер\".</p>\n<p class=\"home-promo-modal__para\">Распределение призов:<br> Проигравший -50%<br>Победитель - 30%<br> Остальные игроки -20%.</p>\n<h2 class=\"home-promo-modal__para\">2</h2>\n<h2 class=\"home-promo-modal__para\">Старшая рука</h2>\n<p class=\"home-promo-modal__para\">(Только для \"холдема\") Если к концу раздачи у игрока на руках окажется комбинация из четырех карт или выше, он и все игроки,\nучаствовавшие в раздаче (включая тех, кто сбросил карты), получат свою долю от джекпота, выигранного в самой крупной раздаче.</p>"
+        }
+      }
+    },
+    "en": {
+      "triggers": {
+        "bonus": "More info",
+        "events": "More info",
+        "jackpot": "More info"
+      },
+      "modals": {
+        "bonus": {
+          "titleHtml": "First deposit bonus of 150% up to 500 dollars",
+          "iconSrc": "/assets/media/2024/07/rivet-icons_money.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Make a deposit in the club for the first time, get 10% of the amount of the first\ndeposit immediately and 150% of the total amount as you accumulate points for any activity in the room!</p>\n<p class=\"home-promo-modal__para\">Write a promo code to the operator</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">and get access to the bonus!</p>\n<p class=\"home-promo-modal__para\">Conditions:</p>\n<p class=\"home-promo-modal__para\">The bonus is credited only on the FIRST deposit</p>\n<p class=\"home-promo-modal__para\">During participation in tournaments, the bonus accumulates slowly.</p>\n<p class=\"home-promo-modal__para\">The bonus is paid once a week. The more hands you play per week, the faster the wagering takes place.</p>\n<p class=\"home-promo-modal__para\">You can find out the current status of your bonus from the operator at any time.</p>\n<p class=\"home-promo-modal__para\">The 150% bonus and other bonuses/conditions do not add up!!!</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">The bonus accumulates during the game</strong> and it depends on the following parameters:</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Type of game</strong> (slower in OFC and NLH, faster in PLO)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Limit</strong> (the higher the limit, the faster)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Activity</strong> (the higher the VPIP, the faster)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Number of hands</strong> (the more, the faster)</p>"
+        },
+        "events": {
+          "titleHtml": "Events",
+          "iconSrc": "",
+          "bodyHtml": "<h2 class=\"home-promo-modal__para\">First deposit bonus of 150% up to 500 dollars</h2>\n<p class=\"home-promo-modal__para\">Make a deposit in the club for the first time, get 10% of the amount of the first deposit immediately and 150% in total as you accumulate points for any activity in the room!</p>\n<p class=\"home-promo-modal__para\">Write the promo code to the operator</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">and get access to the bonus!</p>\n<h2 class=\"home-promo-modal__para\">Event<br>\n\"Double chance\"</h2>\n<p class=\"home-promo-modal__para\">For the second deposit in our room, we will give you a ticket to the tournament with a guarantee of up to $ 5,000!</p>\n<p class=\"home-promo-modal__para\">Write the promo code to the operator</p>\n<p class=\"home-promo-modal__para\">DOUBLE</p>\n<p class=\"home-promo-modal__para\">before making a second deposit</p>\n<h2 class=\"home-promo-modal__para\">Event<br>\n\"The Warrior\"</h2>\n<p class=\"home-promo-modal__para\">Play 500 hands in our room in any cash game at any limit and get $50 to your balance.</p>\n<p class=\"home-promo-modal__para\">The hands will start counting down from the moment you place your order.</p>\n<p class=\"home-promo-modal__para\">promo code for the operator</p>\n<p class=\"home-promo-modal__para\">FIGHT</p>\n<h2 class=\"home-promo-modal__para\">Freerolls are only for NUTS Club players</h2>\n<p class=\"home-promo-modal__para\">Sometimes we hold private free tournaments for our club members only. You will receive a notification from your personal manager.</p>"
+        },
+        "jackpot": {
+          "titleHtml": "Jackpot",
+          "iconSrc": "/assets/media/2024/08/solar_cup-star-bold.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Играя в кэш-игры в Nuts,\nвы можете выиграть джекпот.</p>\n<p class=\"home-promo-modal__para\">В PPPOKER есть два вида джекпотов</p>\n<h2 class=\"home-promo-modal__para\">1</h2>\n<h2 class=\"home-promo-modal__para\">Cooler</h2>\n<p class=\"home-promo-modal__para\">If players reveal four-in-one versus four-in-one or higher cards on the showdown (the so-called Cooler situation), all participants in the hand, including those who discarded the cards, will receive a share of the Cooler jackpot.</p>\n<p class=\"home-promo-modal__para\">Distribution of prizes:<br> The loser -50%<br>Winner - 30%<br> Other players -20%.</p>\n<h2 class=\"home-promo-modal__para\">2</h2>\n<h2 class=\"home-promo-modal__para\">The older hand</h2>\n<p class=\"home-promo-modal__para\">(Only for \"Hold'em\") If by the end of the hand a player has a combination of four cards or higher in his hands, he and all the players\nwho participated in the hand (including those who folded) will receive their share of the jackpot won in the largest hand.</p>"
+        }
+      }
+    },
+    "hy": {
+      "triggers": {
+        "bonus": "Կարդ մորե",
+        "events": "Կարդ մորե",
+        "jackpot": "Կարդ մորե"
+      },
+      "modals": {
+        "bonus": {
+          "titleHtml": "Бонус на первый депозит 150% до 500 долларов",
+          "iconSrc": "/assets/media/2024/07/rivet-icons_money.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Внесите депозит в клубе в первый раз, получите 10% от суммы первого\nдепозита сразу и 150% от общей суммы по мере накопления баллов за любую активность в руме!</p>\n<p class=\"home-promo-modal__para\">Напишите промо-код оператору</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">и получите доступ к бонусу!</p>\n<p class=\"home-promo-modal__para\">Условия:</p>\n<p class=\"home-promo-modal__para\">Бонус начисляется только на ПЕРВЫЙ депозит</p>\n<p class=\"home-promo-modal__para\">Во время участия в турнирах бонус накапливается медленно</p>\n<p class=\"home-promo-modal__para\">Бонус выплачивается раз в неделю. Чем больше раздач вы разыгрываете в неделю, тем быстрее происходит отыгрыш.</p>\n<p class=\"home-promo-modal__para\">Вы можете узнать текущий статус вашего бонуса у оператора в любое время</p>\n<p class=\"home-promo-modal__para\">Бонус в размере 150% и другие бонусы/условия не суммируются!!!</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Бонус накапливается во время игры</strong> и это зависит от следующих параметров:</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Тип игры</strong> (медленнее в OFC и NLH, быстрее в PLO)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Лимит</strong> (чем выше лимит, тем быстрее)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Активность</strong> (чем выше VPIP, тем быстрее)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Количество рук</strong> (чем больше, тем быстрее)</p>"
+        },
+        "events": {
+          "titleHtml": "Акции",
+          "iconSrc": "",
+          "bodyHtml": "<h2 class=\"home-promo-modal__para\">Бонус на первый депозит 150% до 500 долларов</h2>\n<p class=\"home-promo-modal__para\">Внесите депозит в клубе в первый раз, получите 10% от суммы первого депозита сразу и 150% в общей сложности по мере накопления баллов за любую активность в руме!</p>\n<p class=\"home-promo-modal__para\">Напишите оператору промокод</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">и получите доступ к бонусу!</p>\n<h2 class=\"home-promo-modal__para\">Акция<br>\n\"Двойной шанс\"</h2>\n<p class=\"home-promo-modal__para\">За второй депозит в нашем руме мы подарим вам билет на турнир с гарантией до 5000 долларов!</p>\n<p class=\"home-promo-modal__para\">Напишите оператору промокод</p>\n<p class=\"home-promo-modal__para\">DOUBLE</p>\n<p class=\"home-promo-modal__para\">перед внесением второго депозита</p>\n<h2 class=\"home-promo-modal__para\">Акция<br>\n\"Воин\"</h2>\n<p class=\"home-promo-modal__para\">Сыграйте 500 раздач в нашем руме в любой кэш-игре на любом лимите и получите 50 долларов на свой баланс.</p>\n<p class=\"home-promo-modal__para\">Руки начнут отсчет с того момента, как вы оформите свой заказ.</p>\n<p class=\"home-promo-modal__para\">промокод для оператора</p>\n<p class=\"home-promo-modal__para\">FIGHT</p>\n<h2 class=\"home-promo-modal__para\">Фрироллы только для игроков клуба NUTS</h2>\n<p class=\"home-promo-modal__para\">Иногда мы проводим частные бесплатные турниры только для членов нашего клуба. Вы получите уведомление от своего персонального менеджера.</p>"
+        },
+        "jackpot": {
+          "titleHtml": "Джекпот",
+          "iconSrc": "/assets/media/2024/08/solar_cup-star-bold.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Играя в кэш-игры в Nuts,\nвы можете выиграть джекпот.</p>\n<p class=\"home-promo-modal__para\">В PPPOKER есть два вида джекпотов</p>\n<h2 class=\"home-promo-modal__para\">1</h2>\n<h2 class=\"home-promo-modal__para\">Кулер</h2>\n<p class=\"home-promo-modal__para\">Если на шоудауне игроки раскроют карты \"четыре в одном\" против \"четырех в одном\" или выше (так называемая ситуация \"Кулер\"), все участники раздачи, включая тех, кто сбросил карты, получат долю джекпота \"Кулер\".</p>\n<p class=\"home-promo-modal__para\">Распределение призов:<br> Проигравший -50%<br>Победитель - 30%<br> Остальные игроки -20%.</p>\n<h2 class=\"home-promo-modal__para\">2</h2>\n<h2 class=\"home-promo-modal__para\">Старшая рука</h2>\n<p class=\"home-promo-modal__para\">(Только для \"холдема\") Если к концу раздачи у игрока на руках окажется комбинация из четырех карт или выше, он и все игроки,\nучаствовавшие в раздаче (включая тех, кто сбросил карты), получат свою долю от джекпота, выигранного в самой крупной раздаче.</p>"
+        }
+      }
+    },
+    "uz": {
+      "triggers": {
+        "bonus": "Batafsil",
+        "events": "Batafsil",
+        "jackpot": "Batafsil"
+      },
+      "modals": {
+        "bonus": {
+          "titleHtml": "Bonus birinchi depozit uchun 150% 500 dollargacha",
+          "iconSrc": "/assets/media/2024/07/rivet-icons_money.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Klubga birinchi marta depozit qo'ying, birinchisining 10 foizini oling\ndepozit darhol va jami 150%, chunki xonada har qanday faoliyat uchun ballar to'planadi!</p>\n<p class=\"home-promo-modal__para\">Promo-kodni operatorga yozing</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">va bonus kirish olish!</p>\n<p class=\"home-promo-modal__para\">Shartlar:</p>\n<p class=\"home-promo-modal__para\">Bonus faqat birinchi depozit uchun beriladi</p>\n<p class=\"home-promo-modal__para\">Turnirlarda qatnashish paytida bonus asta-sekin to'planadi</p>\n<p class=\"home-promo-modal__para\">Bonus haftada bir marta to'lanadi. Haftada qancha ko'p sovg'a qilsangiz, shuncha tez o'ynaysiz.</p>\n<p class=\"home-promo-modal__para\">Bonusingizning joriy holatini istalgan vaqtda operatordan bilib olishingiz mumkin</p>\n<p class=\"home-promo-modal__para\">150% bonus va boshqa bonuslar/shartlar qo'shilmaydi!!!</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Bonus o'yin davomida to'planadi</strong> va bu quyidagi parametrlarga bog'liq:</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">O'yin turi</strong> (OFC va NLH-da sekinroq, PLO-da tezroq)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Limit</strong> (chegara qanchalik baland bo'lsa, tezroq)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Faoliyat</strong> (VPIP qanchalik baland bo'lsa, tezroq)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Qo'llar soni</strong> (qanchalik katta bo'lsa, tezroq)</p>"
+        },
+        "events": {
+          "titleHtml": "Aktsiyalar",
+          "iconSrc": "",
+          "bodyHtml": "<h2 class=\"home-promo-modal__para\">Birinchi depozit bonusi 150% dan 500 dollargacha</h2>\n<p class=\"home-promo-modal__para\">Klubga birinchi marta depozit qo'ying, darhol birinchi depozitning 10 foizini va jami 150 foizini oling, chunki har qanday xona faoliyati uchun ballar to'planadi!</p>\n<p class=\"home-promo-modal__para\">Operatorga reklama kodini yozing</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">va bonus kirish olish!</p>\n<h2 class=\"home-promo-modal__para\">Aksiya<br>\n\"Ikki baravar imkoniyat\"</h2>\n<p class=\"home-promo-modal__para\">Bizning xonamizdagi ikkinchi depozit uchun biz sizga 5000 dollargacha kafolat bilan turnirga chipta beramiz!</p>\n<p class=\"home-promo-modal__para\">Operatorga reklama kodini yozing</p>\n<p class=\"home-promo-modal__para\">DOUBLE</p>\n<p class=\"home-promo-modal__para\">ikkinchi depozit qo'yishdan oldin</p>\n<h2 class=\"home-promo-modal__para\">Aksiya<br>\n\"Jangchi\"</h2>\n<p class=\"home-promo-modal__para\">Har qanday chegaradagi har qanday Kesh o'yinida bizning xonamizda 500 ta sovg'a o'ynang va balansingizdan 50 dollar oling.</p>\n<p class=\"home-promo-modal__para\">Buyurtma bergan paytdan boshlab qo'llar hisoblashni boshlaydi.</p>\n<p class=\"home-promo-modal__para\">operator uchun promo-kod</p>\n<p class=\"home-promo-modal__para\">FIGHT</p>\n<h2 class=\"home-promo-modal__para\">Frirolls faqat klub o'yinchilari uchun NUTS</h2>\n<p class=\"home-promo-modal__para\">Ba'zan biz faqat klubimiz a'zolari uchun shaxsiy bepul turnirlarni o'tkazamiz. Siz shaxsiy menejeringizdan bildirishnoma olasiz.</p>"
+        },
+        "jackpot": {
+          "titleHtml": "Jekpot",
+          "iconSrc": "/assets/media/2024/08/solar_cup-star-bold.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Играя в кэш-игры в Nuts,\nвы можете выиграть джекпот.</p>\n<p class=\"home-promo-modal__para\">В PPPOKER есть два вида джекпотов</p>\n<h2 class=\"home-promo-modal__para\">1</h2>\n<h2 class=\"home-promo-modal__para\">Sovutgich</h2>\n<p class=\"home-promo-modal__para\">Agar shoudownda o'yinchilar to'rtta bitta kartani to'rtta bitta yoki undan yuqori kartaga (\"sovutgich\" holati deb ataladigan) ochib berishsa, barcha tarqatuvchilar, shu jumladan kartalarni tashlaganlar ham \"sovutgich\" jackpotidan ulush olishadi.</p>\n<p class=\"home-promo-modal__para\">Sovrinlarni taqsimlash:<br> Yo'qotilgan -50%<br>G'olib - 30%<br> Qolgan oyinchilar -20%.</p>\n<h2 class=\"home-promo-modal__para\">2</h2>\n<h2 class=\"home-promo-modal__para\">Katta qo'l</h2>\n<p class=\"home-promo-modal__para\">(Faqat\"xoldem\" uchun) Agar sovg'a oxirida o'yinchining qo'lida to'rtta karta yoki undan yuqori karta bo'lsa, u va barcha o'yinchilar,\nsovg'ada ishtirok etganlar (shu jumladan kartalarni tashlaganlar) eng katta sovg'ada qo'lga kiritilgan jekpotdan o'z ulushlarini olishadi.</p>"
+        }
+      }
+    },
+    "kz": {
+      "triggers": {
+        "bonus": "ТОЛЫҒЫРАҚ",
+        "events": "ТОЛЫҒЫРАҚ",
+        "jackpot": "ТОЛЫҒЫРАҚ"
+      },
+      "modals": {
+        "bonus": {
+          "titleHtml": "Бірінші депозиттік Бонус 150% - дан 500 долларға дейін",
+          "iconSrc": "/assets/media/2024/07/rivet-icons_money.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Клубқа бірінші рет депозит салыңыз, бірінші соманың 10% алыңыз\nдепозит бірден және жалпы соманың 150% - ы, өйткені бөлмедегі кез-келген белсенділік үшін ұпайлар жиналады!</p>\n<p class=\"home-promo-modal__para\">Операторға промо-код жазыңыз</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">және бонусқа қол жеткізіңіз!</p>\n<p class=\"home-promo-modal__para\">Шарттар:</p>\n<p class=\"home-promo-modal__para\">Бонус тек бірінші депозитке есептеледі</p>\n<p class=\"home-promo-modal__para\">Турнирлерге қатысу кезінде бонус баяу жинақталады</p>\n<p class=\"home-promo-modal__para\">Бонус аптасына бір рет төленеді. Аптасына неғұрлым көп сыйлық жасасаңыз, соғұрлым тезірек ұтыс ойыны болады.</p>\n<p class=\"home-promo-modal__para\">Сіз өзіңіздің бонусыңыздың ағымдағы күйін оператордан кез келген уақытта біле аласыз</p>\n<p class=\"home-promo-modal__para\">150% Бонус және басқа бонустар / шарттар қосылмайды!!!</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Бонус ойын барысында жинақталады</strong> және бұл келесі параметрлерге байланысты:</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Ойын түрі</strong> (OFC және NLH-де баяу, PLO-да жылдамырақ)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Шектеу</strong> (шегі неғұрлым жоғары болса, соғұрлым тезірек)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Белсенділік</strong> (vpip неғұрлым жоғары болса, соғұрлым тезірек)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Қолдар саны</strong> (неғұрлым көп болса, соғұрлым тезірек)</p>"
+        },
+        "events": {
+          "titleHtml": "Акциялар",
+          "iconSrc": "",
+          "bodyHtml": "<h2 class=\"home-promo-modal__para\">Бірінші депозиттік Бонус 150% - дан 500 долларға дейін</h2>\n<p class=\"home-promo-modal__para\">Клубқа бірінші рет депозит жасаңыз, бірінші депозит сомасының 10% - и бірден алыңыз және бөлмедегі кез келген әрекет үшін ұпайлар жинақталған кезде барлығы 150% алыңыз!</p>\n<p class=\"home-promo-modal__para\">Операторға жарнамалық кодты жазыңыз</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">және бонусқа қол жеткізіңіз!</p>\n<h2 class=\"home-promo-modal__para\">Акция<br>\n\"Қос мүмкіндік\"</h2>\n<p class=\"home-promo-modal__para\">Біздің бөлмедегі екінші депозит үшін біз Сізге 5000 долларға дейін кепілдікпен турнирге билет береміз!</p>\n<p class=\"home-promo-modal__para\">Операторға жарнамалық кодты жазыңыз</p>\n<p class=\"home-promo-modal__para\">DOUBLE</p>\n<p class=\"home-promo-modal__para\">екінші депозит жасамас бұрын</p>\n<h2 class=\"home-promo-modal__para\">Акция<br>\n\"Жауынгер\"</h2>\n<p class=\"home-promo-modal__para\">Кез келген шекте кез келген кэш ойынында біздің бөлмеде 500 қол ойнаңыз және балансыңызға 50 доллар алыңыз.</p>\n<p class=\"home-promo-modal__para\">Қолдар сіз тапсырыс берген сәттен бастап санауды бастайды.</p>\n<p class=\"home-promo-modal__para\">операторға арналған промокод</p>\n<p class=\"home-promo-modal__para\">FIGHT</p>\n<h2 class=\"home-promo-modal__para\">ФРИРОЛЛАР тек NUTS клубының ойыншыларына арналған</h2>\n<p class=\"home-promo-modal__para\">Кейде біз тек клуб мүшелеріне арналған жеке тегін турнирлер өткіземіз. Сіз өзіңіздің жеке менеджеріңізден хабарлама аласыз.</p>"
+        },
+        "jackpot": {
+          "titleHtml": "Джекпот",
+          "iconSrc": "/assets/media/2024/08/solar_cup-star-bold.png",
+          "bodyHtml": "<p class=\"home-promo-modal__para\">Играя в кэш-игры в Nuts,\nвы можете выиграть джекпот.</p>\n<p class=\"home-promo-modal__para\">В PPPOKER есть два вида джекпотов</p>\n<h2 class=\"home-promo-modal__para\">1</h2>\n<h2 class=\"home-promo-modal__para\">Салқындатқыш</h2>\n<p class=\"home-promo-modal__para\">Егер шоуда ойыншылар \"төрт-бір\" және \"төрт-бір\" немесе одан жоғары карталарды ашса (\"салқындатқыш\" деп аталатын жағдай), барлық қатысушылар, соның ішінде карталарын тастағандар да \"салқындатқыш\"джекпотының үлесін алады.</p>\n<p class=\"home-promo-modal__para\">Жүлделерді бөлу:<br> Жеңілген -50%<br>Жеңімпаз - 30%<br> Қалған ойыншылар -20%.</p>\n<h2 class=\"home-promo-modal__para\">2</h2>\n<h2 class=\"home-promo-modal__para\">Аға қол</h2>\n<p class=\"home-promo-modal__para\">(Тек \"Холдем\" үшін) егер сыйлықтың соңында ойыншының қолында төрт карта немесе одан жоғары комбинация болса, ол және барлық ойыншылар,\nүлестіруге қатысқандар (соның ішінде карталарын тастағандар) ең үлкен үлесте жеңіп алған джекпоттан өз үлестерін алады.</p>"
+        }
+      }
+    }
+  }
+}
