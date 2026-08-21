@@ -1,5 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" role="img" aria-label="!">
-  <rect width="120" height="40" rx="8" fill="#1DB954"/>
-  <path fill="#fff" d="M18 12h6l-4 8 4 8h-6l-4-8 4-8zm14 0h6l-4 8 4 8h-6l-4-8 4-8zm14 0h6l-4 8 4 8h-6l-4-8 4-8z"/>
-  <text x="62" y="26" fill="#fff" font-family="system-ui,sans-serif" font-size="14" font-weight="700">!</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40" role="img" aria-label="СБП">
+  <rect width="120" height="40" rx="8" fill="#1D1346"/>
+  <path fill="#21A038" d="M14 10h5.2l-3.5 10 3.5 10H14l-3.5-10z"/>
+  <path fill="#F5A623" d="M24.5 10H30l-3.5 10 3.5 10h-5.5l-3.5-10z"/>
+  <path fill="#5B2D82" d="M35 10h5.2l-3.5 10 3.5 10H35l-3.5-10z"/>
+  <text x="62" y="26" fill="#fff" font-family="system-ui,sans-serif" font-size="15" font-weight="800" text-anchor="middle">СБП</text>
 </svg>

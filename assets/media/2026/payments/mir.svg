@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" role="img" aria-label=" ">
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="40" viewBox="0 0 120 40" role="img" aria-label="МИР">
   <defs>
-    <linearGradient id="mir-g" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="mir-gradient" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#1FAF38"/>
       <stop offset="100%" stop-color="#007B3A"/>
     </linearGradient>
   </defs>
-  <rect width="120" height="40" rx="8" fill="url(#mir-g)"/>
-  <text x="60" y="27" fill="#fff" font-family="system-ui,sans-serif" font-size="18" font-weight="800" text-anchor="middle"> </text>
+  <rect width="120" height="40" rx="8" fill="url(#mir-gradient)"/>
+  <text x="60" y="27" fill="#fff" font-family="system-ui,sans-serif" font-size="18" font-weight="800" text-anchor="middle">МИР</text>
 </svg>

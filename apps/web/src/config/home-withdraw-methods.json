@@ -46,7 +46,7 @@
     {
       "id": "bitcoin",
       "src": "/assets/media/2026/payments/bitcoin.svg",
-      "width": 40,
+      "width": 120,
       "height": 40,
       "label": "Bitcoin"
     }

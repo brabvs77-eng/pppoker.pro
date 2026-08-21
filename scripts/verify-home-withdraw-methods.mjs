@@ -31,6 +31,7 @@ function verifyBodyHtml(html, label, expectedMethods) {
   assert(html.includes('id="native-home-withdraw-methods"'), `${label}: missing native-home-withdraw-methods`);
   assert(html.includes('class="home-withdraw__title"'), `${label}: missing withdraw title`);
   assert(html.includes('class="home-withdraw__grid"'), `${label}: missing withdraw grid`);
+  assert(html.includes('class="home-withdraw__chip"'), `${label}: missing withdraw chip wrapper`);
 
   const logoCount = (html.match(/class="home-withdraw__logo"/g) || []).length;
   assert(
@@ -43,11 +44,21 @@ function verifyBodyHtml(html, label, expectedMethods) {
   }
 }
 
+function verifySvgAssets(methods) {
+  for (const method of methods) {
+    const svgPath = path.join(ROOT, method.src.replace(/^\//, ''));
+    const bytes = fs.readFileSync(svgPath);
+    const bad = [...bytes].filter((b) => b < 32 && b !== 9 && b !== 10 && b !== 13);
+    assert(bad.length === 0, `${method.id}.svg: invalid control bytes in SVG`);
+  }
+}
+
 function main() {
   const chrome = JSON.parse(read(CHROME));
   const withdrawRoutes = chrome.homeWithdrawMethodsSlotRoutes ?? [];
   const ruMethods = loadHomeWithdrawMethods('ru');
   assert(ruMethods.methods.length === 7, 'config: expected 7 withdraw methods');
+  verifySvgAssets(ruMethods.methods);
 
   for (const { fileId, route } of withdrawRoutes) {
     const bodyPath = path.join(BODIES, `${fileId}-with-blog-slot.html`);
