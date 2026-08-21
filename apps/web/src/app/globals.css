@@ -1335,6 +1335,184 @@ body {
   }
 }
 
+/* Native home registration steps carousel (replaces Elementor slides widgets). */
+.home-reg {
+  position: relative;
+  z-index: 9;
+  padding: 2.5rem 1rem 3rem;
+  background: #0a0d14;
+}
+
+.home-reg__carousel {
+  position: relative;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.home-reg__radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.home-reg__viewport {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(253, 230, 97, 0.12);
+  background: linear-gradient(145deg, #121a2a 0%, #0d111c 100%);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+}
+
+.home-reg__track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.home-reg__slide {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.75rem;
+  min-height: 320px;
+}
+
+.home-reg__media {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-reg__image {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.home-reg__content {
+  color: #e8ecf4;
+}
+
+.home-reg__heading {
+  margin: 0 0 0.75rem;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  font-weight: 700;
+  color: #fde661;
+}
+
+.home-reg__description {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgba(232, 236, 244, 0.92);
+}
+
+.home-reg__description p {
+  margin: 0 0 0.75rem;
+}
+
+.home-reg__description p:last-child {
+  margin-bottom: 0;
+}
+
+.home-reg__controls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home-reg__nav {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 230, 97, 0.35);
+  background: rgba(10, 13, 20, 0.75);
+  color: #fde661;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.home-reg__nav:hover {
+  background: rgba(253, 230, 97, 0.12);
+  border-color: rgba(253, 230, 97, 0.6);
+}
+
+.home-reg__nav--prev {
+  left: 0.5rem;
+}
+
+.home-reg__nav--next {
+  right: 0.5rem;
+}
+
+.home-reg__nav-icon {
+  display: block;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+
+.home-reg__nav--prev .home-reg__nav-icon {
+  transform: rotate(-135deg) translate(1px, -1px);
+}
+
+.home-reg__nav--next .home-reg__nav-icon {
+  transform: rotate(45deg) translate(-1px, 1px);
+}
+
+.home-reg__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.home-reg__dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.home-reg__dot:hover {
+  background: rgba(253, 230, 97, 0.5);
+}
+
+@media (max-width: 767px) {
+  .home-reg__slide {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .home-reg__image {
+    max-width: 280px;
+  }
+
+  .home-reg__nav--prev {
+    left: 0.25rem;
+  }
+
+  .home-reg__nav--next {
+    right: 0.25rem;
+  }
+}
+
 /* CRASH / Russian poker promo blocks — mobile: interleave text with media so sections don't merge. */
 @media (max-width: 767px) {
   /* RU/HY: video → CRASH text | image → rus-poker text → videos */

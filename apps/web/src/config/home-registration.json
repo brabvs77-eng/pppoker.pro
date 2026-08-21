@@ -1,0 +1,121 @@
+{
+  "images": [
+    "/assets/media/2024/08/Mask-group1-opt.webp",
+    "/assets/media/2024/08/Mask-group2-opt.webp",
+    "/assets/media/2024/09/1-3-opt.webp",
+    "/assets/media/2024/09/1-6-opt.webp",
+    "/assets/media/2024/09/1-5-opt.webp"
+  ],
+  "stepsByLocale": {
+    "ru": [
+      {
+        "heading": "Шаг 1",
+        "descriptionHtml": "Создайте логин и пароль"
+      },
+      {
+        "heading": "Шаг 2",
+        "descriptionHtml": "Закройте все всплывающие окна\n<br>\nи нажмите \"Присоединиться\" в главном лобби"
+      },
+      {
+        "heading": "Шаг 3",
+        "descriptionHtml": "В поле идентификатор клуба введите номер\n<br><span style=\"font-weight:900; color:#4CAF50;\">111777</span> и нажмите Присоединиться"
+      },
+      {
+        "heading": "Шаг 4",
+        "descriptionHtml": "Откройте свой «Профиль»"
+      },
+      {
+        "heading": "Шаг 5",
+        "descriptionHtml": "Скопируйте ваш User ID\n<br>и отправьте его оператору \n\n<br><br><span style=\"font-weight:100;\">Позже здесь можно будет выбрать аватар\n<br>и псевдоним</span>\n<br><br>\nВсе готово! Свяжитесь с оператором <br>и начинайте игру в приложении pppoker. Удачи!"
+      }
+    ],
+    "en": [
+      {
+        "heading": "Step 1",
+        "descriptionHtml": "Create  login and password"
+      },
+      {
+        "heading": "Step 2",
+        "descriptionHtml": "Close all pop-up windows\n<br>and click Join in the main lobby"
+      },
+      {
+        "heading": "Step 3",
+        "descriptionHtml": "In the club ID field enter the number\n<br><span style=\"font-weight:900; color:#4CAF50;\">111777</span> and click Join"
+      },
+      {
+        "heading": "Step 4",
+        "descriptionHtml": "Open your «Profile»"
+      },
+      {
+        "heading": "Step 5",
+        "descriptionHtml": "Copy your ID\n<br>and send it to the operator \n\n<br><br><span style=\"font-weight:100;\">Later its possible here to chose avatar\n<br>and nickname</span>\n<br><br>\nAll is ready! Contact with operator<br> and start the game in our club NUTS. Good Luck!"
+      }
+    ],
+    "hy": [
+      {
+        "heading": "Քայլ 1",
+        "descriptionHtml": "Ստեղծեք օգտվողի անուն և գաղտնաբառ"
+      },
+      {
+        "heading": "Քայլ 2",
+        "descriptionHtml": "Փակել բոլոր ելնող պատուհանները\n<br>\nև կտտացրեք \"միանալ\" հիմնական նախասրահում"
+      },
+      {
+        "heading": "Քայլ 3",
+        "descriptionHtml": "Ակումբի id դաշտում մուտքագրեք համարը\n<br><span style=\"font-weight:900; color:#4CAF50;\">111777</span> և կտտացրեք միանալ"
+      },
+      {
+        "heading": "Քայլ 4",
+        "descriptionHtml": "Բացեք ձեր \"պրոֆիլը\""
+      },
+      {
+        "heading": "Քայլ 5",
+        "descriptionHtml": "Պատճենել Ձեր User ID\n<br>և ուղարկեք այն օպերատորին\n\n<br><br><span style=\"font-weight:100;\">Ավելի ուշ այստեղ հնարավոր կլինի ընտրել ավատար\n<br>և կեղծանունը</span>\n<br><br>\nԱմեն ինչ պատրաստ է: Կապվեք օպերատորի հետ <br>Եվ սկսեք խաղը pppoker հավելվածում: Հաջողություն!"
+      }
+    ],
+    "uz": [
+      {
+        "heading": "Kadam 1",
+        "descriptionHtml": "<p>Login va parolni yarating</p>"
+      },
+      {
+        "heading": "Kadam 2",
+        "descriptionHtml": "<p>Barcha qalqib chiquvchi oynalarni yoping<br>\n<br>va asosiy qabulxonasiga qo'shiling bosing</p>"
+      },
+      {
+        "heading": "Kadam 3",
+        "descriptionHtml": "<p>Klub identifikatori maydoniga raqamni kiriting<br>\n<br><span style=\"font-weight:900; color:#4CAF50;\">111777</span> va bosing qo'shiling</p>"
+      },
+      {
+        "heading": "Kadam 4",
+        "descriptionHtml": "<p>\"Profil\"ni oching</p>"
+      },
+      {
+        "heading": "Kadam 5",
+        "descriptionHtml": "<p>Sizning ID nusxa<br>\n<br>va uni operatorga yuboring</p>\n<p><span style=\"font-weight:100;\">Keyinchalik bu yerda avatarni tanlash mumkin<br>\n<br>va taxallus</span></p>\n<p>Hammasi tayyor! Operator bilan bog'laning<br> va NUTS klubimizda o'yinni boshlang. Omad tilaymiz!</p>"
+      }
+    ],
+    "kz": [
+      {
+        "heading": "Қадам 1",
+        "descriptionHtml": "Логин мен пароль жасаңыз"
+      },
+      {
+        "heading": "Қадам 2",
+        "descriptionHtml": "Барлық қалқымалы терезелерді жабыңыз\n<br>және Негізгі фойеде Қосылу түймесін басыңыз"
+      },
+      {
+        "heading": "Қадам 3",
+        "descriptionHtml": "Клуб ID өрісіне нөмірді енгізіңіз\n<br><span style=\"font-weight:900; color:#4CAF50;\">111777</span> Және Қосылу түймесін басыңыз"
+      },
+      {
+        "heading": "Қадам 4",
+        "descriptionHtml": "\"Профильді\" ашыңыз"
+      },
+      {
+        "heading": "Қадам 5",
+        "descriptionHtml": "ЖЕКЕ ID көшіріңіз\n<br>және оны операторға жіберіңіз\n\n<br><br><span style=\"font-weight:100;\">Кейінірек аватарды таңдауға болады\n<br>және лақап аты</span>\n<br><br>\nБәрі дайын! Оператормен байланысыңыз<br> және ойынды БІЗДІҢ КЛУБ <br>ЖАҢҒАҚТАРЫНАН бастаңыз. Іске Сәт!"
+      }
+    ]
+  }
+}

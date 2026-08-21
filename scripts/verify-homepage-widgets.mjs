@@ -6,15 +6,19 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
-  { label: 'EN', outPath: 'en/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
-  { label: 'HY', outPath: 'hy/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
-  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
-  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 2, requireFaq: true, requireRuntime: true, minReviewCards: 6 },
-  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRuntime: false },
+  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRegistration: false, requireRuntime: false },
 ];
 
-function verifyHomepageWidgets({ label, minSwipers, minReviewCards = 0, requireFaq, requireRuntime }, html, violations) {
+function verifyHomepageWidgets(
+  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireRuntime },
+  html,
+  violations,
+) {
   if (requireFaq) {
     if (html.includes('href="#collapse-')) {
       violations.push(`[${label}] FAQ accordion still uses lowercase #collapse- href anchors`);
@@ -30,6 +34,18 @@ function verifyHomepageWidgets({ label, minSwipers, minReviewCards = 0, requireF
     }
   }
 
+  if (requireRegistration) {
+    if (html.includes('class="elementor-main-swiper"')) {
+      violations.push(`[${label}] Legacy elementor-main-swiper carousel still present`);
+    }
+    if (!html.includes('id="native-home-registration"')) {
+      violations.push(`[${label}] Missing native home registration section`);
+    }
+    if (!html.includes('class="home-reg__slide"')) {
+      violations.push(`[${label}] Missing native registration slides`);
+    }
+  }
+
   if (
     requireRuntime &&
     !html.includes('LegacyElementorBoot') &&
@@ -38,6 +54,10 @@ function verifyHomepageWidgets({ label, minSwipers, minReviewCards = 0, requireF
     if (!html.includes('elementor-frontend-js')) {
       violations.push(`[${label}] Missing elementor-frontend-js on homepage`);
     }
+  }
+
+  if (!requireRuntime && html.includes('elementor-frontend-js')) {
+    violations.push(`[${label}] Elementor runtime should not load on native home shell`);
   }
 
   const swiperCount = (html.match(/class="[^"]*elementor-main-swiper[^"]*"/g) ?? []).length;
@@ -92,7 +112,7 @@ async function main() {
   }
 
   console.log(
-    `Verified homepage widget markup on ${checked.join(', ')} (FAQ, carousels, popups).`,
+    `Verified homepage widget markup on ${checked.join(', ')} (FAQ, registration, popups).`,
   );
 }
 
