@@ -19,12 +19,14 @@ const localeFiles = {
   kz: 'kz/index.html',
 };
 
-const popupIdsByLocale = {
-  ru: { bonus: '3989', events: '3946', jackpot: '3981' },
-  en: { bonus: '886', events: '834', jackpot: '893' },
-  hy: { bonus: '3989', events: '3946', jackpot: '3981' },
-  uz: { bonus: '3992', events: '3975', jackpot: '3984' },
-  kz: { bonus: '3986', events: '3971', jackpot: '3979' },
+const hotspotElementIds = {
+  bonus: '4b0f657',
+  events: '0f49f23',
+  jackpot: '4dc426c',
+};
+
+const popupIdOverrides = {
+  hy: { bonus: '886', events: '834', jackpot: '893' },
 };
 
 const hotspotLabels = {
@@ -35,12 +37,85 @@ const hotspotLabels = {
   kz: { bonus: 'ТОЛЫҒЫРАҚ', events: 'ТОЛЫҒЫРАҚ', jackpot: 'ТОЛЫҒЫРАҚ' },
 };
 
+const jackpotIntroByLocale = {
+  ru: [
+    'Играя в кэш-игры в Nuts,\nвы можете выиграть джекпот.',
+    'В PPPOKER есть два вида джекпотов',
+  ],
+  en: [
+    'By playing cash games at Nuts, you can win a jackpot.',
+    'PPPOKER has two types of jackpots',
+  ],
+  hy: [
+    'By playing cash games at Nuts, you can win a jackpot.',
+    'PPPOKER has two types of jackpots',
+  ],
+  uz: [
+    "Nuts klubida kesh o'yinlarini o'ynab, jekpot yutib olishingiz mumkin.",
+    "PPPOKERda ikki xil jekpot mavjud",
+  ],
+  kz: [
+    'Nuts клубында кэш ойындарын ойнап, джекпот ұтып алуға болады.',
+    'PPPOKER-де екі түрлі джекпот бар',
+  ],
+};
+
+function decodePopupIdFromActionUrl(url) {
+  const match = url.match(/settings%3D([^"&]+)/);
+  if (!match) return null;
+  try {
+    const json = JSON.parse(Buffer.from(decodeURIComponent(match[1]), 'base64').toString('utf8'));
+    return json.id != null ? String(json.id) : null;
+  } catch {
+    return null;
+  }
+}
+
+function popupIdFromHotspot($, elementId) {
+  const widget = $(`.elementor-element-${elementId}`).first();
+  if (!widget.length) return null;
+
+  const anchorHref = widget.find('a.e-hotspot--link[href*="popup:open"]').attr('href');
+  if (anchorHref) {
+    const id = decodePopupIdFromActionUrl(anchorHref);
+    if (id) return id;
+  }
+
+  const rawLink = widget.attr('data-ha-element-link');
+  if (rawLink) {
+    try {
+      const parsed = JSON.parse(rawLink.replace(/&quot;/g, '"'));
+      const id = decodePopupIdFromActionUrl(parsed.url ?? '');
+      if (id) return id;
+    } catch {
+      // ignore malformed JSON
+    }
+  }
+
+  return null;
+}
+
+function isResponsiveDuplicate($, el) {
+  const widget = $(el).closest('.elementor-widget');
+  return (
+    widget.hasClass('elementor-hidden-desktop') ||
+    widget.hasClass('elementor-hidden-tablet') ||
+    widget.hasClass('elementor-hidden-mobile')
+  );
+}
+
+function normalizeIconSrc(src) {
+  if (!src) return '';
+  return src.replace(/\.png$/i, '.webp');
+}
+
 function extractPopupBody($, popup) {
   const chunks = [];
   const contentRoot = popup.find('.elementor-element-dbda4a5').first();
   const root = contentRoot.length ? contentRoot : popup;
 
   root.find('.elementor-widget-heading .elementor-heading-title').each((index, el) => {
+    if (isResponsiveDuplicate($, el)) return;
     if (index === 0 && $(el).closest('h2').length) return;
     const tag = $(el).prop('tagName')?.toLowerCase() === 'h2' ? 'h2' : 'p';
     const html = $(el).html()?.trim();
@@ -48,6 +123,7 @@ function extractPopupBody($, popup) {
   });
 
   root.find('.eael-dual-header .title').each((_, el) => {
+    if (isResponsiveDuplicate($, el)) return;
     const lead = $(el).find('.lead').html()?.trim();
     const rest = $(el)
       .contents()
@@ -63,6 +139,25 @@ function extractPopupBody($, popup) {
   return chunks.join('\n');
 }
 
+function stripRussianJackpotIntro(bodyHtml) {
+  return bodyHtml
+    .replace(/<p class="home-promo-modal__para">Играя в кэш-игры[\s\S]*?<\/p>\n?/g, '')
+    .replace(/<p class="home-promo-modal__para">В PPPOKER есть два вида джекпотов<\/p>\n?/g, '');
+}
+
+function applyJackpotIntro(locale, bodyHtml) {
+  let html = locale === 'ru' ? bodyHtml : stripRussianJackpotIntro(bodyHtml);
+  if (html.includes('Играя в кэш-игры') || html.includes('By playing cash games at Nuts')) {
+    return html;
+  }
+
+  const intros = jackpotIntroByLocale[locale];
+  if (!intros?.length) return html;
+
+  const prefix = intros.map((text) => `<p class="home-promo-modal__para">${text}</p>`).join('\n');
+  return `${prefix}\n${html}`;
+}
+
 function extractPopup($, popupId) {
   const popup = $(`[data-elementor-type="popup"][data-elementor-id="${popupId}"]`).first();
   if (!popup.length) return null;
@@ -72,8 +167,9 @@ function extractPopup($, popupId) {
     popup.find('.elementor-heading-title').first().html()?.trim() ??
     '';
 
-  const iconSrc =
-    popup.find('.elementor-element-05a3f0c img, .elementor-element-9cef1e5 img').first().attr('src') ?? '';
+  const iconSrc = normalizeIconSrc(
+    popup.find('.elementor-element-05a3f0c img, .elementor-element-9cef1e5 img').first().attr('src') ?? '',
+  );
 
   return {
     titleHtml,
@@ -88,8 +184,8 @@ async function main() {
   for (const [locale, file] of Object.entries(localeFiles)) {
     const html = await fs.readFile(path.join(rootDir, file), 'utf8');
     const $ = load(html);
-    const ids = popupIdsByLocale[locale];
     const labels = hotspotLabels[locale];
+    const overrides = popupIdOverrides[locale] ?? {};
 
     modalsByLocale[locale] = {
       triggers: labels,
@@ -97,21 +193,35 @@ async function main() {
     };
 
     for (const kind of ['bonus', 'events', 'jackpot']) {
-      const extracted = extractPopup($, ids[kind]);
-      if (!extracted?.titleHtml) {
-        console.error(`Missing popup ${kind} (${ids[kind]}) for ${locale}`);
+      const popupId =
+        overrides[kind] ?? popupIdFromHotspot($, hotspotElementIds[kind]);
+      if (!popupId) {
+        console.error(`Missing popup id for ${locale}/${kind}`);
         process.exitCode = 1;
         continue;
       }
+
+      const extracted = extractPopup($, popupId);
+      if (!extracted?.titleHtml) {
+        console.error(`Missing popup ${kind} (${popupId}) for ${locale}`);
+        process.exitCode = 1;
+        continue;
+      }
+
+      if (kind === 'jackpot') {
+        extracted.bodyHtml = applyJackpotIntro(locale, extracted.bodyHtml);
+      }
+
       modalsByLocale[locale].modals[kind] = extracted;
     }
   }
 
   const config = {
-    hotspotElementIds: {
-      bonus: '4b0f657',
-      events: '0f49f23',
-      jackpot: '4dc426c',
+    hotspotElementIds,
+    cardElementIds: {
+      bonus: '1aacb59',
+      events: '44201aa',
+      jackpot: '938716b',
     },
     popupTemplateStyleIds: ['886', '834', '893', '840'],
     modalsByLocale,
