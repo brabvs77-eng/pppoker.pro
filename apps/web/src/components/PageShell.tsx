@@ -4,6 +4,7 @@ import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
 import { HomePromoModalsBoot } from '@/components/native/HomePromoModalsBoot';
+import { BlogJsonLdBlock } from '@/components/native/BlogJsonLdBlock';
 import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
 import { NativePage } from '@/components/native/NativePage';
