@@ -29,10 +29,13 @@ function verifyBodyHtml(html, label) {
   assert(html.includes('id="native-home-promo-modals"'), `${label}: missing native-home-promo-modals`);
   assert(!html.includes('elementor-location-popup'), `${label}: legacy Elementor popups still present`);
   assert(!html.includes('data-elementor-type="popup"'), `${label}: legacy popup containers still present`);
-  assert(html.includes('home-promo-modals-boot'), `${label}: missing promo modals boot script`);
   assert(html.includes('data-home-promo-modal="bonus"'), `${label}: missing bonus modal trigger`);
   assert(html.includes('data-home-promo-modal="events"'), `${label}: missing events modal trigger`);
   assert(html.includes('data-home-promo-modal="jackpot"'), `${label}: missing jackpot modal trigger`);
+  assert(html.includes('data-home-promo-card="bonus"'), `${label}: missing bonus card trigger`);
+  assert(html.includes('data-home-promo-card="events"'), `${label}: missing events card trigger`);
+  assert(html.includes('data-home-promo-card="jackpot"'), `${label}: missing jackpot card trigger`);
+  assert(html.includes('home-promo-modal__trigger-img'), `${label}: missing but-back trigger image`);
   assert(html.includes('id="home-promo-modal-bonus"'), `${label}: missing bonus dialog`);
   assert(html.includes('id="home-promo-modal-events"'), `${label}: missing events dialog`);
   assert(html.includes('id="home-promo-modal-jackpot"'), `${label}: missing jackpot dialog`);

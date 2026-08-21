@@ -6,44 +6,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../.
 const configPath = path.join(rootDir, 'apps/web/src/config/home-promo-modals.json');
 
 const MODAL_KEYS = ['bonus', 'events', 'jackpot'];
-const BOOT_SCRIPT_ID = 'home-promo-modals-boot';
-
-const BOOT_SCRIPT = `<script id="${BOOT_SCRIPT_ID}">
-(function () {
-  function openModal(key) {
-    var dialog = document.getElementById('home-promo-modal-' + key);
-    if (dialog && typeof dialog.showModal === 'function') {
-      dialog.showModal();
-    }
-  }
-  function wire() {
-    document.querySelectorAll('[data-home-promo-modal]').forEach(function (btn) {
-      if (btn.__promoModalWired) return;
-      btn.__promoModalWired = true;
-      btn.addEventListener('click', function () {
-        openModal(btn.getAttribute('data-home-promo-modal'));
-      });
-    });
-    document.querySelectorAll('[data-home-promo-modal-close]').forEach(function (btn) {
-      if (btn.__promoModalCloseWired) return;
-      btn.__promoModalCloseWired = true;
-      btn.addEventListener('click', function () {
-        var dialog = btn.closest('dialog');
-        if (dialog) dialog.close();
-      });
-    });
-    document.querySelectorAll('dialog.home-promo-modal').forEach(function (dialog) {
-      if (dialog.__promoModalBackdropWired) return;
-      dialog.__promoModalBackdropWired = true;
-      dialog.addEventListener('click', function (event) {
-        if (event.target === dialog) dialog.close();
-      });
-    });
-  }
-  wire();
-  document.addEventListener('DOMContentLoaded', wire);
-})();
-</script>`;
+const TRIGGER_IMG_SRC = '/assets/media/2024/07/but-back.webp';
 
 function loadConfig() {
   return JSON.parse(readFileSync(configPath, 'utf8'));
@@ -56,6 +19,7 @@ export function loadHomePromoModals(locale) {
     modals: localeConfig.modals,
     triggers: localeConfig.triggers,
     hotspotElementIds: config.hotspotElementIds,
+    cardElementIds: config.cardElementIds ?? {},
     popupTemplateStyleIds: config.popupTemplateStyleIds,
   };
 }
@@ -87,7 +51,10 @@ function renderModal(key, modal) {
 
 export function renderHotspotTrigger(modalKey, label) {
   return `<div class="home-promo-modal__trigger-wrap home-promo-modal__trigger-wrap--${modalKey}">
-  <button type="button" class="home-promo-modal__trigger" data-home-promo-modal="${modalKey}">${escapeHtml(label)}</button>
+  <button type="button" class="home-promo-modal__trigger" data-home-promo-modal="${modalKey}">
+    <img class="home-promo-modal__trigger-img" src="${TRIGGER_IMG_SRC}" alt="" width="367" height="118" loading="lazy" decoding="async">
+    <span class="home-promo-modal__trigger-label">${escapeHtml(label)}</span>
+  </button>
 </div>`;
 }
 
@@ -99,6 +66,5 @@ export function renderHomePromoModalsSection({ locale }) {
 
   return `<div class="home-promo-modals" id="native-home-promo-modals">
 ${dialogs}
-</div>
-${BOOT_SCRIPT}`;
+</div>`;
 }

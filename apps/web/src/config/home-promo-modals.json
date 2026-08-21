@@ -4,6 +4,11 @@
     "events": "0f49f23",
     "jackpot": "4dc426c"
   },
+  "cardElementIds": {
+    "bonus": "1aacb59",
+    "events": "44201aa",
+    "jackpot": "938716b"
+  },
   "popupTemplateStyleIds": [
     "886",
     "834",
