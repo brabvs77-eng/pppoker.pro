@@ -193,6 +193,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Lighthouse CI | `lighthouse:budget` in GHA after smoke — LCP ≤ 4500ms, CLS ≤ 0.10 on 5 homepages |
 | Home FAQ accordion | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS `<details>`; `verify:home-faq`; smoke |
 | Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
+| Home cash games grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 3 static cards; `verify:home-cash-games` |
 | Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime` |
 
 ## Planned work (backlog)
@@ -202,7 +203,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 2. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
 3. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
 4. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
-5. More Elementor sections → native components (e.g. cash games grid `79d6e08`)
+5. More Elementor sections → native components (remaining legacy homepage blocks after cash games grid)
 
 ## Adding or updating content
 

@@ -1513,6 +1513,135 @@ body {
   }
 }
 
+/* Native home cash games grid (replaces Elementor 79d6e08 section). */
+.home-cash {
+  position: relative;
+  z-index: 8;
+  padding: 2.5rem 1rem 3rem;
+  background: linear-gradient(180deg, #0a0d14 0%, #101624 100%);
+  border-top: 1px solid rgba(253, 230, 97, 0.06);
+}
+
+.home-cash__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.home-cash__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-cash__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(160deg, rgba(24, 34, 54, 0.95) 0%, rgba(14, 20, 34, 0.98) 100%);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+.home-cash__card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.home-cash__icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.home-cash__card-titles {
+  min-width: 0;
+}
+
+.home-cash__card-title {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: #fde661;
+  line-height: 1.2;
+}
+
+.home-cash__card-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  color: rgba(232, 236, 244, 0.82);
+}
+
+.home-cash__variants {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.home-cash__variant {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #e8ecf4;
+  line-height: 1.35;
+}
+
+.home-cash__muted {
+  color: #7b8db2;
+  font-weight: 500;
+}
+
+.home-cash__buyins-lead,
+.home-cash__stat,
+.home-cash__guarantee-label {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(232, 236, 244, 0.88);
+}
+
+.home-cash__buyins-range,
+.home-cash__tournament-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.home-cash__buyins-range {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.home-cash__connector {
+  font-size: 0.9rem;
+  color: rgba(232, 236, 244, 0.65);
+}
+
+.home-cash__amount {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 800;
+  color: #fde661;
+  line-height: 1.1;
+}
+
+.home-cash__amount--guarantee {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+@media (max-width: 960px) {
+  .home-cash__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* CRASH / Russian poker promo blocks — mobile: interleave text with media so sections don't merge. */
 @media (max-width: 767px) {
   /* RU/HY: video → CRASH text | image → rus-poker text → videos */

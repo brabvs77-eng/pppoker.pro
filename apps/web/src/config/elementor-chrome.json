@@ -63,6 +63,14 @@
     { "fileId": "uz", "route": "/uz/" },
     { "fileId": "kz", "route": "/kz/" }
   ],
+  "legacyCashGamesSectionElementId": "79d6e08",
+  "homeCashGamesSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" }
+  ],
   "stripLegacyFooterRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "en", "route": "/en/" },

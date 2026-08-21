@@ -6,16 +6,16 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRegistration: false, requireRuntime: false },
+  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRegistration: false, requireCashGames: false, requireRuntime: false },
 ];
 
 function verifyHomepageWidgets(
-  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireRuntime },
+  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireCashGames, requireRuntime },
   html,
   violations,
 ) {
@@ -43,6 +43,18 @@ function verifyHomepageWidgets(
     }
     if (!html.includes('class="home-reg__slide"')) {
       violations.push(`[${label}] Missing native registration slides`);
+    }
+  }
+
+  if (requireCashGames) {
+    if (html.includes('class="elementor-element elementor-element-79d6e08')) {
+      violations.push(`[${label}] Legacy cash games section still present`);
+    }
+    if (!html.includes('id="native-home-cash-games"')) {
+      violations.push(`[${label}] Missing native home cash games section`);
+    }
+    if (!html.includes('<article class="home-cash__card')) {
+      violations.push(`[${label}] Missing native cash game cards`);
     }
   }
 
@@ -112,7 +124,7 @@ async function main() {
   }
 
   console.log(
-    `Verified homepage widget markup on ${checked.join(', ')} (FAQ, registration, popups).`,
+    `Verified homepage widget markup on ${checked.join(', ')} (FAQ, registration, cash games, popups).`,
   );
 }
 

@@ -13,15 +13,15 @@ const port = 9876;
 const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'EN', urlPath: '/en/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 0, minRegistrationSlides: 5, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
+  { label: 'RU', urlPath: '/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'EN', urlPath: '/en/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minCashGameCards: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
 ];
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistrationSlides = 0, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistrationSlides = 0, minCashGameCards = 0, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
   const violations = [];
   await page.goto(`http://127.0.0.1:${port}${urlPath}`, {
     waitUntil: 'load',
@@ -45,6 +45,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     nativeFaqItems: document.querySelectorAll('.home-faq__item').length,
     nativeRegistration: !!document.querySelector('#native-home-registration'),
     nativeRegistrationSlides: document.querySelectorAll('.home-reg__slide').length,
+    nativeCashGames: !!document.querySelector('#native-home-cash-games'),
+    nativeCashGameCards: document.querySelectorAll('.home-cash__card').length,
     legacySwiper: document.querySelectorAll('.elementor-main-swiper').length,
     legacyFaqAccordion: !!document.querySelector('.elementskit-accordion, .elementor-widget-elementskit-accordion'),
     channelLink: !!document.querySelector(`a[href="${channel}"]`),
@@ -108,6 +110,14 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
   if (minRegistrationSlides > 0 && state.nativeRegistrationSlides < minRegistrationSlides) {
     violations.push(
       `[${label}] Expected at least ${minRegistrationSlides} native registration slides, found ${state.nativeRegistrationSlides}`,
+    );
+  }
+  if (minCashGameCards > 0 && !state.nativeCashGames) {
+    violations.push(`[${label}] Missing native home cash games section`);
+  }
+  if (minCashGameCards > 0 && state.nativeCashGameCards < minCashGameCards) {
+    violations.push(
+      `[${label}] Expected at least ${minCashGameCards} native cash game cards, found ${state.nativeCashGameCards}`,
     );
   }
   if (state.faqBadHash) violations.push(`[${label}] FAQ still has lowercase #collapse- anchors`);
@@ -197,7 +207,7 @@ async function main() {
     }
 
     console.log(
-      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (registration, FAQ, contacts, native footer, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
+      `Homepage smoke passed for ${HOME_SMOKE_PAGES.map((p) => p.label).join(', ')} (registration, cash games, FAQ, contacts, native footer, Telegram hero CTAs, no WhatsApp, CRASH video, home blog, RSS).`,
     );
   } finally {
     await browser.close();
