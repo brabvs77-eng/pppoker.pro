@@ -48,6 +48,9 @@ async function main() {
   const cashGamesRoutes = new Set(
     (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const promoBlocksRoutes = new Set(
+    (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
