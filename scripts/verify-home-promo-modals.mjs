@@ -12,6 +12,15 @@ const OUT = path.join(ROOT, 'apps/web/out');
 const BODIES = path.join(ROOT, 'content/bodies');
 const CHROME = path.join(ROOT, 'apps/web/src/config/elementor-chrome.json');
 const GLOBALS_CSS = path.join(ROOT, 'apps/web/src/app/globals.css');
+const CONFIG = path.join(ROOT, 'apps/web/src/config/home-promo-modals.json');
+
+const localeMarkers = {
+  '/': { mustHave: ['Бонус на первый депозит'], mustNotHave: ['By playing cash games at Nuts'] },
+  '/en/': { mustHave: ['First deposit bonus of 150%', 'By playing cash games at Nuts'], mustNotHave: ['Играя в кэш-игры'] },
+  '/hy/': { mustHave: ['First deposit bonus of 150%', 'By playing cash games at Nuts'], mustNotHave: ['Играя в кэш-игры'] },
+  '/uz/': { mustHave: ['Bonus birinchi depozit', 'Nuts klubida kesh'], mustNotHave: ['Играя в кэш-игры'] },
+  '/kz/': { mustHave: ['Бірінші депозиттік Бонус', 'Nuts клубында кэш'], mustNotHave: ['Играя в кэш-игры'] },
+};
 
 function read(p) {
   return fs.readFileSync(p, 'utf8');
@@ -64,8 +73,26 @@ function verifyGlobalsCss(css) {
   );
 }
 
+function verifyLocalization(html, route) {
+  const markers = localeMarkers[route];
+  if (!markers) return;
+  for (const text of markers.mustHave) {
+    assert(html.includes(text), `${route}: missing localized promo copy "${text}"`);
+  }
+  for (const text of markers.mustNotHave) {
+    assert(!html.includes(text), `${route}: leaked foreign promo copy "${text}"`);
+  }
+}
+
+function verifyConfig(config) {
+  assert(config.cardElementIds?.bonus, 'home-promo-modals.json: missing cardElementIds.bonus');
+  assert(config.cardElementIds?.events, 'home-promo-modals.json: missing cardElementIds.events');
+  assert(config.cardElementIds?.jackpot, 'home-promo-modals.json: missing cardElementIds.jackpot');
+}
+
 function main() {
   verifyGlobalsCss(read(GLOBALS_CSS));
+  verifyConfig(JSON.parse(read(CONFIG)));
   const chrome = JSON.parse(read(CHROME));
   const modalRoutes = chrome.homePromoModalsSlotRoutes ?? [];
 
@@ -84,7 +111,9 @@ function main() {
   for (const { route } of modalRoutes) {
     const p = outPathForRoute(route);
     assert(fs.existsSync(p), `missing export: ${route}`);
-    verifyBodyHtml(read(p), route);
+    const html = read(p);
+    verifyBodyHtml(html, route);
+    verifyLocalization(html, route);
   }
 
   console.log('verify-home-promo-modals: OK');
