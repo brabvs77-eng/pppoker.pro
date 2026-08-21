@@ -30,13 +30,15 @@ export function renderHomeWithdrawMethodsSection({ locale }) {
   const items = methods
     .map(
       (method) => `<li class="home-withdraw__item">
-  <img class="home-withdraw__logo"
-    src="${method.src}"
-    alt="${escapeHtml(method.label)}"
-    width="${method.width}"
-    height="${method.height}"
-    loading="lazy"
-    decoding="async">
+  <span class="home-withdraw__chip">
+    <img class="home-withdraw__logo"
+      src="${method.src}"
+      alt="${escapeHtml(method.label)}"
+      width="${method.width}"
+      height="${method.height}"
+      loading="lazy"
+      decoding="async">
+  </span>
 </li>`,
     )
     .join('\n');
