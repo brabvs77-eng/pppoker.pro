@@ -54,9 +54,6 @@ async function main() {
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
-  const promoBlocksRoutes = new Set(
-    (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
-  );
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const faqSectionId = chrome.legacyFaqSectionElementId;
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
