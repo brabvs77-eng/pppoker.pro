@@ -103,6 +103,34 @@ function stripLegacyFooter(bodyHtml) {
   return `${bodyHtml.slice(0, colophonStart)}${bodyHtml.slice(footerEnd + '</footer>'.length)}`;
 }
 
+function stripLegacyMasthead(bodyHtml) {
+  const mastheadStart = bodyHtml.search(/<header[^>]*\bid="masthead"/i);
+  if (mastheadStart === -1) return bodyHtml;
+
+  const headerEnd = bodyHtml.indexOf('</header>', mastheadStart);
+  if (headerEnd === -1) return bodyHtml;
+
+  return `${bodyHtml.slice(0, mastheadStart)}${bodyHtml.slice(headerEnd + '</header>'.length)}`;
+}
+
+function stripDeadHomeMarkup(bodyHtml, { stripMasthead, widsterSectionId, duplicateCtaIds }) {
+  let processed = bodyHtml;
+
+  if (stripMasthead) {
+    processed = stripLegacyMasthead(processed);
+  }
+
+  if (widsterSectionId) {
+    processed = stripElementorSection(processed, widsterSectionId);
+  }
+
+  for (const elementId of duplicateCtaIds ?? []) {
+    processed = stripElementorSection(processed, elementId);
+  }
+
+  return processed;
+}
+
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const defaultLegacySectionId = chrome.legacyBlogSectionIds[0];
@@ -133,6 +161,11 @@ async function main() {
   const stripFooterRoutes = new Set(
     (chrome.stripLegacyFooterRoutes ?? []).map((entry) => entry.fileId),
   );
+  const stripMastheadRoutes = new Set(
+    (chrome.stripLegacyMastheadRoutes ?? []).map((entry) => entry.fileId),
+  );
+  const widsterByFileId = chrome.legacyWidsterSectionElementIdsByFileId ?? {};
+  const duplicateCtaIds = chrome.homepageDuplicateCtaElementIds ?? [];
 
   for (const { fileId, route, legacyBlogSectionId, appendBlogSlotWhenMissing } of homeRoutes) {
     const legacySectionId = legacyBlogSectionId ?? defaultLegacySectionId;
@@ -209,6 +242,13 @@ async function main() {
       processed = appendPromoModalsSlotBeforeFooter(processed);
     }
 
+    processed = stripDeadHomeMarkup(processed, {
+      stripMasthead: stripMastheadRoutes.has(fileId),
+      widsterSectionId:
+        registrationRoutes.has(route) ? widsterByFileId[fileId] : undefined,
+      duplicateCtaIds: registrationRoutes.has(route) ? duplicateCtaIds : [],
+    });
+
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)
       ? stripLegacyFooter(processed)
       : processed;
@@ -240,8 +280,14 @@ async function main() {
       continue;
     }
 
-    const withoutLegacyFooter = stripLegacyFooter(bodyHtml);
-    if (withoutLegacyFooter === bodyHtml) {
+    let processed = stripDeadHomeMarkup(bodyHtml, {
+      stripMasthead: stripMastheadRoutes.has(fileId),
+      widsterSectionId: undefined,
+      duplicateCtaIds: [],
+    });
+
+    const withoutLegacyFooter = stripLegacyFooter(processed);
+    if (withoutLegacyFooter === processed) {
       console.warn(`No #colophon footer to strip on ${route}`);
     }
 

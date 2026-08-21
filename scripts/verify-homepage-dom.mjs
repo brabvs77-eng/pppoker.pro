@@ -57,6 +57,11 @@ async function main() {
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const stripMastheadRoutes = new Set(
+    (chrome.stripLegacyMastheadRoutes ?? []).map((entry) => entry.fileId),
+  );
+  const widsterByFileId = chrome.legacyWidsterSectionElementIdsByFileId ?? {};
+  const duplicateCtaIds = chrome.homepageDuplicateCtaElementIds ?? [];
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const faqSectionId = chrome.legacyFaqSectionElementId;
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
@@ -147,6 +152,25 @@ async function main() {
     if (promoModalsRoutes.has(route)) {
       if (!html.includes('id="native-home-promo-modals-slot"') && !html.includes('id="native-home-promo-modals"')) {
         violations.push(`[${route}] Missing native promo modals slot or section`);
+      }
+    }
+
+    if (stripMastheadRoutes.has(fileId) && html.includes('id="masthead"')) {
+      violations.push(`[${route}] Legacy #masthead still present in slotted body`);
+    }
+
+    if (registrationRoutes.has(route)) {
+      const widsterId = widsterByFileId[fileId];
+      if (widsterId && html.includes(`class="elementor-element elementor-element-${widsterId}`)) {
+        violations.push(`[${route}] Legacy Widster section ${widsterId} still present`);
+      }
+      for (const ctaId of duplicateCtaIds) {
+        if (html.includes(`class="elementor-element elementor-element-${ctaId}`)) {
+          violations.push(`[${route}] Duplicate hero CTA ${ctaId} still present`);
+        }
+      }
+      if (html.includes('id="widster-')) {
+        violations.push(`[${route}] Widster embed still present`);
       }
     }
   }
