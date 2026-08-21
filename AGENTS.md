@@ -194,7 +194,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Home FAQ accordion | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS `<details>`; `verify:home-faq`; smoke |
 | Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
 | Home cash games grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 3 static cards; `verify:home-cash-games` |
-| Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime` |
+| Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime`; empty spacers stripped; `verify:home-shell` |
 
 ## Planned work (backlog)
 
@@ -203,7 +203,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 2. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
 3. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
 4. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
-5. More Elementor sections → native components (remaining legacy homepage blocks after cash games grid)
+5. Native promo blocks (CRASH / Russian poker video sections) — replace patched Elementor containers with static HTML
+6. Native Elementor popups or remove dead popup markup on home shell routes
 
 ## Adding or updating content
 

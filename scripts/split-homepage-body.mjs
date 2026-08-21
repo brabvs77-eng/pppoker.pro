@@ -141,34 +141,41 @@ async function main() {
       continue;
     }
 
-    const withReviewSlot =
-      reviewsSectionId && reviewRoutes.has(route)
-        ? replaceElementorSectionWithSlot(withSlot, reviewsSectionId, reviewSlotHtml)
-        : withSlot;
+    let processed = withSlot;
 
-    const withFaqSlot =
-      faqSectionId && faqRoutes.has(route)
-        ? replaceElementorSectionWithSlot(withReviewSlot, faqSectionId, faqSlotHtml)
-        : withReviewSlot;
+    if (registrationDesktopSectionId && registrationRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(
+        processed,
+        registrationDesktopSectionId,
+        registrationSlotHtml,
+      );
+    }
 
-    const withRegistrationSlot =
-      registrationDesktopSectionId && registrationRoutes.has(route)
-        ? replaceElementorSectionWithSlot(withFaqSlot, registrationDesktopSectionId, registrationSlotHtml)
-        : withFaqSlot;
+    if (registrationMobileSectionId && registrationRoutes.has(route)) {
+      processed = stripElementorSection(processed, registrationMobileSectionId);
+    }
 
-    const withoutMobileRegistration =
-      registrationMobileSectionId && registrationRoutes.has(route)
-        ? stripElementorSection(withRegistrationSlot, registrationMobileSectionId)
-        : withRegistrationSlot;
+    if (cashGamesSectionId && cashGamesRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(processed, cashGamesSectionId, cashGamesSlotHtml);
+    }
 
-    const withCashGamesSlot =
-      cashGamesSectionId && cashGamesRoutes.has(route)
-        ? replaceElementorSectionWithSlot(withoutMobileRegistration, cashGamesSectionId, cashGamesSlotHtml)
-        : withoutMobileRegistration;
+    if (reviewsSectionId && reviewRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(processed, reviewsSectionId, reviewSlotHtml);
+    }
+
+    if (faqSectionId && faqRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(processed, faqSectionId, faqSlotHtml);
+    }
+
+    if (registrationRoutes.has(route)) {
+      for (const spacerId of chrome.legacyEmptySpacerElementIds ?? []) {
+        processed = stripElementorSection(processed, spacerId);
+      }
+    }
 
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)
-      ? stripLegacyFooter(withCashGamesSlot)
-      : withCashGamesSlot;
+      ? stripLegacyFooter(processed)
+      : processed;
 
     const balance = divTagBalance(withoutLegacyFooter);
     if (balance !== 0) {

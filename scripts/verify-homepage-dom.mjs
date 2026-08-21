@@ -116,6 +116,14 @@ async function main() {
         violations.push(`[${route}] Legacy cash games section ${cashGamesSectionId} still present`);
       }
     }
+
+    if (registrationRoutes.has(route)) {
+      for (const spacerId of chrome.legacyEmptySpacerElementIds ?? []) {
+        if (html.includes(`class="elementor-element elementor-element-${spacerId}`)) {
+          violations.push(`[${route}] Legacy empty spacer ${spacerId} still present`);
+        }
+      }
+    }
   }
 
   if (violations.length) {
