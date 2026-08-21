@@ -49,7 +49,7 @@ const FEEDS = [
     language: 'hy-AM',
     title: 'Nuts PPPoker — Blog',
     description: 'Պոկեր, стратегия и Nuts клуб — հոդվածներ',
-    blogLink: '/blog/',
+    blogLink: '/hy/blog/',
   },
   {
     locale: 'tj',
@@ -57,7 +57,7 @@ const FEEDS = [
     language: 'tg-TJ',
     title: 'Nuts PPPoker — Блог',
     description: 'Мақолаҳо дар бораи покер, стратегия ва клуби Nuts',
-    blogLink: '/blog/',
+    blogLink: '/tj/blog/',
   },
 ];
 

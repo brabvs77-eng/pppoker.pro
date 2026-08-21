@@ -17,13 +17,10 @@ const slotPattern = new RegExp(`<div id="${slotId}"></div>`);
 const localeByRoute = {
   '/': 'ru',
   '/hy/': 'hy',
+  '/tj/': 'tj',
   '/en/': 'en',
   '/uz/': 'uz',
   '/kz/': 'kz',
-};
-
-const postsLocaleByRoute = {
-  '/hy/': 'ru',
 };
 
 async function main() {
@@ -34,8 +31,7 @@ async function main() {
     const bodyPath = path.join(bodiesDir, `${fileId}-with-blog-slot.html`);
     const bodyHtml = await fs.readFile(bodyPath, 'utf8');
     const locale = localeByRoute[route] ?? 'ru';
-    const postsLocale = postsLocaleByRoute[route] ?? locale;
-    const posts = loadHomeBlogPosts(postsLocale);
+    const posts = loadHomeBlogPosts(locale);
     const labels = loadHomeBlogLabels(locale);
 
     if (!slotPattern.test(bodyHtml)) {
@@ -55,8 +51,7 @@ async function main() {
       locale,
       // HY/TJ have no native blog export — link straight to the RU archive
       // instead of routing visitors and crawlers through a 301.
-      blogArchiveHref:
-        locale === 'ru' || locale === 'hy' || locale === 'tj' ? '/blog/' : `/${locale}/blog/`,
+      blogArchiveHref: locale === 'ru' ? '/blog/' : `/${locale}/blog/`,
     });
 
     if (!blogHtml) {

@@ -10,7 +10,7 @@ export type BlogArchiveSlice = {
   totalPages: number;
 };
 
-const NATIVE_BLOG_LOCALE_PATTERN = 'en|uz|kz';
+const NATIVE_BLOG_LOCALE_PATTERN = 'en|uz|kz|hy|tj';
 
 export function isNativeBlogArchiveRoute(route: string): boolean {
   if (route === '/blog/') return true;

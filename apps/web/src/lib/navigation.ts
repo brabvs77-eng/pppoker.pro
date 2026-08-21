@@ -8,7 +8,7 @@ export function homeHref(locale: string): string {
   return locale === 'ru' ? '/' : `/${locale}/`;
 }
 
-/** Locales without a native blog archive (HY, TJ) fall back to RU `/blog/`. */
+/** Locales with a native blog archive route. HY/TJ use seeded stub HTML. */
 export function blogHref(locale: string): string {
   return `${localeBlogRoot(locale as AppLocale)}/`;
 }

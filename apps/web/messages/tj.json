@@ -28,6 +28,16 @@
     "paginationLabel": "Саҳифабандии блог",
     "relatedTitle": "Мақолаҳои монанд"
   },
+  "homeBlog": {
+    "title": "Блоги Nuts",
+    "subtitle": "Мақолаҳои нав дар бораи покер, стратегия ва клуб — интихоб автоматӣ нав карда мешавад",
+    "readMore": "Хондани мақола",
+    "allPosts": "Ҳамаи мақолаҳо",
+    "category": "Блог"
+  },
+  "rss": {
+    "feedTitle": "Nuts PPPoker — Блог"
+  },
   "llms": {
     "linkTitle": "LLMs.txt — хaritaи сайт барои AI"
   },

@@ -3,6 +3,11 @@
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },
     {
+      "fileId": "tj",
+      "route": "/tj/",
+      "appendBlogSlotWhenMissing": true
+    },
+    {
       "fileId": "en",
       "route": "/en/",
       "legacyBlogSectionId": "cd2276a",

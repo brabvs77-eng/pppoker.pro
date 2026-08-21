@@ -153,11 +153,11 @@ async function main() {
         timeout: 90_000,
       });
       const hyBlogHref = await page.evaluate(() => {
-        const link = document.querySelector('.site-header__nav a[href="/blog/"]');
+        const link = document.querySelector('.site-header__nav a[href="/hy/blog/"]');
         return link?.getAttribute('href') ?? null;
       });
-      if (hyBlogHref !== '/blog/') {
-        violations.push(`[HY header] Blog link must fall back to /blog/, got ${hyBlogHref}`);
+      if (hyBlogHref !== '/hy/blog/') {
+        violations.push(`[HY header] Blog link must point to /hy/blog/, got ${hyBlogHref}`);
       }
     }
   } finally {

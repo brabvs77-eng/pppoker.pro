@@ -11,6 +11,8 @@ const homeBlogPostsFile = {
   en: 'enHomeBlogPosts.json',
   uz: 'uzHomeBlogPosts.json',
   kz: 'kzHomeBlogPosts.json',
+  hy: 'hyHomeBlogPosts.json',
+  tj: 'tjHomeBlogPosts.json',
 };
 
 const homepages = [
@@ -26,7 +28,7 @@ const homepages = [
     path: path.join(rootDir, 'apps/web/out/hy/index.html'),
     footerMarker: 'class="site-footer"',
     extraMarkers: ['instagram.com'],
-    locale: 'ru',
+    locale: 'hy',
   },
   {
     label: 'EN',
@@ -57,8 +59,7 @@ const homepages = [
     path: path.join(rootDir, 'apps/web/out/tj/index.html'),
     footerMarker: 'class="site-footer"',
     extraMarkers: ['instagram.com'],
-    locale: 'ru',
-    skipHomeBlog: true,
+    locale: 'tj',
   },
 ];
 

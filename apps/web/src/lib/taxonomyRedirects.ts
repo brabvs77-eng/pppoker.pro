@@ -1,6 +1,6 @@
 import type { AppLocale } from '@/i18n/routing';
 
-const NATIVE_BLOG_LOCALES = new Set<AppLocale>(['ru', 'en', 'uz', 'kz']);
+const NATIVE_BLOG_LOCALES = new Set<AppLocale>(['ru', 'en', 'uz', 'kz', 'hy', 'tj']);
 
 /** Keep in sync with scripts/lib/taxonomy-blog-redirects.mjs */
 export function localeBlogRoot(locale: AppLocale): string {

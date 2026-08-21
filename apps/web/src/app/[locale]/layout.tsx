@@ -10,7 +10,7 @@ import { routing, type AppLocale } from '@/i18n/routing';
 
 import '../globals.css';
 
-const RSS_FEED_LOCALES = new Set<AppLocale>(['ru', 'en', 'uz', 'kz']);
+const RSS_FEED_LOCALES = new Set<AppLocale>(['ru', 'en', 'uz', 'kz', 'hy', 'tj']);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

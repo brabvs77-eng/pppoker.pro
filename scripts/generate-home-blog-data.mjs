@@ -35,6 +35,16 @@ const localeConfigs = [
         .replace(/\s*-\s*Қазақстандағы онлайн покер клубы — pppoker Nuts, Астана\s*$/i, '')
         .trim(),
   },
+  {
+    locale: 'hy',
+    outputFile: 'hyHomeBlogPosts.json',
+    stripTitleSuffix: (title) => title.replace(/\s*—\s*Nuts PPPoker\s*$/i, '').trim(),
+  },
+  {
+    locale: 'tj',
+    outputFile: 'tjHomeBlogPosts.json',
+    stripTitleSuffix: (title) => title.replace(/\s*—\s*Nuts PPPoker\s*$/i, '').trim(),
+  },
 ];
 
 async function main() {
