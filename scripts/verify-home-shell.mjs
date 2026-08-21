@@ -55,6 +55,7 @@ function verifyShellHtml(html, label, chrome) {
 
   assert(html.includes('id="native-home-registration"'), `${label}: missing native registration`);
   assert(html.includes('id="native-home-cash-games"'), `${label}: missing native cash games`);
+  assert(html.includes('id="native-home-withdraw-methods"'), `${label}: missing native withdraw methods`);
   assert(html.includes('id="native-review-snippets"'), `${label}: missing native reviews`);
   assert(html.includes('id="native-home-faq"'), `${label}: missing native FAQ`);
 }

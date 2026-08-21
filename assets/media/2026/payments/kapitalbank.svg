@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 40" role="img" aria-label="Kapitalbank">
+  <rect width="140" height="40" rx="8" fill="#E30613"/>
+  <text x="70" y="18" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle">KAPITAL</text>
+  <text x="70" y="31" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700" text-anchor="middle">BANK</text>
+</svg>

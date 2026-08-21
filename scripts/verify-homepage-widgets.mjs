@@ -6,16 +6,16 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRegistration: false, requireCashGames: false, requirePromoModals: false, requireRuntime: false },
+  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRegistration: false, requireCashGames: false, requireWithdrawMethods: false, requirePromoModals: false, requireRuntime: false },
 ];
 
 function verifyHomepageWidgets(
-  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireCashGames, requirePromoModals, requireRuntime },
+  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireCashGames, requireWithdrawMethods, requirePromoModals, requireRuntime },
   html,
   violations,
 ) {
@@ -55,6 +55,16 @@ function verifyHomepageWidgets(
     }
     if (!html.includes('<article class="home-cash__card')) {
       violations.push(`[${label}] Missing native cash game cards`);
+    }
+  }
+
+  if (requireWithdrawMethods) {
+    if (!html.includes('id="native-home-withdraw-methods"')) {
+      violations.push(`[${label}] Missing native home withdraw methods section`);
+    }
+    const logoCount = (html.match(/class="home-withdraw__logo"/g) ?? []).length;
+    if (logoCount < 7) {
+      violations.push(`[${label}] Expected 7 withdraw method logos, found ${logoCount}`);
     }
   }
 

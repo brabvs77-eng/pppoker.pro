@@ -12,6 +12,7 @@ const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
 const promoBlocksSlotHtml = '<div id="native-home-promo-blocks-slot"></div>';
 const promoModalsSlotHtml = '<div id="native-home-promo-modals-slot"></div>';
+const withdrawMethodsSlotHtml = '<div id="native-home-withdraw-methods-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -53,6 +54,17 @@ function stripElementorSection(bodyHtml, elementId) {
   if (divEnd === -1) return bodyHtml;
 
   return `${bodyHtml.slice(0, divStart)}${bodyHtml.slice(divEnd)}`;
+}
+
+function insertSlotBeforeSection(bodyHtml, elementId, slotMarkup) {
+  const classNeedle = elementorContainerNeedle(elementId);
+  const classIndex = bodyHtml.indexOf(classNeedle);
+  if (classIndex === -1) return bodyHtml;
+
+  const divStart = bodyHtml.lastIndexOf('<div', classIndex);
+  if (divStart === -1) return bodyHtml;
+
+  return `${bodyHtml.slice(0, divStart)}${slotMarkup}${bodyHtml.slice(divStart)}`;
 }
 
 function replaceElementorSectionWithSlot(bodyHtml, elementId, slotMarkup) {
@@ -139,6 +151,7 @@ async function main() {
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
   const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
   const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
+  const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
@@ -151,6 +164,9 @@ async function main() {
   );
   const cashGamesRoutes = new Set(
     (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const withdrawMethodsRoutes = new Set(
+    (chrome.homeWithdrawMethodsSlotRoutes ?? []).map((entry) => entry.route),
   );
   const promoBlocksByRoute = new Map(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => [entry.route, entry]),
@@ -210,6 +226,10 @@ async function main() {
 
     if (cashGamesSectionId && cashGamesRoutes.has(route)) {
       processed = replaceElementorSectionWithSlot(processed, cashGamesSectionId, cashGamesSlotHtml);
+    }
+
+    if (whyNutsSectionId && withdrawMethodsRoutes.has(route)) {
+      processed = insertSlotBeforeSection(processed, whyNutsSectionId, withdrawMethodsSlotHtml);
     }
 
     if (reviewsSectionId && reviewRoutes.has(route)) {

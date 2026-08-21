@@ -13,12 +13,12 @@ const port = 9876;
 const WHATSAPP_MARKERS = ['wa.clck.bar', 'class="hero-cta-btn hero-cta-btn--whatsapp"'];
 
 const HOME_SMOKE_PAGES = [
-  { label: 'RU', urlPath: '/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'HY', urlPath: '/hy/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'EN', urlPath: '/en/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'UZ', urlPath: '/uz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'KZ', urlPath: '/kz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minCashGameCards: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
+  { label: 'RU', urlPath: '/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 6, minReviewCards: 6, minFaqItems: 5, feedHref: '/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'HY', urlPath: '/hy/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/hy/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'EN', urlPath: '/en/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'UZ', urlPath: '/uz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 2, minReviewCards: 6, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'KZ', urlPath: '/kz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 1, minReviewCards: 6, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minCashGameCards: 0, minCashGameVariants: 0, minWithdrawMethodLogos: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
 ];
 
 const LOCALE_BY_LABEL = {
@@ -30,7 +30,7 @@ const LOCALE_BY_LABEL = {
   TJ: 'tj',
 };
 
-async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistrationSlides = 0, minCashGameCards = 0, minCashGameVariants = 0, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
+async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistrationSlides = 0, minCashGameCards = 0, minCashGameVariants = 0, minWithdrawMethodLogos = 0, minHomeBlogCards = 0, minReviewCards = 0, minFaqItems = 0, feedHref, checkHeroCtas = true, checkCrashVideo = false, checkNativeFooter = false }) {
   const violations = [];
   const locale = LOCALE_BY_LABEL[label] ?? 'ru';
   const partnerUrl = iplanutsHref(locale);
@@ -59,6 +59,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     nativeCashGames: !!document.querySelector('#native-home-cash-games'),
     nativeCashGameCards: document.querySelectorAll('.home-cash__card').length,
     nativeCashGameVariants: document.querySelectorAll('.home-cash__variant').length,
+    nativeWithdrawMethods: !!document.querySelector('#native-home-withdraw-methods'),
+    nativeWithdrawLogos: document.querySelectorAll('.home-withdraw__logo').length,
     rusPokerVideos: document.querySelectorAll('.home-promo-blocks__video--rus').length,
     legacySwiper: document.querySelectorAll('.elementor-main-swiper').length,
     legacyFaqAccordion: !!document.querySelector('.elementskit-accordion, .elementor-widget-elementskit-accordion'),
@@ -144,6 +146,14 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
   if (minCashGameVariants > 0 && state.nativeCashGameVariants < minCashGameVariants) {
     violations.push(
       `[${label}] Expected at least ${minCashGameVariants} cash game variants, found ${state.nativeCashGameVariants}`,
+    );
+  }
+  if (minWithdrawMethodLogos > 0 && !state.nativeWithdrawMethods) {
+    violations.push(`[${label}] Missing native home withdraw methods section`);
+  }
+  if (minWithdrawMethodLogos > 0 && state.nativeWithdrawLogos < minWithdrawMethodLogos) {
+    violations.push(
+      `[${label}] Expected at least ${minWithdrawMethodLogos} withdraw method logos, found ${state.nativeWithdrawLogos}`,
     );
   }
   if (checkCrashVideo && state.rusPokerVideos > 1) {
