@@ -137,6 +137,40 @@ function patchHotspots(bodyHtml, hotspotElementIds, triggers) {
   return html;
 }
 
+function findElementorWidgetBounds(html, elementId) {
+  const classNeedle = elementorContainerNeedle(elementId);
+  const classIndex = html.indexOf(classNeedle);
+  if (classIndex === -1) return null;
+
+  const divStart = html.lastIndexOf('<div', classIndex);
+  if (divStart === -1) return null;
+
+  const divEnd = findMatchingDivClose(html, divStart);
+  if (divEnd === -1) return null;
+
+  return { start: divStart, end: divEnd };
+}
+
+function relocateJackpotTrigger(bodyHtml) {
+  const triggerNeedle = 'home-promo-modal__trigger-wrap--jackpot';
+  const triggerStart = bodyHtml.indexOf(triggerNeedle);
+  if (triggerStart === -1) return bodyHtml;
+
+  const divStart = bodyHtml.lastIndexOf('<div', triggerStart);
+  if (divStart === -1) return bodyHtml;
+
+  const triggerEnd = findMatchingDivClose(bodyHtml, divStart);
+  if (triggerEnd === -1) return bodyHtml;
+
+  const triggerHtml = bodyHtml.slice(divStart, triggerEnd);
+  let html = `${bodyHtml.slice(0, divStart)}${bodyHtml.slice(triggerEnd)}`;
+
+  const priceBounds = findElementorWidgetBounds(html, 'c85d132');
+  if (!priceBounds) return bodyHtml;
+
+  return `${html.slice(0, priceBounds.end)}${triggerHtml}${html.slice(priceBounds.end)}`;
+}
+
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const modalRoutes = chrome.homePromoModalsSlotRoutes ?? [];
@@ -174,6 +208,7 @@ async function main() {
     }
 
     let patched = patchHotspots(bodyHtml, hotspotElementIds, triggers);
+    patched = relocateJackpotTrigger(patched);
     patched = patchCards(patched, cardElementIds);
     patched = stripElementorPopups(patched);
     patched = stripPopupStyles(patched, popupTemplateStyleIds);

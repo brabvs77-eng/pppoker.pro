@@ -2108,23 +2108,13 @@ body {
   position: relative;
 }
 
-.elementor-element-cf7ff30 {
+.elementor-element-938716b {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.elementor-element-cf7ff30 .elementor-element-21e97f2 {
-  order: 1;
-  position: relative;
-  z-index: 2;
-}
-
-.elementor-element-cf7ff30 .elementor-element-c85d132 {
-  order: 2;
-}
-
-.elementor-element-cf7ff30 .home-promo-modal__trigger-wrap--jackpot {
-  order: 3;
+.home-promo-modal__trigger-wrap--jackpot {
   position: static;
   transform: none;
   width: min(92%, 240px);

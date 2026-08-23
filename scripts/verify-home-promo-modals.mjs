@@ -62,6 +62,15 @@ function verifyBodyHtml(html, label) {
     !html.includes('class="elementor-element elementor-element-4dc426c'),
     `${label}: legacy jackpot hotspot widget still present`,
   );
+
+  const jackpotAmountEnd = html.indexOf('elementor-element-c85d132');
+  const jackpotTrigger = html.indexOf('home-promo-modal__trigger-wrap--jackpot');
+  if (jackpotAmountEnd !== -1 && jackpotTrigger !== -1) {
+    assert(
+      jackpotTrigger > jackpotAmountEnd,
+      `${label}: jackpot trigger must appear after the amount headline`,
+    );
+  }
 }
 
 function verifyGlobalsCss(css) {
