@@ -42,6 +42,9 @@ async function main() {
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const chipCalculatorRoutes = new Set(
+    (chrome.homeChipCalculatorSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -99,6 +102,17 @@ async function main() {
       }
       if (reviewsSectionId && html.includes(`elementor-element-${reviewsSectionId}`)) {
         violations.push(`[${route}] Legacy reviews section ${reviewsSectionId} still present`);
+      }
+    }
+
+    if (chipCalculatorRoutes.has(route)) {
+      if (!html.includes('id="native-chip-calculator-slot"') && !html.includes('id="native-chip-calculator"')) {
+        violations.push(`[${route}] Missing native chip calculator slot or section`);
+      }
+      const calcIndex = html.indexOf('id="native-chip-calculator"');
+      const reviewIndex = html.indexOf('id="native-review-snippets"');
+      if (calcIndex !== -1 && reviewIndex !== -1 && calcIndex > reviewIndex) {
+        violations.push(`[${route}] Chip calculator must appear above reviews`);
       }
     }
 

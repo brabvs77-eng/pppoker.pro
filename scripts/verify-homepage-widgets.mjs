@@ -6,16 +6,16 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outDir = path.join(rootDir, 'apps/web/out');
 
 const HOME_PAGES = [
-  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
-  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'RU', outPath: 'index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requireChipCalculator: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'EN', outPath: 'en/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requireChipCalculator: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'HY', outPath: 'hy/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requireChipCalculator: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'UZ', outPath: 'uz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requireChipCalculator: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
+  { label: 'KZ', outPath: 'kz/index.html', minSwipers: 0, requireFaq: true, requireRegistration: true, requireCashGames: true, requireWithdrawMethods: true, requireChipCalculator: true, requirePromoModals: true, requireRuntime: false, minReviewCards: 6 },
   { label: 'TJ', outPath: 'tj/index.html', minSwipers: 0, requireFaq: false, requireRegistration: false, requireCashGames: false, requireWithdrawMethods: false, requirePromoModals: false, requireRuntime: false },
 ];
 
 function verifyHomepageWidgets(
-  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireCashGames, requireWithdrawMethods, requirePromoModals, requireRuntime },
+  { label, minSwipers, minReviewCards = 0, requireFaq, requireRegistration, requireCashGames, requireWithdrawMethods, requireChipCalculator, requirePromoModals, requireRuntime },
   html,
   violations,
 ) {
@@ -87,6 +87,20 @@ function verifyHomepageWidgets(
     violations.push(
       `[${label}] Expected at least ${minSwipers} elementor-main-swiper carousels, found ${swiperCount}`,
     );
+  }
+
+  if (requireChipCalculator) {
+    if (!html.includes('id="native-chip-calculator"')) {
+      violations.push(`[${label}] Missing native chip calculator section`);
+    }
+    if (!html.includes('data-chip-calculator-usd')) {
+      violations.push(`[${label}] Missing chip calculator USD input`);
+    }
+    const calcIndex = html.indexOf('id="native-chip-calculator"');
+    const reviewIndex = html.indexOf('id="native-review-snippets"');
+    if (calcIndex !== -1 && reviewIndex !== -1 && calcIndex > reviewIndex) {
+      violations.push(`[${label}] Chip calculator must appear above reviews`);
+    }
   }
 
   if (minReviewCards > 0) {
