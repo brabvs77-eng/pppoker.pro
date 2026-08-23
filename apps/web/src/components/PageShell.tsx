@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { AnalyticsScripts } from '@/components/AnalyticsScripts';
 import { JsonLd } from '@/components/JsonLd';
 import { LegacyElementorBoot } from '@/components/LegacyElementorBoot';
+import { ChipCalculatorBoot } from '@/components/native/ChipCalculatorBoot';
 import { HomePromoModalsBoot } from '@/components/native/HomePromoModalsBoot';
 import { BlogJsonLdBlock } from '@/components/native/BlogJsonLdBlock';
 import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
@@ -74,6 +75,7 @@ export function PageShell({
         ))}
       <SiteFooter page={page} variant={hasElementorFooter ? 'locale-only' : 'full'} />
       {showHomePromo ? <HomePromoModalsBoot /> : null}
+      {showHomePromo ? <ChipCalculatorBoot /> : null}
       {loadNativeAnalytics ? <AnalyticsScripts /> : null}
       {loadElementorRuntime ? (
         <>

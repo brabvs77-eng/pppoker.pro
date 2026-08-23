@@ -1,0 +1,55 @@
+{
+  "presets": [10, 50, 100, 500, 1000],
+  "labelsByLocale": {
+    "ru": {
+      "title": "Калькулятор фишек",
+      "subtitle": "В клубе Nuts 1 фишка = 1 доллар. Введите сумму — калькулятор покажет эквивалент.",
+      "rate": "1 фишка = 1 $",
+      "usdLabel": "Доллары ($)",
+      "chipsLabel": "Фишки",
+      "presetsLabel": "Быстрый выбор",
+      "usdAria": "Сумма в долларах",
+      "chipsAria": "Количество фишек"
+    },
+    "en": {
+      "title": "Chip calculator",
+      "subtitle": "At Nuts club, 1 chip = $1. Enter an amount to see the equivalent.",
+      "rate": "1 chip = $1",
+      "usdLabel": "Dollars ($)",
+      "chipsLabel": "Chips",
+      "presetsLabel": "Quick select",
+      "usdAria": "Amount in dollars",
+      "chipsAria": "Number of chips"
+    },
+    "hy": {
+      "title": "Ֆիշկերի հաշվիչ",
+      "subtitle": "Nuts ակումբում 1 ֆիշկ = 1 դոլար։ Մուտքագրեք գումարը՝ համարժեքը տեսնելու համար։",
+      "rate": "1 ֆիշկ = 1 $",
+      "usdLabel": "Դոլար ($)",
+      "chipsLabel": "Ֆիշկեր",
+      "presetsLabel": "Արագ ընտրություն",
+      "usdAria": "Գումար դոլարով",
+      "chipsAria": "Ֆիշկերի քանակ"
+    },
+    "uz": {
+      "title": "Chip kalkulyatori",
+      "subtitle": "Nuts klubida 1 chip = 1 dollar. Miqdorni kiriting — kalkulyator ekvivalentini ko'rsatadi.",
+      "rate": "1 chip = 1 $",
+      "usdLabel": "Dollar ($)",
+      "chipsLabel": "Chiplar",
+      "presetsLabel": "Tez tanlash",
+      "usdAria": "Dollar miqdori",
+      "chipsAria": "Chiplar soni"
+    },
+    "kz": {
+      "title": "Фишка калькуляторы",
+      "subtitle": "Nuts клубында 1 фишка = 1 доллар. Соманы енгізіңіз — калькулятор баламасын көрсетеді.",
+      "rate": "1 фишка = 1 $",
+      "usdLabel": "Доллар ($)",
+      "chipsLabel": "Фишкалар",
+      "presetsLabel": "Жылдам таңдау",
+      "usdAria": "Доллар сомасы",
+      "chipsAria": "Фишкалар саны"
+    }
+  }
+}

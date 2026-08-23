@@ -1157,6 +1157,193 @@ body {
   }
 }
 
+/* Native chip calculator (homepages, above reviews). */
+.chip-calculator {
+  position: relative;
+  z-index: 10;
+  padding: 3rem 1.25rem 2.5rem;
+  background: linear-gradient(180deg, #0c111a 0%, #131b2b 45%, #1a2438 100%);
+  border-top: 1px solid rgba(253, 230, 97, 0.1);
+}
+
+.chip-calculator__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.chip-calculator__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.chip-calculator__title {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 700;
+  color: #fde661;
+  text-wrap: balance;
+}
+
+.chip-calculator__subtitle {
+  margin: 0.45rem 0 0;
+  max-width: 34rem;
+  color: #9aa8c7;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.chip-calculator__rate {
+  margin: 0;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 230, 97, 0.28);
+  background: rgba(253, 230, 97, 0.08);
+  color: #fde661;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.chip-calculator__panel {
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid rgba(253, 230, 97, 0.16);
+  background: rgba(12, 17, 26, 0.72);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.chip-calculator__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  align-items: end;
+}
+
+.chip-calculator__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.chip-calculator__label {
+  color: #9aa8c7;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.chip-calculator__input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(154, 168, 199, 0.28);
+  background: #131b2b;
+  color: #e8ecf4;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.chip-calculator__input:focus {
+  outline: none;
+  border-color: rgba(253, 230, 97, 0.65);
+  box-shadow: 0 0 0 3px rgba(253, 230, 97, 0.18);
+}
+
+.chip-calculator__input:focus-visible {
+  outline: 2px solid #fde661;
+  outline-offset: 2px;
+}
+
+.chip-calculator__equals {
+  align-self: center;
+  padding-bottom: 0.35rem;
+  color: #7b8db2;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.chip-calculator__presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(253, 230, 97, 0.1);
+}
+
+.chip-calculator__presets-label {
+  color: #7b8db2;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chip-calculator__presets-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip-calculator__preset {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 230, 97, 0.22);
+  background: rgba(253, 230, 97, 0.06);
+  color: #fde661;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.chip-calculator__preset:hover {
+  background: rgba(253, 230, 97, 0.14);
+  border-color: rgba(253, 230, 97, 0.45);
+}
+
+.chip-calculator__preset:focus-visible {
+  outline: 2px solid #fde661;
+  outline-offset: 2px;
+}
+
+.chip-calculator__preset:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 640px) {
+  .chip-calculator__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .chip-calculator__equals {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-calculator__preset {
+    transition: none;
+  }
+
+  .chip-calculator__preset:active {
+    transform: none;
+  }
+}
+
 /* Native review snippets (homepages). */
 .review-snippets {
   position: relative;

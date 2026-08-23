@@ -7,6 +7,7 @@ const bodiesDir = path.join(rootDir, 'content/bodies');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotHtml = '<div id="native-home-blog-slot"></div>';
 const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
+const chipCalculatorSlotHtml = '<div id="native-chip-calculator-slot"></div>';
 const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
@@ -156,6 +157,9 @@ async function main() {
   const reviewRoutes = new Set(
     (chrome.homeReviewSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const chipCalculatorRoutes = new Set(
+    (chrome.homeChipCalculatorSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -230,6 +234,10 @@ async function main() {
 
     if (whyNutsSectionId && withdrawMethodsRoutes.has(route)) {
       processed = insertSlotBeforeSection(processed, whyNutsSectionId, withdrawMethodsSlotHtml);
+    }
+
+    if (reviewsSectionId && chipCalculatorRoutes.has(route)) {
+      processed = insertSlotBeforeSection(processed, reviewsSectionId, chipCalculatorSlotHtml);
     }
 
     if (reviewsSectionId && reviewRoutes.has(route)) {
