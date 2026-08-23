@@ -75,8 +75,6 @@ export function ChipCalculatorBoot() {
     chipsInput.addEventListener('blur', onChipsBlur);
     root.addEventListener('click', onPresetClick);
 
-    setBoth(parseAmount(usdInput.value) || 100);
-
     return () => {
       usdInput.removeEventListener('input', onUsdInput);
       chipsInput.removeEventListener('input', onChipsInput);
