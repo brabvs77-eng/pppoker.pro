@@ -17,7 +17,7 @@ const CONFIG = path.join(ROOT, 'apps/web/src/config/home-promo-modals.json');
 const localeMarkers = {
   '/': { mustHave: ['Бонус на первый депозит'], mustNotHave: ['By playing cash games at Nuts'] },
   '/en/': { mustHave: ['First deposit bonus of 150%', 'By playing cash games at Nuts'], mustNotHave: ['Играя в кэш-игры'] },
-  '/hy/': { mustHave: ['First deposit bonus of 150%', 'By playing cash games at Nuts'], mustNotHave: ['Играя в кэш-игры'] },
+  '/hy/': { mustHave: ['Առաջին ավանդի բոնուս', 'Nuts-ում կեշ խաղեր'], mustNotHave: ['First deposit bonus of 150%', 'By playing cash games at Nuts', 'Играя в кэш-игры'] },
   '/uz/': { mustHave: ['Bonus birinchi depozit', 'Nuts klubida kesh'], mustNotHave: ['Играя в кэш-игры'] },
   '/kz/': { mustHave: ['Бірінші депозиттік Бонус', 'Nuts клубында кэш'], mustNotHave: ['Играя в кэш-игры'] },
 };
