@@ -1,0 +1,26 @@
+{
+  "hy": {
+    "triggers": {
+      "bonus": "Կարդ մորե",
+      "events": "Կարդ մորե",
+      "jackpot": "Կարդ մորե"
+    },
+    "modals": {
+      "bonus": {
+        "titleHtml": "Առաջին ավանդի բոնուս 150% մինչև 500 դոլար",
+        "iconSrc": "/assets/media/2024/07/rivet-icons_money.webp",
+        "bodyHtml": "<p class=\"home-promo-modal__para\">Առաջին անգամ ավանդ կատարեք ակումբում, անմիջապես ստացեք առաջին ավանդի գումարի 10%-ը և ընդհանուր առմամբ 150%-ը՝ ռումում ցանկացած ակտիվության համար միավորներ կուտակելուն զուգընթաց։</p>\n<p class=\"home-promo-modal__para\">Գրեք օպերատորին պրոմո-կոդ</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">և ստացեք հասանելիություն բոնուսին։</p>\n<p class=\"home-promo-modal__para\">Պայմաններ։</p>\n<p class=\"home-promo-modal__para\">Բոնուսը հաշվարկվում է միայն ԱՌԱՋԻՆ ավանդի վրա</p>\n<p class=\"home-promo-modal__para\">Մրցաշարերին մասնակցության ընթացքում բոնուսը դանդաղ է կուտակվում</p>\n<p class=\"home-promo-modal__para\">Բոնուսը վճարվում է շաբաթը մեկ անգամ։ Որքան շատ բաժին եք խաղում շաբաթական, այնքան արագ է կատարվում խաղադրույքը։</p>\n<p class=\"home-promo-modal__para\">Դուք ցանկացած ժամանակ կարող եք իմանալ ձեր բոնուսի ընթացիկ կարգավիճակը օպերատորից</p>\n<p class=\"home-promo-modal__para\">150%-ական բոնուսը և այլ բոնուսներ/պայմաններ չեն գումարվում!!!</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Բոնուսը կուտակվում է խաղի ընթացքում</strong> և այն կախված է հետևյալ պարամետրերից.</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Խաղի տեսակ</strong> (դանդաղ OFC և NLH-ում, արագ PLO-ում)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Լիմիտ</strong> (լիմիտը որքան բարձր է, այնքան արագ)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Ակտիվություն</strong> (VPIP-ը որքան բարձր է, այնքան արագ)</p>\n<p class=\"home-promo-modal__para\"><strong class=\"home-promo-modal__emph\">Բաժիների քանակ</strong> (որքան շատ, այնքան արագ)</p>"
+      },
+      "events": {
+        "titleHtml": "Ակցիաներ",
+        "iconSrc": "",
+        "bodyHtml": "<h2 class=\"home-promo-modal__para\">Առաջին ավանդի բոնուս 150% մինչև 500 դոլար</h2>\n<p class=\"home-promo-modal__para\">Առաջին անգամ ավանդ կատարեք ակումբում, անմիջապես ստացեք առաջին ավանդի գումարի 10%-ը և ընդհանուր առմամբ 150%-ը՝ ռումում ցանկացած ակտիվության համար միավորներ կուտակելուն զուգընթաց։</p>\n<p class=\"home-promo-modal__para\">Գրեք օպերատորին պրոմո-կոդ</p>\n<p class=\"home-promo-modal__para\">NUTS150</p>\n<p class=\"home-promo-modal__para\">և ստացեք հասանելիություն բոնուսին։</p>\n<h2 class=\"home-promo-modal__para\">Ակցիա<br>\n«Կրկնակի հնարավորություն»</h2>\n<p class=\"home-promo-modal__para\">Մեր ռումում երկրորդ ավանդի համար մենք ձեզ կնռանք մրցաշարի տոմս՝ մինչև 5000 դոլար երաշխիքով։</p>\n<p class=\"home-promo-modal__para\">Գրեք օպերատորին պրոմո-կոդ</p>\n<p class=\"home-promo-modal__para\">DOUBLE</p>\n<p class=\"home-promo-modal__para\">երկրորդ ավանդ կատարելուց առաջ</p>\n<h2 class=\"home-promo-modal__para\">Ակցիա<br>\n«Պատերազմող»</h2>\n<p class=\"home-promo-modal__para\">Խաղացեք 500 բաժին մեր ռումում ցանկացած կեշ խաղում ցանկացած լիմիտում և ստացեք 50 դոլար ձեր հաշվեկշռին։</p>\n<p class=\"home-promo-modal__para\">Բաժինների հաշվարկը կսկսվի այն պահից, երբ դուք կատարեք պատվերը։</p>\n<p class=\"home-promo-modal__para\">պրոմո-կոդ օպերատորի համար</p>\n<p class=\"home-promo-modal__para\">FIGHT</p>\n<h2 class=\"home-promo-modal__para\">Ֆրիրոլներ միայն NUTS ակումբի խաղացողների համար</h2>\n<p class=\"home-promo-modal__para\">Երբեմն մենք անցկացնում ենք մասնավոր անվճար մրցաշարներ միայն մեր ակումբի անդամների համար։ Դուք կստանաք ծանուցում ձեր անձնական մենեջերից։</p>"
+      },
+      "jackpot": {
+        "titleHtml": "Ջեքփոթ",
+        "iconSrc": "/assets/media/2024/08/solar_cup-star-bold.webp",
+        "bodyHtml": "<p class=\"home-promo-modal__para\">Nuts-ում կեշ խաղեր խաղալով,\nկարող եք շահել ջեքփոթ։</p>\n<p class=\"home-promo-modal__para\">PPPOKER-ում կան ջեքփոթի երկու տեսակ</p>\n<h2 class=\"home-promo-modal__para\">1</h2>\n<h2 class=\"home-promo-modal__para\">Կուլեր</h2>\n<p class=\"home-promo-modal__para\">Եթե շոուդաունում խաղացողները բացեն «չորսը մեկում» դեմ «չորսը մեկում» կամ ավելի բարձր կոմբինացիաներ (այսպես կոչված «Կուլեր» իրավիճակ), բաժնի բոլոր մասնակիցները, ներառյալ քարտերը թափածներին, կստանան «Կուլեր» ջեքփոթից բաժին։</p>\n<p class=\"home-promo-modal__para\">Մրցանակների բաշխում.<br> Պարտվածը — 50%<br>Հաղթողը — 30%<br> Մնացած խաղացողները — 20%։</p>\n<h2 class=\"home-promo-modal__para\">2</h2>\n<h2 class=\"home-promo-modal__para\">Ավագ ձեռք</h2>\n<p class=\"home-promo-modal__para\">(Միայն «հոլդեմի» համար) Եթե բաժնի ավարտին խաղացողի ձեռքում լինի չորս կամ ավելի բարձր կոմբինացիա, նա և բաժնին մասնակցած բոլոր խաղացողները\n(ներառյալ քարտերը թափածներին) կստանան իրենց բաժինը ամենամեծ բաժնում շահած ջեքփոթից։</p>"
+      }
+    }
+  }
+}

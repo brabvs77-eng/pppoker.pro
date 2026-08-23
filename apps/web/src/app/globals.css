@@ -2109,21 +2109,16 @@ body {
 }
 
 .elementor-element-938716b {
-  padding-bottom: 4.75rem;
-}
-
-.elementor-element-cf7ff30 .elementor-element-21e97f2 {
-  position: relative;
-  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-promo-modal__trigger-wrap--jackpot {
-  position: absolute;
-  left: 50%;
-  bottom: 0.65rem;
-  transform: translateX(-50%);
+  position: static;
+  transform: none;
   width: min(92%, 240px);
-  margin: 0;
+  margin: 0.75rem auto 0;
 }
 
 .home-promo-modal__trigger-wrap--jackpot .home-promo-modal__trigger-img {

@@ -10,6 +10,7 @@ import { load } from 'cheerio';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outPath = path.join(rootDir, 'apps/web/src/config/home-promo-modals.json');
+const overridesPath = path.join(rootDir, 'apps/web/src/config/home-promo-modals-overrides.json');
 
 const localeFiles = {
   ru: 'index.html',
@@ -47,8 +48,8 @@ const jackpotIntroByLocale = {
     'PPPOKER has two types of jackpots',
   ],
   hy: [
-    'By playing cash games at Nuts, you can win a jackpot.',
-    'PPPOKER has two types of jackpots',
+    'Nuts-ում կեշ խաղեր խաղալով,',
+    'PPPOKER-ում կան ջեքփոթի երկու տեսակ',
   ],
   uz: [
     "Nuts klubida kesh o'yinlarini o'ynab, jekpot yutib olishingiz mumkin.",
@@ -180,8 +181,23 @@ function extractPopup($, popupId) {
 
 async function main() {
   const modalsByLocale = {};
+  let manualOverrides = {};
+  try {
+    manualOverrides = JSON.parse(await fs.readFile(overridesPath, 'utf8'));
+  } catch {
+    // optional overrides file
+  }
 
   for (const [locale, file] of Object.entries(localeFiles)) {
+    const manualLocale = manualOverrides[locale];
+    if (manualLocale?.modals) {
+      modalsByLocale[locale] = {
+        triggers: manualLocale.triggers ?? hotspotLabels[locale],
+        modals: manualLocale.modals,
+      };
+      continue;
+    }
+
     const html = await fs.readFile(path.join(rootDir, file), 'utf8');
     const $ = load(html);
     const labels = hotspotLabels[locale];
