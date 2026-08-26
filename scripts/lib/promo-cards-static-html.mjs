@@ -63,8 +63,10 @@ function renderEventsCard(cards, triggers) {
 
 function renderJackpotCard(cards, triggers, decorations) {
   const { jackpot } = cards;
+  const background = jackpot.background ?? decorations.jackpotBackground?.src ?? '';
+  const bgStyle = background ? ` style="--home-promo-card-bg: url('${background}')"` : '';
 
-  return `<article class="home-promo-cards__card home-promo-cards__card--jackpot" data-home-promo-card="jackpot">
+  return `<article class="home-promo-cards__card home-promo-cards__card--jackpot" data-home-promo-card="jackpot"${bgStyle}>
   <div class="home-promo-cards__jackpot-inner">
     <h2 class="home-promo-cards__jackpot-title">${jackpot.title}</h2>
     <p class="home-promo-cards__amount home-promo-cards__headline--gradient">${jackpot.amount}</p>

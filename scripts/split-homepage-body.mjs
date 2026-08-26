@@ -130,16 +130,33 @@ function stripLegacyMasthead(bodyHtml) {
   return `${bodyHtml.slice(0, mastheadStart)}${bodyHtml.slice(headerEnd + '</header>'.length)}`;
 }
 
-function stripDeadHomeMarkup(bodyHtml, { stripMasthead, widsterSectionId, duplicateCtaIds }) {
+const WIDSTER_MOUNT_ID = 'widster-4bb2def655b84202f7ff7cb928f06ce6079db77538f28084840b145afb0f1daa';
+const WIDSTER_MOUNT_HTML = `<div id="${WIDSTER_MOUNT_ID}"></div>`;
+
+function ensureWidsterMount(bodyHtml) {
+  if (bodyHtml.includes(`id="${WIDSTER_MOUNT_ID}"`) || bodyHtml.includes('id="widster-')) {
+    return bodyHtml;
+  }
+
+  const footerIdx = bodyHtml.indexOf('id="colophon"');
+  if (footerIdx !== -1) {
+    const sectionStart = bodyHtml.lastIndexOf('<', footerIdx);
+    if (sectionStart !== -1) {
+      return `${bodyHtml.slice(0, sectionStart)}${WIDSTER_MOUNT_HTML}\n${bodyHtml.slice(sectionStart)}`;
+    }
+  }
+
+  return `${bodyHtml}\n${WIDSTER_MOUNT_HTML}`;
+}
+
+function stripDeadHomeMarkup(bodyHtml, { stripMasthead, duplicateCtaIds }) {
   let processed = bodyHtml;
 
   if (stripMasthead) {
     processed = stripLegacyMasthead(processed);
   }
 
-  if (widsterSectionId) {
-    processed = stripElementorSection(processed, widsterSectionId);
-  }
+  // Widster mount stays in the body; native home shells load its script via WidsterEmbed.
 
   for (const elementId of duplicateCtaIds ?? []) {
     processed = stripElementorSection(processed, elementId);
@@ -203,7 +220,6 @@ async function main() {
   const stripMastheadRoutes = new Set(
     (chrome.stripLegacyMastheadRoutes ?? []).map((entry) => entry.fileId),
   );
-  const widsterByFileId = chrome.legacyWidsterSectionElementIdsByFileId ?? {};
   const duplicateCtaIds = chrome.homepageDuplicateCtaElementIds ?? [];
 
   for (const { fileId, route, legacyBlogSectionId, appendBlogSlotWhenMissing } of homeRoutes) {
@@ -307,10 +323,9 @@ async function main() {
 
     processed = stripDeadHomeMarkup(processed, {
       stripMasthead: stripMastheadRoutes.has(fileId),
-      widsterSectionId:
-        registrationRoutes.has(route) ? widsterByFileId[fileId] : undefined,
       duplicateCtaIds: registrationRoutes.has(route) ? duplicateCtaIds : [],
     });
+    processed = ensureWidsterMount(processed);
 
     const withoutLegacyFooter = stripFooterRoutes.has(fileId)
       ? stripLegacyFooter(processed)
@@ -345,7 +360,6 @@ async function main() {
 
     let processed = stripDeadHomeMarkup(bodyHtml, {
       stripMasthead: stripMastheadRoutes.has(fileId),
-      widsterSectionId: undefined,
       duplicateCtaIds: [],
     });
 

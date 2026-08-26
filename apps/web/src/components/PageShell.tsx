@@ -12,6 +12,7 @@ import { NativePage } from '@/components/native/NativePage';
 import { StructuredPost } from '@/components/native/StructuredPost';
 import { SiteFooter } from '@/components/native/SiteFooter';
 import { SiteHeader } from '@/components/native/SiteHeader';
+import { WidsterEmbed } from '@/components/native/WidsterEmbed';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
 import { WordPressRuntimeScripts } from '@/components/WordPressRuntimeScripts';
@@ -76,6 +77,7 @@ export function PageShell({
       <SiteFooter page={page} variant={hasElementorFooter ? 'locale-only' : 'full'} />
       {showHomePromo ? <HomePromoModalsBoot /> : null}
       {showHomePromo ? <ChipCalculatorBoot /> : null}
+      {showHomePromo ? <WidsterEmbed /> : null}
       {loadNativeAnalytics ? <AnalyticsScripts /> : null}
       {loadElementorRuntime ? (
         <>
