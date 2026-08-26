@@ -30,7 +30,7 @@ body {
   border: 0;
 }
 
-#wordpress-page-root[data-home-promo] .elementor-element-23c91dc {
+#wordpress-page-root[data-home-promo] #native-home-hero {
   padding-top: 0 !important;
 }
 

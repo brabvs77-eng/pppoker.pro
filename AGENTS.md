@@ -194,6 +194,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
 | Home cash games grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 3 static cards; `verify:home-cash-games` |
 | Home Why NUTS grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 8 feature tiles; `verify:home-why-nuts` |
+| Home hero | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — headline, NUTS logo (LCP), Telegram CTA, bonus panel; `verify:home-hero` |
 | Home app download | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — store badges + `#reg` anchor; `verify:home-app-download` |
 | Home promo blocks (CRASH / Russian Poker) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — static HTML + autoplay script; `verify:home-promo-blocks` |
 | Home promo cards | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — bonus/events/jackpot grid + modal triggers; `verify:home-promo-cards` |
@@ -209,8 +210,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 4. ~~Home Why NUTS grid~~ — done (Sprint C1, `home-why-nuts.json`, `inject:why-nuts`)
 5. ~~Home app download~~ — done (Sprint C2, `home-app-download.json`, `inject:app-download`)
 6. ~~Home promo cards~~ — done (Sprint C3, `home-promo-cards.json`, `inject:promo-cards`)
-7. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
-8. **More Elementor sections → native** — hero
+7. ~~Home hero~~ — done (Sprint C4, `home-hero.json`, `inject:home-hero`)
+8. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
 9. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
 
 ## Adding or updating content

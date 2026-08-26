@@ -1,0 +1,151 @@
+{
+  "background": "/assets/media/2024/07/Mask-group-opt.webp",
+  "logo": {
+    "src": "/assets/media/2024/07/NUTS.webp",
+    "width": 527,
+    "height": 122,
+    "alt": "nuts pppoker"
+  },
+  "copyByLocale": {
+    "ru": {
+      "onlineBadge": "ONLINE",
+      "title": "ПОКЕР КЛУБ PPPOKER",
+      "taglineHtml": "Вступай в NUTS - крупнейший онлайн клуб на платформе PPPoker.",
+      "playersHtml": "50 000 игроков pppoker <span class=\"home-hero__muted\">из Америки, Европы и Азии.​</span>",
+      "inviteHtml": "Только любители покера. <span class=\"home-hero__muted\">Вступайте в наш клуб и выигрывайте сегодня!​</span>",
+      "ctaLabel": "Написать в Telegram",
+      "playTitleHtml": "НАЧАТЬ ИГРАТЬ <br> В ПОКЕР",
+      "playSubtitleHtml": "Можно через вашего <br><span class=\"home-hero__panel-muted\">персонального менеджера Nuts.</span>",
+      "playBodyHtml": "Он все расскажет, поможет настроить приложение pppoker<span class=\"home-hero__panel-muted\"><br>и даст...🔥🔥🔥</span>",
+      "bonusLabel": "Бонус",
+      "bonusPercent": "150%",
+      "bonusCapHtml": "на депозит<br>до 500$",
+      "bonusCta": "Написать менеджеру и забрать бонус !!!",
+      "registerHtml": "Или вы можете <a class=\"home-hero__link\" href=\"#reg\">Зарегистрироваться в pppoker</a> самостоятельно по нашей подробной инструкции.",
+      "background": "/assets/media/2024/07/Mask-group-opt.webp",
+      "panelBackground": null,
+      "logo": {
+        "src": "/assets/media/2024/07/NUTS.webp",
+        "width": 527,
+        "height": 122,
+        "alt": "nuts pppoker"
+      },
+      "character": {
+        "src": "/assets/media/elementor/thumbs/turbo-rg5s7cldmmlgkbw98se2hgmy8skiuap9bgbkzyuq60.webp",
+        "alt": "pppoker"
+      }
+    },
+    "en": {
+      "onlineBadge": "ONLINE",
+      "title": "poker club pppoker",
+      "taglineHtml": "The biggest online poker club on the PPPoker platform.",
+      "playersHtml": "50 000 pppoker players <span class=\"home-hero__muted\">from Latin America, Europe and Asia. ​</span>",
+      "inviteHtml": "Only poker amateurs. <span class=\"home-hero__muted\">Join our club and get win today!​</span>",
+      "ctaLabel": "Message on Telegram",
+      "playTitleHtml": "START PLAYING PPPOKER",
+      "playSubtitleHtml": "You can start through your <br><span class=\"home-hero__panel-muted\">personal manager.</span>",
+      "playBodyHtml": "We will explain everything, help with setup, <span class=\"home-hero__panel-muted\"><br>and provide you with...🔥🔥🔥</span>",
+      "bonusLabel": "bonus",
+      "bonusPercent": "150%",
+      "bonusCapHtml": "on deposit<br>UP to 500$",
+      "bonusCta": "Message to manager and claim your bonus now !!!",
+      "registerHtml": "Or you can <a class=\"home-hero__link\" href=\"#reg\">Register in pppoker</a> on your own by following our detailed instructions.",
+      "background": "/assets/media/2024/07/Mask-group-opt.webp",
+      "panelBackground": "/assets/media/2024/07/Mask-group-1-2-opt.webp",
+      "logo": {
+        "src": "/assets/media/2024/07/NUTS.webp",
+        "width": 527,
+        "height": 122,
+        "alt": "nuts pppoker"
+      },
+      "character": {
+        "src": "/assets/media/elementor/thumbs/turbo-rg5tbrnji5xbsp6p89cjp9ght9cptr5qvi77waxam0.webp",
+        "alt": "turbo"
+      }
+    },
+    "hy": {
+      "onlineBadge": "առցանց",
+      "title": "ՊՈԿԵՐ ԱԿՈՒՄԲ PPPOKER",
+      "taglineHtml": "Միանալ NUTS - ամենամեծ առցանց ակումբ հարթակում PPPoker.",
+      "playersHtml": "50,000 խաղացողներ pppoker <span class=\"home-hero__muted\">Ամերիկայից, Եվրոպայից և Ասիայից.​</span>",
+      "inviteHtml": "Միայն պոկերի սիրահարներ. <span class=\"home-hero__muted\">Միացեք մեր ակումբին և հաղթեք այսօր!​</span>",
+      "ctaLabel": "Գրել Telegram-ում",
+      "playTitleHtml": "ՍԿՍԵՔ ԽԱՂԱԼ <br> ՊՈԿԵՐ",
+      "playSubtitleHtml": "Հնարավոր է ձեր միջոցով <br><span class=\"home-hero__panel-muted\">անհատական մենեջեր Nuts.</span>",
+      "playBodyHtml": "Նա կպատմի ամեն ինչ, կօգնի կարգավորել հավելվածը pppoker<span class=\"home-hero__panel-muted\"><br>Եվ կտա...🔥🔥🔥</span>",
+      "bonusLabel": "Բոնուս",
+      "bonusPercent": "150%",
+      "bonusCapHtml": "ավանդի վրա<br>մինչև 500$",
+      "bonusCta": "Գրեք մենեջերին և Վերցրեք բոնուսը !!!",
+      "registerHtml": "Կամ դուք կարող եք <a class=\"home-hero__link\" href=\"#reg\">Գրանցվել pppoker</a> ինքնուրույն ՝ ըստ մեր մանրամասն հրահանգների.",
+      "background": "/assets/media/2024/07/Mask-group-opt.webp",
+      "panelBackground": null,
+      "logo": {
+        "src": "/assets/media/2024/07/NUTS.webp",
+        "width": 527,
+        "height": 122,
+        "alt": "nuts pppoker"
+      },
+      "character": {
+        "src": "/assets/media/elementor/thumbs/turbo-rfpvvde70baxs2bn03t8cay7kcycahc678ci7akrg8.webp",
+        "alt": "pppoker"
+      }
+    },
+    "uz": {
+      "onlineBadge": "ONLINE",
+      "title": "poker klubi pppoker",
+      "taglineHtml": "Dunyodagi eng katta platformadagi onlayn klub PPPoker.",
+      "playersHtml": "50 000 o'yinchilar <span class=\"home-hero__muted\">Amerika, Evropa va Osiyodan.​</span>",
+      "inviteHtml": "Faqat havaskorlar. <span class=\"home-hero__muted\">Bizning klubimizga qo'shiling va bugun g'alaba qozoning!​</span>",
+      "ctaLabel": "Telegramga yozish",
+      "playTitleHtml": "O'YNASHNI BOSHLANG PPPOKER",
+      "playSubtitleHtml": "Siz orqali mumkin <br><span class=\"home-hero__panel-muted\">shaxsiy menejer.</span>",
+      "playBodyHtml": "U hamma narsani aytib beradi, yordam beradi<span class=\"home-hero__panel-muted\"><br>sozlash va beradi 🔥🔥🔥</span>",
+      "bonusLabel": "bonus",
+      "bonusPercent": "150%",
+      "bonusCapHtml": "depozit uchun<br>500$ dollargacha",
+      "bonusCta": "Menejerga yozing va bonusni oling !!!",
+      "registerHtml": "Yoki mumkin <a class=\"home-hero__link\" href=\"#reg\">Ro'yxatdan o'tish</a> bizning batafsil ko'rsatmalarimizga muvofiq mustaqil ravishda.",
+      "background": "/assets/media/2024/07/Mask-group-opt.webp",
+      "panelBackground": null,
+      "logo": {
+        "src": "/assets/media/2024/07/NUTS.webp",
+        "width": 527,
+        "height": 122,
+        "alt": "nuts pppoker"
+      },
+      "character": {
+        "src": "/assets/media/elementor/thumbs/turbo-rg5tbrnji5xbsp6p89cjp9ght9cptr5qvi77waxam0.webp",
+        "alt": "turbo"
+      }
+    },
+    "kz": {
+      "onlineBadge": "ONLINE",
+      "title": "ПОКЕР КЛУБЫ",
+      "taglineHtml": "Әлемдегі ең үлкен PPPoker платформасындағы онлайн клуб.",
+      "playersHtml": "50 000 ойыншы<span class=\"home-hero__muted\"> Америкадан, Еуропадан және Азиядан. ​</span>",
+      "inviteHtml": "Тек әуесқойлар. <span class=\"home-hero__muted\">Біздің клубқа қосылыңыз және бүгін жеңіске жетіңіз!​</span>",
+      "ctaLabel": "Telegram-ға жазу",
+      "playTitleHtml": "ОЙНАУДЫ БАСТАУ",
+      "playSubtitleHtml": "Сіз арқылы мүмкін болады <br><span class=\"home-hero__panel-muted\">дербес менеджердің.</span>",
+      "playBodyHtml": "Ол бәрін айтып береді, орнатуға<span class=\"home-hero__panel-muted\"><br>көмектеседі және береді 🔥🔥🔥</span>",
+      "bonusLabel": "Бонус",
+      "bonusPercent": "150%",
+      "bonusCapHtml": "депозитке<br>до 500$",
+      "bonusCta": "Менеджерге хат жазып, бонусты алыңыз !!!",
+      "registerHtml": "Немесе сіз жасай аласыз <a class=\"home-hero__link\" href=\"#reg\">Тіркелу</a> біздің егжей-тегжейлі нұсқауларға сәйкес дербес.",
+      "background": "/assets/media/2024/07/Mask-group-opt.webp",
+      "panelBackground": null,
+      "logo": {
+        "src": "/assets/media/2024/07/NUTS.webp",
+        "width": 527,
+        "height": 122,
+        "alt": "nuts pppoker"
+      },
+      "character": {
+        "src": "/assets/media/elementor/thumbs/turbo-rg5tbrnji5xbsp6p89cjp9ght9cptr5qvi77waxam0.webp",
+        "alt": "turbo"
+      }
+    }
+  }
+}
