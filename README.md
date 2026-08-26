@@ -129,7 +129,7 @@ See also [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md).
 
 - Legacy Elementor reviews carousel (`ccad702`) replaced with `#native-review-snippets-slot`
 - Static review cards + star ratings injected before Next build (`npm run inject:review-snippets`)
-- Content in `apps/web/src/config/review-snippets.json` (6 cards/locale, aggregate 4.9 / 2847)
+- Content in `apps/web/src/config/review-snippets.json` (6 cards/locale, aggregate computed from cards)
 - `ReviewSnippetsJsonLd` emits `Organization` + `AggregateRating` + 3 `Review` items on homepages
 
 ## Sprint 15 features

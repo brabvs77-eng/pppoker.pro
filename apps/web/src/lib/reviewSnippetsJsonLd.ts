@@ -3,6 +3,7 @@ import { siteBranding, siteContacts } from '@/config/site';
 import type { AppLocale } from '@/i18n/routing';
 import { homeHref } from '@/lib/navigation';
 import { absoluteUrl } from '@/lib/jsonLd/urls';
+import { computeReviewAggregate } from '@/lib/reviewSnippetsAggregate';
 
 type ReviewSnippet = {
   name: string;
@@ -18,8 +19,8 @@ export function buildReviewSnippetsJsonLd(locale: AppLocale): string {
   const reviewLocale = (locale in reviewSnippetsConfig.reviewsByLocale
     ? locale
     : 'ru') as ReviewLocale;
-  const reviews = reviewSnippetsConfig.reviewsByLocale[reviewLocale];
-  const { aggregate } = reviewSnippetsConfig;
+  const reviews = reviewSnippetsConfig.reviewsByLocale[reviewLocale] as ReviewSnippet[];
+  const aggregate = computeReviewAggregate(reviews, reviewSnippetsConfig.aggregate.bestRating);
   const siteUrl = absoluteUrl(homeHref(locale));
 
   // Distinct @id: the legacy Yoast graph already defines `#organization` on the
@@ -52,7 +53,7 @@ export function buildReviewSnippetsJsonLd(locale: AppLocale): string {
       bestRating: String(aggregate.bestRating),
       worstRating: '1',
     },
-    review: (reviews as ReviewSnippet[]).slice(0, 3).map((review) => ({
+    review: reviews.map((review) => ({
       '@type': 'Review',
       author: { '@type': 'Person', name: review.name },
       reviewRating: {
