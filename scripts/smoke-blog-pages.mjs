@@ -27,6 +27,22 @@ const BLOG_SMOKE_PAGES = [
     minBreadcrumbLinks: 1,
   },
   {
+    label: 'UZ archive',
+    urlPath: '/uz/blog/',
+    surface: '.blog-surface',
+    shell: '.blog-archive',
+    title: '#blog-archive-title',
+    minBreadcrumbLinks: 1,
+  },
+  {
+    label: 'KZ archive',
+    urlPath: '/kz/blog/',
+    surface: '.blog-surface',
+    shell: '.blog-archive',
+    title: '#blog-archive-title',
+    minBreadcrumbLinks: 1,
+  },
+  {
     label: 'HY archive',
     urlPath: '/hy/blog/',
     surface: '.blog-surface',

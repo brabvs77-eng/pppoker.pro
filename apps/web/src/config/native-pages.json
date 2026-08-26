@@ -2,6 +2,14 @@
   "routes": [
     "/en/user-agreement/",
     "/en/privacy-policy/",
+    "/uz/user-agreement/",
+    "/uz/privacy-policy/",
+    "/kz/user-agreement/",
+    "/kz/privacy-policy/",
+    "/hy/user-agreement/",
+    "/hy/privacy-policy/",
+    "/tj/user-agreement/",
+    "/tj/privacy-policy/",
     "/rus/"
   ],
   "legalFallback": {
@@ -12,6 +20,22 @@
     "en": {
       "user-agreement": "/en/user-agreement/",
       "privacy-policy": "/en/privacy-policy/"
+    },
+    "uz": {
+      "user-agreement": "/uz/user-agreement/",
+      "privacy-policy": "/uz/privacy-policy/"
+    },
+    "kz": {
+      "user-agreement": "/kz/user-agreement/",
+      "privacy-policy": "/kz/privacy-policy/"
+    },
+    "hy": {
+      "user-agreement": "/hy/user-agreement/",
+      "privacy-policy": "/hy/privacy-policy/"
+    },
+    "tj": {
+      "user-agreement": "/tj/user-agreement/",
+      "privacy-policy": "/tj/privacy-policy/"
     }
   }
 }

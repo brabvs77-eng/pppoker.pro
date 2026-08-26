@@ -25,6 +25,8 @@ const FORBIDDEN_PATHS = [
   'apps/web/src/components/PostArticle.tsx',
   'apps/web/src/app/page.module.css',
   'apps/web/src/app/sitemap.ts',
+  'scripts/seed-hy-tj-translations.mjs',
+  'scripts/lib/hy-tj-translations.mjs',
 ];
 
 /** Source files that must not import removed modules. */

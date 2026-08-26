@@ -14,6 +14,7 @@ import {
   detectEnglishPopupsOnRu,
 } from './known-legacy-issues.mjs';
 import { KZ_HOME_LOCALE_REPLACEMENTS } from './kz-home-locale-content.mjs';
+import { fixImplajdDuplicatePost } from './fix-implajd-duplicate.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const checkOnly = process.argv.includes('--check');
@@ -112,6 +113,18 @@ function applyLocaleFileFixes(relativePath, original) {
 }
 
 async function main() {
+  let updatedFiles = 0;
+  let remainingAutoFixes = 0;
+
+  const implajdFix = fixImplajdDuplicatePost({ checkOnly });
+  if (implajdFix.dryRun) {
+    remainingAutoFixes += 1;
+    console.error('[check] implajd-oddsy post: would remove duplicate section');
+  } else if (implajdFix.changed) {
+    updatedFiles += 1;
+    console.log('Fixed implajd-oddsy post: duplicate section and author link');
+  }
+
   const files = (
     await Promise.all(
       LEGACY_GLOBS.map((pattern) =>
@@ -121,8 +134,6 @@ async function main() {
   ).flat();
 
   const uniqueFiles = [...new Set(files)].sort();
-  let updatedFiles = 0;
-  let remainingAutoFixes = 0;
   const manualReports = [];
 
   for (const relativePath of uniqueFiles) {

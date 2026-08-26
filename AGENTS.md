@@ -172,15 +172,14 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 |---------|--------|
 | Header / footer / languages | All pages |
 | HomePromo | All 6 homepages; `verify:home-promo`; smoke all 6 |
-| Structured posts | 29 posts — RU, EN, UZ, KZ; HY/TJ pipeline ready (`structured-post-routes.json`), awaiting post HTML in export |
-| Legal / about | `NativePage` — `/en/user-agreement/`, `/en/privacy-policy/`, `/rus/` |
-| Blog archive | RU, EN, UZ, KZ — `NativeBlogArchive`; HY/TJ header links → `/blog/` |
+| Structured posts | 24 posts × 6 locales (RU + EN/UZ/KZ/HY/TJ via `post-translations/`) |
+| Legal / about | `NativePage` — EN + UZ/KZ/HY/TJ user-agreement & privacy-policy; `/rus/` |
+| Blog archive | All 6 locales — `NativeBlogArchive` (4 pages per locale at 24 posts) |
 | Blog text colors | Full-width `.blog-surface` dark theme; `BlogBreadcrumbs` on archive + posts |
 | Blog JSON-LD | `BreadcrumbList` + `BlogPosting` + `Organization`/`WebSite` with absolute URLs; `verify:json-ld` |
 | Legacy HTML codemod | `fix:legacy-html` — KZ flag, but-back WebP, robots meta; `audit:rudiments` guards regression |
-| Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` (not `/tj/` — no legacy blog section in export) |
-| Review snippets | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 6 cards + fake stars; `verify:review-snippets`; JSON-LD `AggregateRating` |
-| Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`; head link in `verify:rss` + smoke |
+| Home blog inject | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` (`appendBlogSlotWhenMissing` on TJ) |
+| Locale RSS | `/feed.xml`, `/en/feed.xml`, `/uz/feed.xml`, `/kz/feed.xml`, `/hy/feed.xml`, `/tj/feed.xml` |
 | Category/tag archives | 301 → native `/blog/` (see `scripts/lib/taxonomy-blog-redirects.mjs`) |
 | Elementor runtime budget | `needsElementorRuntime` in manifest; `verify:elementor-runtime-budget` |
 | Cloudflare build | `npm run build` Playwright-free; `prebuild` installs `apps/web`; `verify:build-pipeline` |
@@ -201,16 +200,16 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 
 ## Planned work (backlog)
 
-1. ~~Home blog on `/en/`~~ — done (Sprint 21)
-1. ~~NativePage legal URLs (interim)~~ — footer links + redirects → EN until UZ/KZ/HY/TJ HTML export; add routes to `native-pages.json` + `legalByLocale` when export lands
-2. Home blog on `/tj/` — blocked until WordPress re-export includes legacy blog loop
-3. Native blog archive for HY/TJ — blocked until `/hy/blog/`, `/tj/blog/` exist in export; interim: header `blogHref` + 301 redirects → `/blog/`
-4. HY/TJ structured posts — add post HTML to static export, routes to `apps/web/src/config/structured-post-routes.json`, then enable RSS head links for HY/TJ
-5. More Elementor sections → native components (remaining legacy homepage blocks)
+1. ~~Post translations from RU (24 × 5 locales)~~ — done (Sprint 42, `post-translations/`)
+2. ~~Native blog archive HY/TJ + pagination~~ — done (Sprint 42)
+3. ~~Legal pages UZ/KZ/HY/TJ~~ — done (`page-translations/legal.json`, `seed:legal-pages`)
+4. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
+5. **More Elementor sections → native** — remaining legacy homepage blocks
+6. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
 
 ## Adding or updating content
 
-1. Update legacy static HTML export (or re-export from WordPress)
+1. Add or edit RU post HTML at repo root (`/slug/index.html`) or translation JSON in `post-translations/`
 2. Run `npm run build`
 3. Deploy `apps/web/out`
 
