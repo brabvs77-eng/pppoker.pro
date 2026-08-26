@@ -193,6 +193,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Home FAQ accordion | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS `<details>`; `verify:home-faq`; smoke |
 | Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
 | Home cash games grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 3 static cards; `verify:home-cash-games` |
+| Home Why NUTS grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 8 feature tiles; `verify:home-why-nuts` |
 | Home promo blocks (CRASH / Russian Poker) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — static HTML + autoplay script; `verify:home-promo-blocks` |
 | Home promo modals (bonus / events / jackpot) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — native `<dialog>` + stripped Elementor popups; `verify:home-promo-modals` |
 | Dead homepage markup stripped | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — legacy `#masthead`, Widster, duplicate hero CTAs; `verify:home-dead-markup` |
@@ -203,9 +204,10 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 1. ~~Post translations from RU (24 × 5 locales)~~ — done (Sprint 42, `post-translations/`)
 2. ~~Native blog archive HY/TJ + pagination~~ — done (Sprint 42)
 3. ~~Legal pages UZ/KZ/HY/TJ~~ — done (`page-translations/legal.json`, `seed:legal-pages`)
-4. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
-5. **More Elementor sections → native** — remaining legacy homepage blocks
-6. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
+4. ~~Home Why NUTS grid~~ — done (Sprint C1, `home-why-nuts.json`, `inject:why-nuts`)
+5. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
+6. **More Elementor sections → native** — hero, promo cards, app download
+7. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
 
 ## Adding or updating content
 

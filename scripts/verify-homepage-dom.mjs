@@ -54,6 +54,9 @@ async function main() {
   const withdrawMethodsRoutes = new Set(
     (chrome.homeWithdrawMethodsSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const whyNutsRoutes = new Set(
+    (chrome.homeWhyNutsSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const promoBlocksRoutes = new Set(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -150,15 +153,19 @@ async function main() {
       if (!html.includes('id="native-home-withdraw-methods-slot"') && !html.includes('id="native-home-withdraw-methods"')) {
         violations.push(`[${route}] Missing native withdraw methods slot or section`);
       }
-      if (whyNutsSectionId && !html.includes(`class="elementor-element elementor-element-${whyNutsSectionId}`)) {
-        violations.push(`[${route}] Why NUTS section ${whyNutsSectionId} missing after withdraw strip`);
-      }
       const withdrawIndex = html.indexOf('id="native-home-withdraw-methods"');
-      const whyNutsIndex = whyNutsSectionId
-        ? html.indexOf(`class="elementor-element elementor-element-${whyNutsSectionId}`)
-        : -1;
+      const whyNutsIndex = html.indexOf('id="native-home-why-nuts"');
       if (withdrawIndex !== -1 && whyNutsIndex !== -1 && withdrawIndex > whyNutsIndex) {
         violations.push(`[${route}] Withdraw methods section must appear before Why NUTS block`);
+      }
+    }
+
+    if (whyNutsRoutes.has(route)) {
+      if (!html.includes('id="native-home-why-nuts-slot"') && !html.includes('id="native-home-why-nuts"')) {
+        violations.push(`[${route}] Missing native why-nuts slot or section`);
+      }
+      if (whyNutsSectionId && html.includes(`class="elementor-element elementor-element-${whyNutsSectionId}`)) {
+        violations.push(`[${route}] Legacy Why NUTS section ${whyNutsSectionId} still present`);
       }
     }
 

@@ -1,0 +1,121 @@
+{
+  "titleByLocale": {
+    "ru": "Почему покер вместе с NUTS?",
+    "en": "Why NUTS poker club?",
+    "hy": "Ինչու պոկեր NUTS-ի հետ միասին:",
+    "uz": "Nima klub NUTS?",
+    "kz": "Неліктен NUTS клубы?"
+  },
+  "tiles": [
+    {
+      "id": "community",
+      "icon": {
+        "src": "/assets/media/2025/03/Group-23.webp",
+        "width": 33,
+        "height": 26
+      },
+      "textHtmlByLocale": {
+        "ru": "Более 25 000 <br><span class=\"home-why__muted\">любителей покера со всего мира</span>",
+        "en": "More than 25 000 <br><span class=\"home-why__muted\">poker amateurs from all over the world</span>",
+        "hy": "Ավելի քան 25,000 <br><span class=\"home-why__muted\">պոկերի սիրահարներ ամբողջ աշխարհից</span>",
+        "uz": "Ko'proq 25 000 <br><span class=\"home-why__muted\">dunyo bo'ylab havaskorlar</span>",
+        "kz": "Более 25 000 <br><span class=\"home-why__muted\">әлемнің түкпір-түкпірінен келген әуесқойлар</span>"
+      }
+    },
+    {
+      "id": "games",
+      "icon": {
+        "src": "/assets/media/2025/03/Vector1.webp",
+        "width": 26,
+        "height": 26
+      },
+      "textHtmlByLocale": {
+        "ru": "24/7 <br><span class=\"home-why__muted\">все виды игр</span>",
+        "en": "24/7 <br><span class=\"home-why__muted\">all type of games<br>in pppoker</span>",
+        "hy": "24/7 <br><span class=\"home-why__muted\">բոլոր տեսակի խաղեր</span>",
+        "uz": "24/7 <br><span class=\"home-why__muted\">barcha turdagi o'yinlar<br></span>",
+        "kz": "24/7 <br><span class=\"home-why__muted\">ойындардың барлық түрлері</span>"
+      }
+    },
+    {
+      "id": "security",
+      "icon": {
+        "src": "/assets/media/2025/03/Vector-4.webp",
+        "width": 23,
+        "height": 26
+      },
+      "textHtmlByLocale": {
+        "ru": "<span class=\"home-why__muted\">Собственная</span><br> система безопасности",
+        "en": "<span class=\"home-why__muted\">Internal</span><br> security system",
+        "hy": "<span class=\"home-why__muted\">Սեփական</span><br> անվտանգության համակարգ",
+        "uz": "<span class=\"home-why__muted\">O'z</span><br> tizim xavfsizlik",
+        "kz": "<span class=\"home-why__muted\">Меншікті</span><br> жүйе қауіпсіздік"
+      }
+    },
+    {
+      "id": "transfer",
+      "icon": {
+        "src": "/assets/media/2025/03/Vector5.webp",
+        "width": 27,
+        "height": 22
+      },
+      "textHtmlByLocale": {
+        "ru": "Легкий ввод <br>и вывод <span class=\"home-why__muted\">средств</span>",
+        "en": "Easy to transfert <br>and to cashout <span class=\"home-why__muted\">money</span>",
+        "hy": "Հեշտ մուտք <br>և եզրակացություն <span class=\"home-why__muted\">գումար</span>",
+        "uz": "Oson kirish <br>va xulosa <span class=\"home-why__muted\">mablag'lar</span>",
+        "kz": "Оңай енгізу <br>және қорытынды <span class=\"home-why__muted\">қаражатты</span>"
+      }
+    },
+    {
+      "id": "manager",
+      "icon": {
+        "src": "/assets/media/2025/03/Vector6.webp",
+        "width": 28,
+        "height": 26
+      },
+      "textHtmlByLocale": {
+        "ru": "Персональный <span class=\"home-why__muted\">менеджер Nuts <br>на связи 24/7</span>",
+        "en": "Personal <span class=\"home-why__muted\">support service <br>online 24/7</span>",
+        "hy": "Անձնական <span class=\"home-why__muted\">մենեջեր Nuts <br>կապի մեջ 24/7</span>",
+        "uz": "Shaxsiy<span class=\"home-why__muted\"> menejer <br>aloqada 24/7</span>",
+        "kz": "Дербес менеджер <span class=\"home-why__muted\">байланыста 24/7 <br></span>"
+      }
+    },
+    {
+      "id": "jackpot",
+      "icon": {
+        "src": "/assets/media/2025/03/Vector7.webp",
+        "width": 25,
+        "height": 26
+      },
+      "textHtmlByLocale": {
+        "ru": "<span class=\"home-why__muted\">Джекпот</span> <br>до 100000$",
+        "en": "<span class=\"home-why__muted\">Jackpot </span> <br>to 100000$",
+        "hy": "<span class=\"home-why__muted\">Ջեքփոթ</span> <br> 100000$",
+        "uz": "<span class=\"home-why__muted\">Jekpot</span> <br>oldin 100000$",
+        "kz": "<span class=\"home-why__muted\">Джекпот</span> <br>100000$"
+      }
+    },
+    {
+      "id": "deposit",
+      "icon": {
+        "src": "/assets/media/2025/03/Vector8.webp",
+        "width": 26,
+        "height": 26
+      },
+      "textHtmlByLocale": {
+        "ru": "<span class=\"home-why__muted\">Депозит</span> <br>от 10$&nbsp;",
+        "en": "<span class=\"home-why__muted\">Deposit </span> <br>from 10$&nbsp;",
+        "hy": "<span class=\"home-why__muted\">Ավանդ</span> <br> 5$&nbsp;",
+        "uz": "<span class=\"home-why__muted\">Depozit </span> <br>6 dan$",
+        "kz": "<span class=\"home-why__muted\">Депозит</span> <br>от 10$&nbsp;"
+      }
+    },
+    {
+      "id": "brand",
+      "kind": "brand",
+      "mascotSrc": "/assets/media/elementor/thumbs/4-1-1-rg5sbdciwv92ozzcca728hnvd84bbcsju865y8idy8.webp"
+    }
+  ]
+}

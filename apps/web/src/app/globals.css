@@ -2097,6 +2097,92 @@ body {
   }
 }
 
+.home-why {
+  padding: clamp(2.5rem, 5vw, 4rem) 1rem;
+}
+
+.home-why__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.home-why__title {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.home-why__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.home-why__tile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 8.5rem;
+  padding: 1rem 0.85rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, rgba(36, 44, 62, 0.95), rgba(18, 22, 34, 0.98));
+  border: 1px solid rgba(123, 141, 178, 0.18);
+}
+
+.home-why__icon {
+  width: auto;
+  height: 1.625rem;
+  object-fit: contain;
+}
+
+.home-why__text {
+  margin: 0;
+  font-size: clamp(0.95rem, 1.6vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+}
+
+.home-why__muted {
+  color: #7b8db2;
+  font-weight: 500;
+}
+
+.home-why__tile--brand {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.home-why__brand-word {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: #fde661;
+}
+
+.home-why__brand-mascot {
+  width: min(7.5rem, 55%);
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .home-why__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .home-why__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* CRASH / Russian poker promo blocks — mobile: interleave text with media so sections don't merge. */
 @media (max-width: 767px) {
   /* RU/HY: video → CRASH text | image → rus-poker text → videos */
