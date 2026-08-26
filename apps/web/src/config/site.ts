@@ -125,6 +125,12 @@ export const siteAnalytics = {
   googleTagId: 'GT-KF6XSGPD',
 } as const;
 
+/** Widster embed — same widget + mount id as the legacy WordPress export. */
+export const siteWidster = {
+  widgetId: '31ef25007ef1e581dac7e256f3cf3c1d7ce186a94fa6009746209e1ec0baa95f',
+  mountId: 'widster-4bb2def655b84202f7ff7cb928f06ce6079db77538f28084840b145afb0f1daa',
+} as const;
+
 const FLAG_BASE = '/assets/vendor/sitepress-multilingual-cms/res/flags';
 
 export const localeFlags = {

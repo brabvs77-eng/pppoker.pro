@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Verifies dead homepage markup (legacy masthead, Widster, duplicate hero CTAs)
+ * Verifies dead homepage markup (legacy masthead, duplicate hero CTAs)
  * is stripped from native shell bodies and static export.
+ * Widster mount is kept (script loaded via WidsterEmbed on native homes).
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -36,14 +37,6 @@ function verifyDeadMarkup(html, label, chrome, { fileId, stripMasthead, stripShe
   }
 
   if (stripShellDeadMarkup) {
-    const widsterId = chrome.legacyWidsterSectionElementIdsByFileId?.[fileId];
-    if (widsterId) {
-      assert(
-        !html.includes(containerNeedle(widsterId)),
-        `${label}: legacy Widster section ${widsterId} still present`,
-      );
-    }
-
     for (const id of chrome.homepageDuplicateCtaElementIds ?? []) {
       assert(
         !html.includes(containerNeedle(id)),
@@ -51,7 +44,7 @@ function verifyDeadMarkup(html, label, chrome, { fileId, stripMasthead, stripShe
       );
     }
 
-    assert(!html.includes('id="widster-'), `${label}: Widster embed still present`);
+    assert(html.includes('id="widster-'), `${label}: missing Widster mount`);
   }
 }
 

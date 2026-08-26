@@ -20,7 +20,8 @@
         "hy": "Ավելի քան 25,000 <br><span class=\"home-why__muted\">պոկերի սիրահարներ ամբողջ աշխարհից</span>",
         "uz": "Ko'proq 25 000 <br><span class=\"home-why__muted\">dunyo bo'ylab havaskorlar</span>",
         "kz": "Более 25 000 <br><span class=\"home-why__muted\">әлемнің түкпір-түкпірінен келген әуесқойлар</span>"
-      }
+      },
+      "background": "radial-gradient(at top left, #FDD856 11%, #101622 43%)"
     },
     {
       "id": "games",
@@ -35,7 +36,8 @@
         "hy": "24/7 <br><span class=\"home-why__muted\">բոլոր տեսակի խաղեր</span>",
         "uz": "24/7 <br><span class=\"home-why__muted\">barcha turdagi o'yinlar<br></span>",
         "kz": "24/7 <br><span class=\"home-why__muted\">ойындардың барлық түрлері</span>"
-      }
+      },
+      "background": "radial-gradient(at top left, #FF2272 11%, #101622 43%)"
     },
     {
       "id": "security",
@@ -50,7 +52,8 @@
         "hy": "<span class=\"home-why__muted\">Սեփական</span><br> անվտանգության համակարգ",
         "uz": "<span class=\"home-why__muted\">O'z</span><br> tizim xavfsizlik",
         "kz": "<span class=\"home-why__muted\">Меншікті</span><br> жүйе қауіпсіздік"
-      }
+      },
+      "background": "radial-gradient(at top left, #4CAF50 11%, #101622 43%)"
     },
     {
       "id": "transfer",
@@ -65,7 +68,8 @@
         "hy": "Հեշտ մուտք <br>և եզրակացություն <span class=\"home-why__muted\">գումար</span>",
         "uz": "Oson kirish <br>va xulosa <span class=\"home-why__muted\">mablag'lar</span>",
         "kz": "Оңай енгізу <br>және қорытынды <span class=\"home-why__muted\">қаражатты</span>"
-      }
+      },
+      "background": "radial-gradient(at top left, #039BE5 11%, #101622 43%)"
     },
     {
       "id": "manager",
@@ -80,7 +84,8 @@
         "hy": "Անձնական <span class=\"home-why__muted\">մենեջեր Nuts <br>կապի մեջ 24/7</span>",
         "uz": "Shaxsiy<span class=\"home-why__muted\"> menejer <br>aloqada 24/7</span>",
         "kz": "Дербес менеджер <span class=\"home-why__muted\">байланыста 24/7 <br></span>"
-      }
+      },
+      "background": "radial-gradient(at top left, #C856FD 11%, #101622 43%)"
     },
     {
       "id": "jackpot",
@@ -95,7 +100,8 @@
         "hy": "<span class=\"home-why__muted\">Ջեքփոթ</span> <br> 100000$",
         "uz": "<span class=\"home-why__muted\">Jekpot</span> <br>oldin 100000$",
         "kz": "<span class=\"home-why__muted\">Джекпот</span> <br>100000$"
-      }
+      },
+      "background": "radial-gradient(at top left, #FF3A3A 11%, #101622 43%)"
     },
     {
       "id": "deposit",
@@ -110,12 +116,14 @@
         "hy": "<span class=\"home-why__muted\">Ավանդ</span> <br> 5$&nbsp;",
         "uz": "<span class=\"home-why__muted\">Depozit </span> <br>6 dan$",
         "kz": "<span class=\"home-why__muted\">Депозит</span> <br>от 10$&nbsp;"
-      }
+      },
+      "background": "radial-gradient(at top left, #5C6B8A 11%, #101622 43%)"
     },
     {
       "id": "brand",
       "kind": "brand",
-      "mascotSrc": "/assets/media/elementor/thumbs/4-1-1-rg5sbdciwv92ozzcca728hnvd84bbcsju865y8idy8.webp"
+      "mascotSrc": "/assets/media/2025/03/4-1-1.webp",
+      "background": "radial-gradient(at top left, #FFFAE9 10%, #E0BC16 40%)"
     }
   ]
 }

@@ -50,6 +50,12 @@ function verifyBodyHtml(html, label, legacySectionId) {
   const { cards } = loadHomePromoCards('ru');
   assert(html.includes(cards.bonus.background), `${label}: missing bonus card background`);
   assert(html.includes(cards.events.background), `${label}: missing events card background`);
+  assert(
+    Boolean(cards.jackpot.background) && html.includes(cards.jackpot.background),
+    `${label}: missing jackpot card background`,
+  );
+  assert(html.includes('home-promo-cards__decor--money'), `${label}: missing bonus money decor`);
+  assert(html.includes('home-promo-cards__decor--dollar'), `${label}: missing jackpot dollar decor`);
 
   if (legacySectionId) {
     assert(

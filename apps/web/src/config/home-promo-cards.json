@@ -11,6 +11,9 @@
       "width": 67,
       "height": 65,
       "alt": ""
+    },
+    "jackpotBackground": {
+      "src": "/assets/media/2024/07/back-1.webp"
     }
   },
   "panelOverlay": "/assets/media/2024/07/dust-12-1-opt.webp",
@@ -33,16 +36,17 @@
             "value": "140%"
           }
         ],
-        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-1.webp"
       },
       "events": {
         "title": "акции",
         "subtitle": "Каждую неделю! В приложении PPPOKER",
-        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-2.webp"
       },
       "jackpot": {
         "title": "Джекпот",
-        "amount": "55709$"
+        "amount": "55709$",
+        "background": "/assets/media/2024/07/back-1.webp"
       }
     },
     "en": {
@@ -63,16 +67,17 @@
             "value": "140%"
           }
         ],
-        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-1.webp"
       },
       "events": {
         "title": "Events",
         "subtitle": "Every week! In pppoker app",
-        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-2.webp"
       },
       "jackpot": {
         "title": "Jackpot",
-        "amount": "55709$"
+        "amount": "55709$",
+        "background": "/assets/media/2024/07/back-1.webp"
       }
     },
     "hy": {
@@ -93,16 +98,17 @@
             "value": "140%"
           }
         ],
-        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-1.webp"
       },
       "events": {
         "title": "ակցիաներ",
         "subtitle": "Ամեն շաբաթ! Հավելվածում PPPOKER",
-        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-2.webp"
       },
       "jackpot": {
         "title": "Ջեքփոթ",
-        "amount": "55709$"
+        "amount": "55709$",
+        "background": "/assets/media/2024/07/back-1.webp"
       }
     },
     "uz": {
@@ -123,16 +129,17 @@
             "value": "140%"
           }
         ],
-        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-1.webp"
       },
       "events": {
         "title": "Aktsiyalar",
         "subtitle": "Har hafta!",
-        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-2.webp"
       },
       "jackpot": {
         "title": "Jekpot",
-        "amount": "55709$"
+        "amount": "55709$",
+        "background": "/assets/media/2024/07/back-1.webp"
       }
     },
     "kz": {
@@ -153,16 +160,17 @@
             "value": "140%"
           }
         ],
-        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-1.webp"
       },
       "events": {
         "title": "Акциялар",
         "subtitle": "Әр апта сайын!",
-        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+        "background": "/assets/media/2024/07/Bez-imeni-2.webp"
       },
       "jackpot": {
         "title": "Джекпот",
-        "amount": "55709$"
+        "amount": "55709$",
+        "background": "/assets/media/2024/07/back-1.webp"
       }
     }
   }

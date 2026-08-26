@@ -78,7 +78,6 @@ async function main() {
   const stripMastheadRoutes = new Set(
     (chrome.stripLegacyMastheadRoutes ?? []).map((entry) => entry.fileId),
   );
-  const widsterByFileId = chrome.legacyWidsterSectionElementIdsByFileId ?? {};
   const duplicateCtaIds = chrome.homepageDuplicateCtaElementIds ?? [];
   const reviewsSectionId = chrome.legacyReviewsSectionElementId;
   const faqSectionId = chrome.legacyFaqSectionElementId;
@@ -251,17 +250,13 @@ async function main() {
     }
 
     if (registrationRoutes.has(route)) {
-      const widsterId = widsterByFileId[fileId];
-      if (widsterId && html.includes(`class="elementor-element elementor-element-${widsterId}`)) {
-        violations.push(`[${route}] Legacy Widster section ${widsterId} still present`);
-      }
       for (const ctaId of duplicateCtaIds) {
         if (html.includes(`class="elementor-element elementor-element-${ctaId}`)) {
           violations.push(`[${route}] Duplicate hero CTA ${ctaId} still present`);
         }
       }
-      if (html.includes('id="widster-')) {
-        violations.push(`[${route}] Widster embed still present`);
+      if (!html.includes('id="widster-')) {
+        violations.push(`[${route}] Missing Widster mount`);
       }
     }
   }

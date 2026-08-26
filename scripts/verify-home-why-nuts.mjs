@@ -38,6 +38,23 @@ function verifyBodyHtml(html, label, locale, legacyWhyNutsId) {
   assert(iconCount === iconTiles.length, `${label}: expected ${iconTiles.length} icons, got ${iconCount}`);
   assert(html.includes('home-why__tile--brand'), `${label}: missing brand tile`);
 
+  for (const tile of tiles) {
+    if (tile.background) {
+      assert(
+        html.includes('--home-why-tile-bg:'),
+        `${label}: missing --home-why-tile-bg for colored tiles`,
+      );
+      break;
+    }
+  }
+  for (const tile of iconTiles) {
+    assert(html.includes(tile.icon.src), `${label}: missing icon ${tile.icon.src}`);
+  }
+  const brand = tiles.find((tile) => tile.kind === 'brand');
+  if (brand?.mascotSrc) {
+    assert(html.includes(brand.mascotSrc), `${label}: missing brand mascot ${brand.mascotSrc}`);
+  }
+
   if (legacyWhyNutsId) {
     assert(
       !html.includes(`class="elementor-element elementor-element-${legacyWhyNutsId}`),

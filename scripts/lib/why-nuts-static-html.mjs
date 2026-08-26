@@ -30,14 +30,16 @@ export function loadHomeWhyNuts(locale) {
 
 function renderTile(tile) {
   if (tile.kind === 'brand') {
-    return `<article class="home-why__tile home-why__tile--brand" aria-label="NUTS">
+    const style = tile.background ? ` style="--home-why-tile-bg: ${tile.background}"` : '';
+    return `<article class="home-why__tile home-why__tile--brand"${style} aria-label="NUTS">
   <p class="home-why__brand-word">NU<br>TS</p>
   <img class="home-why__brand-mascot" src="${tile.mascotSrc}" alt="" width="150" height="150" loading="lazy" decoding="async">
 </article>`;
   }
 
-  const { icon, textHtml } = tile;
-  return `<article class="home-why__tile">
+  const { icon, textHtml, background } = tile;
+  const style = background ? ` style="--home-why-tile-bg: ${background}"` : '';
+  return `<article class="home-why__tile"${style}>
   <img class="home-why__icon" src="${icon.src}" alt="" width="${icon.width}" height="${icon.height}" loading="lazy" decoding="async">
   <h3 class="home-why__text">${textHtml}</h3>
 </article>`;
