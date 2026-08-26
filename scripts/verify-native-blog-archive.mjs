@@ -2,6 +2,12 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import {
+  BLOG_ARCHIVE_PAGE_SIZE,
+  blogArchivePageCount,
+  loadCatalog,
+} from './lib/post-translation-seed.mjs';
+
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const manifestPath = path.join(rootDir, 'content/manifest.json');
 const outDir = path.join(rootDir, 'apps/web/out');
@@ -64,7 +70,30 @@ async function main() {
     return;
   }
 
-  console.log(`Verified ${checked} native blog archive pages (no Elementor body/runtime).`);
+  const catalog = loadCatalog();
+  const expectedPages = blogArchivePageCount(catalog.length, BLOG_ARCHIVE_PAGE_SIZE);
+  for (const locale of ['en', 'uz', 'kz', 'hy', 'tj']) {
+    for (let page = 2; page <= expectedPages; page += 1) {
+      const route = `/${locale}/blog/page/${page}/`;
+      if (!archivePages.some((entry) => entry.route === route)) {
+        violations.push(`Missing native blog archive route in manifest: ${route}`);
+      }
+    }
+  }
+
+  if (violations.length) {
+    console.error('Native blog archive verification failed:');
+    violations.slice(0, 20).forEach((line) => console.error(`  - ${line}`));
+    if (violations.length > 20) {
+      console.error(`  ... and ${violations.length - 20} more`);
+    }
+    process.exitCode = 1;
+    return;
+  }
+
+  console.log(
+    `Verified ${checked} native blog archive pages (no Elementor body/runtime); ${expectedPages} pages per locale for en/uz/kz/hy/tj.`,
+  );
 }
 
 main().catch((error) => {

@@ -9,6 +9,9 @@ const structuredRoutesPath = path.join(rootDir, 'apps/web/src/config/structured-
 
 export const TARGET_LOCALES = ['en', 'uz', 'kz', 'hy', 'tj'];
 
+/** Keep in sync with apps/web/src/lib/blogArchive.ts BLOG_ARCHIVE_PAGE_SIZE */
+export const BLOG_ARCHIVE_PAGE_SIZE = 6;
+
 export const BLOG_ARCHIVES = {
   en: {
     title: 'Blog — Nuts PPPoker',
@@ -99,6 +102,35 @@ export function renderBlogArchiveHtml({ route, title, description, lang }) {
 <body class="archive category">
 <div class="elementor elementor-location-archive"></div>
 </body></html>`;
+}
+
+const PAGE_SUFFIX = {
+  en: (page, total) => ` — page ${page} of ${total}`,
+  uz: (page, total) => ` — ${page}-sahifa, jami ${total}`,
+  kz: (page, total) => ` — ${page}-бет, барлығы ${total}`,
+  hy: (page, total) => ` — էջ ${page} / ${total}`,
+  tj: (page, total) => ` — саҳифа ${page} аз ${total}`,
+};
+
+export function blogArchiveRoute(locale, pageNumber) {
+  if (pageNumber <= 1) return `/${locale}/blog/`;
+  return `/${locale}/blog/page/${pageNumber}/`;
+}
+
+export function paginatedBlogArchiveMeta(locale, pageNumber, totalPages) {
+  const meta = BLOG_ARCHIVES[locale];
+  if (!meta || pageNumber <= 1) return meta;
+  const suffixFn = PAGE_SUFFIX[locale];
+  const suffix = suffixFn ? suffixFn(pageNumber, totalPages) : ` — page ${pageNumber}`;
+  return {
+    ...meta,
+    title: `${meta.title}${suffix}`,
+    description: meta.description ? `${meta.description}${suffix}.` : meta.description,
+  };
+}
+
+export function blogArchivePageCount(postCount, pageSize = BLOG_ARCHIVE_PAGE_SIZE) {
+  return Math.max(1, Math.ceil(postCount / pageSize));
 }
 
 export function syncStructuredPostRoutes() {

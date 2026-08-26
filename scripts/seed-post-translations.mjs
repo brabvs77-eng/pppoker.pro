@@ -3,10 +3,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
-  BLOG_ARCHIVES,
   TARGET_LOCALES,
+  blogArchivePageCount,
+  blogArchiveRoute,
   loadCatalog,
   loadPostTranslations,
+  paginatedBlogArchiveMeta,
   renderBlogArchiveHtml,
   renderPostHtml,
   syncStructuredPostRoutes,
@@ -56,14 +58,21 @@ async function main() {
     }
   }
 
+  const archivePages = blogArchivePageCount(catalog.length);
+
   for (const locale of TARGET_LOCALES) {
-    const meta = BLOG_ARCHIVES[locale];
-    const route = `/${locale}/blog/`;
-    const filePath = path.join(rootDir, locale, 'blog', 'index.html');
-    const html = renderBlogArchiveHtml({ route, ...meta });
-    await writeSeedFile(filePath, html);
-    created += 1;
-    console.log(`Seeded ${route}`);
+    for (let page = 1; page <= archivePages; page += 1) {
+      const meta = paginatedBlogArchiveMeta(locale, page, archivePages);
+      const route = blogArchiveRoute(locale, page);
+      const filePath =
+        page === 1
+          ? path.join(rootDir, locale, 'blog', 'index.html')
+          : path.join(rootDir, locale, 'blog', 'page', String(page), 'index.html');
+      const html = renderBlogArchiveHtml({ route, ...meta });
+      await writeSeedFile(filePath, html);
+      created += 1;
+      console.log(`Seeded ${route}`);
+    }
   }
 
   const { payload, structuredRoutesPath } = syncStructuredPostRoutes();

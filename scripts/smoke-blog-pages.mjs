@@ -27,6 +27,22 @@ const BLOG_SMOKE_PAGES = [
     minBreadcrumbLinks: 1,
   },
   {
+    label: 'HY archive',
+    urlPath: '/hy/blog/',
+    surface: '.blog-surface',
+    shell: '.blog-archive',
+    title: '#blog-archive-title',
+    minBreadcrumbLinks: 1,
+  },
+  {
+    label: 'TJ archive',
+    urlPath: '/tj/blog/',
+    surface: '.blog-surface',
+    shell: '.blog-archive',
+    title: '#blog-archive-title',
+    minBreadcrumbLinks: 1,
+  },
+  {
     label: 'RU post',
     urlPath: '/blog-chto-takoe-ev-v-pokere/',
     surface: '.blog-surface',
