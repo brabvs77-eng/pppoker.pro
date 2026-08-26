@@ -14,6 +14,7 @@ const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
 const promoBlocksSlotHtml = '<div id="native-home-promo-blocks-slot"></div>';
 const promoModalsSlotHtml = '<div id="native-home-promo-modals-slot"></div>';
 const withdrawMethodsSlotHtml = '<div id="native-home-withdraw-methods-slot"></div>';
+const whyNutsSlotHtml = '<div id="native-home-why-nuts-slot"></div>';
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -172,6 +173,9 @@ async function main() {
   const withdrawMethodsRoutes = new Set(
     (chrome.homeWithdrawMethodsSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const whyNutsRoutes = new Set(
+    (chrome.homeWhyNutsSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const promoBlocksByRoute = new Map(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => [entry.route, entry]),
   );
@@ -234,6 +238,10 @@ async function main() {
 
     if (whyNutsSectionId && withdrawMethodsRoutes.has(route)) {
       processed = insertSlotBeforeSection(processed, whyNutsSectionId, withdrawMethodsSlotHtml);
+    }
+
+    if (whyNutsSectionId && whyNutsRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(processed, whyNutsSectionId, whyNutsSlotHtml);
     }
 
     if (reviewsSectionId && chipCalculatorRoutes.has(route)) {
