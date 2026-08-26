@@ -12,7 +12,6 @@ const OUT = path.join(ROOT, 'apps/web/out');
 const BODIES = path.join(ROOT, 'content/bodies');
 const CHROME = path.join(ROOT, 'apps/web/src/config/elementor-chrome.json');
 const GLOBALS_CSS = path.join(ROOT, 'apps/web/src/app/globals.css');
-const CONFIG = path.join(ROOT, 'apps/web/src/config/home-promo-modals.json');
 
 const localeMarkers = {
   '/': { mustHave: ['Бонус на первый депозит'], mustNotHave: ['By playing cash games at Nuts'] },
@@ -50,20 +49,8 @@ function verifyBodyHtml(html, label) {
   assert(html.includes('id="home-promo-modal-events"'), `${label}: missing events dialog`);
   assert(html.includes('id="home-promo-modal-jackpot"'), `${label}: missing jackpot dialog`);
   assert(!html.includes('popup:open'), `${label}: legacy popup hotspot links still present`);
-  assert(
-    !html.includes('class="elementor-element elementor-element-4b0f657'),
-    `${label}: legacy bonus hotspot widget still present`,
-  );
-  assert(
-    !html.includes('class="elementor-element elementor-element-0f49f23'),
-    `${label}: legacy events hotspot widget still present`,
-  );
-  assert(
-    !html.includes('class="elementor-element elementor-element-4dc426c'),
-    `${label}: legacy jackpot hotspot widget still present`,
-  );
 
-  const jackpotAmountEnd = html.indexOf('elementor-element-c85d132');
+  const jackpotAmountEnd = html.indexOf('home-promo-cards__amount');
   const jackpotTrigger = html.indexOf('home-promo-modal__trigger-wrap--jackpot');
   if (jackpotAmountEnd !== -1 && jackpotTrigger !== -1) {
     assert(
@@ -93,15 +80,8 @@ function verifyLocalization(html, route) {
   }
 }
 
-function verifyConfig(config) {
-  assert(config.cardElementIds?.bonus, 'home-promo-modals.json: missing cardElementIds.bonus');
-  assert(config.cardElementIds?.events, 'home-promo-modals.json: missing cardElementIds.events');
-  assert(config.cardElementIds?.jackpot, 'home-promo-modals.json: missing cardElementIds.jackpot');
-}
-
 function main() {
   verifyGlobalsCss(read(GLOBALS_CSS));
-  verifyConfig(JSON.parse(read(CONFIG)));
   const chrome = JSON.parse(read(CHROME));
   const modalRoutes = chrome.homePromoModalsSlotRoutes ?? [];
 

@@ -57,6 +57,9 @@ async function main() {
   const whyNutsRoutes = new Set(
     (chrome.homeWhyNutsSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const promoCardsRoutes = new Set(
+    (chrome.homePromoCardsSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const promoBlocksRoutes = new Set(
     (chrome.homePromoBlocksSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -81,6 +84,7 @@ async function main() {
   const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
   const appDownloadSectionId = chrome.legacyAppDownloadSectionElementId;
   const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
+  const promoCardsSectionId = chrome.legacyPromoCardsSectionElementId;
   const violations = [];
 
   for (const {
@@ -190,6 +194,15 @@ async function main() {
       }
       if (whyNutsSectionId && html.includes(`class="elementor-element elementor-element-${whyNutsSectionId}`)) {
         violations.push(`[${route}] Legacy Why NUTS section ${whyNutsSectionId} still present`);
+      }
+    }
+
+    if (promoCardsRoutes.has(route)) {
+      if (!html.includes('id="native-home-promo-cards-slot"') && !html.includes('id="native-home-promo-cards"')) {
+        violations.push(`[${route}] Missing native promo-cards slot or section`);
+      }
+      if (promoCardsSectionId && html.includes(`class="elementor-element elementor-element-${promoCardsSectionId}`)) {
+        violations.push(`[${route}] Legacy promo-cards section ${promoCardsSectionId} still present`);
       }
     }
 
