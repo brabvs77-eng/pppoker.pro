@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /**
- * Bootstraps post translation JSON from legacy HY/TJ seeds and extracted content/posts.
+ * Bootstraps post translation JSON from extracted content/posts (dev only).
+ * Primary source of truth: apps/web/src/config/post-translations/posts/*.json
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { HY_TJ_POSTS } from './lib/hy-tj-translations.mjs';
 import { loadCatalog } from './lib/post-translation-seed.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -24,28 +24,9 @@ function writeTranslation(postId, data) {
   writeFileSync(outPath, `${JSON.stringify({ ...existing, ...data }, null, 2)}\n`, 'utf8');
 }
 
-function catalogById(catalog) {
-  return Object.fromEntries(catalog.map((entry) => [entry.id, entry]));
-}
-
-function findPostIdBySourceRoute(catalogMap, sourceRoute) {
-  return Object.values(catalogMap).find((entry) => entry.sourceRoute === sourceRoute)?.id;
-}
-
 function main() {
   const catalog = loadCatalog();
-  const catalogMap = catalogById(catalog);
   let written = 0;
-
-  for (const post of HY_TJ_POSTS) {
-    const postId = findPostIdBySourceRoute(catalogMap, post.sourceRoute);
-    if (!postId) continue;
-    writeTranslation(postId, {
-      hy: post.hy,
-      tj: post.tj,
-    });
-    written += 2;
-  }
 
   for (const entry of catalog) {
     for (const locale of ['en', 'uz', 'kz']) {
@@ -65,7 +46,9 @@ function main() {
     }
   }
 
-  console.log(`Bootstrapped ${written} locale copies into ${outDir}`);
+  console.log(
+    `Bootstrapped ${written} locale copies from content/posts (optional dev import; JSON files are canonical).`,
+  );
 }
 
 main();

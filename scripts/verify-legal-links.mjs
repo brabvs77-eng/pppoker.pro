@@ -73,6 +73,7 @@ async function main() {
     for (const slug of LEGAL_SLUGS) {
       const source = `/${locale}/${slug}`;
       const destination = legalHrefForLocale(locale, slug, config).replace(/\/$/, '');
+      if (source === destination) continue;
       if (expected.static.get(source) !== destination) {
         violations.push(`Missing redirect ${source} → ${destination}`);
       }
