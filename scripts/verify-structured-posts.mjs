@@ -81,6 +81,13 @@ async function main() {
     }
   }
 
+  const counts = Object.fromEntries(
+    ['en', 'uz', 'kz', 'hy', 'tj'].map((locale) => [
+      locale,
+      posts.filter((p) => p.locale === locale).length,
+    ]),
+  );
+
   if (violations.length) {
     console.error('Structured posts verification failed:');
     violations.slice(0, 20).forEach((line) => console.error(`  - ${line}`));
@@ -91,20 +98,12 @@ async function main() {
     return;
   }
 
-  const counts = Object.fromEntries(
-    ['en', 'uz', 'kz', 'hy', 'tj'].map((locale) => [
-      locale,
-      posts.filter((p) => p.locale === locale).length,
-    ]),
-  );
-
   console.log(
     `Verified ${checked} structured post pages (EN ${counts.en}, UZ ${counts.uz}, KZ ${counts.kz}, HY ${counts.hy}, TJ ${counts.tj}).`,
   );
-
-  if (hyTjPosts.length === 0) {
-    console.log('HY/TJ: no post HTML in static export yet — add routes to structured-post-routes.json after re-export.');
-  }
+  console.log(
+    `Translation catalog routes: ${expectedRoutesByLocale.en?.length ?? 0} posts per locale (en/uz/kz/hy/tj).`,
+  );
 }
 
 main().catch((error) => {

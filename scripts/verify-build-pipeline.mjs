@@ -12,8 +12,12 @@ const cloudflareReadme = readFileSync(
 
 const violations = [];
 
-if (!pkg.scripts['build:next']?.includes('seed:hy-tj')) {
-  violations.push('build:next must run seed:hy-tj before extract:content');
+if (!pkg.scripts['build:next']?.includes('seed:post-translations')) {
+  violations.push('build:next must run seed:post-translations before extract:content');
+}
+
+if (!pkg.scripts['build:next']?.includes('verify:post-translations')) {
+  violations.push('build:next must run verify:post-translations before seed:post-translations');
 }
 
 if (pkg.scripts['build:next']?.includes('smoke:homepage')) {
