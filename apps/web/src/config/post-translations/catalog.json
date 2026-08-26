@@ -1,0 +1,314 @@
+[
+  {
+    "id": "agenty-v-pokere",
+    "sourceRoute": "/agenty-v-pokere/",
+    "publishedAt": "2025-09-17T16:23:57+00:00",
+    "image": "/assets/media/2025/09/capture_250917_191810.webp",
+    "slugs": {
+      "en": "poker-agents",
+      "uz": "poker-agentlari",
+      "kz": "poker-agentter",
+      "hy": "poker-agentner",
+      "tj": "poker-agentho"
+    }
+  },
+  {
+    "id": "author-roman-shaposhnikov",
+    "sourceRoute": "/author-roman-shaposhnikov/",
+    "publishedAt": "2025-09-17T16:45:03+00:00",
+    "image": "/assets/media/2025/09/i.webp",
+    "slugs": {
+      "en": "author-roman-shaposhnikov",
+      "uz": "author-roman-shaposhnikov",
+      "kz": "author-roman-shaposhnikov",
+      "hy": "author-roman-shaposhnikov",
+      "tj": "author-roman-shaposhnikov"
+    }
+  },
+  {
+    "id": "blog-chto-takoe-ev-v-pokere",
+    "sourceRoute": "/blog-chto-takoe-ev-v-pokere/",
+    "publishedAt": "2025-09-09T13:40:40+00:00",
+    "image": "/assets/media/2025/09/cvub7pdpo1pmogrc2n90-1.webp",
+    "slugs": {
+      "en": "what-is-ev-in-poker",
+      "uz": "pokarda-ev-nima",
+      "kz": "pokerde-ev-degenimiz-ne",
+      "hy": "inch-e-ev-pokerum",
+      "tj": "ev-v-pokere-chi-ast"
+    }
+  },
+  {
+    "id": "bomb-pot-v-pokere-pravila-i-strategiya-igry",
+    "sourceRoute": "/bomb-pot-v-pokere-pravila-i-strategiya-igry/",
+    "publishedAt": "2025-09-15T16:18:41+00:00",
+    "image": "/assets/media/2025/09/capture_250915_192110.webp",
+    "slugs": {
+      "en": "bomb-pot-poker-rules-and-strategy",
+      "uz": "bomb-pot-poker-qoidalari",
+      "kz": "bomb-pot-poker-erezheleri",
+      "hy": "bomb-pot-poker-kanoner",
+      "tj": "bomb-pot-poker-qoidaho"
+    }
+  },
+  {
+    "id": "etiket-zhivogo-pokera-chto-nuzhno-znat-novichku",
+    "sourceRoute": "/etiket-zhivogo-pokera-chto-nuzhno-znat-novichku/",
+    "publishedAt": "2025-09-26T21:26:09+00:00",
+    "image": "/assets/media/2025/09/i-4.webp",
+    "slugs": {
+      "en": "live-poker-etiquette-for-beginners",
+      "uz": "jonli-poker-etiketi",
+      "kz": "tik-poker-etiketi",
+      "hy": "tsayin-poker-etiket",
+      "tj": "pokeri-zinda-etiket"
+    }
+  },
+  {
+    "id": "implajd-oddsy-v-pokere-kak-primenyat-potentsialnye-shansy-banka",
+    "sourceRoute": "/implajd-oddsy-v-pokere-kak-primenyat-potentsialnye-shansy-banka/",
+    "publishedAt": "2025-09-07T21:09:12+00:00",
+    "image": "/assets/media/2025/09/image.webp",
+    "slugs": {
+      "en": "implied-odds-in-poker",
+      "uz": "implajd-odds-pokerda",
+      "kz": "implajd-odds-pokerde",
+      "hy": "implajd-odds-pokerum",
+      "tj": "implajd-odds-v-pokere"
+    }
+  },
+  {
+    "id": "kak-igrat-6-short-deck-v-pppoker-nuts",
+    "sourceRoute": "/kak-igrat-6-short-deck-v-pppoker-nuts/",
+    "publishedAt": "2025-12-12T16:05:07+00:00",
+    "image": "/assets/media/2025/12/2087074.webp",
+    "slugs": {
+      "en": "how-to-play-short-deck-6-plus-in-pppoker-nuts",
+      "uz": "short-deck-6-plus-pppokerda",
+      "kz": "short-deck-6-plus-pppokerde",
+      "hy": "short-deck-6-plus-pppoker-um",
+      "tj": "short-deck-6-plus-pppoker"
+    }
+  },
+  {
+    "id": "mnogostolovye-turniry-mtt",
+    "sourceRoute": "/mnogostolovye-turniry-mtt/",
+    "publishedAt": "2026-01-11T22:09:17+00:00",
+    "image": "/assets/media/2026/01/i-2.webp",
+    "slugs": {
+      "en": "multi-table-tournaments-mtt",
+      "uz": "ko-p-stolli-turnirlar-mtt",
+      "kz": "koptoldy-turnirler-mtt",
+      "hy": "batsatoxanner-mtt",
+      "tj": "turnirhoi-ko-stol-mtt"
+    }
+  },
+  {
+    "id": "na-chto-potratit-vyigrysh-v-pokere",
+    "sourceRoute": "/na-chto-potratit-vyigrysh-v-pokere/",
+    "publishedAt": "2025-09-22T09:20:27+00:00",
+    "image": "/assets/media/2025/09/1755544716.webp",
+    "slugs": {
+      "en": "how-to-spend-poker-winnings",
+      "uz": "poker-yutugini-qayerga-sarflash",
+      "kz": "poker-jeuinis-kalay-zhumsau",
+      "hy": "poker-haghovuty-vorosh",
+      "tj": "baroi-chi-xarochoti-poker"
+    }
+  },
+  {
+    "id": "obzor-onlajn-platformy-pppoker-2025",
+    "sourceRoute": "/obzor-onlajn-platformy-pppoker-2025/",
+    "publishedAt": "2025-08-27T20:38:24+00:00",
+    "image": "/assets/media/2025/08/capture_250917_200318.webp",
+    "slugs": {
+      "en": "pppoker-review-2026",
+      "uz": "pppoker-2026",
+      "kz": "pppoker-zheke-poker-klubtary-platformasyny-2026",
+      "hy": "pppoker-review-2026",
+      "tj": "pppoker-review-2026"
+    }
+  },
+  {
+    "id": "open-face-chinese-poker-ofc",
+    "sourceRoute": "/open-face-chinese-poker-ofc/",
+    "publishedAt": "2026-01-11T21:07:46+00:00",
+    "image": "/assets/media/2026/01/i.webp",
+    "slugs": {
+      "en": "open-face-chinese-poker-ofc",
+      "uz": "open-face-chinese-poker-ofc",
+      "kz": "open-face-chinese-poker-ofc",
+      "hy": "open-face-chinese-poker-ofc",
+      "tj": "open-face-chinese-poker-ofc"
+    }
+  },
+  {
+    "id": "osnovnye-tipy-igrokov-v-pokere",
+    "sourceRoute": "/osnovnye-tipy-igrokov-v-pokere/",
+    "publishedAt": "2025-12-12T16:10:09+00:00",
+    "image": "/assets/media/2025/12/i.webp",
+    "slugs": {
+      "en": "main-poker-player-types",
+      "uz": "poker-oyinchilari-turlari",
+      "kz": "poker-oyynshylary-turleri",
+      "hy": "poker-khaghoghineri-tesakner",
+      "tj": "nav-hoi-bozigaroni-poker"
+    }
+  },
+  {
+    "id": "osnovy-pravilnogo-bet-sajzinga-v-pokere",
+    "sourceRoute": "/osnovy-pravilnogo-bet-sajzinga-v-pokere/",
+    "publishedAt": "2026-01-11T20:44:20+00:00",
+    "image": "/assets/media/2026/01/osnovy_pravilnogo_bet-saizinga_v_pokere.webp",
+    "slugs": {
+      "en": "bet-sizing-basics-in-poker",
+      "uz": "bet-sizing-asoslari",
+      "kz": "bet-sizing-negizderi",
+      "hy": "bet-sizing-himnakaner",
+      "tj": "asoshoi-bet-sizing"
+    }
+  },
+  {
+    "id": "poker-gto-chto-eto-i-kak-primenyat-v-klube-nuts",
+    "sourceRoute": "/poker-gto-chto-eto-i-kak-primenyat-v-klube-nuts/",
+    "publishedAt": "2025-09-22T08:42:00+00:00",
+    "image": "/assets/media/2025/09/What-Is-GTO-Poker-1024x576-1.webp",
+    "slugs": {
+      "en": "poker-gto-in-nuts-club",
+      "uz": "poker-gto-nuts-klubida",
+      "kz": "poker-gto-nuts-klubinde",
+      "hy": "poker-gto-nuts-akumbum",
+      "tj": "poker-gto-klubi-nuts"
+    }
+  },
+  {
+    "id": "pppoker-mini-highroller",
+    "sourceRoute": "/pppoker-mini-highroller/",
+    "publishedAt": "2025-09-12T18:02:43+00:00",
+    "image": "/assets/media/2025/09/photo_2025-09-12_20-57-02.webp",
+    "slugs": {
+      "en": "pppoker-mini-highroller-promo",
+      "uz": "pppoker-mini-highroller",
+      "kz": "pppoker-mini-highroller",
+      "hy": "pppoker-mini-highroller",
+      "tj": "pppoker-mini-highroller"
+    }
+  },
+  {
+    "id": "pppoker-nuts-bomb-pot-vzryvnoj-format-dlya-lyubitelej-ekshena",
+    "sourceRoute": "/pppoker-nuts-bomb-pot-vzryvnoj-format-dlya-lyubitelej-ekshena/",
+    "publishedAt": "2025-12-12T15:54:42+00:00",
+    "image": "/assets/media/2025/12/bomb-1.webp",
+    "slugs": {
+      "en": "pppoker-nuts-bomb-pot-action-format",
+      "uz": "pppoker-nuts-bomb-pot",
+      "kz": "pppoker-nuts-bomb-pot",
+      "hy": "pppoker-nuts-bomb-pot",
+      "tj": "pppoker-nuts-bomb-pot"
+    }
+  },
+  {
+    "id": "pravila-igry-v-tehasskij-holdem-nlh",
+    "sourceRoute": "/pravila-igry-v-tehasskij-holdem-nlh/",
+    "publishedAt": "2026-01-11T20:58:11+00:00",
+    "image": "/assets/media/2026/01/1442904970_1673623880.webp",
+    "slugs": {
+      "en": "no-limit-texas-holdem-rules-nlh",
+      "uz": "texas-holdem-nlh-qoidalari",
+      "kz": "texas-holdem-nlh-erezheleri",
+      "hy": "texas-holdem-nlh-kanoner",
+      "tj": "texas-holdem-nlh-qoidaho"
+    }
+  },
+  {
+    "id": "pravila-pot-limit-omahi-plo",
+    "sourceRoute": "/pravila-pot-limit-omahi-plo/",
+    "publishedAt": "2026-01-11T22:01:29+00:00",
+    "image": "/assets/media/2026/01/i-1.webp",
+    "slugs": {
+      "en": "pot-limit-omaha-plo-rules",
+      "uz": "pot-limit-omaha-plo-qoidalari",
+      "kz": "pot-limit-omaha-plo-erezheleri",
+      "hy": "pot-limit-omaha-plo-kanoner",
+      "tj": "pot-limit-omaha-plo-qoidaho"
+    }
+  },
+  {
+    "id": "pravila-tehasskogo-holdema",
+    "sourceRoute": "/pravila-tehasskogo-holdema/",
+    "publishedAt": "2026-01-11T21:55:53+00:00",
+    "image": "/assets/media/2026/01/pravila-texasskogo-holdem-pokera.webp",
+    "slugs": {
+      "en": "texas-holdem-rules",
+      "uz": "texas-holdem-qoidalari",
+      "kz": "texas-holdem-erezheleri",
+      "hy": "texas-holdem-kanoner",
+      "tj": "texas-holdem-qoidaho"
+    }
+  },
+  {
+    "id": "samyj-krupnyj-turnir-v-pppoker",
+    "sourceRoute": "/samyj-krupnyj-turnir-v-pppoker/",
+    "publishedAt": "2025-09-11T20:02:57+00:00",
+    "image": "/assets/media/2025/09/photo_2025-09-08_18-48-10.webp",
+    "slugs": {
+      "en": "biggest-pppoker-tournament",
+      "uz": "eng-katta-pppoker-turniri",
+      "kz": "iri-pppoker-turniri",
+      "hy": "amenamec-mets-pppoker-turnir",
+      "tj": "boztargan-turniri-pppoker"
+    }
+  },
+  {
+    "id": "startovye-ruki-v-tehasskom-holdeme",
+    "sourceRoute": "/startovye-ruki-v-tehasskom-holdeme/",
+    "publishedAt": "2026-01-11T20:52:57+00:00",
+    "image": "/assets/media/2026/01/2470-1633372816.webp",
+    "slugs": {
+      "en": "starting-hands-in-texas-holdem",
+      "uz": "texas-holdem-boshlangich-qollar",
+      "kz": "texas-holdem-bastauy-qol",
+      "hy": "texas-holdem-sksman-qarer",
+      "tj": "dasthoi-oshgohi-texas-holdem"
+    }
+  },
+  {
+    "id": "strategiya-igry-na-mikrostejks-turnirah",
+    "sourceRoute": "/strategiya-igry-na-mikrostejks-turnirah/",
+    "publishedAt": "2025-09-22T09:30:29+00:00",
+    "image": "/assets/media/2025/09/i-1.webp",
+    "slugs": {
+      "en": "microstakes-tournament-strategy",
+      "uz": "mikro-stavka-turnir-strategiyasi",
+      "kz": "mikro-stavka-turnir-strategiyasy",
+      "hy": "mikro-stavka-turnirayin-strategia",
+      "tj": "strategiyai-turnirhoi-mikrostavka"
+    }
+  },
+  {
+    "id": "vpip",
+    "sourceRoute": "/vpip/",
+    "publishedAt": "2026-01-11T21:16:32+00:00",
+    "image": "/assets/media/2026/01/63038b0050a4e9cf95a8e536_main-image-blog-post_vpip.webp",
+    "slugs": {
+      "en": "vpip-stat-in-poker",
+      "uz": "vpip-pokerda",
+      "kz": "vpip-pokerde",
+      "hy": "vpip-pokerum",
+      "tj": "vpip-v-pokere"
+    }
+  },
+  {
+    "id": "znaj-svoih-pokernyh-sopernikov-sekrety-vyigryshnyh-strategij",
+    "sourceRoute": "/znaj-svoih-pokernyh-sopernikov-sekrety-vyigryshnyh-strategij/",
+    "publishedAt": "2025-09-09T09:37:26+00:00",
+    "image": "/assets/media/2025/09/a2cc545e23.webp",
+    "slugs": {
+      "en": "know-your-poker-opponents-secrets-of-winning-strategies",
+      "uz": "poker-raqiblaringizni-biling",
+      "kz": "poker-karsylastarynyzdy-tanynyz",
+      "hy": "know-your-poker-opponents-secrets-of-winning-strategies",
+      "tj": "know-your-poker-opponents-secrets-of-winning-strategies"
+    }
+  }
+]
