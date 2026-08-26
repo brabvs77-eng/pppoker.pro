@@ -196,7 +196,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Home Why NUTS grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 8 feature tiles; `verify:home-why-nuts` |
 | Home app download | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — store badges + `#reg` anchor; `verify:home-app-download` |
 | Home promo blocks (CRASH / Russian Poker) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — static HTML + autoplay script; `verify:home-promo-blocks` |
-| Home promo modals (bonus / events / jackpot) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — native `<dialog>` + stripped Elementor popups; `verify:home-promo-modals` |
+| Home promo cards | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — bonus/events/jackpot grid + modal triggers; `verify:home-promo-cards` |
+| Home promo modals | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — native `<dialog>` + stripped Elementor popups; `verify:home-promo-modals` |
 | Dead homepage markup stripped | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — legacy `#masthead`, Widster, duplicate hero CTAs; `verify:home-dead-markup` |
 | Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime`; empty spacers stripped; `verify:home-shell` |
 
@@ -207,9 +208,10 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 3. ~~Legal pages UZ/KZ/HY/TJ~~ — done (`page-translations/legal.json`, `seed:legal-pages`)
 4. ~~Home Why NUTS grid~~ — done (Sprint C1, `home-why-nuts.json`, `inject:why-nuts`)
 5. ~~Home app download~~ — done (Sprint C2, `home-app-download.json`, `inject:app-download`)
-6. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
-7. **More Elementor sections → native** — hero, promo cards
-7. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
+6. ~~Home promo cards~~ — done (Sprint C3, `home-promo-cards.json`, `inject:promo-cards`)
+7. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
+8. **More Elementor sections → native** — hero
+9. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
 
 ## Adding or updating content
 

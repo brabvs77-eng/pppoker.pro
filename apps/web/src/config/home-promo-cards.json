@@ -1,0 +1,169 @@
+{
+  "decorations": {
+    "bonusMoney": {
+      "src": "/assets/media/2024/07/money.webp",
+      "width": 160,
+      "height": 100,
+      "alt": ""
+    },
+    "jackpotDollar": {
+      "src": "/assets/media/2024/07/Dollar.webp",
+      "width": 67,
+      "height": 65,
+      "alt": ""
+    }
+  },
+  "panelOverlay": "/assets/media/2024/07/dust-12-1-opt.webp",
+  "cardsByLocale": {
+    "ru": {
+      "bonus": {
+        "headline": "Бонус",
+        "subtitleHtml": "🔥🔥🔥 На первый депозит",
+        "steps": [
+          {
+            "label": "Cделай первый депозит:",
+            "value": "от 10$"
+          },
+          {
+            "label": "Получи моментальный бонус:",
+            "value": "10%"
+          },
+          {
+            "label": "По мере продвижения в игре:",
+            "value": "140%"
+          }
+        ],
+        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+      },
+      "events": {
+        "title": "акции",
+        "subtitle": "Каждую неделю! В приложении PPPOKER",
+        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+      },
+      "jackpot": {
+        "title": "Джекпот",
+        "amount": "55709$"
+      }
+    },
+    "en": {
+      "bonus": {
+        "headline": "Bonus",
+        "subtitleHtml": "🔥🔥🔥 To first deposit",
+        "steps": [
+          {
+            "label": "Make a first deposit:",
+            "value": "from 10$"
+          },
+          {
+            "label": "Get the instant bonus:",
+            "value": "10%"
+          },
+          {
+            "label": "By advance in poker game:",
+            "value": "140%"
+          }
+        ],
+        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+      },
+      "events": {
+        "title": "Events",
+        "subtitle": "Every week! In pppoker app",
+        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+      },
+      "jackpot": {
+        "title": "Jackpot",
+        "amount": "55709$"
+      }
+    },
+    "hy": {
+      "bonus": {
+        "headline": "Բոնուս",
+        "subtitleHtml": "🔥🔥🔥 Առաջին ավանդի համար",
+        "steps": [
+          {
+            "label": "Կատարեք առաջին ավանդ:",
+            "value": "5$"
+          },
+          {
+            "label": "Ստացիր ակնթարթային բոնուս:",
+            "value": "10%"
+          },
+          {
+            "label": "Խաղում առաջխաղացմանը զուգընթաց:",
+            "value": "140%"
+          }
+        ],
+        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+      },
+      "events": {
+        "title": "ակցիաներ",
+        "subtitle": "Ամեն շաբաթ! Հավելվածում PPPOKER",
+        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+      },
+      "jackpot": {
+        "title": "Ջեքփոթ",
+        "amount": "55709$"
+      }
+    },
+    "uz": {
+      "bonus": {
+        "headline": "Bonus",
+        "subtitleHtml": "🔥🔥🔥 Birinchi depozit uchun",
+        "steps": [
+          {
+            "label": "Birinchi depozit qiling:",
+            "value": "10$ dan"
+          },
+          {
+            "label": "Bir zumda bonus oling:",
+            "value": "10%"
+          },
+          {
+            "label": "O'yin davom etar ekan:",
+            "value": "140%"
+          }
+        ],
+        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+      },
+      "events": {
+        "title": "Aktsiyalar",
+        "subtitle": "Har hafta!",
+        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+      },
+      "jackpot": {
+        "title": "Jekpot",
+        "amount": "55709$"
+      }
+    },
+    "kz": {
+      "bonus": {
+        "headline": "Бонус",
+        "subtitleHtml": "🔥🔥🔥 Бірінші депозитке",
+        "steps": [
+          {
+            "label": "Бірінші депозитті жасаңыз:",
+            "value": "от 10$"
+          },
+          {
+            "label": "Лезде бонус ал:",
+            "value": "10%"
+          },
+          {
+            "label": "Ойында алға жылжу барысында:",
+            "value": "140%"
+          }
+        ],
+        "background": "/assets/media/2024/07/Bez-imeni-1.jpg"
+      },
+      "events": {
+        "title": "Акциялар",
+        "subtitle": "Әр апта сайын!",
+        "background": "/assets/media/2024/07/Bez-imeni-2.jpg"
+      },
+      "jackpot": {
+        "title": "Джекпот",
+        "amount": "55709$"
+      }
+    }
+  }
+}

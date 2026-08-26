@@ -18,8 +18,6 @@ export function loadHomePromoModals(locale) {
   return {
     modals: localeConfig.modals,
     triggers: localeConfig.triggers,
-    hotspotElementIds: config.hotspotElementIds,
-    cardElementIds: config.cardElementIds ?? {},
     popupTemplateStyleIds: config.popupTemplateStyleIds,
   };
 }

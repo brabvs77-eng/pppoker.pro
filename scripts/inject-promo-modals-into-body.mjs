@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url';
 import {
   loadHomePromoModals,
   renderHomePromoModalsSection,
-  renderHotspotTrigger,
 } from './lib/promo-modals-static-html.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -13,6 +12,8 @@ const bodiesDir = path.join(rootDir, 'content/bodies');
 const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json');
 const slotId = 'native-home-promo-modals-slot';
 const slotPattern = new RegExp(`<div id="${slotId}"></div>`);
+const existingModalsPattern =
+  /<div class="home-promo-modals" id="native-home-promo-modals"[\s\S]*?<\/div>\s*(?=<footer|<\/body)/;
 
 const localeByRoute = {
   '/': 'ru',
@@ -21,8 +22,6 @@ const localeByRoute = {
   '/uz/': 'uz',
   '/kz/': 'kz',
 };
-
-const MODAL_KEYS = ['bonus', 'events', 'jackpot'];
 
 function findMatchingDivClose(html, divStart) {
   let pos = divStart;
@@ -45,24 +44,6 @@ function findMatchingDivClose(html, divStart) {
   }
 
   return -1;
-}
-
-function elementorContainerNeedle(elementId) {
-  return `class="elementor-element elementor-element-${elementId}`;
-}
-
-function replaceElementorWidget(bodyHtml, elementId, replacement) {
-  const classNeedle = elementorContainerNeedle(elementId);
-  const classIndex = bodyHtml.indexOf(classNeedle);
-  if (classIndex === -1) return bodyHtml;
-
-  const divStart = bodyHtml.lastIndexOf('<div', classIndex);
-  if (divStart === -1) return bodyHtml;
-
-  const divEnd = findMatchingDivClose(bodyHtml, divStart);
-  if (divEnd === -1) return bodyHtml;
-
-  return `${bodyHtml.slice(0, divStart)}${replacement}${bodyHtml.slice(divEnd)}`;
 }
 
 function stripElementorPopups(bodyHtml) {
@@ -96,81 +77,6 @@ function stripPopupStyles(bodyHtml, styleIds) {
   return html;
 }
 
-function addDataAttributeToElement(bodyHtml, elementId, attrName, attrValue) {
-  const classNeedle = elementorContainerNeedle(elementId);
-  const classIndex = bodyHtml.indexOf(classNeedle);
-  if (classIndex === -1) return bodyHtml;
-
-  const divStart = bodyHtml.lastIndexOf('<div', classIndex);
-  if (divStart === -1) return bodyHtml;
-
-  const insertAt = bodyHtml.indexOf('>', divStart);
-  if (insertAt === -1) return bodyHtml;
-
-  const openTag = bodyHtml.slice(divStart, insertAt);
-  if (openTag.includes(attrName)) return bodyHtml;
-
-  return `${bodyHtml.slice(0, insertAt)} ${attrName}="${attrValue}"${bodyHtml.slice(insertAt)}`;
-}
-
-function patchCards(bodyHtml, cardElementIds) {
-  let html = bodyHtml;
-
-  for (const key of MODAL_KEYS) {
-    const elementId = cardElementIds[key];
-    if (!elementId) continue;
-    html = addDataAttributeToElement(html, elementId, 'data-home-promo-card', key);
-  }
-
-  return html;
-}
-
-function patchHotspots(bodyHtml, hotspotElementIds, triggers) {
-  let html = bodyHtml;
-
-  for (const key of MODAL_KEYS) {
-    const elementId = hotspotElementIds[key];
-    const label = triggers[key] ?? 'More info';
-    html = replaceElementorWidget(html, elementId, renderHotspotTrigger(key, label));
-  }
-
-  return html;
-}
-
-function findElementorWidgetBounds(html, elementId) {
-  const classNeedle = elementorContainerNeedle(elementId);
-  const classIndex = html.indexOf(classNeedle);
-  if (classIndex === -1) return null;
-
-  const divStart = html.lastIndexOf('<div', classIndex);
-  if (divStart === -1) return null;
-
-  const divEnd = findMatchingDivClose(html, divStart);
-  if (divEnd === -1) return null;
-
-  return { start: divStart, end: divEnd };
-}
-
-function relocateJackpotTrigger(bodyHtml) {
-  const triggerNeedle = 'home-promo-modal__trigger-wrap--jackpot';
-  const triggerStart = bodyHtml.indexOf(triggerNeedle);
-  if (triggerStart === -1) return bodyHtml;
-
-  const divStart = bodyHtml.lastIndexOf('<div', triggerStart);
-  if (divStart === -1) return bodyHtml;
-
-  const triggerEnd = findMatchingDivClose(bodyHtml, divStart);
-  if (triggerEnd === -1) return bodyHtml;
-
-  const triggerHtml = bodyHtml.slice(divStart, triggerEnd);
-  let html = `${bodyHtml.slice(0, divStart)}${bodyHtml.slice(triggerEnd)}`;
-
-  const priceBounds = findElementorWidgetBounds(html, 'c85d132');
-  if (!priceBounds) return bodyHtml;
-
-  return `${html.slice(0, priceBounds.end)}${triggerHtml}${html.slice(priceBounds.end)}`;
-}
-
 async function main() {
   const chrome = JSON.parse(await fs.readFile(chromePath, 'utf8'));
   const modalRoutes = chrome.homePromoModalsSlotRoutes ?? [];
@@ -186,20 +92,8 @@ async function main() {
       continue;
     }
 
-    if (!slotPattern.test(bodyHtml)) {
-      if (bodyHtml.includes(`id="${slotId}"`) && bodyHtml.includes('id="native-home-promo-modals"')) {
-        console.log(`Native promo modals already present in ${route} body`);
-        continue;
-      }
-
-      console.error(`Missing empty #${slotId} in ${fileId}-with-blog-slot.html`);
-      process.exitCode = 1;
-      continue;
-    }
-
     const locale = localeByRoute[route] ?? 'ru';
-    const { hotspotElementIds, cardElementIds, popupTemplateStyleIds, triggers } =
-      loadHomePromoModals(locale);
+    const { popupTemplateStyleIds } = loadHomePromoModals(locale);
     const sectionHtml = renderHomePromoModalsSection({ locale });
     if (!sectionHtml) {
       console.error(`No promo modal content to inject into ${route}`);
@@ -207,12 +101,26 @@ async function main() {
       continue;
     }
 
-    let patched = patchHotspots(bodyHtml, hotspotElementIds, triggers);
-    patched = relocateJackpotTrigger(patched);
-    patched = patchCards(patched, cardElementIds);
-    patched = stripElementorPopups(patched);
+    let patched = stripElementorPopups(bodyHtml);
     patched = stripPopupStyles(patched, popupTemplateStyleIds);
-    patched = patched.replace(slotPattern, sectionHtml);
+
+    if (slotPattern.test(patched)) {
+      patched = patched.replace(slotPattern, sectionHtml);
+    } else if (existingModalsPattern.test(patched)) {
+      patched = patched.replace(existingModalsPattern, () => `${sectionHtml}\n`);
+      console.log(`Re-injected native promo modals on ${route}`);
+    } else if (patched.includes('id="native-home-promo-modals"')) {
+      console.log(`Native promo modals already present in ${route} body`);
+      if (patched.includes('elementor-location-popup')) {
+        console.error(`Legacy Elementor popups still present after strip on ${route}`);
+        process.exitCode = 1;
+      }
+      continue;
+    } else {
+      console.error(`Missing empty #${slotId} in ${fileId}-with-blog-slot.html`);
+      process.exitCode = 1;
+      continue;
+    }
 
     if (patched.includes('elementor-location-popup')) {
       console.error(`Legacy Elementor popups still present after strip on ${route}`);
