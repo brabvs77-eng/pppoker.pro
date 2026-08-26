@@ -57,6 +57,9 @@ async function main() {
   const whyNutsRoutes = new Set(
     (chrome.homeWhyNutsSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const heroRoutes = new Set(
+    (chrome.homeHeroSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const promoCardsRoutes = new Set(
     (chrome.homePromoCardsSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -84,6 +87,7 @@ async function main() {
   const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
   const appDownloadSectionId = chrome.legacyAppDownloadSectionElementId;
   const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
+  const heroSectionId = chrome.homepageHeroRootElementId;
   const promoCardsSectionId = chrome.legacyPromoCardsSectionElementId;
   const violations = [];
 
@@ -194,6 +198,15 @@ async function main() {
       }
       if (whyNutsSectionId && html.includes(`class="elementor-element elementor-element-${whyNutsSectionId}`)) {
         violations.push(`[${route}] Legacy Why NUTS section ${whyNutsSectionId} still present`);
+      }
+    }
+
+    if (heroRoutes.has(route)) {
+      if (!html.includes('id="native-home-hero-slot"') && !html.includes('id="native-home-hero"')) {
+        violations.push(`[${route}] Missing native hero slot or section`);
+      }
+      if (heroSectionId && html.includes(`class="elementor-element elementor-element-${heroSectionId}`)) {
+        violations.push(`[${route}] Legacy hero section ${heroSectionId} still present`);
       }
     }
 

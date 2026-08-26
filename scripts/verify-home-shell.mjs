@@ -53,6 +53,7 @@ function verifyShellHtml(html, label, chrome) {
   assert(!html.includes('id="masthead"'), `${label}: legacy #masthead still present`);
   assert(!html.includes('id="widster-'), `${label}: Widster embed still present`);
 
+  assert(html.includes('id="native-home-hero"'), `${label}: missing native hero`);
   assert(html.includes('id="native-home-registration"'), `${label}: missing native registration`);
   assert(html.includes('id="native-home-app-download"'), `${label}: missing native app-download`);
   assert(html.includes('id="reg"'), `${label}: missing #reg anchor`);

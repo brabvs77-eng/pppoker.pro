@@ -44,7 +44,7 @@ ${blogHide} {
   border: 0;
 }
 
-#wordpress-page-root[data-home-promo] ${elementClass(chrome.homepageHeroRootElementId)} {
+#wordpress-page-root[data-home-promo] #native-home-hero {
   padding-top: 0 !important;
 }
 
