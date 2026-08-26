@@ -10,6 +10,7 @@ const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
 const chipCalculatorSlotHtml = '<div id="native-chip-calculator-slot"></div>';
 const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
+const appDownloadSlotHtml = '<div id="native-home-app-download-slot"></div>';
 const cashGamesSlotHtml = '<div id="native-home-cash-games-slot"></div>';
 const promoBlocksSlotHtml = '<div id="native-home-promo-blocks-slot"></div>';
 const promoModalsSlotHtml = '<div id="native-home-promo-modals-slot"></div>';
@@ -153,6 +154,7 @@ async function main() {
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
   const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
   const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
+  const appDownloadSectionId = chrome.legacyAppDownloadSectionElementId;
   const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
@@ -166,6 +168,9 @@ async function main() {
   );
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
+  );
+  const appDownloadRoutes = new Set(
+    (chrome.homeAppDownloadSlotRoutes ?? []).map((entry) => entry.route),
   );
   const cashGamesRoutes = new Set(
     (chrome.homeCashGamesSlotRoutes ?? []).map((entry) => entry.route),
@@ -230,6 +235,10 @@ async function main() {
 
     if (registrationMobileSectionId && registrationRoutes.has(route)) {
       processed = stripElementorSection(processed, registrationMobileSectionId);
+    }
+
+    if (appDownloadSectionId && appDownloadRoutes.has(route)) {
+      processed = replaceElementorSectionWithSlot(processed, appDownloadSectionId, appDownloadSlotHtml);
     }
 
     if (cashGamesSectionId && cashGamesRoutes.has(route)) {

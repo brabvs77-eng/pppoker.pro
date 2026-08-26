@@ -78,6 +78,14 @@
   ],
   "legacyRegistrationDesktopSectionElementId": "da376ea",
   "legacyRegistrationMobileSectionElementId": "f6f6130",
+  "legacyAppDownloadSectionElementId": "95836b8",
+  "homeAppDownloadSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" }
+  ],
   "homeRegistrationSlotRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },

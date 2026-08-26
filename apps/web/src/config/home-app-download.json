@@ -1,0 +1,64 @@
+{
+  "logo": {
+    "src": "/assets/media/2024/07/image-10.webp",
+    "width": 56,
+    "height": 52,
+    "alt": "PPPoker"
+  },
+  "stores": [
+    {
+      "id": "google-play",
+      "href": "https://play.google.com/store/apps/details?id=com.lein.pppoker.android",
+      "src": "/assets/media/2024/07/b1.webp",
+      "width": 200,
+      "height": 59,
+      "alt": "pppoker apk скачать"
+    },
+    {
+      "id": "app-store",
+      "href": "https://apps.apple.com/ru/app/pppoker-nlh-plo-ofc/id1101622978",
+      "src": "/assets/media/2024/07/b2.webp",
+      "width": 200,
+      "height": 59,
+      "alt": "pppoker mac скачать"
+    },
+    {
+      "id": "pc",
+      "href": "https://www.pppoker.net/pcpackage/PPPOKER_PC_V40-3.6.106.msi",
+      "src": "/assets/media/2024/08/but.webp",
+      "width": 311,
+      "height": 100,
+      "alt": "pppoker пк скачать"
+    },
+    {
+      "id": "android-apk",
+      "href": "https://www.pppoker.net/pcpackage/PPPoker.Unity_Web-109.B215_V4.2.12.apk",
+      "src": "/assets/media/2024/09/android-ppp.webp",
+      "width": 169,
+      "height": 50,
+      "alt": "pppoker android скачать"
+    }
+  ],
+  "copyByLocale": {
+    "ru": {
+      "titleHtml": "Скачай приложение PPPoker\n<br>из AppStore и Google play",
+      "ctaHtml": "И переходи к регистрации"
+    },
+    "en": {
+      "titleHtml": "Download the app PPPoker\n<br>from AppStore and Google play",
+      "ctaHtml": "Then register by instruction below"
+    },
+    "hy": {
+      "titleHtml": "Ներբեռնեք ծրագիրը PPPoker\n<br>AppStore և Google play",
+      "ctaHtml": "և անցնել գրանցման"
+    },
+    "uz": {
+      "titleHtml": "Ilovani yuklab oling PPPoker\n<br>AppStore va Google play",
+      "ctaHtml": "Va ro'yxatdan o'tishga o'ting"
+    },
+    "kz": {
+      "titleHtml": "Қосымшаны жүктеп ал PPPoker\n<br>AppStore және Google play-ден",
+      "ctaHtml": "Және тіркеуге көшіңіз"
+    }
+  }
+}

@@ -66,6 +66,9 @@ async function main() {
   const registrationRoutes = new Set(
     (chrome.homeRegistrationSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const appDownloadRoutes = new Set(
+    (chrome.homeAppDownloadSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const stripMastheadRoutes = new Set(
     (chrome.stripLegacyMastheadRoutes ?? []).map((entry) => entry.fileId),
   );
@@ -76,6 +79,7 @@ async function main() {
   const registrationDesktopSectionId = chrome.legacyRegistrationDesktopSectionElementId;
   const registrationMobileSectionId = chrome.legacyRegistrationMobileSectionElementId;
   const cashGamesSectionId = chrome.legacyCashGamesSectionElementId;
+  const appDownloadSectionId = chrome.legacyAppDownloadSectionElementId;
   const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
   const violations = [];
 
@@ -137,6 +141,26 @@ async function main() {
       }
       if (registrationMobileSectionId && html.includes(`class="elementor-element elementor-element-${registrationMobileSectionId}`)) {
         violations.push(`[${route}] Legacy registration mobile section ${registrationMobileSectionId} still present`);
+      }
+    }
+
+    if (appDownloadRoutes.has(route)) {
+      if (!html.includes('id="native-home-app-download-slot"') && !html.includes('id="native-home-app-download"')) {
+        violations.push(`[${route}] Missing native app-download slot or section`);
+      }
+      if (appDownloadSectionId && html.includes(`class="elementor-element elementor-element-${appDownloadSectionId}`)) {
+        violations.push(`[${route}] Legacy app-download section ${appDownloadSectionId} still present`);
+      }
+      const appDownloadIndex = Math.max(
+        html.indexOf('id="native-home-app-download-slot"'),
+        html.indexOf('id="native-home-app-download"'),
+      );
+      const registrationIndex = Math.max(
+        html.indexOf('id="native-home-registration-slot"'),
+        html.indexOf('id="native-home-registration"'),
+      );
+      if (appDownloadIndex !== -1 && registrationIndex !== -1 && appDownloadIndex > registrationIndex) {
+        violations.push(`[${route}] App download section must appear before registration carousel`);
       }
     }
 
