@@ -54,6 +54,8 @@ function verifyShellHtml(html, label, chrome) {
   assert(!html.includes('id="widster-'), `${label}: Widster embed still present`);
 
   assert(html.includes('id="native-home-registration"'), `${label}: missing native registration`);
+  assert(html.includes('id="native-home-app-download"'), `${label}: missing native app-download`);
+  assert(html.includes('id="reg"'), `${label}: missing #reg anchor`);
   assert(html.includes('id="native-home-cash-games"'), `${label}: missing native cash games`);
   assert(html.includes('id="native-home-withdraw-methods"'), `${label}: missing native withdraw methods`);
   assert(html.includes('id="native-home-why-nuts"'), `${label}: missing native why-nuts`);
