@@ -10,7 +10,7 @@ const REVIEW_ROUTES = new Set(hreflangConfig.reviewRoutes);
 
 type ReviewLocale = keyof typeof reviewSnippetsConfig.reviewsByLocale;
 
-const HOME_OG_REVIEW_SUFFIX: Partial<Record<ReviewLocale, (rating: number, count: number) => string>> = {
+const HOME_OG_REVIEW_SUFFIX: Record<string, (rating: number, count: number) => string> = {
   ru: (rating, count) => ` Рейтинг ${formatRating(rating, 'ru')}/5 на основе ${count} отзывов.`,
   en: (rating, count) => ` Rated ${formatRating(rating, 'en')}/5 based on ${count} player reviews.`,
   uz: (rating, count) => ` Reyting ${formatRating(rating, 'uz')}/5 — ${count} ta sharh.`,
