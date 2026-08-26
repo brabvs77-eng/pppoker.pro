@@ -33,7 +33,7 @@ function renderTile(tile) {
     const style = tile.background ? ` style="--home-why-tile-bg: ${tile.background}"` : '';
     return `<article class="home-why__tile home-why__tile--brand"${style} aria-label="NUTS">
   <p class="home-why__brand-word">NU<br>TS</p>
-  <img class="home-why__brand-mascot" src="${tile.mascotSrc}" alt="" width="150" height="150" loading="lazy" decoding="async">
+  <img class="home-why__brand-mascot" src="${tile.mascotSrc}" alt="" width="106" height="90" loading="lazy" decoding="async">
 </article>`;
   }
 
