@@ -1,7 +1,5 @@
 {
   "aggregate": {
-    "ratingValue": 4.9,
-    "reviewCount": 2847,
     "bestRating": 5
   },
   "reviewsByLocale": {

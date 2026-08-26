@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { computeReviewAggregate } from './review-snippets-aggregate.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const configPath = path.join(rootDir, 'apps/web/src/config/review-snippets.json');
@@ -73,7 +74,8 @@ export function loadReviewSnippets(locale) {
   const config = loadConfig();
   const reviews = config.reviewsByLocale[locale] ?? config.reviewsByLocale.ru;
   const labels = LABELS[locale] ?? LABELS.ru;
-  return { aggregate: config.aggregate, reviews, labels };
+  const aggregate = computeReviewAggregate(reviews, config.aggregate.bestRating);
+  return { aggregate, reviews, labels };
 }
 
 export function renderReviewSnippetsSection({ locale }) {
