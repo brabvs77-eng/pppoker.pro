@@ -19,21 +19,21 @@ const homepages = [
   {
     label: 'RU',
     path: path.join(rootDir, 'apps/web/out/index.html'),
-    footerMarker: 'class="site-footer"',
+    footerMarker: 'class="nuts-footer"',
     extraMarkers: ['instagram.com', 't.me/+Sj5sG5o0aqJkMTBi'],
     locale: 'ru',
   },
   {
     label: 'HY',
     path: path.join(rootDir, 'apps/web/out/hy/index.html'),
-    footerMarker: 'class="site-footer"',
+    footerMarker: 'class="nuts-footer"',
     extraMarkers: ['instagram.com'],
     locale: 'hy',
   },
   {
     label: 'EN',
     path: path.join(rootDir, 'apps/web/out/en/index.html'),
-    footerMarker: 'class="site-footer"',
+    footerMarker: 'class="nuts-footer"',
     extraMarkers: ['instagram.com'],
     locale: 'en',
     legacyBlogLoopElementId: '97d6258',
@@ -41,7 +41,7 @@ const homepages = [
   {
     label: 'UZ',
     path: path.join(rootDir, 'apps/web/out/uz/index.html'),
-    footerMarker: 'class="site-footer"',
+    footerMarker: 'class="nuts-footer"',
     extraMarkers: ['instagram.com'],
     locale: 'uz',
     legacyBlogLoopElementId: '97d6258',
@@ -49,7 +49,7 @@ const homepages = [
   {
     label: 'KZ',
     path: path.join(rootDir, 'apps/web/out/kz/index.html'),
-    footerMarker: 'class="site-footer"',
+    footerMarker: 'class="nuts-footer"',
     extraMarkers: ['instagram.com'],
     locale: 'kz',
     legacyBlogLoopElementId: 'b37be6f',
@@ -57,7 +57,7 @@ const homepages = [
   {
     label: 'TJ',
     path: path.join(rootDir, 'apps/web/out/tj/index.html'),
-    footerMarker: 'class="site-footer"',
+    footerMarker: 'class="nuts-footer"',
     extraMarkers: ['instagram.com'],
     locale: 'tj',
   },

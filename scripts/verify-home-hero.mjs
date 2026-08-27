@@ -51,6 +51,9 @@ function verifyBodyHtml(html, label, legacySectionId, locale = 'ru') {
   assert(html.includes(siteContacts.telegramManager), `${label}: missing Telegram manager link`);
   assert(html.includes('href="#reg"'), `${label}: missing #reg link in hero`);
   assert(html.includes('home-hero__panel'), `${label}: missing hero panel`);
+  assert(html.includes('home-hero__play'), `${label}: missing restored play hotspot`);
+  assert(html.includes('/assets/media/2024/07/but-back.webp'), `${label}: missing play hotspot art`);
+  assert(!html.includes('home-hero__character'), `${label}: legacy tiny turbo character thumb still present`);
 
   const { logo, title } = loadHomeHero(locale);
   assert(html.includes(logo.src), `${label}: missing hero logo asset`);

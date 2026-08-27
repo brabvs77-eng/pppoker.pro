@@ -38,7 +38,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     waitUntil: 'load',
     timeout: 90_000,
   });
-  await page.waitForSelector('.home-reg__slide, .hero-cta-group, .site-header', {
+  await page.waitForSelector('.home-reg__slide, .hero-cta-group, .nuts-header', {
     timeout: 30_000,
   }).catch(() => {});
   await page.waitForTimeout(5000);
@@ -103,14 +103,14 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
           `link[rel="alternate"][type="application/rss+xml"][href="${feedHref}"]`,
         )
       : true,
-    nativeFooter: !!document.querySelector('footer.site-footer'),
+    nativeFooter: !!document.querySelector('footer.nuts-footer'),
     legacyColophon: !!document.querySelector('#colophon'),
     instagramLink: document.body.innerHTML.includes('instagram.com/pppoker_union_nuts'),
-    footerAddress: !!document.querySelector('.site-footer__address'),
-    footerPhone: !!document.querySelector(`a.site-footer__phone[href="${phoneHref}"]`),
-    footerYoutube: !!document.querySelector(`a.site-footer__social-card[href="${youtubeUrl}"]`),
-    footerPaymentIcons: document.querySelectorAll('.site-footer__payment img').length,
-    footerPartner: !!document.querySelector(`a.site-footer__partner-link[href="${partnerUrl}"]`),
+    footerAddress: !!document.querySelector('.nuts-footer__address'),
+    footerPhone: !!document.querySelector(`a.nuts-footer__phone[href="${phoneHref}"]`),
+    footerYoutube: !!document.querySelector(`a.nuts-footer__social-card[href="${youtubeUrl}"]`),
+    footerPaymentIcons: document.querySelectorAll('.nuts-footer__payment img').length,
+    footerPartner: !!document.querySelector(`a.nuts-footer__partner-link[href="${partnerUrl}"]`),
   }), {
     channel: siteContacts.telegramChannel,
     feedHref,

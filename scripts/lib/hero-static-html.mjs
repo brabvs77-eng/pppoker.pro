@@ -21,6 +21,7 @@ export function loadHomeHero(locale) {
     ...localeCopy,
     logo: localeCopy.logo ?? config.logo,
     background: localeCopy.background ?? config.background,
+    playHotspot: config.playHotspot,
   };
 }
 
@@ -33,11 +34,6 @@ function renderCta(label) {
 </div>`;
 }
 
-function optionalBlock(tag, className, html) {
-  if (!html) return '';
-  return `<${tag} class="${className}">${html}</${tag}>`;
-}
-
 export function renderHomeHeroSection({ locale }) {
   const copy = loadHomeHero(locale);
   if (!copy?.title) return '';
@@ -47,6 +43,13 @@ export function renderHomeHeroSection({ locale }) {
     : '';
   const bonusCta = copy.bonusCta
     ? `<p class="home-hero__bonus-cta"><a class="home-hero__bonus-link" href="${siteContacts.telegramManager}" target="_blank" rel="noopener noreferrer">${copy.bonusCta}</a></p>`
+    : '';
+  const playLabel = copy.playHotspotLabel ?? 'Начать Играть';
+  const hotspot = copy.playHotspot
+    ? `<a class="home-hero__play" href="${siteContacts.telegramManager}" target="_blank" rel="noopener noreferrer">
+  <img class="home-hero__play-bg" src="${copy.playHotspot.src}" alt="" width="${copy.playHotspot.width}" height="${copy.playHotspot.height}" loading="lazy" decoding="async">
+  <span class="home-hero__play-label">${playLabel}</span>
+</a>`
     : '';
 
   return `<section class="home-hero" id="native-home-hero">
@@ -72,15 +75,13 @@ export function renderHomeHeroSection({ locale }) {
             <p class="home-hero__bonus-cap">${copy.bonusCapHtml}</p>
           </div>
           ${bonusCta}
+          ${hotspot}
           <a class="home-hero__telegram-pill" href="${siteContacts.telegramManager}" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
             <svg aria-hidden="true" viewBox="0 0 448 512" width="20" height="20"><path fill="currentColor" d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z"></path></svg>
             <span>Telegram</span>
           </a>
         </div>
-        <div class="home-hero__figure">
-          <img class="home-hero__character" src="${copy.character.src}" alt="${copy.character.alt}" width="360" height="420" loading="lazy" decoding="async">
-          <p class="home-hero__register">${copy.registerHtml}</p>
-        </div>
+        <p class="home-hero__register">${copy.registerHtml}</p>
       </aside>
     </div>
   </div>

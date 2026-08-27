@@ -24,8 +24,8 @@ body {
   background-color: #0c111a !important;
 }
 
-.site-header,
-.site-footer {
+.nuts-header,
+.nuts-footer {
   background-color: #0c111a !important;
 }
 

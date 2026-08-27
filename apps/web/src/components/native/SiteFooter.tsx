@@ -55,8 +55,8 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
   const partnerUrl = iplanutsHref(page.locale);
 
   return (
-    <footer className="site-footer" data-locale={page.locale} data-variant={variant}>
-      <div className="site-footer__inner">
+    <footer className="nuts-footer" data-locale={page.locale} data-variant={variant}>
+      <div className="nuts-footer__inner">
         <LocaleSwitcher
           alternates={alternates}
           currentLocale={page.locale}
@@ -65,17 +65,17 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
 
         {localeOnly ? null : (
           <>
-            <div className="site-footer__social" aria-label={t('socialLabel')}>
+            <div className="nuts-footer__social" aria-label={t('socialLabel')}>
               {SOCIAL_CARDS.map((card) => (
                 <a
                   key={card.key}
-                  className="site-footer__social-card"
+                  className="nuts-footer__social-card"
                   href={card.href}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img
-                    className="site-footer__social-icon"
+                    className="nuts-footer__social-icon"
                     src={card.icon}
                     alt=""
                     width={43}
@@ -83,14 +83,14 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
                     loading="lazy"
                     decoding="async"
                   />
-                  <span className="site-footer__social-label">{t(card.labelKey)}</span>
+                  <span className="nuts-footer__social-label">{t(card.labelKey)}</span>
                 </a>
               ))}
             </div>
 
-            <div className="site-footer__payments" aria-label={t('paymentsLabel')}>
+            <div className="nuts-footer__payments" aria-label={t('paymentsLabel')}>
               {siteFooterPaymentIcons.map((icon) => (
-                <span key={icon.src} className="site-footer__payment">
+                <span key={icon.src} className="nuts-footer__payment">
                   <img
                     src={icon.src}
                     alt={icon.alt}
@@ -103,15 +103,15 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
               ))}
             </div>
 
-            <div className="site-footer__partner">
+            <div className="nuts-footer__partner">
               <a
-                className="site-footer__social-card site-footer__social-card--compact"
+                className="nuts-footer__social-card nuts-footer__social-card--compact"
                 href={siteContacts.telegramManager}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  className="site-footer__social-icon"
+                  className="nuts-footer__social-icon"
                   src={siteFooterAssets.telegramIcon}
                   alt=""
                   width={43}
@@ -119,10 +119,10 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
                   loading="lazy"
                   decoding="async"
                 />
-                <span className="site-footer__social-label">{t('manager')}</span>
+                <span className="nuts-footer__social-label">{t('manager')}</span>
               </a>
               <a
-                className="site-footer__partner-link"
+                className="nuts-footer__partner-link"
                 href={partnerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -139,22 +139,22 @@ export async function SiteFooter({ page, variant = 'full' }: SiteFooterProps) {
               </a>
             </div>
 
-            <nav className="site-footer__nav" aria-label={t('navLabel')}>
+            <nav className="nuts-footer__nav" aria-label={t('navLabel')}>
               <Link href={blogHref(page.locale)}>{t('blog')}</Link>
               <a href={legalHref(page.locale, 'user-agreement')}>{t('terms')}</a>
               <a href={legalHref(page.locale, 'privacy-policy')}>{t('privacy')}</a>
             </nav>
 
-            <address className="site-footer__contact" itemScope itemType="https://schema.org/PostalAddress">
-              <span className="site-footer__address" itemProp="streetAddress">
+            <address className="nuts-footer__contact" itemScope itemType="https://schema.org/PostalAddress">
+              <span className="nuts-footer__address" itemProp="streetAddress">
                 {siteLegalEntity.address}
               </span>
-              <a className="site-footer__phone" href={siteLegalEntity.phoneHref} itemProp="telephone">
+              <a className="nuts-footer__phone" href={siteLegalEntity.phoneHref} itemProp="telephone">
                 {siteLegalEntity.phoneDisplay}
               </a>
             </address>
 
-            <p className="site-footer__copy">
+            <p className="nuts-footer__copy">
               © {siteLegalEntity.copyrightStartYear}–{year} {siteLegalEntity.associationName} ·{' '}
               {t('tagline')}
             </p>
