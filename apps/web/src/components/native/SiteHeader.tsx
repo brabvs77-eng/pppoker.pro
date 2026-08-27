@@ -12,15 +12,65 @@ type SiteHeaderProps = {
   page: PageEntry;
 };
 
+function NavLinks({
+  home,
+  blog,
+  homeLabel,
+  blogLabel,
+  managerLabel,
+  channelLabel,
+}: {
+  home: string;
+  blog: string;
+  homeLabel: string;
+  blogLabel: string;
+  managerLabel: string;
+  channelLabel: string;
+}) {
+  return (
+    <>
+      <Link href={home}>{homeLabel}</Link>
+      <Link href={blog}>{blogLabel}</Link>
+      <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
+        {managerLabel}
+      </a>
+      <a href={siteContacts.telegramChannel} target="_blank" rel="noopener noreferrer">
+        {channelLabel}
+      </a>
+    </>
+  );
+}
+
 export async function SiteHeader({ page }: SiteHeaderProps) {
   const t = await getTranslations({ locale: page.locale, namespace: 'siteHeader' });
   const alternates = getLocaleAlternates(page);
   const home = homeHref(page.locale);
   const blog = blogHref(page.locale);
+  const navProps = {
+    home,
+    blog,
+    homeLabel: t('home'),
+    blogLabel: t('blog'),
+    managerLabel: t('manager'),
+    channelLabel: t('channel'),
+  };
 
   return (
     <header className="nuts-header" data-locale={page.locale}>
       <div className="nuts-header__inner">
+        <details className="nuts-header__drawer">
+          <summary className="nuts-header__menu-btn" aria-label={t('openMenu')}>
+            <span className="nuts-header__menu-icon" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+          </summary>
+          <nav className="nuts-header__nav nuts-header__nav--drawer" aria-label={t('navLabel')}>
+            <NavLinks {...navProps} />
+          </nav>
+        </details>
+
         <Link className="nuts-header__brand" href={home}>
           <img
             src={siteBranding.logoSrc}
@@ -31,31 +81,8 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
           />
         </Link>
 
-        <details className="nuts-header__drawer">
-          <summary className="nuts-header__menu-btn" aria-label={t('openMenu')}>
-            <span aria-hidden="true">☰</span>
-          </summary>
-          <nav className="nuts-header__nav" aria-label={t('navLabel')}>
-            <Link href={home}>{t('home')}</Link>
-            <Link href={blog}>{t('blog')}</Link>
-            <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
-              {t('manager')}
-            </a>
-            <a href={siteContacts.telegramChannel} target="_blank" rel="noopener noreferrer">
-              {t('channel')}
-            </a>
-          </nav>
-        </details>
-
-        <nav className="nuts-header__nav nuts-header__nav--desktop" aria-label={t('navLabel')}>
-          <Link href={home}>{t('home')}</Link>
-          <Link href={blog}>{t('blog')}</Link>
-          <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
-            {t('manager')}
-          </a>
-          <a href={siteContacts.telegramChannel} target="_blank" rel="noopener noreferrer">
-            {t('channel')}
-          </a>
+        <nav className="nuts-header__nav nuts-header__nav--bar" aria-label={t('navLabel')}>
+          <NavLinks {...navProps} />
         </nav>
 
         <div className="nuts-header__locales">
