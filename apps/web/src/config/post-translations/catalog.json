@@ -310,5 +310,18 @@
       "hy": "know-your-poker-opponents-secrets-of-winning-strategies",
       "tj": "know-your-poker-opponents-secrets-of-winning-strategies"
     }
+  },
+  {
+    "id": "chto-takoe-pppoker",
+    "sourceRoute": "/chto-takoe-pppoker/",
+    "publishedAt": "2026-02-01T12:00:00+00:00",
+    "image": "/assets/media/2026/08/chto-takoe-pppoker-hero.webp",
+    "slugs": {
+      "en": "what-is-pppoker",
+      "uz": "pppoker-nima",
+      "kz": "pppoker-ne",
+      "hy": "inch-e-pppoker",
+      "tj": "pppoker-chist"
+    }
   }
 ]

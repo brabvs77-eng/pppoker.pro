@@ -172,9 +172,9 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 |---------|--------|
 | Header / footer / languages | All pages |
 | HomePromo | All 6 homepages; `verify:home-promo`; smoke all 6 |
-| Structured posts | 24 posts × 6 locales (RU + EN/UZ/KZ/HY/TJ via `post-translations/`) |
+| Structured posts | 25 posts × 6 locales (RU + EN/UZ/KZ/HY/TJ via `post-translations/`) |
 | Legal / about | `NativePage` — EN + UZ/KZ/HY/TJ user-agreement & privacy-policy; `/rus/` |
-| Blog archive | All 6 locales — `NativeBlogArchive` (4 pages per locale at 24 posts) |
+| Blog archive | All 6 locales — `NativeBlogArchive` (5 pages per locale at 25 posts) |
 | Blog text colors | Full-width `.blog-surface` dark theme; `BlogBreadcrumbs` on archive + posts |
 | Blog JSON-LD | `BreadcrumbList` + `BlogPosting` + `Organization`/`WebSite` with absolute URLs; `verify:json-ld` |
 | Legacy HTML codemod | `fix:legacy-html` — KZ flag, but-back WebP, robots meta; `audit:rudiments` guards regression |
