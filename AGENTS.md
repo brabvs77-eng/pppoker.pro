@@ -211,7 +211,7 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 5. ~~Home app download~~ — done (Sprint C2, `home-app-download.json`, `inject:app-download`)
 6. ~~Home promo cards~~ — done (Sprint C3, `home-promo-cards.json`, `inject:promo-cards`)
 7. ~~Home hero~~ — done (Sprint C4, `home-hero.json`, `inject:home-hero`)
-8. **EN translation quality pass** — human review top-5 posts (PPPoker review, GTO, VPIP, EV, opponents)
+8. ~~EN translation quality pass~~ — done (Sprint EN-Q1: review, GTO, VPIP, EV, opponents)
 9. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
 
 ## Adding or updating content
