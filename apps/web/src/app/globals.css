@@ -2367,10 +2367,11 @@ body {
   position: relative;
   padding: 1.35rem 1.2rem 1.2rem;
   border-radius: 1.35rem;
-  background: linear-gradient(145deg, #fde661 0%, #f3c94a 55%, #d7a52d 100%);
-  background-image: var(--home-hero-panel-bg), linear-gradient(145deg, #fde661 0%, #f3c94a 55%, #d7a52d 100%);
+  background-color: #f3c94a;
+  background-image: var(--home-hero-panel-bg, none), linear-gradient(145deg, #fde661 0%, #f3c94a 55%, #d7a52d 100%);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   color: #131b2b;
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.35),
