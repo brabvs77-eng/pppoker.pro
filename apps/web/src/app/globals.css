@@ -87,7 +87,7 @@ body {
 .nuts-header__locales {
   grid-area: locales;
   justify-self: end;
-  max-width: min(46vw, 12rem);
+  max-width: min(58vw, 14.5rem);
 }
 
 .nuts-header__menu-btn {
