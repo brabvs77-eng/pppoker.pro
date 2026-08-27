@@ -34,12 +34,12 @@ async function main() {
       continue;
     }
 
-    if (!html.includes('class="site-header"')) {
-      violations.push(`[${label}] Missing native site-header`);
+    if (!html.includes('class="nuts-header"')) {
+      violations.push(`[${label}] Missing native nuts-header`);
     }
 
-    if (!html.includes('class="site-footer"')) {
-      violations.push(`[${label}] Missing native site-footer`);
+    if (!html.includes('class="nuts-footer"')) {
+      violations.push(`[${label}] Missing native nuts-footer`);
     }
 
     if (html.includes('elementor-frontend-js')) {

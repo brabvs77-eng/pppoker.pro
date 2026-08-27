@@ -19,9 +19,9 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
   const blog = blogHref(page.locale);
 
   return (
-    <header className="site-header" data-locale={page.locale}>
-      <div className="site-header__inner">
-        <Link className="site-header__brand" href={home}>
+    <header className="nuts-header" data-locale={page.locale}>
+      <div className="nuts-header__inner">
+        <Link className="nuts-header__brand" href={home}>
           <img
             src={siteBranding.logoSrc}
             alt={siteBranding.logoAlt}
@@ -31,11 +31,11 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
           />
         </Link>
 
-        <details className="site-header__drawer">
-          <summary className="site-header__menu-btn" aria-label={t('openMenu')}>
+        <details className="nuts-header__drawer">
+          <summary className="nuts-header__menu-btn" aria-label={t('openMenu')}>
             <span aria-hidden="true">☰</span>
           </summary>
-          <nav className="site-header__nav" aria-label={t('navLabel')}>
+          <nav className="nuts-header__nav" aria-label={t('navLabel')}>
             <Link href={home}>{t('home')}</Link>
             <Link href={blog}>{t('blog')}</Link>
             <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
@@ -47,7 +47,7 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
           </nav>
         </details>
 
-        <nav className="site-header__nav site-header__nav--desktop" aria-label={t('navLabel')}>
+        <nav className="nuts-header__nav nuts-header__nav--desktop" aria-label={t('navLabel')}>
           <Link href={home}>{t('home')}</Link>
           <Link href={blog}>{t('blog')}</Link>
           <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
@@ -58,7 +58,7 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
           </a>
         </nav>
 
-        <div className="site-header__locales">
+        <div className="nuts-header__locales">
           <LocaleSwitcher
             alternates={alternates}
             currentLocale={page.locale}

@@ -20,8 +20,8 @@ async function smokeLandingPage(page, { label, route }) {
   await page.waitForTimeout(2000);
 
   const state = await page.evaluate(({ channel, whatsappMarkers }) => ({
-    siteHeader: !!document.querySelector('.site-header'),
-    siteFooter: !!document.querySelector('.site-footer'),
+    siteHeader: !!document.querySelector('.nuts-header'),
+    siteFooter: !!document.querySelector('.nuts-footer'),
     channelLink: !!document.querySelector(`a[href="${channel}"]`),
     whatsappLinks: whatsappMarkers.filter((marker) => document.body.innerHTML.includes(marker)).length,
     elementorRuntime: !!document.querySelector('script[src*="elementor-frontend"]'),
@@ -30,8 +30,8 @@ async function smokeLandingPage(page, { label, route }) {
     whatsappMarkers: ['wa.clck.bar', 'hero-cta-btn--whatsapp'],
   });
 
-  if (!state.siteHeader) violations.push(`[${label}] Missing .site-header`);
-  if (!state.siteFooter) violations.push(`[${label}] Missing .site-footer`);
+  if (!state.siteHeader) violations.push(`[${label}] Missing .nuts-header`);
+  if (!state.siteFooter) violations.push(`[${label}] Missing .nuts-footer`);
   if (!state.channelLink) violations.push(`[${label}] Missing Telegram channel link`);
   if (state.whatsappLinks > 0) violations.push(`[${label}] WhatsApp links still present`);
   if (state.elementorRuntime) violations.push(`[${label}] Elementor frontend script loaded`);

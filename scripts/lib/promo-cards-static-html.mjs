@@ -69,7 +69,7 @@ function renderJackpotCard(cards, triggers, decorations) {
   return `<article class="home-promo-cards__card home-promo-cards__card--jackpot" data-home-promo-card="jackpot"${bgStyle}>
   <div class="home-promo-cards__jackpot-inner">
     <h2 class="home-promo-cards__jackpot-title">${jackpot.title}</h2>
-    <p class="home-promo-cards__amount home-promo-cards__headline--gradient">${jackpot.amount}</p>
+    <p class="home-promo-cards__amount">${jackpot.amount}</p>
     ${renderHotspotTrigger('jackpot', triggers.jackpot)}
   </div>
   <img class="home-promo-cards__decor home-promo-cards__decor--dollar" src="${decorations.jackpotDollar.src}" alt="${decorations.jackpotDollar.alt}" width="${decorations.jackpotDollar.width}" height="${decorations.jackpotDollar.height}" loading="lazy" decoding="async">

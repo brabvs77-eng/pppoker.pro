@@ -36,6 +36,10 @@ function verifyBodyHtml(html, label, legacySectionId) {
   }
 
   assert(html.includes('home-promo-cards__amount'), `${label}: missing jackpot amount`);
+  assert(
+    !html.includes('home-promo-cards__amount home-promo-cards__headline--gradient'),
+    `${label}: jackpot amount must not use gold gradient (unreadable on coin background)`,
+  );
   assert(html.includes('home-promo-modal__trigger-wrap--jackpot'), `${label}: missing jackpot trigger`);
 
   const amountIndex = html.indexOf('home-promo-cards__amount');

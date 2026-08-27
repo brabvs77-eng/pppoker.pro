@@ -185,7 +185,7 @@ async function main() {
         timeout: 90_000,
       });
       const hyBlogHref = await page.evaluate(() => {
-        const link = document.querySelector('.site-header__nav a[href="/hy/blog/"]');
+        const link = document.querySelector('.nuts-header__nav a[href="/hy/blog/"]');
         return link?.getAttribute('href') ?? null;
       });
       if (hyBlogHref !== '/hy/blog/') {
