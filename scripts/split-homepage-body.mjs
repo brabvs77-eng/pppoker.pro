@@ -92,6 +92,37 @@ function appendBlogSlotBeforeFooter(bodyHtml) {
   return `${bodyHtml.slice(0, colophonStart)}${slotHtml}${bodyHtml.slice(colophonStart)}`;
 }
 
+/**
+ * TJ (and similar) exports keep a thin Elementor wp-page landing above the
+ * appended native slots. Strip that root so the native hero is first paint.
+ */
+function stripLegacyWpPageBeforeNative(bodyHtml) {
+  const nativeNeedles = [
+    'id="native-home-hero-slot"',
+    'id="native-home-hero"',
+    'id="native-home-blog-slot"',
+    'id="native-home-blog"',
+  ];
+  let nativePos = -1;
+  for (const needle of nativeNeedles) {
+    const idx = bodyHtml.indexOf(needle);
+    if (idx !== -1 && (nativePos === -1 || idx < nativePos)) nativePos = idx;
+  }
+  if (nativePos === -1) return bodyHtml;
+
+  const wpPageNeedle = 'data-elementor-type="wp-page"';
+  const wpPageIdx = bodyHtml.indexOf(wpPageNeedle);
+  if (wpPageIdx === -1 || wpPageIdx > nativePos) return bodyHtml;
+
+  const divStart = bodyHtml.lastIndexOf('<div', wpPageIdx);
+  if (divStart === -1 || divStart > nativePos) return bodyHtml;
+
+  const divEnd = findMatchingDivClose(bodyHtml, divStart);
+  if (divEnd === -1 || divEnd > nativePos) return bodyHtml;
+
+  return `${bodyHtml.slice(0, divStart)}${bodyHtml.slice(divEnd)}`;
+}
+
 function ensureSlot(html, needles, slotMarkup, beforeNeedle) {
   const needleList = Array.isArray(needles) ? needles : [needles];
   if (needleList.some((needle) => html.includes(needle))) return html;
@@ -428,6 +459,12 @@ async function main() {
           faqSlotHtml,
           blogSlotNeedle,
         );
+      }
+
+      const beforeStrip = processed;
+      processed = stripLegacyWpPageBeforeNative(processed);
+      if (processed !== beforeStrip) {
+        console.log(`Stripped legacy Elementor wp-page landing above native slots on ${route}`);
       }
     }
 
