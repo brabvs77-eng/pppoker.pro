@@ -9,6 +9,15 @@ const RSS_FEED_HREF: Partial<Record<AppLocale, string>> = {
   tj: '/tj/feed.xml',
 };
 
+const LLMS_HREF: Record<AppLocale, string> = {
+  ru: '/llms.txt',
+  en: '/en/llms.txt',
+  uz: '/uz/llms.txt',
+  kz: '/kz/llms.txt',
+  hy: '/hy/llms.txt',
+  tj: '/tj/llms.txt',
+};
+
 type SiteHeadProps = {
   locale: AppLocale;
   rssFeedTitle?: string;
@@ -18,6 +27,7 @@ type SiteHeadProps = {
 /** Global head tags shared across all locale layouts. */
 export function SiteHead({ locale, rssFeedTitle, llmsLinkTitle }: SiteHeadProps) {
   const rssHref = RSS_FEED_HREF[locale];
+  const llmsHref = LLMS_HREF[locale];
 
   return (
     <>
@@ -46,7 +56,7 @@ export function SiteHead({ locale, rssFeedTitle, llmsLinkTitle }: SiteHeadProps)
         />
       ) : null}
       {llmsLinkTitle ? (
-        <link rel="alternate" type="text/plain" title={llmsLinkTitle} href="/llms.txt" />
+        <link rel="alternate" type="text/plain" title={llmsLinkTitle} href={llmsHref} />
       ) : null}
     </>
   );

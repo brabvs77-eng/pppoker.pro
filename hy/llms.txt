@@ -1,0 +1,45 @@
+# Nuts PPPoker — օնլայն պոկերի ակումբ
+
+> PPPoker-ում գումարի դեմ օնլայն պոկեր. Հուսալի սենյակ՝ դուրսբերումներով, բոնուսներով և մրց турներով.
+
+Generated 2026-08-28. All URLs: https://pppoker.pro
+
+## Էջեր
+- [օնլայն պոկեր փողի համար — Nuts PPPoker](https://pppoker.pro/hy/)
+- [Բլոգ — Nuts PPPoker](https://pppoker.pro/hy/blog/)
+- [Բլոգ — Nuts PPPoker — էջ 2 / 5](https://pppoker.pro/hy/blog/page/2/)
+- [Բլոգ — Nuts PPPoker — էջ 3 / 5](https://pppoker.pro/hy/blog/page/3/)
+- [Բլոգ — Nuts PPPoker — էջ 4 / 5](https://pppoker.pro/hy/blog/page/4/)
+- [Բլոգ — Nuts PPPoker — էջ 5 / 5](https://pppoker.pro/hy/blog/page/5/)
+- [Գաղտնիության քաղաքականություն — Nuts PPPoker](https://pppoker.pro/hy/privacy-policy/)
+- [Օգտագործողի համաձայնագիր — Nuts PPPoker](https://pppoker.pro/hy/user-agreement/)
+
+## Բլոգի գրառումներ
+- [Ամենամեծ PPPoker տուրնիրը — Nuts PPPoker](https://pppoker.pro/hy/amenamec-mets-pppoker-turnir/)
+- [Ռոման Շապոշնիկով — Nuts PPPoker](https://pppoker.pro/hy/author-roman-shaposhnikov/)
+- [Բազմասեղանի մրցաշարներ (MTT) — Nuts PPPoker](https://pppoker.pro/hy/batsatoxanner-mtt/)
+- [Bet sizing-ի հիմունքներ պոկերում — Nuts PPPoker](https://pppoker.pro/hy/bet-sizing-himnakaner/)
+- [Bomb Pot պոկերում. կանոններ և ռազմավարություն — Nuts PPPoker](https://pppoker.pro/hy/bomb-pot-poker-kanoner/)
+- [Implajd odds պոկերում. պոտենցիալ բանկի шанսերի կիրառում — Nuts PPPoker](https://pppoker.pro/hy/implajd-odds-pokerum/)
+- [Ինչ է EV-ը պոկերում — Nuts PPPoker](https://pppoker.pro/hy/inch-e-ev-pokerum/)
+- [Ինչ է PPPoker-ը. մասնավոր ակումբի պլատֆորմի վերանայում 2026 թ — Nuts PPPoker](https://pppoker.pro/hy/inch-e-pppoker/)
+- [Ճանաչիր քո պոքերի մրցակիցներին — Nuts PPPoker](https://pppoker.pro/hy/know-your-poker-opponents-secrets-of-winning-strategies/)
+- [Միկրոստավկայի մրցաշարերի ռազմավարություն — Nuts PPPoker](https://pppoker.pro/hy/mikro-stavka-turnirayin-strategia/)
+- [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/hy/open-face-chinese-poker-ofc/)
+- [Պոկերի գործակալներ. ովքեր են, ինչ դեր ունեն և ինչ օգուտ են տալիս խաղացողներին — Nuts PPPoker](https://pppoker.pro/hy/poker-agentner/)
+- [Poker GTO — ինչ է և ինչպես կիրառել NUTS ակումբում — Nuts PPPoker](https://pppoker.pro/hy/poker-gto-nuts-akumbum/)
+- [Ինչպես ծախսել պոկերի հաղթանակը — Nuts PPPoker](https://pppoker.pro/hy/poker-haghovuty-vorosh/)
+- [Պոկերի խաղացողների հիմնական տեսակներ — Nuts PPPoker](https://pppoker.pro/hy/poker-khaghoghineri-tesakner/)
+- [Pot-Limit Omaha (PLO) կանոններ — Nuts PPPoker](https://pppoker.pro/hy/pot-limit-omaha-plo-kanoner/)
+- [ԱԿՑԻԱ՝ MINI HIGHROLLER NUTS ԱԿՈՒՄԲՈՒՄ! — Nuts PPPoker](https://pppoker.pro/hy/pppoker-mini-highroller/)
+- [PPPoker NUTS: Bomb Pot — գործողությունով լի պայթյունային ձևաչափ! — Nuts PPPoker](https://pppoker.pro/hy/pppoker-nuts-bomb-pot/)
+- [PPPoker: մանրամասների ակնարկ 2026 — Nuts PPPoker](https://pppoker.pro/hy/pppoker-review-2026/)
+- [Ինչպես խաղալ 6+ (Short Deck) PPPoker NUTS-ում — Nuts PPPoker](https://pppoker.pro/hy/short-deck-6-plus-pppoker-um/)
+- [Տեխաս Հոլդեմի կանոններ — Nuts PPPoker](https://pppoker.pro/hy/texas-holdem-kanoner/)
+- [Տեխաս Հոլդեմ (NLH) կանոններ — Nuts PPPoker](https://pppoker.pro/hy/texas-holdem-nlh-kanoner/)
+- [Սկսնակ ձեռքեր Թեխասյան Հոլդեմում — Nuts PPPoker](https://pppoker.pro/hy/texas-holdem-sksman-qarer/)
+- [Կենդանի պոկերի էտիկետ. ինչ պետք է իմանա սկսնակը — Nuts PPPoker](https://pppoker.pro/hy/tsayin-poker-etiket/)
+- [VPIP — Nuts PPPoker](https://pppoker.pro/hy/vpip-pokerum/)
+
+## Լրացուցիչ
+- [Sitemap index](https://pppoker.pro/sitemap_index.xml)
