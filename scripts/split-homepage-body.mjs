@@ -92,6 +92,47 @@ function appendBlogSlotBeforeFooter(bodyHtml) {
   return `${bodyHtml.slice(0, colophonStart)}${slotHtml}${bodyHtml.slice(colophonStart)}`;
 }
 
+/**
+ * TJ (and similar) exports keep a thin Elementor wp-page landing above the
+ * appended native slots. Strip that root so the native hero is first paint.
+ */
+function stripLegacyWpPageBeforeNative(bodyHtml) {
+  const nativeNeedles = [
+    'id="native-home-hero-slot"',
+    'id="native-home-hero"',
+    'id="native-home-blog-slot"',
+    'id="native-home-blog"',
+  ];
+  let nativePos = -1;
+  for (const needle of nativeNeedles) {
+    const idx = bodyHtml.indexOf(needle);
+    if (idx !== -1 && (nativePos === -1 || idx < nativePos)) nativePos = idx;
+  }
+  if (nativePos === -1) return bodyHtml;
+
+  const wpPageNeedle = 'data-elementor-type="wp-page"';
+  const wpPageIdx = bodyHtml.indexOf(wpPageNeedle);
+  if (wpPageIdx === -1 || wpPageIdx > nativePos) return bodyHtml;
+
+  const divStart = bodyHtml.lastIndexOf('<div', wpPageIdx);
+  if (divStart === -1 || divStart > nativePos) return bodyHtml;
+
+  const divEnd = findMatchingDivClose(bodyHtml, divStart);
+  if (divEnd === -1 || divEnd > nativePos) return bodyHtml;
+
+  return `${bodyHtml.slice(0, divStart)}${bodyHtml.slice(divEnd)}`;
+}
+
+function ensureSlot(html, needles, slotMarkup, beforeNeedle) {
+  const needleList = Array.isArray(needles) ? needles : [needles];
+  if (needleList.some((needle) => html.includes(needle))) return html;
+
+  const beforeIndex = html.indexOf(beforeNeedle);
+  if (beforeIndex === -1) return html;
+
+  return `${html.slice(0, beforeIndex)}${slotMarkup}${html.slice(beforeIndex)}`;
+}
+
 function appendPromoModalsSlotBeforeFooter(bodyHtml) {
   const colophonStart = bodyHtml.search(/<footer[^>]*\bid="colophon"/i);
   if (colophonStart !== -1) {
@@ -221,6 +262,9 @@ async function main() {
     (chrome.stripLegacyMastheadRoutes ?? []).map((entry) => entry.fileId),
   );
   const duplicateCtaIds = chrome.homepageDuplicateCtaElementIds ?? [];
+  const appendNativeSlotsRoutes = new Set(
+    homeRoutes.filter((entry) => entry.appendNativeSlotsWhenMissing).map((entry) => entry.route),
+  );
 
   for (const { fileId, route, legacyBlogSectionId, appendBlogSlotWhenMissing } of homeRoutes) {
     const legacySectionId = legacyBlogSectionId ?? defaultLegacySectionId;
@@ -306,7 +350,7 @@ async function main() {
     }
 
     const promoEntry = promoBlocksByRoute.get(route);
-    if (promoEntry) {
+    if (promoEntry?.legacyCrashPromoSectionElementId) {
       processed = stripElementorSection(
         replaceElementorSectionWithSlot(
           processed,
@@ -315,6 +359,113 @@ async function main() {
         ),
         promoEntry.legacyRusPokerPromoSectionElementId,
       );
+    }
+
+    // When the legacy Elementor section IDs above are absent from the body
+    // (e.g. TJ, whose export uses its own distinct Elementor element IDs),
+    // the replace* helpers are no-ops and the slots never land in the body.
+    // Append the missing slots before the blog slot instead, preserving the
+    // hero → app-download → registration → cash-games → withdraw-methods →
+    // why-nuts → promo-cards → promo-blocks → chip-calculator → reviews →
+    // faq → blog top-to-bottom order (app-download must precede registration;
+    // see verify-homepage-dom.mjs).
+    if (appendNativeSlotsRoutes.has(route)) {
+      const blogSlotNeedle = '<div id="native-home-blog-slot"';
+
+      if (heroSectionId && heroRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-hero-slot', 'id="native-home-hero"'],
+          heroSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (appDownloadRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-app-download-slot', 'id="native-home-app-download"'],
+          appDownloadSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (registrationRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-registration-slot', 'id="native-home-registration"'],
+          registrationSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (cashGamesRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-cash-games-slot', 'id="native-home-cash-games"'],
+          cashGamesSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (withdrawMethodsRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-withdraw-methods-slot', 'id="native-home-withdraw-methods"'],
+          withdrawMethodsSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (whyNutsRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-why-nuts-slot', 'id="native-home-why-nuts"'],
+          whyNutsSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (promoCardsRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-promo-cards-slot', 'id="native-home-promo-cards"'],
+          promoCardsSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (promoEntry) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-promo-blocks-slot', 'id="native-home-promo-blocks"'],
+          promoBlocksSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (chipCalculatorRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-chip-calculator-slot', 'id="native-chip-calculator"'],
+          chipCalculatorSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (reviewRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-review-snippets-slot', 'id="native-review-snippets"'],
+          reviewSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (faqRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-faq-slot', 'id="native-home-faq"'],
+          faqSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+
+      const beforeStrip = processed;
+      processed = stripLegacyWpPageBeforeNative(processed);
+      if (processed !== beforeStrip) {
+        console.log(`Stripped legacy Elementor wp-page landing above native slots on ${route}`);
+      }
     }
 
     if (promoModalsRoutes.has(route)) {

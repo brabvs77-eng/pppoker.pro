@@ -27,6 +27,7 @@ const localeByRoute = {
   '/en/': 'en',
   '/uz/': 'uz',
   '/kz/': 'kz',
+  '/tj/': 'tj',
 };
 
 function read(p) {
@@ -78,7 +79,7 @@ function main() {
   const chrome = JSON.parse(read(CHROME));
   const routes = chrome.homeHeroSlotRoutes ?? [];
   const legacySectionId = chrome.homepageHeroRootElementId;
-  assert(routes.length === 5, 'config: expected 5 homeHeroSlotRoutes');
+  assert(routes.length === 6, 'config: expected 6 homeHeroSlotRoutes');
 
   for (const { fileId, route } of routes) {
     const bodyPath = path.join(BODIES, `${fileId}-with-blog-slot.html`);

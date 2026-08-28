@@ -172,6 +172,37 @@
         "amount": "55709$",
         "background": "/assets/media/2024/07/back-1.webp"
       }
+    },
+    "tj": {
+      "bonus": {
+        "headline": "Бонус",
+        "subtitleHtml": "🔥🔥🔥 Барои пасандози аввал",
+        "steps": [
+          {
+            "label": "Пасандози аввалро гузоред:",
+            "value": "аз 10$"
+          },
+          {
+            "label": "Бонуси фаврӣ гиред:",
+            "value": "10%"
+          },
+          {
+            "label": "Ба андозаи пешравӣ дар бозӣ:",
+            "value": "140%"
+          }
+        ],
+        "background": "/assets/media/2024/07/Bez-imeni-1.webp"
+      },
+      "events": {
+        "title": "акцияҳо",
+        "subtitle": "Ҳар ҳафта! Дар барномаи PPPOKER",
+        "background": "/assets/media/2024/07/Bez-imeni-2.webp"
+      },
+      "jackpot": {
+        "title": "Ҷекпот",
+        "amount": "55709$",
+        "background": "/assets/media/2024/07/back-1.webp"
+      }
     }
   }
 }

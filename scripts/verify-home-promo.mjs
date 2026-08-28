@@ -15,7 +15,7 @@ const HOME_PAGES = [
   { label: 'HY', outPath: 'hy/index.html', checkHeroCtas: true, checkCrashVideo: true },
   { label: 'UZ', outPath: 'uz/index.html', checkHeroCtas: true, checkCrashVideo: true },
   { label: 'KZ', outPath: 'kz/index.html', checkHeroCtas: true, checkCrashVideo: true },
-  { label: 'TJ', outPath: 'tj/index.html', checkHeroCtas: false, checkCrashVideo: false },
+  { label: 'TJ', outPath: 'tj/index.html', checkHeroCtas: true, checkCrashVideo: true },
 ];
 
 async function main() {

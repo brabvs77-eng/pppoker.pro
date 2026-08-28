@@ -5,7 +5,8 @@
     {
       "fileId": "tj",
       "route": "/tj/",
-      "appendBlogSlotWhenMissing": true
+      "appendBlogSlotWhenMissing": true,
+      "appendNativeSlotsWhenMissing": true
     },
     {
       "fileId": "en",
@@ -41,7 +42,8 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "legacyHeaderSpacerElementIds": ["8141f77", "3f45d89"],
   "homepageDuplicateCtaElementIds": ["d014ade", "404896e", "b5a91f5"],
@@ -66,14 +68,16 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "homeChipCalculatorSlotRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "legacyFaqSectionElementId": "aa7fa52",
   "homeFaqSlotRoutes": [
@@ -81,7 +85,8 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "legacyRegistrationDesktopSectionElementId": "da376ea",
   "legacyRegistrationMobileSectionElementId": "f6f6130",
@@ -91,14 +96,16 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "homeRegistrationSlotRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "legacyWhyNutsSectionElementId": "6fdeb4a",
   "legacyPromoCardsSectionElementId": "f9ceb10",
@@ -107,7 +114,8 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "legacyCashGamesSectionElementId": "79d6e08",
   "homeWithdrawMethodsSlotRoutes": [
@@ -115,14 +123,16 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "homeWhyNutsSlotRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "legacyEmptySpacerElementIds": ["821dbda", "32273a8", "1eaf67a", "07af73c"],
   "homeCashGamesSlotRoutes": [
@@ -130,7 +140,8 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "homePromoBlocksSlotRoutes": [
     {
@@ -162,6 +173,11 @@
       "route": "/kz/",
       "legacyCrashPromoSectionElementId": "db11841",
       "legacyRusPokerPromoSectionElementId": "8982bde"
+    },
+    {
+      "fileId": "tj",
+      "route": "/tj/",
+      "appendWhenMissing": true
     }
   ],
   "homePromoModalsSlotRoutes": [
@@ -169,7 +185,8 @@
     { "fileId": "hy", "route": "/hy/" },
     { "fileId": "en", "route": "/en/" },
     { "fileId": "uz", "route": "/uz/" },
-    { "fileId": "kz", "route": "/kz/" }
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
   ],
   "stripLegacyFooterRoutes": [
     { "fileId": "_root", "route": "/" },
