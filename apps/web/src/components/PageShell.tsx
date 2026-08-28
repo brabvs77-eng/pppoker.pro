@@ -45,7 +45,9 @@ export function PageShell({
   const showHomePromo = (homePromoRoutes as readonly string[]).includes(page.route);
   const useLegacyBody = !structuredPost && !nativePage && !nativeBlog;
   const hasElementorFooter = useLegacyBody && bodyHtml.includes('id="colophon"');
-  const loadPageStyles = useLegacyBody || Boolean(structuredPost) || Boolean(nativePage);
+  const nativeHomeShell = isNativeHomeShellRoute(page.route);
+  const loadPageStyles =
+    (!nativeHomeShell && useLegacyBody) || Boolean(structuredPost) || Boolean(nativePage);
   const loadElementorRuntime = useLegacyBody && page.needsElementorRuntime;
   const loadNativeAnalytics = !loadElementorRuntime;
   const useNativeBlogJsonLd = Boolean(nativeBlog || structuredPost);

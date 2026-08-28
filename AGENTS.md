@@ -212,15 +212,21 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 6. ~~Home promo cards~~ — done (Sprint C3, `home-promo-cards.json`, `inject:promo-cards`)
 7. ~~Home hero~~ — done (Sprint C4, `home-hero.json`, `inject:home-hero`)
 8. ~~EN translation quality pass~~ — done (Sprint EN-Q1: review, GTO, VPIP, EV, opponents)
-9. **New post workflow** — add RU post → `catalog.json` → `post-translations/posts/*.json` → `npm run build`
+9. ~~New post workflow~~ — done (`docs/NEW_POST_WORKFLOW.md`, `polish:post-translations`)
 
 ## Adding or updating content
 
-1. Add or edit RU post HTML at repo root (`/slug/index.html`) or translation JSON in `post-translations/`
-2. Run `npm run build`
-3. Deploy `apps/web/out`
+**New blog post:** follow [docs/NEW_POST_WORKFLOW.md](docs/NEW_POST_WORKFLOW.md).
+
+Quick path:
+
+1. Add RU HTML at `/{slug}/index.html` + entry in `catalog.json` + `post-translations/posts/{id}.json`
+2. `npm run polish:post-translations && npm run verify:post-translations`
+3. `npm run build`
+4. Deploy `apps/web/out`
 
 ## Docs
 
 - [README.md](README.md) — commands, sprint history
+- [docs/NEW_POST_WORKFLOW.md](docs/NEW_POST_WORKFLOW.md) — add/update structured blog posts
 - [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md) — removed legacy artifacts

@@ -213,6 +213,8 @@ GitHub Actions on `main` (after build + smoke) `rsync`s `apps/web/out/` → `/va
 2. Run `npm run build` — content is re-extracted automatically.
 3. Deploy.
 
+**New structured blog post:** see [docs/NEW_POST_WORKFLOW.md](docs/NEW_POST_WORKFLOW.md) (catalog → translations → `polish:post-translations` → build).
+
 ## Next steps (optional improvements)
 
 - More `components/native/*` blocks to replace Elementor sections.

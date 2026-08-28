@@ -221,6 +221,15 @@ async function writePageRecord(fileId, record) {
   await fs.writeFile(path.join(pagesDir, `${fileId}.json`), `${serialized}\n`, 'utf8');
 }
 
+const LLMS_LOCALES = JSON.parse(
+  readFileSync(path.join(rootDir, 'apps/web/src/config/llms-locales.json'), 'utf8'),
+);
+
+function llmsOutputPath(locale) {
+  if (locale === 'ru') return path.join(rootDir, 'llms.txt');
+  return path.join(rootDir, locale, 'llms.txt');
+}
+
 async function generateLlmsTxt(pages) {
   const active = pages.filter(
     (page) =>
@@ -235,44 +244,61 @@ async function generateLlmsTxt(pages) {
     return `${SITE_URL}${normalized}`;
   }
 
-  const pageEntries = active
-    .filter(
-      (page) =>
-        page.type === 'home' ||
-        page.hasNativePage ||
-        isBlogArchiveRoute(page.route) ||
-        page.type === 'page',
-    )
-    .sort((a, b) => a.route.localeCompare(b.route));
+  const generated = [];
 
-  const postEntries = active
-    .filter((page) => page.type === 'post' && (page.hasStructuredPost || page.title))
-    .sort((a, b) => a.route.localeCompare(b.route));
+  for (const locale of Object.keys(LLMS_LOCALES)) {
+    const copy = LLMS_LOCALES[locale];
+    const localePages = active.filter((page) => page.locale === locale);
 
-  const lines = [
-    '# Nuts онлайн покер клуб pppoker россия',
-    '',
-    '> Онлайн покер на деньги — PPPoker. Надежный покер-рум с выводом, бонусами и турнирами.',
-    '',
-    `Generated ${new Date().toISOString().split('T')[0]}. All URLs: ${SITE_URL}`,
-    '',
-    '## Страницы',
-  ];
+    const pageEntries = localePages
+      .filter(
+        (page) =>
+          page.type === 'home' ||
+          page.hasNativePage ||
+          isBlogArchiveRoute(page.route) ||
+          page.type === 'page',
+      )
+      .sort((a, b) => a.route.localeCompare(b.route));
 
-  for (const page of pageEntries) {
-    lines.push(`- [${page.title}](${absoluteSiteUrl(page.route)})`);
+    const postEntries = localePages
+      .filter((page) => page.type === 'post' && (page.hasStructuredPost || page.title))
+      .sort((a, b) => a.route.localeCompare(b.route));
+
+    const lines = [
+      copy.title,
+      '',
+      copy.tagline,
+      '',
+      `Generated ${new Date().toISOString().split('T')[0]}. All URLs: ${SITE_URL}`,
+      '',
+      copy.pagesSection,
+    ];
+
+    for (const page of pageEntries) {
+      lines.push(`- [${page.title}](${absoluteSiteUrl(page.route)})`);
+    }
+
+    lines.push('', copy.blogSection);
+    for (const page of postEntries.slice(0, 32)) {
+      lines.push(`- [${page.title}](${absoluteSiteUrl(page.route)})`);
+    }
+
+    lines.push(
+      '',
+      copy.optionalSection,
+      `- [Sitemap index](${SITE_URL}/sitemap_index.xml)`,
+      '',
+    );
+
+    const llms = lines.join('\n');
+    const outputPath = llmsOutputPath(locale);
+    assertNoHekler(llms, path.relative(rootDir, outputPath));
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.writeFile(outputPath, llms, 'utf8');
+    generated.push(path.relative(rootDir, outputPath));
   }
 
-  lines.push('', '## Записи блога');
-  for (const page of postEntries.slice(0, 32)) {
-    lines.push(`- [${page.title}](${absoluteSiteUrl(page.route)})`);
-  }
-
-  lines.push('', '## Optional', `- [Sitemap index](${SITE_URL}/sitemap_index.xml)`, '');
-
-  const llms = lines.join('\n');
-  assertNoHekler(llms, 'llms.txt');
-  await fs.writeFile(path.join(rootDir, 'llms.txt'), llms, 'utf8');
+  console.log(`Generated llms.txt for ${generated.length} locales`);
 }
 
 async function main() {

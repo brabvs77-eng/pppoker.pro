@@ -17,6 +17,8 @@ const COPY_FILES = [
   'feed.xml',
 ];
 
+const LOCALE_LLMS = ['en', 'uz', 'kz', 'hy', 'tj'];
+
 async function copyDir(from, to) {
   await fs.cp(from, to, { recursive: true, force: true });
 }
@@ -40,6 +42,18 @@ async function main() {
     try {
       await fs.copyFile(source, path.join(publicDir, file));
       console.log(`Copied ${file}`);
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+    }
+  }
+
+  for (const locale of LOCALE_LLMS) {
+    const source = path.join(rootDir, locale, 'llms.txt');
+    try {
+      const destDir = path.join(publicDir, locale);
+      await fs.mkdir(destDir, { recursive: true });
+      await fs.copyFile(source, path.join(destDir, 'llms.txt'));
+      console.log(`Copied ${locale}/llms.txt`);
     } catch (error) {
       if (error.code !== 'ENOENT') throw error;
     }

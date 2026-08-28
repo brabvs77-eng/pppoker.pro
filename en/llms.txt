@@ -1,0 +1,45 @@
+# Nuts PPPoker — online poker club
+
+> Real-money online poker on PPPoker. A trusted room with withdrawals, bonuses, and tournaments.
+
+Generated 2026-08-28. All URLs: https://pppoker.pro
+
+## Pages
+- [PPPoker for Money — Nuts Online Poker Club](https://pppoker.pro/en/)
+- [Blog — Nuts PPPoker](https://pppoker.pro/en/blog/)
+- [Blog — Nuts PPPoker — page 2 of 5](https://pppoker.pro/en/blog/page/2/)
+- [Blog — Nuts PPPoker — page 3 of 5](https://pppoker.pro/en/blog/page/3/)
+- [Blog — Nuts PPPoker — page 4 of 5](https://pppoker.pro/en/blog/page/4/)
+- [Blog — Nuts PPPoker — page 5 of 5](https://pppoker.pro/en/blog/page/5/)
+- [Privacy Policy — Nuts PPPoker](https://pppoker.pro/en/privacy-policy/)
+- [User Agreement — Nuts PPPoker](https://pppoker.pro/en/user-agreement/)
+
+## Blog posts
+- [Roman Shaposhnikov — Poker Coach & Author — Nuts PPPoker](https://pppoker.pro/en/author-roman-shaposhnikov/)
+- [Bet Sizing in Poker: Preflop & Postflop Basics — Nuts PPPoker](https://pppoker.pro/en/bet-sizing-basics-in-poker/)
+- [Biggest PPPoker Tournament: Prize Pool & Highlights — Nuts PPPoker](https://pppoker.pro/en/biggest-pppoker-tournament/)
+- [Bomb Pot in Poker: Rules and Strategy — Nuts PPPoker](https://pppoker.pro/en/bomb-pot-poker-rules-and-strategy/)
+- [How to Play 6+ (Short Deck) in PPPoker NUTS — Nuts PPPoker](https://pppoker.pro/en/how-to-play-short-deck-6-plus-in-pppoker-nuts/)
+- [What to Do With Poker Winnings: Bankroll, Training & More — Nuts PPPoker](https://pppoker.pro/en/how-to-spend-poker-winnings/)
+- [Implied Odds in Poker: How to Apply Potential Pot Odds — Nuts PPPoker](https://pppoker.pro/en/implied-odds-in-poker/)
+- [Know Your Poker Opponents: Player Types and How to Beat Them — Nuts PPPoker](https://pppoker.pro/en/know-your-poker-opponents-secrets-of-winning-strategies/)
+- [Live Poker Etiquette: What Beginners Need to Know — Nuts PPPoker](https://pppoker.pro/en/live-poker-etiquette-for-beginners/)
+- [Poker Player Types: TAG, LAG, Nit & Fish — Nuts PPPoker](https://pppoker.pro/en/main-poker-player-types/)
+- [Microstakes Tournament Strategy — Nuts PPPoker](https://pppoker.pro/en/microstakes-tournament-strategy/)
+- [Multi-Table Tournaments (MTT): Rules, Formats & Strategy — Nuts PPPoker](https://pppoker.pro/en/multi-table-tournaments-mtt/)
+- [No-Limit Texas Hold'em (NLH) Rules — Nuts PPPoker](https://pppoker.pro/en/no-limit-texas-holdem-rules-nlh/)
+- [Open Face Chinese Poker (OFC): Rules & Scoring — Nuts PPPoker](https://pppoker.pro/en/open-face-chinese-poker-ofc/)
+- [Poker Agents: Who They Are, Their Role, and Benefits for Players — Nuts PPPoker](https://pppoker.pro/en/poker-agents/)
+- [Poker GTO Explained: How to Apply It at NUTS — Nuts PPPoker](https://pppoker.pro/en/poker-gto-in-nuts-club/)
+- [Pot-Limit Omaha (PLO) Rules & Hand Rankings — Nuts PPPoker](https://pppoker.pro/en/pot-limit-omaha-plo-rules/)
+- [PROMO: MINI HIGHROLLER IN THE NUTS CLUB! — Nuts PPPoker](https://pppoker.pro/en/pppoker-mini-highroller-promo/)
+- [PPPoker NUTS: Bomb Pot — Explosive Action Format! — Nuts PPPoker](https://pppoker.pro/en/pppoker-nuts-bomb-pot-action-format/)
+- [PPPoker Review 2026: Clubs, Games, Rakeback, and Risks — Nuts PPPoker](https://pppoker.pro/en/pppoker-review-2026/)
+- [Starting Hands in Texas Hold'em — Nuts PPPoker](https://pppoker.pro/en/starting-hands-in-texas-holdem/)
+- [Texas Hold'em Rules for Beginners — Nuts PPPoker](https://pppoker.pro/en/texas-holdem-rules/)
+- [VPIP in Poker: What It Means and How to Use It — Nuts PPPoker](https://pppoker.pro/en/vpip-stat-in-poker/)
+- [What Is EV in Poker? Expected Value Explained — Nuts PPPoker](https://pppoker.pro/en/what-is-ev-in-poker/)
+- [What Is PPPoker? Private Poker Clubs Platform Review 2026 — Nuts PPPoker](https://pppoker.pro/en/what-is-pppoker/)
+
+## Optional
+- [Sitemap index](https://pppoker.pro/sitemap_index.xml)
