@@ -25,7 +25,7 @@ export function isBlogArchiveRoute(route) {
 
 /** Homepages with native blog/review/FAQ/registration shells — no Elementor JS. */
 export function isNativeHomeShellRoute(route) {
-  return ['/', '/en/', '/hy/', '/uz/', '/kz/'].includes(route);
+  return ['/', '/en/', '/hy/', '/uz/', '/kz/', '/tj/'].includes(route);
 }
 
 export function bodyNeedsElementorRuntime(bodyHtml) {

@@ -49,7 +49,7 @@ Migration pattern: **Strangler Fig** — replace Elementor sections with native 
 4. **Home review slot** (`homeReviewSlotRoutes`) → static review cards + `ReviewSnippetsJsonLd`; no client portal
 5. **Everything else** → `WordPressBody` + Elementor CSS; load runtime only if `needsElementorRuntime`
 
-`needsElementorRuntime` is false when body has no interactive widgets (swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, taxonomy redirect, native home shell (`/`, `/en/`, `/hy/`, `/uz/`, `/kz/`), or a static landing page that only embeds global Elementor popups.
+`needsElementorRuntime` is false when body has no interactive widgets (swiper, FAQ accordion, slides, testimonials, loop-grid), or the route is a structured post, native page, blog archive, taxonomy redirect, native home shell (`/`, `/en/`, `/hy/`, `/uz/`, `/kz/`, `/tj/`), or a static landing page that only embeds global Elementor popups.
 
 ## Hard constraints (CI will fail)
 
@@ -190,17 +190,17 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 | Analytics on native pages | `AnalyticsScripts` when Elementor runtime skipped; `verify:analytics` in GHA |
 | Native footer social | Telegram channel + Instagram in `SiteFooter`; `#colophon` stripped on home; smoke checks |
 | Lighthouse CI | `lighthouse:budget` in GHA after smoke — LCP ≤ 4500ms, CLS ≤ 0.10 on 5 homepages |
-| Home FAQ accordion | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS `<details>`; `verify:home-faq`; smoke |
-| Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
-| Home cash games grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 3 static cards; `verify:home-cash-games` |
-| Home Why NUTS grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — 8 feature tiles; `verify:home-why-nuts` |
-| Home hero | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — headline, NUTS logo (LCP), Telegram CTA, bonus panel; `verify:home-hero` |
-| Home app download | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — store badges + `#reg` anchor; `verify:home-app-download` |
-| Home promo blocks (CRASH / Russian Poker) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — static HTML + autoplay script; `verify:home-promo-blocks` |
-| Home promo cards | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — bonus/events/jackpot grid + modal triggers; `verify:home-promo-cards` |
-| Home promo modals | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/` — native `<dialog>` + stripped Elementor popups; `verify:home-promo-modals` |
+| Home FAQ accordion | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — CSS `<details>`; `verify:home-faq`; smoke |
+| Home registration steps | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — CSS radio carousel; `verify:home-registration`; no Elementor swiper |
+| Home cash games grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — 3 static cards; `verify:home-cash-games` |
+| Home Why NUTS grid | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — 8 feature tiles; `verify:home-why-nuts` |
+| Home hero | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — headline, NUTS logo (LCP), Telegram CTA, bonus panel; `verify:home-hero` |
+| Home app download | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — store badges + `#reg` anchor; `verify:home-app-download` |
+| Home promo blocks (CRASH / Russian Poker) | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — static HTML + autoplay script; `verify:home-promo-blocks` |
+| Home promo cards | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — bonus/events/jackpot grid + modal triggers; `verify:home-promo-cards` |
+| Home promo modals | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — native `<dialog>` + stripped Elementor popups; `verify:home-promo-modals` |
 | Dead homepage markup stripped | `/`, `/hy/`, `/en/`, `/uz/`, `/kz/`, `/tj/` — legacy `#masthead`, duplicate hero CTAs; `verify:home-dead-markup` |
-| Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 5 homepages skip `needsElementorRuntime`; empty spacers stripped; Widster mount kept + `WidsterEmbed` script; `verify:home-shell` |
+| Native home shell (no Elementor JS) | `isNativeHomeShellRoute` — 6 homepages skip `needsElementorRuntime`; empty spacers stripped; Widster mount kept + `WidsterEmbed` script; `verify:home-shell` |
 
 ## Planned work (backlog)
 
