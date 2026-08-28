@@ -132,6 +132,15 @@ async function main() {
         violations.push(`[${stage.label}] unexpected sitemap URL (not in manifest): ${url}`);
       }
     }
+
+    for (const orphan of ['category-sitemap.xml', 'post_tag-sitemap.xml']) {
+      try {
+        await fs.access(path.join(stage.dir, orphan));
+        violations.push(`[${stage.label}] orphan taxonomy sitemap must be removed: ${orphan}`);
+      } catch {
+        // expected — file absent
+      }
+    }
   }
 
   if (violations.length) {

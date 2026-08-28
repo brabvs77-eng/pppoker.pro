@@ -12,6 +12,13 @@ export const homepageNativeRoutes = [
   '/tj/',
 ] as const;
 
+/** Home shells with native sections only — skip legacy Yoast JSON-LD. */
+export const nativeHomeShellRoutes = homepageNativeRoutes;
+
+export function isNativeHomeShellRoute(route: string): boolean {
+  return (nativeHomeShellRoutes as readonly string[]).includes(route);
+}
+
 export const homePromoRoutes = homepageNativeRoutes;
 
 /** Legal/about pages rendered via NativePage (content/pages/*.json). */

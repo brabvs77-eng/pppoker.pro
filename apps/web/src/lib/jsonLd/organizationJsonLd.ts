@@ -33,7 +33,7 @@ export function buildOrganizationNode(locale: AppLocale) {
         '@type': 'ContactPoint',
         contactType: 'customer support',
         url: siteContacts.telegramManager,
-        availableLanguage: ['ru', 'en', 'uz', 'kk', 'hy'],
+    "availableLanguage": ['ru', 'en', 'uz', 'kk', 'hy', 'tg'],
       },
     ],
   };
@@ -49,6 +49,13 @@ export function buildWebSiteNode(locale: AppLocale) {
     name: 'pppoker.pro',
     alternateName: 'Nuts',
     publisher: { '@id': `${siteUrl}#organization` },
-    inLanguage: locale === 'ru' ? 'ru-RU' : `${locale}-${locale.toUpperCase()}`,
+    inLanguage:
+      locale === 'ru'
+        ? 'ru-RU'
+        : locale === 'kz'
+          ? 'kk-KZ'
+          : locale === 'tj'
+            ? 'tg-TJ'
+            : `${locale}-${locale.toUpperCase()}`,
   };
 }

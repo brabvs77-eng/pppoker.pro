@@ -53,7 +53,7 @@ export async function StructuredPost({ post, relatedPosts = [] }: StructuredPost
             <img
               className="post-article__hero-image"
               src={post.image}
-              alt=""
+              alt={post.title}
               width={1200}
               height={675}
               loading="eager"
@@ -72,7 +72,7 @@ export async function StructuredPost({ post, relatedPosts = [] }: StructuredPost
             <div className="post-article__related-grid">
               {relatedPosts.map((related) => (
                 <a key={related.route} href={related.route} className="post-article__related-card">
-                  {related.image ? <img src={related.image} alt="" loading="lazy" /> : null}
+                  {related.image ? <img src={related.image} alt={related.title} loading="lazy" /> : null}
                   <span>{related.title}</span>
                 </a>
               ))}
