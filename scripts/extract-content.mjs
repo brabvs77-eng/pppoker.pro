@@ -5,8 +5,9 @@ import { fileURLToPath } from 'node:url';
 import { load } from 'cheerio';
 
 import { buildPostTagsIndex } from './lib/post-tags.mjs';
-import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
+import { applyManifestSeoPatches } from './lib/manifest-seo.mjs';
 import { assertNoHekler, normalizeUrls } from '../src/lib/normalizeUrls.mjs';
+import { discoverWordPressPages } from '../src/lib/wordpressHtml.mjs';
 import { computeCssBudget } from './compute-css-budget.mjs';
 import { isBlogArchiveRoute, needsElementorRuntime } from './lib/elementor-runtime-budget.mjs';
 import { taxonomyBlogRedirectDestination } from './lib/taxonomy-blog-redirects.mjs';
@@ -367,6 +368,8 @@ async function main() {
 
     manifestPages.push(entry);
   }
+
+  applyManifestSeoPatches(manifestPages);
 
   const budget = computeCssBudget(manifestPages);
 

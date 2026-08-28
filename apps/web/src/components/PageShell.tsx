@@ -16,7 +16,7 @@ import { WidsterEmbed } from '@/components/native/WidsterEmbed';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
 import { WordPressRuntimeScripts } from '@/components/WordPressRuntimeScripts';
-import { homePromoRoutes } from '@/config/site';
+import { homePromoRoutes, isNativeHomeShellRoute } from '@/config/site';
 import type { BlogArchiveSlice } from '@/lib/blogArchive';
 import type { BlogPostCard } from '@/lib/blogRotation';
 import type { AppLocale } from '@/i18n/routing';
@@ -49,11 +49,12 @@ export function PageShell({
   const loadElementorRuntime = useLegacyBody && page.needsElementorRuntime;
   const loadNativeAnalytics = !loadElementorRuntime;
   const useNativeBlogJsonLd = Boolean(nativeBlog || structuredPost);
+  const skipLegacyJsonLd = useNativeBlogJsonLd || isNativeHomeShellRoute(page.route);
 
   return (
     <>
       {loadPageStyles ? <WordPressHead page={page} /> : null}
-      <JsonLd blocks={useNativeBlogJsonLd ? [] : page.jsonLd} />
+      <JsonLd blocks={skipLegacyJsonLd ? [] : page.jsonLd} />
       {nativeBlog ? (
         <BlogJsonLdBlock locale={page.locale as AppLocale} route={page.route} />
       ) : null}

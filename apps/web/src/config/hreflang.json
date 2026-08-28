@@ -14,13 +14,20 @@
     "x-default": "https://pppoker.pro/"
   },
   "reviewRoutes": [
+    "/obzor-onlajn-platformy-pppoker-2025/",
     "/en/pppoker-review-2026/",
+    "/uz/pppoker-2026/",
     "/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/",
-    "/uz/pppoker-2026/"
+    "/hy/pppoker-review-2026/",
+    "/tj/pppoker-review-2026/"
   ],
   "reviewLanguages": {
+    "ru": "https://pppoker.pro/obzor-onlajn-platformy-pppoker-2025/",
     "en": "https://pppoker.pro/en/pppoker-review-2026/",
     "kk": "https://pppoker.pro/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/",
-    "uz": "https://pppoker.pro/uz/pppoker-2026/"
+    "uz": "https://pppoker.pro/uz/pppoker-2026/",
+    "hy": "https://pppoker.pro/hy/pppoker-review-2026/",
+    "tg": "https://pppoker.pro/tj/pppoker-review-2026/",
+    "x-default": "https://pppoker.pro/obzor-onlajn-platformy-pppoker-2025/"
   }
 }

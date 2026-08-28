@@ -22,6 +22,11 @@ const HEAD_SAMPLES = [
   { route: '/blog/', label: 'RU blog archive' },
 ];
 
+const POST_HREFLANG_SAMPLES = [
+  { route: '/chto-takoe-pppoker/', label: 'RU post cluster' },
+  { route: '/en/what-is-pppoker/', label: 'EN post cluster' },
+];
+
 function outputPathForRoute(route) {
   if (route === '/') return path.join(outDir, 'index.html');
   return path.join(outDir, route.replace(/^\//, ''), 'index.html');
@@ -53,6 +58,22 @@ function verifySitemapXml(xml, label, violations) {
       violations.push(
         `[${label}] deprecated hreflang code "${code}" — use BCP 47 from hreflang.json codeMap`,
       );
+    }
+  }
+}
+
+function verifyPostCluster(block, label, violations) {
+  for (const code of ['ru', 'en', 'uz', 'kk', 'hy', 'tg', 'x-default']) {
+    if (!block.includes(`hreflang="${code}"`)) {
+      violations.push(`[${label}] missing translated-post hreflang="${code}"`);
+    }
+  }
+}
+
+function verifyBlogArchiveCluster(block, label, violations) {
+  for (const code of ['ru', 'en', 'uz', 'kk', 'hy', 'tg', 'x-default']) {
+    if (!block.includes(`hreflang="${code}"`)) {
+      violations.push(`[${label}] missing blog-archive hreflang="${code}"`);
     }
   }
 }
@@ -108,6 +129,22 @@ async function main() {
       }
       verifyHomeCluster(block, `${stage.label} ${route}`, violations);
     }
+
+    for (const sample of POST_HREFLANG_SAMPLES) {
+      const block = extractLocForRoute(combinedXml, sample.route);
+      if (!block) {
+        violations.push(`[${stage.label}] post sample missing from sitemap: ${sample.route}`);
+        continue;
+      }
+      verifyPostCluster(block, `${stage.label} ${sample.label}`, violations);
+    }
+
+    const blogBlock = extractLocForRoute(combinedXml, '/en/blog/page/5/');
+    if (!blogBlock) {
+      violations.push(`[${stage.label}] EN blog page 5 missing from sitemap`);
+    } else {
+      verifyBlogArchiveCluster(blogBlock, `${stage.label} EN blog page 5`, violations);
+    }
   }
 
   for (const sample of HEAD_SAMPLES) {
@@ -142,7 +179,7 @@ async function main() {
   }
 
   console.log(
-    `verify-hreflang: OK (BCP 47 in sitemaps, ${config.homeRoutes.length} home clusters, ${HEAD_SAMPLES.length} export samples)`,
+    `verify-hreflang: OK (BCP 47 in sitemaps, ${config.homeRoutes.length} home clusters, ${HEAD_SAMPLES.length} export samples, ${POST_HREFLANG_SAMPLES.length} post clusters)`,
   );
 }
 

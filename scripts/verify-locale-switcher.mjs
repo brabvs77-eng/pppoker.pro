@@ -49,9 +49,11 @@ for (const sample of samples) {
     continue;
   }
 
-  const tjLink = switcher[0].match(/href="(\/tj\/?)"[^>]*hrefLang="tj"|hrefLang="tj"[^>]*href="(\/tj\/?)"/);
+  const tjLink = switcher[0].match(
+    /href="(\/tj[^"]*)"[^>]*hrefLang="tj"|hrefLang="tj"[^>]*href="(\/tj[^"]*)"/,
+  );
   if (!tjLink) {
-    console.error(`${sample.label}: TJ switcher link missing href=/tj/`);
+    console.error(`${sample.label}: TJ switcher link missing href under /tj/`);
     failed = true;
     continue;
   }
