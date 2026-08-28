@@ -18,7 +18,7 @@ const HOME_SMOKE_PAGES = [
   { label: 'EN', urlPath: '/en/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 2, minReviewCards: 6, requireChipCalculator: true, minFaqItems: 5, feedHref: '/en/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
   { label: 'UZ', urlPath: '/uz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 2, minReviewCards: 6, requireChipCalculator: true, minFaqItems: 8, feedHref: '/uz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
   { label: 'KZ', urlPath: '/kz/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 1, minReviewCards: 6, requireChipCalculator: true, minFaqItems: 8, feedHref: '/kz/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
-  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 0, minCashGameCards: 0, minCashGameVariants: 0, minWithdrawMethodLogos: 0, minHomeBlogCards: 2, minReviewCards: 0, minFaqItems: 0, feedHref: '/tj/feed.xml', checkHeroCtas: false, checkCrashVideo: false, checkNativeFooter: true },
+  { label: 'TJ', urlPath: '/tj/', minSwipers: 0, minRegistrationSlides: 5, minCashGameCards: 3, minCashGameVariants: 6, minWithdrawMethodLogos: 7, minHomeBlogCards: 2, minReviewCards: 6, requireChipCalculator: true, minFaqItems: 5, feedHref: '/tj/feed.xml', checkHeroCtas: true, checkCrashVideo: true, checkNativeFooter: true },
 ];
 
 const LOCALE_BY_LABEL = {

@@ -39,16 +39,16 @@
       "playersHtml": "50 000 pppoker players <span class=\"home-hero__muted\">from Latin America, Europe and Asia. ​</span>",
       "inviteHtml": "Only poker amateurs. <span class=\"home-hero__muted\">Join our club and get win today!​</span>",
       "ctaLabel": "Message on Telegram",
-      "playTitleHtml": "START PLAYING PPPOKER",
+      "playTitleHtml": "START PLAYING <br> PPPOKER",
       "playSubtitleHtml": "You can start through your <br><span class=\"home-hero__panel-muted\">personal manager.</span>",
       "playBodyHtml": "We will explain everything, help with setup, <span class=\"home-hero__panel-muted\"><br>and provide you with...🔥🔥🔥</span>",
       "bonusLabel": "bonus",
       "bonusPercent": "150%",
       "bonusCapHtml": "on deposit<br>UP to 500$",
-      "bonusCta": "Message to manager and claim your bonus now !!!",
+      "bonusCta": "Message manager and claim your bonus!",
       "registerHtml": "Or you can <a class=\"home-hero__link\" href=\"#reg\">Register in pppoker</a> on your own by following our detailed instructions.",
       "background": "/assets/media/2024/07/Mask-group-opt.webp",
-      "panelBackground": "/assets/media/2024/07/Mask-group-1-2-opt.webp",
+      "panelBackground": null,
       "logo": {
         "src": "/assets/media/2024/07/NUTS.webp",
         "width": 527,
@@ -131,6 +131,31 @@
         "alt": "nuts pppoker"
       },
       "playHotspotLabel": "Ойнауды бастау"
+    },
+    "tj": {
+      "onlineBadge": "ONLINE",
+      "title": "КЛУБИ ПОКЕРИ PPPOKER",
+      "taglineHtml": "Ба NUTS ҳамроҳ шавед — калонтарин клуби онлайнӣ дар платформаи PPPoker.",
+      "playersHtml": "50 000 бозигари pppoker <span class=\"home-hero__muted\">аз Амрико, Аврупо ва Осиё.​</span>",
+      "inviteHtml": "Танҳо ҳаваскорони покер. <span class=\"home-hero__muted\">Ба клуби мо ҳамроҳ шавед ва имрӯз бурд кунед!​</span>",
+      "ctaLabel": "Дар Telegram навиштан",
+      "playTitleHtml": "ОҒОЗ КУНЕД <br> БОЗИИ ПОКЕР",
+      "playSubtitleHtml": "Мумкин аст тавассути <br><span class=\"home-hero__panel-muted\">менеджери шахсии Nuts.</span>",
+      "playBodyHtml": "Ӯ ҳама чизро мефаҳмонад, дар насби барномаи pppoker кӯмак мекунад<span class=\"home-hero__panel-muted\"><br>ва медиҳад...🔥🔥🔥</span>",
+      "bonusLabel": "Бонус",
+      "bonusPercent": "150%",
+      "bonusCapHtml": "ба депозит<br>то 500$",
+      "bonusCta": "Ба менеҷер нависед ва бонусро гиред !!!",
+      "registerHtml": "Ё шумо метавонед мустақилона мувофиқи дастури муфассали мо <a class=\"home-hero__link\" href=\"#reg\">дар pppoker бақайдгирӣ кунед</a>.",
+      "background": "/assets/media/2024/07/Mask-group-opt.webp",
+      "panelBackground": null,
+      "logo": {
+        "src": "/assets/media/2024/07/NUTS.webp",
+        "width": 527,
+        "height": 122,
+        "alt": "nuts pppoker"
+      },
+      "playHotspotLabel": "Бозиро оғоз кунед"
     }
   },
   "playHotspot": {

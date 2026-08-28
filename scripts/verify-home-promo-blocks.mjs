@@ -57,6 +57,7 @@ const localeByRoute = {
   '/en/': 'en',
   '/uz/': 'uz',
   '/kz/': 'kz',
+  '/tj/': 'tj',
 };
 
 function main() {

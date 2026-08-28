@@ -4,7 +4,8 @@
     "en": "Why NUTS poker club?",
     "hy": "Ինչու պոկեր NUTS-ի հետ միասին:",
     "uz": "Nima klub NUTS?",
-    "kz": "Неліктен NUTS клубы?"
+    "kz": "Неліктен NUTS клубы?",
+    "tj": "Чаро покер бо NUTS?"
   },
   "tiles": [
     {
@@ -19,7 +20,8 @@
         "en": "More than 25 000 <br><span class=\"home-why__muted\">poker amateurs from all over the world</span>",
         "hy": "Ավելի քան 25,000 <br><span class=\"home-why__muted\">պոկերի սիրահարներ ամբողջ աշխարհից</span>",
         "uz": "Ko'proq 25 000 <br><span class=\"home-why__muted\">dunyo bo'ylab havaskorlar</span>",
-        "kz": "Более 25 000 <br><span class=\"home-why__muted\">әлемнің түкпір-түкпірінен келген әуесқойлар</span>"
+        "kz": "Более 25 000 <br><span class=\"home-why__muted\">әлемнің түкпір-түкпірінен келген әуесқойлар</span>",
+        "tj": "Зиёда аз 25 000 <br><span class=\"home-why__muted\">ҳаваскори покер аз тамоми ҷаҳон</span>"
       },
       "background": "radial-gradient(at top left, #FDD856 11%, #101622 43%)"
     },
@@ -35,7 +37,8 @@
         "en": "24/7 <br><span class=\"home-why__muted\">all type of games<br>in pppoker</span>",
         "hy": "24/7 <br><span class=\"home-why__muted\">բոլոր տեսակի խաղեր</span>",
         "uz": "24/7 <br><span class=\"home-why__muted\">barcha turdagi o'yinlar<br></span>",
-        "kz": "24/7 <br><span class=\"home-why__muted\">ойындардың барлық түрлері</span>"
+        "kz": "24/7 <br><span class=\"home-why__muted\">ойындардың барлық түрлері</span>",
+        "tj": "24/7 <br><span class=\"home-why__muted\">ҳама намуди бозиҳо</span>"
       },
       "background": "radial-gradient(at top left, #FF2272 11%, #101622 43%)"
     },
@@ -51,7 +54,8 @@
         "en": "<span class=\"home-why__muted\">Internal</span><br> security system",
         "hy": "<span class=\"home-why__muted\">Սեփական</span><br> անվտանգության համակարգ",
         "uz": "<span class=\"home-why__muted\">O'z</span><br> tizim xavfsizlik",
-        "kz": "<span class=\"home-why__muted\">Меншікті</span><br> жүйе қауіпсіздік"
+        "kz": "<span class=\"home-why__muted\">Меншікті</span><br> жүйе қауіпсіздік",
+        "tj": "<span class=\"home-why__muted\">Хусусии</span><br> системаи амниятӣ"
       },
       "background": "radial-gradient(at top left, #4CAF50 11%, #101622 43%)"
     },
@@ -67,7 +71,8 @@
         "en": "Easy to transfert <br>and to cashout <span class=\"home-why__muted\">money</span>",
         "hy": "Հեշտ մուտք <br>և եզրակացություն <span class=\"home-why__muted\">գումար</span>",
         "uz": "Oson kirish <br>va xulosa <span class=\"home-why__muted\">mablag'lar</span>",
-        "kz": "Оңай енгізу <br>және қорытынды <span class=\"home-why__muted\">қаражатты</span>"
+        "kz": "Оңай енгізу <br>және қорытынды <span class=\"home-why__muted\">қаражатты</span>",
+        "tj": "Гузоштани осон <br>ва гирифтани <span class=\"home-why__muted\">маблағ</span>"
       },
       "background": "radial-gradient(at top left, #039BE5 11%, #101622 43%)"
     },
@@ -83,7 +88,8 @@
         "en": "Personal <span class=\"home-why__muted\">support service <br>online 24/7</span>",
         "hy": "Անձնական <span class=\"home-why__muted\">մենեջեր Nuts <br>կապի մեջ 24/7</span>",
         "uz": "Shaxsiy<span class=\"home-why__muted\"> menejer <br>aloqada 24/7</span>",
-        "kz": "Дербес менеджер <span class=\"home-why__muted\">байланыста 24/7 <br></span>"
+        "kz": "Дербес менеджер <span class=\"home-why__muted\">байланыста 24/7 <br></span>",
+        "tj": "Менеджери <span class=\"home-why__muted\">шахсии Nuts <br>дар алоқа 24/7</span>"
       },
       "background": "radial-gradient(at top left, #C856FD 11%, #101622 43%)"
     },
@@ -99,7 +105,8 @@
         "en": "<span class=\"home-why__muted\">Jackpot </span> <br>to 100000$",
         "hy": "<span class=\"home-why__muted\">Ջեքփոթ</span> <br> 100000$",
         "uz": "<span class=\"home-why__muted\">Jekpot</span> <br>oldin 100000$",
-        "kz": "<span class=\"home-why__muted\">Джекпот</span> <br>100000$"
+        "kz": "<span class=\"home-why__muted\">Джекпот</span> <br>100000$",
+        "tj": "<span class=\"home-why__muted\">Ҷекпот</span> <br>то 100000$"
       },
       "background": "radial-gradient(at top left, #FF3A3A 11%, #101622 43%)"
     },
@@ -115,7 +122,8 @@
         "en": "<span class=\"home-why__muted\">Deposit </span> <br>from 10$&nbsp;",
         "hy": "<span class=\"home-why__muted\">Ավանդ</span> <br> 5$&nbsp;",
         "uz": "<span class=\"home-why__muted\">Depozit </span> <br>6 dan$",
-        "kz": "<span class=\"home-why__muted\">Депозит</span> <br>от 10$&nbsp;"
+        "kz": "<span class=\"home-why__muted\">Депозит</span> <br>от 10$&nbsp;",
+        "tj": "<span class=\"home-why__muted\">Пасандоз</span> <br>аз 10$&nbsp;"
       },
       "background": "radial-gradient(at top left, #5C6B8A 11%, #101622 43%)"
     },

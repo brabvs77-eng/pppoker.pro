@@ -73,9 +73,10 @@ function main() {
     '/en/': 'en',
     '/uz/': 'uz',
     '/kz/': 'kz',
+    '/tj/': 'tj',
   };
 
-  assert(whyNutsRoutes.length === 5, 'config: expected 5 homeWhyNutsSlotRoutes');
+  assert(whyNutsRoutes.length === 6, 'config: expected 6 homeWhyNutsSlotRoutes');
 
   for (const { fileId, route } of whyNutsRoutes) {
     const bodyPath = path.join(BODIES, `${fileId}-with-blog-slot.html`);

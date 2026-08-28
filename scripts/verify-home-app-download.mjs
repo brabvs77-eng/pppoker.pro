@@ -48,7 +48,7 @@ function main() {
   const chrome = JSON.parse(read(CHROME));
   const routes = chrome.homeAppDownloadSlotRoutes ?? [];
   const legacySectionId = chrome.legacyAppDownloadSectionElementId;
-  assert(routes.length === 5, 'config: expected 5 homeAppDownloadSlotRoutes');
+  assert(routes.length === 6, 'config: expected 6 homeAppDownloadSlotRoutes');
 
   for (const { fileId, route } of routes) {
     const bodyPath = path.join(BODIES, `${fileId}-with-blog-slot.html`);
