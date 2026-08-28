@@ -171,6 +171,38 @@
         "guaranteeLabel": "Кепілдікпен дейін:",
         "guaranteeAmount": "20000$"
       }
+    ],
+    "tj": [
+      {
+        "kind": "variants",
+        "title": "Бозиҳои кеш",
+        "subtitle": "Ҳама намудҳои мавҷуда",
+        "items": [
+          "NLH",
+          "PLO4",
+          "PLO5",
+          "PLO6",
+          "Short Deck <span class=\"home-cash__muted\">(6+)</span> SEKA",
+          "OFC <span class=\"home-cash__muted\">(Чинӣ)</span>"
+        ]
+      },
+      {
+        "kind": "buyins",
+        "title": "Бай-инҳо",
+        "subtitle": "Барои ҳар гуна бонкролл!",
+        "leadHtml": "Ба мизи покер гузоштан<br> мумкин аст аз",
+        "min": "0.4$",
+        "connector": "то",
+        "max": "2000$"
+      },
+      {
+        "kind": "tournaments",
+        "title": "Турнирҳо",
+        "subtitle": "Мукофотҳои калон",
+        "lines": ["40 турнир дар як рӯз"],
+        "guaranteeLabel": "Бо кафолат то:",
+        "guaranteeAmount": "20000$"
+      }
     ]
   }
 }
