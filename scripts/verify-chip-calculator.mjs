@@ -39,7 +39,9 @@ function outPathForRoute(route) {
 function verifyBodyHtml(html, label, locale) {
   const { labels } = loadChipCalculator(locale);
   assert(html.includes('id="native-chip-calculator"'), `${label}: missing native-chip-calculator`);
-  assert(html.includes('data-chip-calculator-usd'), `${label}: missing USD input`);
+  assert(html.includes('data-chip-calculator-money'), `${label}: missing money input`);
+  assert(html.includes('data-chip-calculator-rate'), `${label}: missing FX rate attribute`);
+  assert(html.includes(`data-chip-calculator-currency="${labels.currency}"`), `${label}: missing currency "${labels.currency}"`);
   assert(html.includes('data-chip-calculator-chips'), `${label}: missing chips input`);
   assert(html.includes('data-chip-calculator-preset'), `${label}: missing preset buttons`);
   assert(html.includes(labels.title), `${label}: missing localized title "${labels.title}"`);

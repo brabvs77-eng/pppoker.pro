@@ -93,8 +93,8 @@ function verifyHomepageWidgets(
     if (!html.includes('id="native-chip-calculator"')) {
       violations.push(`[${label}] Missing native chip calculator section`);
     }
-    if (!html.includes('data-chip-calculator-usd')) {
-      violations.push(`[${label}] Missing chip calculator USD input`);
+    if (!html.includes('data-chip-calculator-money')) {
+      violations.push(`[${label}] Missing chip calculator money input`);
     }
     const calcIndex = html.indexOf('id="native-chip-calculator"');
     const reviewIndex = html.indexOf('id="native-review-snippets"');

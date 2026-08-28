@@ -95,7 +95,7 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     })(),
     homeBlogCards: document.querySelectorAll('.home-blog__card').length,
     chipCalculator: !!document.querySelector('#native-chip-calculator'),
-    chipCalculatorUsd: !!document.querySelector('[data-chip-calculator-usd]'),
+    chipCalculatorMoney: !!document.querySelector('[data-chip-calculator-money]'),
     reviewCards: document.querySelectorAll('.review-snippets__card').length,
     reviewStars: document.querySelectorAll('.review-stars').length,
     rssLink: feedHref
@@ -208,8 +208,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     if (!state.chipCalculator) {
       violations.push(`[${label}] Missing native chip calculator section`);
     }
-    if (!state.chipCalculatorUsd) {
-      violations.push(`[${label}] Missing chip calculator USD input`);
+    if (!state.chipCalculatorMoney) {
+      violations.push(`[${label}] Missing chip calculator money input`);
     }
   }
   if (minReviewCards > 0 && state.reviewCards < minReviewCards) {
