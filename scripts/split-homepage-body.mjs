@@ -218,6 +218,7 @@ async function main() {
   const appDownloadSectionId = chrome.legacyAppDownloadSectionElementId;
   const whyNutsSectionId = chrome.legacyWhyNutsSectionElementId;
   const promoCardsSectionId = chrome.legacyPromoCardsSectionElementId;
+  const promoDecorSectionId = chrome.legacyPromoDecorSectionElementId;
   const heroSectionId = chrome.homepageHeroRootElementId;
   const homeRoutes = chrome.homeBlogSlotRoutes ?? [{ fileId: '_root', route: '/' }];
   const reviewRoutes = new Set(
@@ -333,6 +334,10 @@ async function main() {
 
     if (promoCardsSectionId && promoCardsRoutes.has(route)) {
       processed = replaceElementorSectionWithSlot(processed, promoCardsSectionId, promoCardsSlotHtml);
+    }
+
+    if (promoDecorSectionId && promoCardsRoutes.has(route)) {
+      processed = stripElementorSection(processed, promoDecorSectionId);
     }
 
     if (reviewsSectionId && chipCalculatorRoutes.has(route)) {

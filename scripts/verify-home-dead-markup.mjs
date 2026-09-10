@@ -45,6 +45,14 @@ function verifyDeadMarkup(html, label, chrome, { fileId, stripMasthead, stripShe
     }
 
     assert(html.includes('id="widster-'), `${label}: missing Widster mount`);
+
+    const promoDecorId = chrome.legacyPromoDecorSectionElementId;
+    if (stripShellDeadMarkup && promoDecorId) {
+      assert(
+        !html.includes(containerNeedle(promoDecorId)),
+        `${label}: legacy promo decor section ${promoDecorId} still present between Why NUTS and promo cards`,
+      );
+    }
   }
 }
 

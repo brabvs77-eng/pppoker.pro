@@ -42,6 +42,8 @@ function verifyBodyHtml(html, label, locale) {
   assert(html.includes('class="home-deposit__title"'), `${label}: missing deposit title`);
   assert(html.includes('class="home-deposit__steps"'), `${label}: missing deposit steps`);
   assert(html.includes('class="home-deposit__cta"'), `${label}: missing deposit CTA`);
+  assert(html.includes('class="home-deposit__tg"'), `${label}: missing Telegram chat preview`);
+  assert(html.includes('class="home-deposit__tg-keyboard"'), `${label}: missing Telegram keyboard preview`);
   assert(html.includes(botUrl), `${label}: missing bot URL "${botUrl}"`);
   assert(html.includes(labels.title), `${label}: missing localized title "${labels.title}"`);
   assert(html.includes(rate), `${label}: missing rate label "${rate}"`);
