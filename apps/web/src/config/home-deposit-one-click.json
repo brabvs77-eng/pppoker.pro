@@ -1,0 +1,134 @@
+{
+  "botUsername": "NUTS111777_bot",
+  "botUrl": "https://t.me/NUTS111777_bot",
+  "clubId": "111777",
+  "clubName": "NUTS",
+  "labelsByLocale": {
+    "ru": {
+      "title": "Пополните счёт в 1 клик",
+      "subtitle": "Через Telegram-бота — быстро, безопасно, с любого банка. Вывод средств тоже через бота.",
+      "ctaLabel": "Открыть @NUTS111777_bot",
+      "steps": [
+        "Запустите бота @NUTS111777_bot",
+        "Выберите «Пополнение» или «Вывод»",
+        "Укажите сумму ({rate})",
+        "Переведите с вашего банка",
+        "Получите фишки мгновенно"
+      ],
+      "badges": [
+        { "text": "Менее 5 мин" },
+        { "text": "Безопасно" },
+        { "text": "Мгновенно" }
+      ],
+      "botPreviewTitle": "NUTS Poker Bot",
+      "botPreviewHandle": "@NUTS111777_bot",
+      "botPreviewWelcome": "Добро пожаловать в бот клуба NUTS! Club ID: {clubId}",
+      "botPreviewRate": "{rate}"
+    },
+    "en": {
+      "title": "Top up in 1 click",
+      "subtitle": "Via Telegram bot — fast, secure, from any bank. Withdrawals work through the bot too.",
+      "ctaLabel": "Open @NUTS111777_bot",
+      "steps": [
+        "Start @NUTS111777_bot",
+        "Choose \"Deposit\" or \"Withdraw\"",
+        "Enter the amount ({rate})",
+        "Transfer from your bank",
+        "Receive chips instantly"
+      ],
+      "badges": [
+        { "text": "Under 5 min" },
+        { "text": "Secure" },
+        { "text": "Instant" }
+      ],
+      "botPreviewTitle": "NUTS Poker Bot",
+      "botPreviewHandle": "@NUTS111777_bot",
+      "botPreviewWelcome": "Welcome to the NUTS club bot! Club ID: {clubId}",
+      "botPreviewRate": "{rate}"
+    },
+    "hy": {
+      "title": "Համալրեք հաշիվը 1 կլիկով",
+      "subtitle": "Telegram-բոտի միջոցով՝ արapid, ապահով, ցանկացած բանկից։ Դուրս բերումն էլ բոտի միջոցով է։",
+      "ctaLabel": "Բացել @NUTS111777_bot",
+      "steps": [
+        "Սկսել @NUTS111777_bot-ը",
+        "Ընտրել «Լրացում» կամ «Դուրս բերում»",
+        "Մուտքագրել գումարը ({rate})",
+        "Փոխանցել ձեր բանկից",
+        "Ստանալ ֆիշկերն ակնթարթ"
+      ],
+      "badges": [
+        { "text": "5 րոպեից պակաս" },
+        { "text": "Ապահով" },
+        { "text": "Ակնթարթ" }
+      ],
+      "botPreviewTitle": "NUTS Poker Bot",
+      "botPreviewHandle": "@NUTS111777_bot",
+      "botPreviewWelcome": "Բարի գալուստ NUTS ակումբի բոտ! Club ID: {clubId}",
+      "botPreviewRate": "{rate}"
+    },
+    "uz": {
+      "title": "1 bosishda to'ldiring",
+      "subtitle": "Telegram-bot orqali — tez, xavfsiz, istalgan bankdan. Pul yechish ham bot orqali.",
+      "ctaLabel": "@NUTS111777_bot ni ochish",
+      "steps": [
+        "@NUTS111777_bot ni ishga tushiring",
+        "«To'ldirish» yoki «Yechib olish» ni tanlang",
+        "Summani kiriting ({rate})",
+        "Bankingizdan o'tkazing",
+        "Chiplarni darhol oling"
+      ],
+      "badges": [
+        { "text": "5 daqiqadan kam" },
+        { "text": "Xavfsiz" },
+        { "text": "Darhol" }
+      ],
+      "botPreviewTitle": "NUTS Poker Bot",
+      "botPreviewHandle": "@NUTS111777_bot",
+      "botPreviewWelcome": "NUTS klubi botiga xush kelibsiz! Club ID: {clubId}",
+      "botPreviewRate": "{rate}"
+    },
+    "kz": {
+      "title": "1 басумен толықтырыңыз",
+      "subtitle": "Telegram-бот арқылы — жылдам, қауіпсіз, кез келген банктен. Ақша шығару да бот арқылы.",
+      "ctaLabel": "@NUTS111777_bot ашу",
+      "steps": [
+        "@NUTS111777_bot ботын іске қосыңыз",
+        "«Толықтыру» немесе «Шығару» таңдаңыз",
+        "Соманы енгізіңіз ({rate})",
+        "Банкіңізден аударыңыз",
+        "Фишкаларды лезде алыңыз"
+      ],
+      "badges": [
+        { "text": "5 минуттан аз" },
+        { "text": "Қауіпсіз" },
+        { "text": "Лезде" }
+      ],
+      "botPreviewTitle": "NUTS Poker Bot",
+      "botPreviewHandle": "@NUTS111777_bot",
+      "botPreviewWelcome": "NUTS клубы ботына қош келдіңіз! Club ID: {clubId}",
+      "botPreviewRate": "{rate}"
+    },
+    "tj": {
+      "title": "Дар 1 клик пур кунед",
+      "subtitle": "Тавассути боти Telegram — зуд, бехатар, аз ҳар бонк. Баровардани маблағ низ тавассути бот.",
+      "ctaLabel": "@NUTS111777_bot-ро кушоед",
+      "steps": [
+        "@NUTS111777_bot-ро оғоз кунед",
+        "«Пуркунӣ» ё «Баровардан»-ро интихоб кунед",
+        "Маблағро ворид кунед ({rate})",
+        "Аз бонки худ интиқол диҳед",
+        "Фишкаҳоро дарҳол гиред"
+      ],
+      "badges": [
+        { "text": "Камтар аз 5 дақ" },
+        { "text": "Бехатар" },
+        { "text": "Дарҳол" }
+      ],
+      "botPreviewTitle": "NUTS Poker Bot",
+      "botPreviewHandle": "@NUTS111777_bot",
+      "botPreviewWelcome": "Хуш омадед ба боти клуби NUTS! Club ID: {clubId}",
+      "botPreviewRate": "{rate}"
+    }
+  }
+}

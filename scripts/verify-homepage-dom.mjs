@@ -45,6 +45,9 @@ async function main() {
   const chipCalculatorRoutes = new Set(
     (chrome.homeChipCalculatorSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const depositOneClickRoutes = new Set(
+    (chrome.homeDepositOneClickSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -127,6 +130,21 @@ async function main() {
       const reviewIndex = html.indexOf('id="native-review-snippets"');
       if (calcIndex !== -1 && reviewIndex !== -1 && calcIndex > reviewIndex) {
         violations.push(`[${route}] Chip calculator must appear above reviews`);
+      }
+    }
+
+    if (depositOneClickRoutes.has(route)) {
+      if (!html.includes('id="native-home-deposit-one-click-slot"') && !html.includes('id="native-home-deposit-one-click"')) {
+        violations.push(`[${route}] Missing native deposit one-click slot or section`);
+      }
+      const calcIndex = html.indexOf('id="native-chip-calculator"');
+      const depositIndex = html.indexOf('id="native-home-deposit-one-click"');
+      const reviewIndex = html.indexOf('id="native-review-snippets"');
+      if (calcIndex !== -1 && depositIndex !== -1 && calcIndex > depositIndex) {
+        violations.push(`[${route}] Deposit one-click must appear after chip calculator`);
+      }
+      if (depositIndex !== -1 && reviewIndex !== -1 && depositIndex > reviewIndex) {
+        violations.push(`[${route}] Deposit one-click must appear before reviews`);
       }
     }
 

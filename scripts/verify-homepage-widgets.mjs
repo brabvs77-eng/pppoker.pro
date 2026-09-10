@@ -103,6 +103,24 @@ function verifyHomepageWidgets(
     }
   }
 
+  if (requireChipCalculator) {
+    if (!html.includes('id="native-home-deposit-one-click"')) {
+      violations.push(`[${label}] Missing native deposit one-click section`);
+    }
+    if (!html.includes('class="home-deposit__cta"')) {
+      violations.push(`[${label}] Missing deposit one-click CTA`);
+    }
+    const calcIndex = html.indexOf('id="native-chip-calculator"');
+    const depositIndex = html.indexOf('id="native-home-deposit-one-click"');
+    const reviewIndex = html.indexOf('id="native-review-snippets"');
+    if (calcIndex !== -1 && depositIndex !== -1 && calcIndex > depositIndex) {
+      violations.push(`[${label}] Deposit one-click must appear after chip calculator`);
+    }
+    if (depositIndex !== -1 && reviewIndex !== -1 && depositIndex > reviewIndex) {
+      violations.push(`[${label}] Deposit one-click must appear before reviews`);
+    }
+  }
+
   if (minReviewCards > 0) {
     const reviewCount = (html.match(/class="review-snippets__card"/g) ?? []).length;
     if (reviewCount < minReviewCards) {
