@@ -7,23 +7,23 @@
     500,
     1000
   ],
-  "ratesUpdatedAt": "Fri, 28 Aug 2026 00:02:31 +0000",
+  "ratesUpdatedAt": "Thu, 10 Sep 2026 00:02:31 +0000",
   "rates": {
     "USD": 1,
-    "RUB": 85.872448,
-    "AMD": 364.407103,
-    "UZS": 11811.517564,
-    "KZT": 463.944382,
-    "TJS": 9.233614
+    "RUB": 85.344215,
+    "AMD": 363.745168,
+    "UZS": 11811.346137,
+    "KZT": 454.469892,
+    "TJS": 9.235195
   },
   "labelsByLocale": {
     "ru": {
       "currency": "RUB",
       "intlLocale": "ru-RU",
-      "localPerUsd": 85.872448,
+      "localPerUsd": 85.344215,
       "title": "Калькулятор фишек",
       "subtitle": "В клубе Nuts 1 фишка = 1 $. Введите сумму в рублях — калькулятор пересчитает по актуальному курсу.",
-      "rate": "1 фишка ≈ 86 ₽",
+      "rate": "1 фишка ≈ 85 ₽",
       "moneyLabel": "Рубли (₽)",
       "chipsLabel": "Фишки",
       "presetsLabel": "Быстрый выбор",
@@ -46,7 +46,7 @@
     "hy": {
       "currency": "AMD",
       "intlLocale": "hy-AM",
-      "localPerUsd": 364.407103,
+      "localPerUsd": 363.745168,
       "title": "Ֆիշկերի հաշվիչ",
       "subtitle": "Nuts ակումբում 1 ֆիշկ = 1 $։ Մուտքագրեք գումարը դրամով՝ արդիական փոխարժեքով հաշվարկի համար։",
       "rate": "1 ֆիշկ ≈ 364 ֏",
@@ -59,7 +59,7 @@
     "uz": {
       "currency": "UZS",
       "intlLocale": "uz-UZ",
-      "localPerUsd": 11811.517564,
+      "localPerUsd": 11811.346137,
       "title": "Chip kalkulyatori",
       "subtitle": "Nuts klubida 1 chip = 1 $. Miqdorni so'mda kiriting — kalkulyator joriy kurs bo'yicha hisoblaydi.",
       "rate": "1 chip ≈ 11 800 so'm",
@@ -72,10 +72,10 @@
     "kz": {
       "currency": "KZT",
       "intlLocale": "kk-KZ",
-      "localPerUsd": 463.944382,
+      "localPerUsd": 454.469892,
       "title": "Фишка калькуляторы",
       "subtitle": "Nuts клубында 1 фишка = 1 $. Соманы теңгемен енгізіңіз — калькулятор ағымдағы курс бойынша есептейді.",
-      "rate": "1 фишка ≈ 464 ₸",
+      "rate": "1 фишка ≈ 454 ₸",
       "moneyLabel": "Теңге (₸)",
       "chipsLabel": "Фишкалар",
       "presetsLabel": "Жылдам таңдау",
@@ -85,7 +85,7 @@
     "tj": {
       "currency": "TJS",
       "intlLocale": "tg-TJ",
-      "localPerUsd": 9.233614,
+      "localPerUsd": 9.235195,
       "title": "Ҳисобкунаки фишкаҳо",
       "subtitle": "Дар клуби Nuts 1 фишка = 1 $. Маблағро бо сомонӣ ворид кунед — ҳисобкунак бо қурби ҷории асъор ҳисоб мекунад.",
       "rate": "1 фишка ≈ 9 сомонӣ",
