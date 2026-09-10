@@ -2,6 +2,7 @@
 export const siteContacts = {
   telegramManager: 'https://t.me/NUTSsup',
   telegramChannel: 'https://t.me/+Sj5sG5o0aqJkMTBi',
+  telegramDepositBot: 'https://t.me/NUTS111777_bot',
 };
 
 /** Keep in sync with apps/web/src/config/site.ts → siteLegalEntity */

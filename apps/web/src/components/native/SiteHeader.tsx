@@ -19,6 +19,8 @@ function NavLinks({
   blogLabel,
   managerLabel,
   channelLabel,
+  depositLabel,
+  showDepositCta,
 }: {
   home: string;
   blog: string;
@@ -26,9 +28,21 @@ function NavLinks({
   blogLabel: string;
   managerLabel: string;
   channelLabel: string;
+  depositLabel: string;
+  showDepositCta?: boolean;
 }) {
   return (
     <>
+      {showDepositCta ? (
+        <a
+          className="nuts-header__deposit-cta nuts-header__deposit-cta--drawer"
+          href={siteContacts.telegramDepositBot}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {depositLabel}
+        </a>
+      ) : null}
       <Link href={home}>{homeLabel}</Link>
       <Link href={blog}>{blogLabel}</Link>
       <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
@@ -46,6 +60,7 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
   const alternates = getLocaleAlternates(page);
   const home = homeHref(page.locale);
   const blog = blogHref(page.locale);
+  const depositLabel = t('depositTelegram');
   const navProps = {
     home,
     blog,
@@ -53,6 +68,7 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
     blogLabel: t('blog'),
     managerLabel: t('manager'),
     channelLabel: t('channel'),
+    depositLabel,
   };
 
   return (
@@ -67,7 +83,7 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
             </span>
           </summary>
           <nav className="nuts-header__nav nuts-header__nav--drawer" aria-label={t('navLabel')}>
-            <NavLinks {...navProps} />
+            <NavLinks {...navProps} showDepositCta />
           </nav>
         </details>
 
@@ -85,12 +101,22 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
           <NavLinks {...navProps} />
         </nav>
 
-        <div className="nuts-header__locales">
-          <LocaleSwitcher
-            alternates={alternates}
-            currentLocale={page.locale}
-            label={t('languageLabel')}
-          />
+        <div className="nuts-header__actions">
+          <a
+            className="nuts-header__deposit-cta"
+            href={siteContacts.telegramDepositBot}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {depositLabel}
+          </a>
+          <div className="nuts-header__locales">
+            <LocaleSwitcher
+              alternates={alternates}
+              currentLocale={page.locale}
+              label={t('languageLabel')}
+            />
+          </div>
         </div>
       </div>
     </header>
