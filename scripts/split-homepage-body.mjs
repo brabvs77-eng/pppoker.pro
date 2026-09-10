@@ -8,6 +8,7 @@ const chromePath = path.join(rootDir, 'apps/web/src/config/elementor-chrome.json
 const slotHtml = '<div id="native-home-blog-slot"></div>';
 const reviewSlotHtml = '<div id="native-review-snippets-slot"></div>';
 const chipCalculatorSlotHtml = '<div id="native-chip-calculator-slot"></div>';
+const depositOneClickSlotHtml = '<div id="native-home-deposit-one-click-slot"></div>';
 const faqSlotHtml = '<div id="native-home-faq-slot"></div>';
 const registrationSlotHtml = '<div id="native-home-registration-slot"></div>';
 const appDownloadSlotHtml = '<div id="native-home-app-download-slot"></div>';
@@ -225,6 +226,9 @@ async function main() {
   const chipCalculatorRoutes = new Set(
     (chrome.homeChipCalculatorSlotRoutes ?? []).map((entry) => entry.route),
   );
+  const depositOneClickRoutes = new Set(
+    (chrome.homeDepositOneClickSlotRoutes ?? []).map((entry) => entry.route),
+  );
   const faqRoutes = new Set(
     (chrome.homeFaqSlotRoutes ?? []).map((entry) => entry.route),
   );
@@ -335,6 +339,10 @@ async function main() {
       processed = insertSlotBeforeSection(processed, reviewsSectionId, chipCalculatorSlotHtml);
     }
 
+    if (reviewsSectionId && depositOneClickRoutes.has(route)) {
+      processed = insertSlotBeforeSection(processed, reviewsSectionId, depositOneClickSlotHtml);
+    }
+
     if (reviewsSectionId && reviewRoutes.has(route)) {
       processed = replaceElementorSectionWithSlot(processed, reviewsSectionId, reviewSlotHtml);
     }
@@ -366,8 +374,8 @@ async function main() {
     // the replace* helpers are no-ops and the slots never land in the body.
     // Append the missing slots before the blog slot instead, preserving the
     // hero → app-download → registration → cash-games → withdraw-methods →
-    // why-nuts → promo-cards → promo-blocks → chip-calculator → reviews →
-    // faq → blog top-to-bottom order (app-download must precede registration;
+    // why-nuts → promo-cards → promo-blocks → chip-calculator → deposit-one-click →
+    // reviews → faq → blog top-to-bottom order (app-download must precede registration;
     // see verify-homepage-dom.mjs).
     if (appendNativeSlotsRoutes.has(route)) {
       const blogSlotNeedle = '<div id="native-home-blog-slot"';
@@ -441,6 +449,14 @@ async function main() {
           processed,
           ['native-chip-calculator-slot', 'id="native-chip-calculator"'],
           chipCalculatorSlotHtml,
+          blogSlotNeedle,
+        );
+      }
+      if (depositOneClickRoutes.has(route)) {
+        processed = ensureSlot(
+          processed,
+          ['native-home-deposit-one-click-slot', 'id="native-home-deposit-one-click"'],
+          depositOneClickSlotHtml,
           blogSlotNeedle,
         );
       }

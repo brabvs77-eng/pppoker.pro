@@ -96,6 +96,8 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     homeBlogCards: document.querySelectorAll('.home-blog__card').length,
     chipCalculator: !!document.querySelector('#native-chip-calculator'),
     chipCalculatorMoney: !!document.querySelector('[data-chip-calculator-money]'),
+    depositOneClick: !!document.querySelector('#native-home-deposit-one-click'),
+    depositOneClickCta: !!document.querySelector('.home-deposit__cta'),
     reviewCards: document.querySelectorAll('.review-snippets__card').length,
     reviewStars: document.querySelectorAll('.review-stars').length,
     rssLink: feedHref
@@ -210,6 +212,12 @@ async function smokeHomepage(page, { label, urlPath, minSwipers, minRegistration
     }
     if (!state.chipCalculatorMoney) {
       violations.push(`[${label}] Missing chip calculator money input`);
+    }
+    if (!state.depositOneClick) {
+      violations.push(`[${label}] Missing native deposit one-click section`);
+    }
+    if (!state.depositOneClickCta) {
+      violations.push(`[${label}] Missing deposit one-click CTA button`);
     }
   }
   if (minReviewCards > 0 && state.reviewCards < minReviewCards) {

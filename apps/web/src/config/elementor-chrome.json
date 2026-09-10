@@ -79,6 +79,14 @@
     { "fileId": "kz", "route": "/kz/" },
     { "fileId": "tj", "route": "/tj/" }
   ],
+  "homeDepositOneClickSlotRoutes": [
+    { "fileId": "_root", "route": "/" },
+    { "fileId": "hy", "route": "/hy/" },
+    { "fileId": "en", "route": "/en/" },
+    { "fileId": "uz", "route": "/uz/" },
+    { "fileId": "kz", "route": "/kz/" },
+    { "fileId": "tj", "route": "/tj/" }
+  ],
   "legacyFaqSectionElementId": "aa7fa52",
   "homeFaqSlotRoutes": [
     { "fileId": "_root", "route": "/" },

@@ -1536,6 +1536,242 @@ body {
   }
 }
 
+/* Native deposit one-click (homepages). */
+.home-deposit {
+  position: relative;
+  z-index: 10;
+  padding: 3.5rem 1.25rem;
+  background: linear-gradient(165deg, #131b2b 0%, #0f1522 45%, #131b2b 100%);
+  border-top: 1px solid rgba(253, 230, 97, 0.1);
+  border-bottom: 1px solid rgba(253, 230, 97, 0.1);
+}
+
+.home-deposit__inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 2.5rem 3rem;
+  align-items: center;
+}
+
+.home-deposit__header {
+  margin-bottom: 1.75rem;
+}
+
+.home-deposit__title {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #fde661;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.home-deposit__subtitle {
+  margin: 0.65rem 0 0;
+  color: #9aa8c7;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 34rem;
+}
+
+.home-deposit__steps {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.home-deposit__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.home-deposit__step-num {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(253, 230, 97, 0.14);
+  border: 1px solid rgba(253, 230, 97, 0.35);
+  color: #fde661;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.home-deposit__step-text {
+  color: #e8ecf4;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  padding-top: 0.1rem;
+}
+
+.home-deposit__badges {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+}
+
+.home-deposit__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(12, 17, 26, 0.55);
+  border: 1px solid rgba(97, 206, 112, 0.25);
+  color: #c8d4ea;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.home-deposit__badge-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #61ce70;
+  box-shadow: 0 0 8px rgba(97, 206, 112, 0.45);
+}
+
+.home-deposit__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 10px;
+  background: #fde661;
+  color: #131b2b;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out;
+  box-shadow: 0 4px 18px rgba(253, 230, 97, 0.22);
+}
+
+.home-deposit__cta:hover {
+  background: #fff176;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(253, 230, 97, 0.3);
+}
+
+.home-deposit__cta:focus-visible {
+  outline: 2px solid #fde661;
+  outline-offset: 3px;
+}
+
+.home-deposit__preview {
+  display: flex;
+  justify-content: center;
+}
+
+.home-deposit__phone {
+  width: min(100%, 320px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #1a2438;
+  border: 1px solid rgba(253, 230, 97, 0.18);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+}
+
+.home-deposit__phone-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  background: linear-gradient(135deg, #2aabee 0%, #229ed9 100%);
+}
+
+.home-deposit__phone-avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.home-deposit__phone-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.home-deposit__phone-name {
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.home-deposit__phone-handle {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.78rem;
+}
+
+.home-deposit__phone-body {
+  padding: 1.1rem 1rem 1.25rem;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.home-deposit__bot-message,
+.home-deposit__bot-rate {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 12px 12px 12px 4px;
+  background: rgba(12, 17, 26, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #e8ecf4;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.home-deposit__bot-rate {
+  width: fit-content;
+  color: #fde661;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .home-deposit__inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .home-deposit__preview {
+    order: -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-deposit__cta {
+    transition: none;
+  }
+
+  .home-deposit__cta:hover {
+    transform: none;
+  }
+}
+
 /* Native review snippets (homepages). */
 .review-snippets {
   position: relative;
