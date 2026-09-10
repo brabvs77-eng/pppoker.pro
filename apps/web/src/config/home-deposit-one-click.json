@@ -23,7 +23,11 @@
       "botPreviewTitle": "NUTS Poker Bot",
       "botPreviewHandle": "@NUTS111777_bot",
       "botPreviewWelcome": "Добро пожаловать в бот клуба NUTS! Club ID: {clubId}",
-      "botPreviewRate": "{rate}"
+      "botPreviewRate": "{rate}",
+      "botPreviewDate": "Сегодня",
+      "botPreviewDepositBtn": "💳 Пополнение",
+      "botPreviewWithdrawBtn": "💸 Вывод",
+      "botPreviewInput": "Сообщение"
     },
     "en": {
       "title": "Top up in 1 click",
@@ -44,7 +48,11 @@
       "botPreviewTitle": "NUTS Poker Bot",
       "botPreviewHandle": "@NUTS111777_bot",
       "botPreviewWelcome": "Welcome to the NUTS club bot! Club ID: {clubId}",
-      "botPreviewRate": "{rate}"
+      "botPreviewRate": "{rate}",
+      "botPreviewDate": "Today",
+      "botPreviewDepositBtn": "💳 Deposit",
+      "botPreviewWithdrawBtn": "💸 Withdraw",
+      "botPreviewInput": "Message"
     },
     "hy": {
       "title": "Համալրեք հաշիվը 1 կլիկով",
@@ -65,7 +73,11 @@
       "botPreviewTitle": "NUTS Poker Bot",
       "botPreviewHandle": "@NUTS111777_bot",
       "botPreviewWelcome": "Բարի գալուստ NUTS ակումբի բոտ! Club ID: {clubId}",
-      "botPreviewRate": "{rate}"
+      "botPreviewRate": "{rate}",
+      "botPreviewDate": "Այսօր",
+      "botPreviewDepositBtn": "💳 Լրացում",
+      "botPreviewWithdrawBtn": "💸 Դուրս բերում",
+      "botPreviewInput": "Հաղորդագրություն"
     },
     "uz": {
       "title": "1 bosishda to'ldiring",
@@ -86,7 +98,11 @@
       "botPreviewTitle": "NUTS Poker Bot",
       "botPreviewHandle": "@NUTS111777_bot",
       "botPreviewWelcome": "NUTS klubi botiga xush kelibsiz! Club ID: {clubId}",
-      "botPreviewRate": "{rate}"
+      "botPreviewRate": "{rate}",
+      "botPreviewDate": "Bugun",
+      "botPreviewDepositBtn": "💳 To'ldirish",
+      "botPreviewWithdrawBtn": "💸 Yechib olish",
+      "botPreviewInput": "Xabar"
     },
     "kz": {
       "title": "1 басумен толықтырыңыз",
@@ -107,7 +123,11 @@
       "botPreviewTitle": "NUTS Poker Bot",
       "botPreviewHandle": "@NUTS111777_bot",
       "botPreviewWelcome": "NUTS клубы ботына қош келдіңіз! Club ID: {clubId}",
-      "botPreviewRate": "{rate}"
+      "botPreviewRate": "{rate}",
+      "botPreviewDate": "Бүгін",
+      "botPreviewDepositBtn": "💳 Толықтыру",
+      "botPreviewWithdrawBtn": "💸 Шығару",
+      "botPreviewInput": "Хабарлама"
     },
     "tj": {
       "title": "Дар 1 клик пур кунед",
@@ -128,7 +148,11 @@
       "botPreviewTitle": "NUTS Poker Bot",
       "botPreviewHandle": "@NUTS111777_bot",
       "botPreviewWelcome": "Хуш омадед ба боти клуби NUTS! Club ID: {clubId}",
-      "botPreviewRate": "{rate}"
+      "botPreviewRate": "{rate}",
+      "botPreviewDate": "Имрӯз",
+      "botPreviewDepositBtn": "💳 Пуркунӣ",
+      "botPreviewWithdrawBtn": "💸 Баровардан",
+      "botPreviewInput": "Паём"
     }
   }
 }

@@ -80,17 +80,37 @@ export function renderHomeDepositOneClickSection({ locale }) {
       <a class="home-deposit__cta" href="${escapeHtml(botUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(labels.ctaLabel)}</a>
     </div>
     <aside class="home-deposit__preview" aria-label="${escapeHtml(labels.botPreviewTitle)}">
-      <div class="home-deposit__phone">
-        <div class="home-deposit__phone-header">
-          <span class="home-deposit__phone-avatar" aria-hidden="true">N</span>
-          <div class="home-deposit__phone-meta">
-            <span class="home-deposit__phone-name">${escapeHtml(labels.botPreviewTitle)}</span>
-            <span class="home-deposit__phone-handle">${escapeHtml(labels.botPreviewHandle)}</span>
+      <div class="home-deposit__tg">
+        <header class="home-deposit__tg-header">
+          <span class="home-deposit__tg-back" aria-hidden="true"></span>
+          <span class="home-deposit__tg-avatar" aria-hidden="true">N</span>
+          <div class="home-deposit__tg-meta">
+            <span class="home-deposit__tg-name">${escapeHtml(labels.botPreviewTitle)}</span>
+            <span class="home-deposit__tg-status">${escapeHtml(labels.botPreviewHandle)}</span>
+          </div>
+        </header>
+        <div class="home-deposit__tg-chat">
+          <div class="home-deposit__tg-date">${escapeHtml(labels.botPreviewDate ?? 'Today')}</div>
+          <div class="home-deposit__tg-row home-deposit__tg-row--in">
+            <div class="home-deposit__tg-bubble">
+              <p>${escapeHtml(welcome)}</p>
+              <span class="home-deposit__tg-time">12:01</span>
+            </div>
+          </div>
+          <div class="home-deposit__tg-row home-deposit__tg-row--in">
+            <div class="home-deposit__tg-bubble home-deposit__tg-bubble--accent">
+              <p>${escapeHtml(previewRate)}</p>
+              <span class="home-deposit__tg-time">12:01</span>
+            </div>
+          </div>
+          <div class="home-deposit__tg-keyboard" aria-hidden="true">
+            <span class="home-deposit__tg-key">${escapeHtml(labels.botPreviewDepositBtn ?? 'Deposit')}</span>
+            <span class="home-deposit__tg-key">${escapeHtml(labels.botPreviewWithdrawBtn ?? 'Withdraw')}</span>
           </div>
         </div>
-        <div class="home-deposit__phone-body">
-          <p class="home-deposit__bot-message">${escapeHtml(welcome)}</p>
-          <p class="home-deposit__bot-rate">${escapeHtml(previewRate)}</p>
+        <div class="home-deposit__tg-inputbar" aria-hidden="true">
+          <span class="home-deposit__tg-input">${escapeHtml(labels.botPreviewInput ?? 'Message')}</span>
+          <span class="home-deposit__tg-send" aria-hidden="true"></span>
         </div>
       </div>
     </aside>

@@ -117,6 +117,7 @@
   ],
   "legacyWhyNutsSectionElementId": "6fdeb4a",
   "legacyPromoCardsSectionElementId": "f9ceb10",
+  "legacyPromoDecorSectionElementId": "ef81c36",
   "homePromoCardsSlotRoutes": [
     { "fileId": "_root", "route": "/" },
     { "fileId": "hy", "route": "/hy/" },
