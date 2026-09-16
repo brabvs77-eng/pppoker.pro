@@ -40,6 +40,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Основы правильного бет-сайзинга в покере — Nuts PPPoker](https://pppoker.pro/osnovy-pravilnogo-bet-sajzinga-v-pokere/)
 - [Poker GTO — что это и как применять в клубе NUTS — Nuts PPPoker](https://pppoker.pro/poker-gto-chto-eto-i-kak-primenyat-v-klube-nuts/)
 - [Позиция за столом в покере: почему баттон — лучший друг регуляра — Nuts PPPoker](https://pppoker.pro/poziciya-za-stolom-poker/)
+- [PPPoker для игроков из Казахстана: валюта, столы, клуб NUTS — Nuts PPPoker](https://pppoker.pro/pppoker-dlya-kazakhstana/)
 - [PPPoker для игроков из Узбекистана: валюта, поддержка, клуб NUTS — Nuts PPPoker](https://pppoker.pro/pppoker-dlya-uzbekistana/)
 - [АКЦИЯ: МИНИ ХАЙРОЛЛЕР В КЛУБЕ NUTS! — Nuts PPPoker](https://pppoker.pro/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — Взрывной Формат для Любителей Экшена! — Nuts PPPoker](https://pppoker.pro/pppoker-nuts-bomb-pot-vzryvnoj-format-dlya-lyubitelej-ekshena/)
@@ -49,7 +50,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Рейкбек и бонусы NUTS: что получает игрок и как не упустить — Nuts PPPoker](https://pppoker.pro/rejkbek-i-bonusy-nuts/)
 - [Русский покер в NUTS: правила и стратегия для начинающих — Nuts PPPoker](https://pppoker.pro/russkiy-poker-v-nuts-pravila/)
 - [‼️ Самый крупный турнир в PPPoker — Nuts PPPoker](https://pppoker.pro/samyj-krupnyj-turnir-v-pppoker/)
-- [Стартовые руки в Техасском Холдеме — Nuts PPPoker](https://pppoker.pro/startovye-ruki-v-tehasskom-holdeme/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

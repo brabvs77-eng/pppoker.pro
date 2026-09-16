@@ -479,5 +479,31 @@
       "hy": "poker-kombinacia-sparq",
       "tj": "kombinatsiyaho-dar-poker-shpora"
     }
+  },
+  {
+    "id": "sng-vs-mtt-nuts",
+    "sourceRoute": "/sng-vs-mtt-nuts/",
+    "publishedAt": "2027-03-05T10:00:00+00:00",
+    "image": "/assets/media/2026/01/i-2.webp",
+    "slugs": {
+      "en": "sng-vs-mtt-nuts-club",
+      "uz": "sng-vs-mtt-nuts-klub",
+      "kz": "sng-vs-mtt-nuts-klubinde",
+      "hy": "sng-vs-mtt-nuts-akumb",
+      "tj": "sng-vs-mtt-nuts-klubi"
+    }
+  },
+  {
+    "id": "pppoker-dlya-kazakhstana",
+    "sourceRoute": "/pppoker-dlya-kazakhstana/",
+    "publishedAt": "2027-03-20T10:00:00+00:00",
+    "image": "/assets/media/2024/08/Mask-group1-opt.webp",
+    "slugs": {
+      "en": "pppoker-for-kazakhstan-players",
+      "uz": "pppoker-qozogiston-uchun",
+      "kz": "pppoker-qazaqstan-ushin",
+      "hy": "pppoker-qazakhstan-khaghoghneri",
+      "tj": "pppoker-baroi-qozogiston"
+    }
   }
 ]
