@@ -28,6 +28,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Көп үстелдік турнирлер (MTT) — Nuts PPPoker](https://pppoker.pro/kz/koptoldy-turnirler-mtt/)
 - [Жауапкершілікті покер ойыны — Nuts PPPoker](https://pppoker.pro/kz/masuliyatli-poker-oyin/)
 - [Микроставка турнирлерінде ойнау стратегиясы — Nuts PPPoker](https://pppoker.pro/kz/mikro-stavka-turnir-strategiyasy/)
+- [NUTS апталық турнир дайджесті — Nuts PPPoker](https://pppoker.pro/kz/nuts-aptalyk-turnir-dayjesti/)
 - [NUTS финалдық үстел тарихы — Nuts PPPoker](https://pppoker.pro/kz/nuts-finaldy-ustel-olayi/)
 - [NUTS клуб FAQ: 20 сұрақ — Nuts PPPoker](https://pppoker.pro/kz/nuts-klub-faq-kz/)
 - [Сочиден онлайнға: NUTS клуб тарихы — Nuts PPPoker](https://pppoker.pro/kz/nuts-klub-tarykhy-sochi/)
@@ -46,10 +47,9 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Покер tilt және психология: 7 тәсіл — Nuts PPPoker](https://pppoker.pro/kz/poker-tilt-zhane-psihologiya/)
 - [Покерде EV дегеніміз не — Nuts PPPoker](https://pppoker.pro/kz/pokerde-ev-degenimiz-ne/)
 - [Pot-Limit Omaha (PLO) ережелері — Nuts PPPoker](https://pppoker.pro/kz/pot-limit-omaha-plo-erezheleri/)
+- [Армения ойыншылары үшін PPPoker — Nuts PPPoker](https://pppoker.pro/kz/pppoker-armeniya-ushin/)
 - [АКЦИЯ: NUTS КЛУБЫНДА MINI HIGHROLLER! — Nuts PPPoker](https://pppoker.pro/kz/pppoker-mini-highroller/)
 - [PPPoker дегеніміз не: 2026 жеке клубтық платформасына шолу — Nuts PPPoker](https://pppoker.pro/kz/pppoker-ne/)
-- [PPPoker NUTS: Bomb Pot — экшнге толы жарылыс форматы! — Nuts PPPoker](https://pppoker.pro/kz/pppoker-nuts-bomb-pot/)
-- [Өзбекстан ойыншылары үшін PPPoker — Nuts PPPoker](https://pppoker.pro/kz/pppoker-ozbekstan-oyynshylary-ushin/)
 
 ## Қосымша
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

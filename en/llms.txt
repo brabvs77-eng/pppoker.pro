@@ -39,6 +39,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [From Sochi to Online: The Story of NUTS Club — Nuts PPPoker](https://pppoker.pro/en/nuts-club-history-sochi/)
 - [A NUTS Final Table Story: How I Lost with the Nuts and Won the Tournament — Nuts PPPoker](https://pppoker.pro/en/nuts-final-table-story/)
 - [NUTS Tournament Schedule: How to Read the Grid and Find Value — Nuts PPPoker](https://pppoker.pro/en/nuts-tournament-schedule/)
+- [NUTS Weekly Tournament Digest: How Not to Miss the Best GTD — Nuts PPPoker](https://pppoker.pro/en/nuts-weekly-tournament-digest/)
 - [Online Poker Bankroll Management: Limits, ABI and Discipline — Nuts PPPoker](https://pppoker.pro/en/online-poker-bankroll-management/)
 - [Open Face Chinese Poker (OFC): Rules & Scoring — Nuts PPPoker](https://pppoker.pro/en/open-face-chinese-poker-ofc/)
 - [Poker Agents: Who They Are, Their Role, and Benefits for Players — Nuts PPPoker](https://pppoker.pro/en/poker-agents/)
@@ -47,9 +48,8 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Table Position in Poker: Why the Button Is a Reg's Best Friend — Nuts PPPoker](https://pppoker.pro/en/poker-table-position/)
 - [Tilt and Poker Psychology: 7 Ways to Stop Bleeding Your Stack — Nuts PPPoker](https://pppoker.pro/en/poker-tilt-and-psychology/)
 - [Pot-Limit Omaha (PLO) Rules & Hand Rankings — Nuts PPPoker](https://pppoker.pro/en/pot-limit-omaha-plo-rules/)
+- [PPPoker for Players from Armenia: Currency, Support, NUTS Club — Nuts PPPoker](https://pppoker.pro/en/pppoker-for-armenia-players/)
 - [PPPoker for Players from Kazakhstan: Currency, Tables, NUTS Club — Nuts PPPoker](https://pppoker.pro/en/pppoker-for-kazakhstan-players/)
-- [PPPoker for Players from Uzbekistan: Currency, Support, NUTS Club — Nuts PPPoker](https://pppoker.pro/en/pppoker-for-uzbekistan-players/)
-- [PROMO: MINI HIGHROLLER IN THE NUTS CLUB! — Nuts PPPoker](https://pppoker.pro/en/pppoker-mini-highroller-promo/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

@@ -35,6 +35,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Навъҳои асосии бозигарони покер — Nuts PPPoker](https://pppoker.pro/tj/nav-hoi-bozigaroni-poker/)
 - [Таърихи мизи финалии NUTS — Nuts PPPoker](https://pppoker.pro/tj/nuts-final-dasti/)
 - [Ҷадвали турнирҳои NUTS — Nuts PPPoker](https://pppoker.pro/tj/nuts-grafiki-turnirho/)
+- [Дайджести ҳафтаинаи турнирҳои NUTS — Nuts PPPoker](https://pppoker.pro/tj/nuts-haftagii-digesti-turnirho/)
 - [FAQ клуби NUTS: 20 савол — Nuts PPPoker](https://pppoker.pro/tj/nuts-klub-faq-tj/)
 - [Чӣ тавр дар 5 дақиқа ба клуби NUTS ҳамроҳ шудан мумкин аст — Nuts PPPoker](https://pppoker.pro/tj/nuts-klubro-chi-tavr-chidam/)
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/tj/open-face-chinese-poker-ofc/)
@@ -45,11 +46,10 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Этикети покери зинда: навомӯзон бояд чӣ донанд — Nuts PPPoker](https://pppoker.pro/tj/pokeri-zinda-etiket/)
 - [Қоидаҳои Pot-Limit Omaha (PLO) — Nuts PPPoker](https://pppoker.pro/tj/pot-limit-omaha-plo-qoidaho/)
 - [Позиция дар покер — Nuts PPPoker](https://pppoker.pro/tj/pozitsiya-v-poker/)
+- [PPPoker барои бозигарони Армистон — Nuts PPPoker](https://pppoker.pro/tj/pppoker-baroi-armiston/)
 - [PPPoker барои бозигарони Ӯзбекистон — Nuts PPPoker](https://pppoker.pro/tj/pppoker-baroi-bozigoroni-ozbekiston/)
 - [PPPoker барои бозигарони Қазоқистон — Nuts PPPoker](https://pppoker.pro/tj/pppoker-baroi-qozogiston/)
 - [PPPoker чист: баррасии платформаи клуби хусусии 2026 — Nuts PPPoker](https://pppoker.pro/tj/pppoker-chist/)
-- [АКСИЯ: MINI HIGHROLLER ДАР КЛУБИ NUTS! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-mini-highroller/)
-- [PPPoker NUTS: Bomb Pot — формати таркишии экшн! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-nuts-bomb-pot/)
 
 ## Иловагӣ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
