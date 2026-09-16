@@ -29,6 +29,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Jonli poker etiketi: yangi boshlovchilar nimalarni bilishi kerak — Nuts PPPoker](https://pppoker.pro/uz/jonli-poker-etiketi/)
 - [Ko'p stolli turnirlar (MTT) — Nuts PPPoker](https://pppoker.pro/uz/ko-p-stolli-turnirlar-mtt/)
 - [Mikrostavka turnirlarida o'ynash strategiyasi — Nuts PPPoker](https://pppoker.pro/uz/mikro-stavka-turnir-strategiyasi/)
+- [Sochidan onlaynga: NUTS klub tarixi — Nuts PPPoker](https://pppoker.pro/uz/nuts-klub-tarixi-sochi/)
 - [NUTS klubiga 5 daqiqada qanday qo'shilish mumkin — Nuts PPPoker](https://pppoker.pro/uz/nuts-klubiga-qanday-qoshilish/)
 - [NUTS turnir jadvali: qanday o'qish va value topish — Nuts PPPoker](https://pppoker.pro/uz/nuts-turnir-jadvali/)
 - [Onlayn pokerda bankroll-menejment — Nuts PPPoker](https://pppoker.pro/uz/onlayn-poker-bankroll-menejmenti/)
@@ -38,6 +39,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Poker GTO — bu nima va uni NUTS klubida qanday qo'llash — Nuts PPPoker](https://pppoker.pro/uz/poker-gto-nuts-klubida/)
 - [Poker o'yinchilarining asosiy turlari — Nuts PPPoker](https://pppoker.pro/uz/poker-oyinchilari-turlari/)
 - [Poker raqiblaringizni biling: g'alaba strategiyalari siri — Nuts PPPoker](https://pppoker.pro/uz/poker-raqiblaringizni-biling/)
+- [Poker stol pozitsiyasi: nega button muhim — Nuts PPPoker](https://pppoker.pro/uz/poker-stol-pozitsiyasi/)
 - [Poker tilt va psixologiya: 7 usul stekni qotirmaslik — Nuts PPPoker](https://pppoker.pro/uz/poker-tilt-va-psixologiya/)
 - [Poker yutug'ini qayerga sarflash kerak — Nuts PPPoker](https://pppoker.pro/uz/poker-yutugini-qayerga-sarflash/)
 - [Pot-Limit Omaha (PLO) qoidalari — Nuts PPPoker](https://pppoker.pro/uz/pot-limit-omaha-plo-qoidalari/)
@@ -48,8 +50,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [NUTS rejkbek va bonuslar: o'yinchilar nima oladi — Nuts PPPoker](https://pppoker.pro/uz/rejkbek-va-bonuslar-nuts/)
 - [NUTSdagi rus pokeri: yangi boshlanuvchilar uchun qoidalar va strategiya — Nuts PPPoker](https://pppoker.pro/uz/rus-pokeri-nuts-qoidalari/)
 - [PPPoker NUTS-da 6+ (Short Deck) qanday o'ynash kerak — Nuts PPPoker](https://pppoker.pro/uz/short-deck-6-plus-pppokerda/)
-- [Texas Hold'emda boshlang'ich qo'llar — Nuts PPPoker](https://pppoker.pro/uz/texas-holdem-boshlangich-qollar/)
-- [Texas Hold'em (NLH) qoidalari — Nuts PPPoker](https://pppoker.pro/uz/texas-holdem-nlh-qoidalari/)
 
 ## Qo'shimcha
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

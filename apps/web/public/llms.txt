@@ -25,6 +25,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Депозит и вывод в NUTS: пошагово через Telegram-бота — Nuts PPPoker](https://pppoker.pro/depozit-i-vyvod-v-nuts/)
 - [Этикет живого покера: что нужно знать новичку — Nuts PPPoker](https://pppoker.pro/etiket-zhivogo-pokera-chto-nuzhno-znat-novichku/)
 - [Имплайд-оддсы в покере: как применять потенциальные шансы банка — Nuts PPPoker](https://pppoker.pro/implajd-oddsy-v-pokere-kak-primenyat-potentsialnye-shansy-banka/)
+- [От Сочи до онлайна: история клуба NUTS — Nuts PPPoker](https://pppoker.pro/istoriya-kluba-nuts-sochi/)
 - [Как играть 6+ (Short Deck) в PPPoker NUTS: — Nuts PPPoker](https://pppoker.pro/kak-igrat-6-short-deck-v-pppoker-nuts/)
 - [Как вступить в клуб NUTS за 5 минут — Nuts PPPoker](https://pppoker.pro/kak-vstupit-v-klub-nuts/)
 - [Многостоловые Турниры (МТТ) — Nuts PPPoker](https://pppoker.pro/mnogostolovye-turniry-mtt/)
@@ -34,6 +35,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Основные типы игроков в покере — Nuts PPPoker](https://pppoker.pro/osnovnye-tipy-igrokov-v-pokere/)
 - [Основы правильного бет-сайзинга в покере — Nuts PPPoker](https://pppoker.pro/osnovy-pravilnogo-bet-sajzinga-v-pokere/)
 - [Poker GTO — что это и как применять в клубе NUTS — Nuts PPPoker](https://pppoker.pro/poker-gto-chto-eto-i-kak-primenyat-v-klube-nuts/)
+- [Позиция за столом в покере: почему баттон — лучший друг регуляра — Nuts PPPoker](https://pppoker.pro/poziciya-za-stolom-poker/)
 - [АКЦИЯ: МИНИ ХАЙРОЛЛЕР В КЛУБЕ NUTS! — Nuts PPPoker](https://pppoker.pro/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — Взрывной Формат для Любителей Экшена! — Nuts PPPoker](https://pppoker.pro/pppoker-nuts-bomb-pot-vzryvnoj-format-dlya-lyubitelej-ekshena/)
 - [Правила игры в Техасский Холдем (NLH) — Nuts PPPoker](https://pppoker.pro/pravila-igry-v-tehasskij-holdem-nlh/)
@@ -45,8 +47,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Стартовые руки в Техасском Холдеме — Nuts PPPoker](https://pppoker.pro/startovye-ruki-v-tehasskom-holdeme/)
 - [Стратегия игры на микростейкс турнирах — Nuts PPPoker](https://pppoker.pro/strategiya-igry-na-mikrostejks-turnirah/)
 - [Тилт и психология покера: 7 способов не сливать стек — Nuts PPPoker](https://pppoker.pro/tilt-i-psihologiya-pokera/)
-- [Турнирная сетка NUTS: как читать расписание и ловить value — Nuts PPPoker](https://pppoker.pro/turnirnaya-setka-nuts/)
-- [VPIP — Nuts PPPoker](https://pppoker.pro/vpip/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

@@ -29,6 +29,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Ինչպես միանալ NUTS ակումբին 5 րոպեում — Nuts PPPoker](https://pppoker.pro/hy/inchpes-miatnal-nuts-akatumb/)
 - [Ճանաչիր քո պոքերի մրցակիցներին — Nuts PPPoker](https://pppoker.pro/hy/know-your-poker-opponents-secrets-of-winning-strategies/)
 - [Միկրոստավկայի մրցաշարերի ռազմավարություն — Nuts PPPoker](https://pppoker.pro/hy/mikro-stavka-turnirayin-strategia/)
+- [Սոչիից օնլայն՝ NUTS ակումբի պատմությունը — Nuts PPPoker](https://pppoker.pro/hy/nuts-akumb-patyust-sotchi/)
 - [NUTS-ի մրցաշարային գրաֆիկ — Nuts PPPoker](https://pppoker.pro/hy/nuts-turnirayin-grafik/)
 - [Օնլայն պոկերի բանկրոլ մենեջմենթ — Nuts PPPoker](https://pppoker.pro/hy/onlayn-poker-bankroll-management/)
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/hy/open-face-chinese-poker-ofc/)
@@ -37,6 +38,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Ինչպես ծախսել պոկերի հաղթանակը — Nuts PPPoker](https://pppoker.pro/hy/poker-haghovuty-vorosh/)
 - [Պոկերի խաղացողների հիմնական տեսակներ — Nuts PPPoker](https://pppoker.pro/hy/poker-khaghoghineri-tesakner/)
 - [Tilt և պոկերի հոգեբանություն — Nuts PPPoker](https://pppoker.pro/hy/poker-tilt-ev-psixologia/)
+- [Պոկերի սեղանի դիրք — Nuts PPPoker](https://pppoker.pro/hy/poker-uxti-pozicia/)
 - [Pot-Limit Omaha (PLO) կանոններ — Nuts PPPoker](https://pppoker.pro/hy/pot-limit-omaha-plo-kanoner/)
 - [ԱԿՑԻԱ՝ MINI HIGHROLLER NUTS ԱԿՈՒՄԲՈՒՄ! — Nuts PPPoker](https://pppoker.pro/hy/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — գործողությունով լի պայթյունային ձևաչափ! — Nuts PPPoker](https://pppoker.pro/hy/pppoker-nuts-bomb-pot/)
@@ -46,8 +48,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Ինչպես խաղալ 6+ (Short Deck) PPPoker NUTS-ում — Nuts PPPoker](https://pppoker.pro/hy/short-deck-6-plus-pppoker-um/)
 - [Տեխաս Հոլդեմի կանոններ — Nuts PPPoker](https://pppoker.pro/hy/texas-holdem-kanoner/)
 - [Տեխաս Հոլդեմ (NLH) կանոններ — Nuts PPPoker](https://pppoker.pro/hy/texas-holdem-nlh-kanoner/)
-- [Սկսնակ ձեռքեր Թեխասյան Հոլդեմում — Nuts PPPoker](https://pppoker.pro/hy/texas-holdem-sksman-qarer/)
-- [Կենդանի պոկերի էտիկետ. ինչ պետք է իմանա սկսնակը — Nuts PPPoker](https://pppoker.pro/hy/tsayin-poker-etiket/)
 
 ## Լրացուցիչ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

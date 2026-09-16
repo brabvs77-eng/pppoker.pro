@@ -37,6 +37,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Покери русӣ дар NUTS: қоидаҳо барои оғозкунандагон — Nuts PPPoker](https://pppoker.pro/tj/pokeri-rusii-nuts-qoidaho/)
 - [Этикети покери зинда: навомӯзон бояд чӣ донанд — Nuts PPPoker](https://pppoker.pro/tj/pokeri-zinda-etiket/)
 - [Қоидаҳои Pot-Limit Omaha (PLO) — Nuts PPPoker](https://pppoker.pro/tj/pot-limit-omaha-plo-qoidaho/)
+- [Позиция дар покер — Nuts PPPoker](https://pppoker.pro/tj/pozitsiya-v-poker/)
 - [PPPoker чист: баррасии платформаи клуби хусусии 2026 — Nuts PPPoker](https://pppoker.pro/tj/pppoker-chist/)
 - [АКСИЯ: MINI HIGHROLLER ДАР КЛУБИ NUTS! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — формати таркишии экшн! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-nuts-bomb-pot/)
@@ -44,10 +45,9 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Рейкбек ва бонусҳо дар NUTS — Nuts PPPoker](https://pppoker.pro/tj/rejkbek-va-bonusho-nuts/)
 - [Чӣ тавр 6+ (Short Deck) дар PPPoker NUTS бозӣ кардан — Nuts PPPoker](https://pppoker.pro/tj/short-deck-6-plus-pppoker/)
 - [Стратегияи бозӣ дар турнирҳои микроставка — Nuts PPPoker](https://pppoker.pro/tj/strategiyai-turnirhoi-mikrostavka/)
+- [Аз Сочи то онлайн: таърихи клуби NUTS — Nuts PPPoker](https://pppoker.pro/tj/tarixi-klubi-nuts-sochi/)
 - [Қоидаҳои Texas Hold'em (NLH) — Nuts PPPoker](https://pppoker.pro/tj/texas-holdem-nlh-qoidaho/)
 - [Қоидаҳои Texas Hold'em — Nuts PPPoker](https://pppoker.pro/tj/texas-holdem-qoidaho/)
-- [Tilt ва психологияи покер: 7 роҳ — Nuts PPPoker](https://pppoker.pro/tj/tilt-va-psixologiyai-poker/)
-- [Турнирҳои чандмизоҷӣ (MTT) — Nuts PPPoker](https://pppoker.pro/tj/turnirhoi-ko-stol-mtt/)
 
 ## Иловагӣ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
