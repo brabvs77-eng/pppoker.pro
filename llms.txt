@@ -17,10 +17,12 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 ## Записи блога
 - [Агенты в покере: кто это, какую роль выполняют и чем полезны игрокам — Nuts PPPoker](https://pppoker.pro/agenty-v-pokere/)
 - [Роман Шапошников — Nuts PPPoker](https://pppoker.pro/author-roman-shaposhnikov/)
+- [Банкролл-менеджмент в онлайн-покере: лимиты, ABI и дисциплина — Nuts PPPoker](https://pppoker.pro/bankroll-menedzhment-onlajn/)
 - [Что такое EV в покере — Nuts PPPoker](https://pppoker.pro/blog-chto-takoe-ev-v-pokere/)
 - [Bomb Pot в покере: правила и стратегия игры — Nuts PPPoker](https://pppoker.pro/bomb-pot-v-pokere-pravila-i-strategiya-igry/)
 - [Что такое PPPoker: обзор платформы приватных клубов 2026 — Nuts PPPoker](https://pppoker.pro/chto-takoe-pppoker/)
 - [CRASH в NUTS: как играть, риск-менеджмент и когда выходить — Nuts PPPoker](https://pppoker.pro/crash-v-nuts-kak-igrat/)
+- [Депозит и вывод в NUTS: пошагово через Telegram-бота — Nuts PPPoker](https://pppoker.pro/depozit-i-vyvod-v-nuts/)
 - [Этикет живого покера: что нужно знать новичку — Nuts PPPoker](https://pppoker.pro/etiket-zhivogo-pokera-chto-nuzhno-znat-novichku/)
 - [Имплайд-оддсы в покере: как применять потенциальные шансы банка — Nuts PPPoker](https://pppoker.pro/implajd-oddsy-v-pokere-kak-primenyat-potentsialnye-shansy-banka/)
 - [Как играть 6+ (Short Deck) в PPPoker NUTS: — Nuts PPPoker](https://pppoker.pro/kak-igrat-6-short-deck-v-pppoker-nuts/)

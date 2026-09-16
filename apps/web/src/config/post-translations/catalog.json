@@ -375,5 +375,31 @@
       "hy": "rakeback-ev-bonusner-nuts",
       "tj": "rejkbek-va-bonusho-nuts"
     }
+  },
+  {
+    "id": "depozit-i-vyvod-v-nuts",
+    "sourceRoute": "/depozit-i-vyvod-v-nuts/",
+    "publishedAt": "2026-11-05T10:00:00+00:00",
+    "image": "/assets/media/2024/07/money.webp",
+    "slugs": {
+      "en": "deposit-and-withdrawal-nuts",
+      "uz": "depozit-va-yechib-olish-nuts",
+      "kz": "depozit-zhane-shygaru-nuts",
+      "hy": "avand-ev-elq-nuts",
+      "tj": "pasandoz-va-giriftan-nuts"
+    }
+  },
+  {
+    "id": "bankroll-menedzhment-onlajn",
+    "sourceRoute": "/bankroll-menedzhment-onlajn/",
+    "publishedAt": "2026-11-15T10:00:00+00:00",
+    "image": "/assets/media/2025/09/1755544716.webp",
+    "slugs": {
+      "en": "online-poker-bankroll-management",
+      "uz": "onlayn-poker-bankroll-menejmenti",
+      "kz": "onlayn-poker-bankroll-menejment",
+      "hy": "onlayn-poker-bankroll-management",
+      "tj": "bankroll-menejmenti-onlajn"
+    }
   }
 ]

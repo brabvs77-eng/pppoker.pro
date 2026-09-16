@@ -1,0 +1,27 @@
+{
+  "en": {
+    "title": "Online Poker Bankroll Management: Limits, ABI and Discipline — Nuts PPPoker",
+    "description": "Bankroll management for online poker: cash game buy-ins (20–30 stacks), MTT ABI (100+), moving up/down stakes, stop-loss rules. Practice at NUTS.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Author: <em><a href=\"/en/author-roman-shaposhnikov/\">Roman Shaposhnikov</a></em></p>\n<p class=\"has-white-color has-text-color\">Published: November 2026</p>\n<p class=\"has-white-color has-text-color\">Bankroll management survives variance when strategy alone cannot. Rules for cash and MTT at NUTS on PPPoker.</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2025/09/1755544716.webp\" alt=\"Bankroll management\" width=\"1328\" height=\"1328\" loading=\"lazy\" decoding=\"async\"></figure>\n<h2 class=\"has-white-color has-text-color\"><strong>Cash: 20–30 buy-ins</strong></h2>\n<p class=\"has-white-color has-text-color\">Hold <strong>20–30 full stacks</strong> at your limit. Move up at 30 buy-ins for the next level; move down below 20. No exceptions.</p>\n<h2 class=\"has-white-color has-text-color\"><strong>MTT: 100+ ABI</strong></h2>\n<p class=\"has-white-color has-text-color\"><strong>ABI</strong> = average buy-in of your schedule. $3 ABI → $300+ bankroll. See <a href=\"/en/multi-table-tournaments-mtt/\"><strong>MTT guide</strong></a> and <a href=\"/en/microstakes-tournament-strategy/\"><strong>microstakes strategy</strong></a>.</p>\n<h2 class=\"has-white-color has-text-color\"><strong>Discipline</strong></h2>\n<ul class=\"has-white-color has-text-color\"><li class=\"has-white-color has-text-color\">Session stop-loss: 3–4 buy-ins</li><li class=\"has-white-color has-text-color\">Track results in a spreadsheet</li><li class=\"has-white-color has-text-color\">Withdraw part of profits regularly</li></ul>\n<p class=\"has-white-color has-text-color\">Club <strong>111777</strong>. <a href=\"/en/how-to-join-nuts-club/\"><strong>Join</strong></a> · <a href=\"/en/deposit-and-withdrawal-nuts/\"><strong>Deposits</strong></a> · <a href=\"/en/rakeback-and-bonuses-nuts/\"><strong>Rakeback</strong></a></p>"
+  },
+  "uz": {
+    "title": "Onlayn pokerda bankroll-menejment — Nuts PPPoker",
+    "description": "Bankroll-menejment: keshda 20–30 bay-in, MTT da 100+ ABI, stop-loss va intizom.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Muallif: <em><a href=\"/uz/author-roman-shaposhnikov/\">Roman Shaposhnikov</a></em></p>\n<p class=\"has-white-color has-text-color\">Kesh: <strong>20–30</strong> to'liq stek. MTT: <strong>100+ ABI</strong>. Sessiya stop-loss: 3–4 bay-in. Klub <strong>111777</strong>.</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2025/09/1755544716.webp\" alt=\"Bankroll\" width=\"1328\" height=\"1328\" loading=\"lazy\" decoding=\"async\"></figure>"
+  },
+  "kz": {
+    "title": "Онлайн покерде банкролл-менеджмент — Nuts PPPoker",
+    "description": "Банкролл-менеджмент: кеште 20–30 бай-ин, MTT-де 100+ ABI, stop-loss және тәртіп.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Автор: <em><a href=\"/kz/author-roman-shaposhnikov/\">Роман Шапошников</a></em></p>\n<p class=\"has-white-color has-text-color\">Кеш: <strong>20–30</strong> толық стек. MTT: <strong>100+ ABI</strong>. Клуб ID <strong>111777</strong>.</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2025/09/1755544716.webp\" alt=\"Банкролл\" width=\"1328\" height=\"1328\" loading=\"lazy\" decoding=\"async\"></figure>"
+  },
+  "hy": {
+    "title": "Օնլայն պոկերի բանկրոլ մենեջմենթ — Nuts PPPoker",
+    "description": "Բանկրոլ մենեջմենթ: կեշում 20–30 բայ-ին, MTT-ում 100+ ABI, կանոնապակություն:",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Հեղինակ՝ <em><a href=\"/hy/author-roman-shaposhnikov/\">Ռոման Շապոշնիկով</a></em></p>\n<p class=\"has-white-color has-text-color\">Կեշ՝ <strong>20–30</strong> լրիվ ստեկ: MTT՝ <strong>100+ ABI</strong>: Ակումբի ID <strong>111777</strong>:</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2025/09/1755544716.webp\" alt=\"Բանկրոլ\" width=\"1328\" height=\"1328\" loading=\"lazy\" decoding=\"async\"></figure>"
+  },
+  "tj": {
+    "title": "Банкролл-менеҷменти покери онлайн — Nuts PPPoker",
+    "description": "Банкролл-менеҷмент: дар кеш 20–30 бай-ин, дар MTT 100+ ABI, интизом.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Муаллиф: <em><a href=\"/tj/author-roman-shaposhnikov/\">Роман Шапошников</a></em></p>\n<p class=\"has-white-color has-text-color\">Кеш: <strong>20–30</strong> стеки пурра. MTT: <strong>100+ ABI</strong>. ID-и клуб <strong>111777</strong>.</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2025/09/1755544716.webp\" alt=\"Банкролл\" width=\"1328\" height=\"1328\" loading=\"lazy\" decoding=\"async\"></figure>"
+  }
+}
