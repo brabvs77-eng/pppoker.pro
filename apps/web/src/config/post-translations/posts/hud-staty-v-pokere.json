@@ -1,0 +1,27 @@
+{
+  "en": {
+    "title": "Poker HUD Stats: 3-Bet, Fold to 3-Bet, WTSD — Nuts PPPoker",
+    "description": "How to read HUD stats in online poker: VPIP, PFR, 3-bet, fold to 3-bet, WTSD, W$SD. What the numbers mean and how to exploit opponents at NUTS.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Author: <em><a href=\"/en/author-roman-shaposhnikov/\"><strong>Roman Shaposhnikov</strong></a></em></p>\n<p class=\"has-white-color has-text-color\">Published: April 2027</p>\n<p class=\"has-white-color has-text-color\">HUD numbers tell you how opponents play. Key stats: VPIP, 3-bet, fold to 3-bet, WTSD. Reliable from 50+ hands.</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2027/04/hud-staty-v-pokere.webp\" alt=\"HUD stats\" width=\"1200\" height=\"675\" loading=\"lazy\" decoding=\"async\"></figure>\n<p class=\"has-white-color has-text-color\"><a href=\"/en/vpip-stat-in-poker/\"><strong>VPIP</strong></a> · <a href=\"/en/poker-gto-in-nuts-club/\"><strong>GTO</strong></a> · <a href=\"/en/main-poker-player-types/\"><strong>Player types</strong></a> · Club <strong>111777</strong></p>"
+  },
+  "uz": {
+    "title": "Poker HUD statistikasi: 3-bet, WTSD — Nuts PPPoker",
+    "description": "HUD statlar: VPIP, 3-bet, fold to 3-bet, WTSD. Qanday o'qish va ekspluatatsiya qilish.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Muallif: <em><a href=\"/uz/author-roman-shaposhnikov/\"><strong>Roman Shaposhnikov</strong></a></em></p>\n<p class=\"has-white-color has-text-color\">Asosiy statlar: VPIP, 3-bet, fold to 3-bet, WTSD. 50+ qo'ldan keyin ishonchli.</p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2027/04/hud-staty-v-pokere.webp\" alt=\"HUD\" width=\"1200\" height=\"675\" loading=\"lazy\" decoding=\"async\"></figure>\n<p class=\"has-white-color has-text-color\"><a href=\"/uz/vpip-pokerda/\"><strong>VPIP</strong></a> · Klub <strong>111777</strong></p>"
+  },
+  "kz": {
+    "title": "Покер HUD статистикасы — Nuts PPPoker",
+    "description": "HUD статтары: VPIP, 3-bet, fold to 3-bet, WTSD.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Автор: <em><a href=\"/kz/author-roman-shaposhnikov/\"><strong>Роман Шапошников</strong></a></em></p>\n<p class=\"has-white-color has-text-color\">Негізгі статтар: VPIP, 3-bet, fold to 3-bet, WTSD. <a href=\"/kz/vpip-pokerde/\"><strong>VPIP</strong></a> · Клуб <strong>111777</strong></p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2027/04/hud-staty-v-pokere.webp\" alt=\"HUD\" width=\"1200\" height=\"675\" loading=\"lazy\" decoding=\"async\"></figure>"
+  },
+  "hy": {
+    "title": "Poker HUD stats — Nuts PPPoker",
+    "description": "HUD ցուցանիշներ. VPIP, 3-bet, fold to 3-bet, WTSD:",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Հեղինակ՝ <em><a href=\"/hy/author-roman-shaposhnikov/\"><strong>Ռոման Շապոշնիկով</strong></a></em></p>\n<p class=\"has-white-color has-text-color\">Հիմնական stats՝ VPIP, 3-bet, WTSD. <a href=\"/hy/vpip-pokerum/\"><strong>VPIP</strong></a> · Ակումբի ID <strong>111777</strong></p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2027/04/hud-staty-v-pokere.webp\" alt=\"HUD\" width=\"1200\" height=\"675\" loading=\"lazy\" decoding=\"async\"></figure>"
+  },
+  "tj": {
+    "title": "HUD-статҳо дар покер — Nuts PPPoker",
+    "description": "VPIP, 3-bet, fold to 3-bet, WTSD — чӣ гуна хондан.",
+    "bodyHtml": "<p class=\"has-white-color has-text-color\">Муаллиф: <em><a href=\"/tj/author-roman-shaposhnikov/\"><strong>Роман Шапошников</strong></a></em></p>\n<p class=\"has-white-color has-text-color\">Статҳои асосӣ: VPIP, 3-bet, WTSD. <a href=\"/tj/vpip-v-pokere/\"><strong>VPIP</strong></a> · ID-и клуб <strong>111777</strong></p>\n<figure class=\"has-white-color has-text-color\"><img src=\"/assets/media/2027/04/hud-staty-v-pokere.webp\" alt=\"HUD\" width=\"1200\" height=\"675\" loading=\"lazy\" decoding=\"async\"></figure>"
+  }
+}

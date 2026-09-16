@@ -25,6 +25,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Deposit and Withdrawal at NUTS: Step-by-Step via Telegram Bot — Nuts PPPoker](https://pppoker.pro/en/deposit-and-withdrawal-nuts/)
 - [How to Join the NUTS Club in 5 Minutes — Nuts PPPoker](https://pppoker.pro/en/how-to-join-nuts-club/)
 - [How to Play 6+ (Short Deck) in PPPoker NUTS — Nuts PPPoker](https://pppoker.pro/en/how-to-play-short-deck-6-plus-in-pppoker-nuts/)
+- [Poker HUD Stats: 3-Bet, Fold to 3-Bet, WTSD — Nuts PPPoker](https://pppoker.pro/en/how-to-read-poker-hud-stats/)
 - [What to Do With Poker Winnings: Bankroll, Training & More — Nuts PPPoker](https://pppoker.pro/en/how-to-spend-poker-winnings/)
 - [Implied Odds in Poker: How to Apply Potential Pot Odds — Nuts PPPoker](https://pppoker.pro/en/implied-odds-in-poker/)
 - [Know Your Poker Opponents: Player Types and How to Beat Them — Nuts PPPoker](https://pppoker.pro/en/know-your-poker-opponents-secrets-of-winning-strategies/)
@@ -48,7 +49,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [PROMO: MINI HIGHROLLER IN THE NUTS CLUB! — Nuts PPPoker](https://pppoker.pro/en/pppoker-mini-highroller-promo/)
 - [PPPoker NUTS: Bomb Pot — Explosive Action Format! — Nuts PPPoker](https://pppoker.pro/en/pppoker-nuts-bomb-pot-action-format/)
 - [PPPoker Review 2026: Clubs, Games, Rakeback, and Risks — Nuts PPPoker](https://pppoker.pro/en/pppoker-review-2026/)
-- [Rakeback and Bonuses at NUTS: What Players Get and How Not to Miss Out — Nuts PPPoker](https://pppoker.pro/en/rakeback-and-bonuses-nuts/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

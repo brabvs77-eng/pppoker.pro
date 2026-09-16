@@ -34,9 +34,11 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [NUTS-ի մրցաշարային գրաֆիկ — Nuts PPPoker](https://pppoker.pro/hy/nuts-turnirayin-grafik/)
 - [Օնլայն պոկերի բանկրոլ մենեջմենթ — Nuts PPPoker](https://pppoker.pro/hy/onlayn-poker-bankroll-management/)
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/hy/open-face-chinese-poker-ofc/)
+- [Պատասխանատու պոկեր — Nuts PPPoker](https://pppoker.pro/hy/patasxanakan-poker/)
 - [Պոկերի գործակալներ. ովքեր են, ինչ դեր ունեն և ինչ օգուտ են տալիս խաղացողներին — Nuts PPPoker](https://pppoker.pro/hy/poker-agentner/)
 - [Poker GTO — ինչ է և ինչպես կիրառել NUTS ակումբում — Nuts PPPoker](https://pppoker.pro/hy/poker-gto-nuts-akumbum/)
 - [Ինչպես ծախսել պոկերի հաղթանակը — Nuts PPPoker](https://pppoker.pro/hy/poker-haghovuty-vorosh/)
+- [Poker HUD stats — Nuts PPPoker](https://pppoker.pro/hy/poker-hud-stats/)
 - [Պոկերի խաղացողների հիմնական տեսակներ — Nuts PPPoker](https://pppoker.pro/hy/poker-khaghoghineri-tesakner/)
 - [Պոկերի կոմբինացիաներ — Nuts PPPoker](https://pppoker.pro/hy/poker-kombinacia-sparq/)
 - [Tilt և պոկերի հոգեբանություն — Nuts PPPoker](https://pppoker.pro/hy/poker-tilt-ev-psixologia/)
@@ -47,8 +49,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [PPPoker Ղազախստանի խաղացողների համար — Nuts PPPoker](https://pppoker.pro/hy/pppoker-qazakhstan-khaghoghneri/)
 - [PPPoker: մանրամասների ակնարկ 2026 — Nuts PPPoker](https://pppoker.pro/hy/pppoker-review-2026/)
 - [PPPoker Ուզբեկստանի խաղացողների համար — Nuts PPPoker](https://pppoker.pro/hy/pppoker-uzbekistan-khaghoghneri-hamar/)
-- [Rakeback և բոնուսներ NUTS-ում — Nuts PPPoker](https://pppoker.pro/hy/rakeback-ev-bonusner-nuts/)
-- [Ռուսական պոկեր NUTS-ում՝ կանոններ սկսնակների համար — Nuts PPPoker](https://pppoker.pro/hy/rusakan-poker-nuts-kanoner/)
 
 ## Լրացուցիչ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

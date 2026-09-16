@@ -25,6 +25,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Имплайд-оддсы в покере: потенциалдық банк мүмкіндіктерін қолдану — Nuts PPPoker](https://pppoker.pro/kz/implajd-odds-pokerde/)
 - [Ең ірі PPPoker турнирі — Nuts PPPoker](https://pppoker.pro/kz/iri-pppoker-turniri/)
 - [Көп үстелдік турнирлер (MTT) — Nuts PPPoker](https://pppoker.pro/kz/koptoldy-turnirler-mtt/)
+- [Жауапкершілікті покер ойыны — Nuts PPPoker](https://pppoker.pro/kz/masuliyatli-poker-oyin/)
 - [Микроставка турнирлерінде ойнау стратегиясы — Nuts PPPoker](https://pppoker.pro/kz/mikro-stavka-turnir-strategiyasy/)
 - [Сочиден онлайнға: NUTS клуб тарихы — Nuts PPPoker](https://pppoker.pro/kz/nuts-klub-tarykhy-sochi/)
 - [NUTS клубына 5 минутта қалай қосылуға болады — Nuts PPPoker](https://pppoker.pro/kz/nuts-klubyna-kalay-kosu/)
@@ -33,6 +34,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/kz/open-face-chinese-poker-ofc/)
 - [Покер агенттері: кімдер, қандай рөл атқарады және ойыншыларға пайдасы — Nuts PPPoker](https://pppoker.pro/kz/poker-agentter/)
 - [Poker GTO — бұл не және оны NUTS клубында қалай қолдану — Nuts PPPoker](https://pppoker.pro/kz/poker-gto-nuts-klubinde/)
+- [Покер HUD статистикасы — Nuts PPPoker](https://pppoker.pro/kz/poker-hud-statistikasy/)
 - [Покер жеңісін қалай жұмсау керек — Nuts PPPoker](https://pppoker.pro/kz/poker-jeuinis-kalay-zhumsau/)
 - [Покер қарсыластарыңызды біліңіз: жеңіс стратегияларының сыры — Nuts PPPoker](https://pppoker.pro/kz/poker-karsylastarynyzdy-tanynyz/)
 - [Покер комбинациялары: жұптан стрит-флешке — Nuts PPPoker](https://pppoker.pro/kz/poker-kombinatsiyalary-shpora/)
@@ -47,8 +49,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Өзбекстан ойыншылары үшін PPPoker — Nuts PPPoker](https://pppoker.pro/kz/pppoker-ozbekstan-oyynshylary-ushin/)
 - [Қазақстан ойыншылары үшін PPPoker — Nuts PPPoker](https://pppoker.pro/kz/pppoker-qazaqstan-ushin/)
 - [PPPoker: Жеке покер клубтары платформасының 2026 жылға арналған толық шолуы — Nuts PPPoker](https://pppoker.pro/kz/pppoker-zheke-poker-klubtary-platformasyny-2026/)
-- [NUTS рейкбек және бонустар — Nuts PPPoker](https://pppoker.pro/kz/rejkbek-zhane-bonus-nuts/)
-- [NUTS-тегі орыс покері: жаңадан бастаушыларға арналған ережелер — Nuts PPPoker](https://pppoker.pro/kz/rus-pokeri-nuts-erezheleri/)
 
 ## Қосымша
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
