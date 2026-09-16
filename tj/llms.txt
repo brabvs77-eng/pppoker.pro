@@ -7,11 +7,12 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 ## Саҳифаҳо
 - [Клуби покери PPPoker — Nuts: депозит, бонусҳо, турнирҳо](https://pppoker.pro/tj/)
 - [Блог — Nuts PPPoker](https://pppoker.pro/tj/blog/)
-- [Блог — Nuts PPPoker — саҳифа 2 аз 6](https://pppoker.pro/tj/blog/page/2/)
-- [Блог — Nuts PPPoker — саҳифа 3 аз 6](https://pppoker.pro/tj/blog/page/3/)
-- [Блог — Nuts PPPoker — саҳифа 4 аз 6](https://pppoker.pro/tj/blog/page/4/)
-- [Блог — Nuts PPPoker — саҳифа 5 аз 6](https://pppoker.pro/tj/blog/page/5/)
-- [Блог — Nuts PPPoker — саҳифа 6 аз 6](https://pppoker.pro/tj/blog/page/6/)
+- [Блог — Nuts PPPoker — саҳифа 2 аз 7](https://pppoker.pro/tj/blog/page/2/)
+- [Блог — Nuts PPPoker — саҳифа 3 аз 7](https://pppoker.pro/tj/blog/page/3/)
+- [Блог — Nuts PPPoker — саҳифа 4 аз 7](https://pppoker.pro/tj/blog/page/4/)
+- [Блог — Nuts PPPoker — саҳифа 5 аз 7](https://pppoker.pro/tj/blog/page/5/)
+- [Блог — Nuts PPPoker — саҳифа 6 аз 7](https://pppoker.pro/tj/blog/page/6/)
+- [Блог — Nuts PPPoker — саҳифа 7 аз 7](https://pppoker.pro/tj/blog/page/7/)
 - [Сиёсати махфият — Nuts PPPoker](https://pppoker.pro/tj/privacy-policy/)
 - [Шартномаи корбар — Nuts PPPoker](https://pppoker.pro/tj/user-agreement/)
 
@@ -27,6 +28,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [EV дар покер чист — Nuts PPPoker](https://pppoker.pro/tj/ev-v-pokere-chi-ast/)
 - [Implajd odds дар покер: чӣ гуна шансҳои потенсиалии банкро татбиқ кардан — Nuts PPPoker](https://pppoker.pro/tj/implajd-odds-v-pokere/)
 - [Рақибони покери худро бишинос — Nuts PPPoker](https://pppoker.pro/tj/know-your-poker-opponents-secrets-of-winning-strategies/)
+- [Комбинатсияҳои покер: шпаргалка — Nuts PPPoker](https://pppoker.pro/tj/kombinatsiyaho-dar-poker-shpora/)
 - [Навъҳои асосии бозигарони покер — Nuts PPPoker](https://pppoker.pro/tj/nav-hoi-bozigaroni-poker/)
 - [Ҷадвали турнирҳои NUTS — Nuts PPPoker](https://pppoker.pro/tj/nuts-grafiki-turnirho/)
 - [Чӣ тавр дар 5 дақиқа ба клуби NUTS ҳамроҳ шудан мумкин аст — Nuts PPPoker](https://pppoker.pro/tj/nuts-klubro-chi-tavr-chidam/)
@@ -38,6 +40,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Этикети покери зинда: навомӯзон бояд чӣ донанд — Nuts PPPoker](https://pppoker.pro/tj/pokeri-zinda-etiket/)
 - [Қоидаҳои Pot-Limit Omaha (PLO) — Nuts PPPoker](https://pppoker.pro/tj/pot-limit-omaha-plo-qoidaho/)
 - [Позиция дар покер — Nuts PPPoker](https://pppoker.pro/tj/pozitsiya-v-poker/)
+- [PPPoker барои бозигарони Ӯзбекистон — Nuts PPPoker](https://pppoker.pro/tj/pppoker-baroi-bozigoroni-ozbekiston/)
 - [PPPoker чист: баррасии платформаи клуби хусусии 2026 — Nuts PPPoker](https://pppoker.pro/tj/pppoker-chist/)
 - [АКСИЯ: MINI HIGHROLLER ДАР КЛУБИ NUTS! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — формати таркишии экшн! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-nuts-bomb-pot/)
@@ -46,8 +49,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Чӣ тавр 6+ (Short Deck) дар PPPoker NUTS бозӣ кардан — Nuts PPPoker](https://pppoker.pro/tj/short-deck-6-plus-pppoker/)
 - [Стратегияи бозӣ дар турнирҳои микроставка — Nuts PPPoker](https://pppoker.pro/tj/strategiyai-turnirhoi-mikrostavka/)
 - [Аз Сочи то онлайн: таърихи клуби NUTS — Nuts PPPoker](https://pppoker.pro/tj/tarixi-klubi-nuts-sochi/)
-- [Қоидаҳои Texas Hold'em (NLH) — Nuts PPPoker](https://pppoker.pro/tj/texas-holdem-nlh-qoidaho/)
-- [Қоидаҳои Texas Hold'em — Nuts PPPoker](https://pppoker.pro/tj/texas-holdem-qoidaho/)
 
 ## Иловагӣ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

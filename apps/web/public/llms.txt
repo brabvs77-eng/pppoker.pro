@@ -28,6 +28,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [От Сочи до онлайна: история клуба NUTS — Nuts PPPoker](https://pppoker.pro/istoriya-kluba-nuts-sochi/)
 - [Как играть 6+ (Short Deck) в PPPoker NUTS: — Nuts PPPoker](https://pppoker.pro/kak-igrat-6-short-deck-v-pppoker-nuts/)
 - [Как вступить в клуб NUTS за 5 минут — Nuts PPPoker](https://pppoker.pro/kak-vstupit-v-klub-nuts/)
+- [Комбинации в покере: шпаргалка от пары до стрит-флеша — Nuts PPPoker](https://pppoker.pro/kombinacii-v-pokere-shpora/)
 - [Многостоловые Турниры (МТТ) — Nuts PPPoker](https://pppoker.pro/mnogostolovye-turniry-mtt/)
 - [На что потратить выигрыш в покере? — Nuts PPPoker](https://pppoker.pro/na-chto-potratit-vyigrysh-v-pokere/)
 - [Обзор онлайн-платформы PPPoker 2025 — Nuts PPPoker](https://pppoker.pro/obzor-onlajn-platformy-pppoker-2025/)
@@ -36,6 +37,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Основы правильного бет-сайзинга в покере — Nuts PPPoker](https://pppoker.pro/osnovy-pravilnogo-bet-sajzinga-v-pokere/)
 - [Poker GTO — что это и как применять в клубе NUTS — Nuts PPPoker](https://pppoker.pro/poker-gto-chto-eto-i-kak-primenyat-v-klube-nuts/)
 - [Позиция за столом в покере: почему баттон — лучший друг регуляра — Nuts PPPoker](https://pppoker.pro/poziciya-za-stolom-poker/)
+- [PPPoker для игроков из Узбекистана: валюта, поддержка, клуб NUTS — Nuts PPPoker](https://pppoker.pro/pppoker-dlya-uzbekistana/)
 - [АКЦИЯ: МИНИ ХАЙРОЛЛЕР В КЛУБЕ NUTS! — Nuts PPPoker](https://pppoker.pro/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — Взрывной Формат для Любителей Экшена! — Nuts PPPoker](https://pppoker.pro/pppoker-nuts-bomb-pot-vzryvnoj-format-dlya-lyubitelej-ekshena/)
 - [Правила игры в Техасский Холдем (NLH) — Nuts PPPoker](https://pppoker.pro/pravila-igry-v-tehasskij-holdem-nlh/)
@@ -45,8 +47,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Русский покер в NUTS: правила и стратегия для начинающих — Nuts PPPoker](https://pppoker.pro/russkiy-poker-v-nuts-pravila/)
 - [‼️ Самый крупный турнир в PPPoker — Nuts PPPoker](https://pppoker.pro/samyj-krupnyj-turnir-v-pppoker/)
 - [Стартовые руки в Техасском Холдеме — Nuts PPPoker](https://pppoker.pro/startovye-ruki-v-tehasskom-holdeme/)
-- [Стратегия игры на микростейкс турнирах — Nuts PPPoker](https://pppoker.pro/strategiya-igry-na-mikrostejks-turnirah/)
-- [Тилт и психология покера: 7 способов не сливать стек — Nuts PPPoker](https://pppoker.pro/tilt-i-psihologiya-pokera/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
