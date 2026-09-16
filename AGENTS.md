@@ -204,6 +204,8 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 
 ## Planned work (backlog)
 
+### Engineering (done)
+
 1. ~~Post translations from RU (24 × 5 locales)~~ — done (Sprint 42, `post-translations/`)
 2. ~~Native blog archive HY/TJ + pagination~~ — done (Sprint 42)
 3. ~~Legal pages UZ/KZ/HY/TJ~~ — done (`page-translations/legal.json`, `seed:legal-pages`)
@@ -213,6 +215,13 @@ Cloudflare deploy: build command above; output `apps/web/out`; Node 20.
 7. ~~Home hero~~ — done (Sprint C4, `home-hero.json`, `inject:home-hero`)
 8. ~~EN translation quality pass~~ — done (Sprint EN-Q1: review, GTO, VPIP, EV, opponents)
 9. ~~New post workflow~~ — done (`docs/NEW_POST_WORKFLOW.md`, `polish:post-translations`)
+10. ~~About page `/o-nas/`~~ — done (team, story, Sochi office)
+
+### Editorial (active — see [docs/CONTENT_PLAN.md](docs/CONTENT_PLAN.md))
+
+- Sep 2026: «Как вступить в клуб NUTS», «Русский покер в NUTS»
+- Content debt: author page (Роман → Алексей Крылов), `/o-nas/` cross-links
+- Cadence: 2 posts/month RU + 5 locale translations
 
 ## Adding or updating content
 
@@ -228,5 +237,6 @@ Quick path:
 ## Docs
 
 - [README.md](README.md) — commands, sprint history
+- [docs/CONTENT_PLAN.md](docs/CONTENT_PLAN.md) — editorial calendar, pillars, backlog
 - [docs/NEW_POST_WORKFLOW.md](docs/NEW_POST_WORKFLOW.md) — add/update structured blog posts
 - [docs/RUDIMENTS_AUDIT.md](docs/RUDIMENTS_AUDIT.md) — removed legacy artifacts
