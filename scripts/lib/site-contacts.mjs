@@ -7,9 +7,9 @@ export const siteContacts = {
 
 /** Keep in sync with apps/web/src/config/site.ts → siteLegalEntity */
 export const siteLegalEntity = {
-  address: "QQ7V+C7G, 34 Chargali St, T'bilisi, Georgia",
-  phoneDisplay: '+995 599 99 59 78',
-  phoneHref: 'tel:+995599995978',
+  address: '354000, г. Сочи, ул. Навагинская, д. 9, БЦ «Навагинский», офис 412',
+  phoneDisplay: '+7 (862) 255-44-19',
+  phoneHref: 'tel:+78622554419',
 };
 
 /** Keep in sync with apps/web/src/config/site.ts → siteSocial */
