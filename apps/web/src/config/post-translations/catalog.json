@@ -349,5 +349,31 @@
       "hy": "rusakan-poker-nuts-kanoner",
       "tj": "pokeri-rusii-nuts-qoidaho"
     }
+  },
+  {
+    "id": "crash-v-nuts-kak-igrat",
+    "sourceRoute": "/crash-v-nuts-kak-igrat/",
+    "publishedAt": "2026-10-05T10:00:00+00:00",
+    "image": "/assets/media/2025/12/turbo.webp",
+    "slugs": {
+      "en": "crash-nuts-how-to-play",
+      "uz": "crash-nuts-qanday-oynash",
+      "kz": "crash-nuts-kalay-oynau",
+      "hy": "crash-nuts-inchpes-khelnel",
+      "tj": "crash-nuts-chi-tavr-bozi"
+    }
+  },
+  {
+    "id": "rejkbek-i-bonusy-nuts",
+    "sourceRoute": "/rejkbek-i-bonusy-nuts/",
+    "publishedAt": "2026-10-15T10:00:00+00:00",
+    "image": "/assets/media/2024/07/Bez-imeni-1.webp",
+    "slugs": {
+      "en": "rakeback-and-bonuses-nuts",
+      "uz": "rejkbek-va-bonuslar-nuts",
+      "kz": "rejkbek-zhane-bonus-nuts",
+      "hy": "rakeback-ev-bonusner-nuts",
+      "tj": "rejkbek-va-bonusho-nuts"
+    }
   }
 ]
