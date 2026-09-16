@@ -30,6 +30,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Ko'p stolli turnirlar (MTT) — Nuts PPPoker](https://pppoker.pro/uz/ko-p-stolli-turnirlar-mtt/)
 - [Mikrostavka turnirlarida o'ynash strategiyasi — Nuts PPPoker](https://pppoker.pro/uz/mikro-stavka-turnir-strategiyasi/)
 - [NUTS klubiga 5 daqiqada qanday qo'shilish mumkin — Nuts PPPoker](https://pppoker.pro/uz/nuts-klubiga-qanday-qoshilish/)
+- [NUTS turnir jadvali: qanday o'qish va value topish — Nuts PPPoker](https://pppoker.pro/uz/nuts-turnir-jadvali/)
 - [Onlayn pokerda bankroll-menejment — Nuts PPPoker](https://pppoker.pro/uz/onlayn-poker-bankroll-menejmenti/)
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/uz/open-face-chinese-poker-ofc/)
 - [Pokerda EV nima — Nuts PPPoker](https://pppoker.pro/uz/pokarda-ev-nima/)
@@ -37,6 +38,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Poker GTO — bu nima va uni NUTS klubida qanday qo'llash — Nuts PPPoker](https://pppoker.pro/uz/poker-gto-nuts-klubida/)
 - [Poker o'yinchilarining asosiy turlari — Nuts PPPoker](https://pppoker.pro/uz/poker-oyinchilari-turlari/)
 - [Poker raqiblaringizni biling: g'alaba strategiyalari siri — Nuts PPPoker](https://pppoker.pro/uz/poker-raqiblaringizni-biling/)
+- [Poker tilt va psixologiya: 7 usul stekni qotirmaslik — Nuts PPPoker](https://pppoker.pro/uz/poker-tilt-va-psixologiya/)
 - [Poker yutug'ini qayerga sarflash kerak — Nuts PPPoker](https://pppoker.pro/uz/poker-yutugini-qayerga-sarflash/)
 - [Pot-Limit Omaha (PLO) qoidalari — Nuts PPPoker](https://pppoker.pro/uz/pot-limit-omaha-plo-qoidalari/)
 - [PPPoker: 2026-yil uchun shaxsiy pokker klublari platformasining batafsil koʻrib chiqilishi — Nuts PPPoker](https://pppoker.pro/uz/pppoker-2026/)
@@ -48,8 +50,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [PPPoker NUTS-da 6+ (Short Deck) qanday o'ynash kerak — Nuts PPPoker](https://pppoker.pro/uz/short-deck-6-plus-pppokerda/)
 - [Texas Hold'emda boshlang'ich qo'llar — Nuts PPPoker](https://pppoker.pro/uz/texas-holdem-boshlangich-qollar/)
 - [Texas Hold'em (NLH) qoidalari — Nuts PPPoker](https://pppoker.pro/uz/texas-holdem-nlh-qoidalari/)
-- [Texas Hold'em qoidalari — Nuts PPPoker](https://pppoker.pro/uz/texas-holdem-qoidalari/)
-- [VPIP — Nuts PPPoker](https://pppoker.pro/uz/vpip-pokerda/)
 
 ## Qo'shimcha
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

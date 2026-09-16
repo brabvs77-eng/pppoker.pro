@@ -44,8 +44,9 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [‼️ Самый крупный турнир в PPPoker — Nuts PPPoker](https://pppoker.pro/samyj-krupnyj-turnir-v-pppoker/)
 - [Стартовые руки в Техасском Холдеме — Nuts PPPoker](https://pppoker.pro/startovye-ruki-v-tehasskom-holdeme/)
 - [Стратегия игры на микростейкс турнирах — Nuts PPPoker](https://pppoker.pro/strategiya-igry-na-mikrostejks-turnirah/)
+- [Тилт и психология покера: 7 способов не сливать стек — Nuts PPPoker](https://pppoker.pro/tilt-i-psihologiya-pokera/)
+- [Турнирная сетка NUTS: как читать расписание и ловить value — Nuts PPPoker](https://pppoker.pro/turnirnaya-setka-nuts/)
 - [VPIP — Nuts PPPoker](https://pppoker.pro/vpip/)
-- [Знай своих покерных соперников: — Nuts PPPoker](https://pppoker.pro/znaj-svoih-pokernyh-sopernikov-sekrety-vyigryshnyh-strategij/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

@@ -26,6 +26,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Көп үстелдік турнирлер (MTT) — Nuts PPPoker](https://pppoker.pro/kz/koptoldy-turnirler-mtt/)
 - [Микроставка турнирлерінде ойнау стратегиясы — Nuts PPPoker](https://pppoker.pro/kz/mikro-stavka-turnir-strategiyasy/)
 - [NUTS клубына 5 минутта қалай қосылуға болады — Nuts PPPoker](https://pppoker.pro/kz/nuts-klubyna-kalay-kosu/)
+- [NUTS турнир кестесі: value қалай табу — Nuts PPPoker](https://pppoker.pro/kz/nuts-turnir-kestesi/)
 - [Онлайн покерде банкролл-менеджмент — Nuts PPPoker](https://pppoker.pro/kz/onlayn-poker-bankroll-menejment/)
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/kz/open-face-chinese-poker-ofc/)
 - [Покер агенттері: кімдер, қандай рөл атқарады және ойыншыларға пайдасы — Nuts PPPoker](https://pppoker.pro/kz/poker-agentter/)
@@ -33,6 +34,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Покер жеңісін қалай жұмсау керек — Nuts PPPoker](https://pppoker.pro/kz/poker-jeuinis-kalay-zhumsau/)
 - [Покер қарсыластарыңызды біліңіз: жеңіс стратегияларының сыры — Nuts PPPoker](https://pppoker.pro/kz/poker-karsylastarynyzdy-tanynyz/)
 - [Покер ойыншыларының негізгі түрлері — Nuts PPPoker](https://pppoker.pro/kz/poker-oyynshylary-turleri/)
+- [Покер tilt және психология: 7 тәсіл — Nuts PPPoker](https://pppoker.pro/kz/poker-tilt-zhane-psihologiya/)
 - [Покерде EV дегеніміз не — Nuts PPPoker](https://pppoker.pro/kz/pokerde-ev-degenimiz-ne/)
 - [Pot-Limit Omaha (PLO) ережелері — Nuts PPPoker](https://pppoker.pro/kz/pot-limit-omaha-plo-erezheleri/)
 - [АКЦИЯ: NUTS КЛУБЫНДА MINI HIGHROLLER! — Nuts PPPoker](https://pppoker.pro/kz/pppoker-mini-highroller/)
@@ -46,7 +48,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Техас Холдем ережелері — Nuts PPPoker](https://pppoker.pro/kz/texas-holdem-erezheleri/)
 - [Техас Холдем (NLH) ережелері — Nuts PPPoker](https://pppoker.pro/kz/texas-holdem-nlh-erezheleri/)
 - [Тік покер этикеті: жаңадан келгендер не білуі керек — Nuts PPPoker](https://pppoker.pro/kz/tik-poker-etiketi/)
-- [VPIP — Nuts PPPoker](https://pppoker.pro/kz/vpip-pokerde/)
 
 ## Қосымша
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
