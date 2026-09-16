@@ -453,5 +453,31 @@
       "hy": "nuts-akumb-patyust-sotchi",
       "tj": "tarixi-klubi-nuts-sochi"
     }
+  },
+  {
+    "id": "pppoker-dlya-uzbekistana",
+    "sourceRoute": "/pppoker-dlya-uzbekistana/",
+    "publishedAt": "2027-02-05T10:00:00+00:00",
+    "image": "/assets/media/2024/08/Mask-group1-opt.webp",
+    "slugs": {
+      "en": "pppoker-for-uzbekistan-players",
+      "uz": "pppoker-ozbekiston-uchun",
+      "kz": "pppoker-ozbekstan-oyynshylary-ushin",
+      "hy": "pppoker-uzbekistan-khaghoghneri-hamar",
+      "tj": "pppoker-baroi-bozigoroni-ozbekiston"
+    }
+  },
+  {
+    "id": "kombinacii-v-pokere-shpora",
+    "sourceRoute": "/kombinacii-v-pokere-shpora/",
+    "publishedAt": "2027-02-20T10:00:00+00:00",
+    "image": "/assets/media/2026/01/pravila-texasskogo-holdem-pokera.webp",
+    "slugs": {
+      "en": "poker-hand-combinations-cheat-sheet",
+      "uz": "poker-kombinatsiyalari-shpora",
+      "kz": "poker-kombinatsiyalary-shpora",
+      "hy": "poker-kombinacia-sparq",
+      "tj": "kombinatsiyaho-dar-poker-shpora"
+    }
   }
 ]

@@ -72,9 +72,11 @@ async function main() {
 
   const catalog = loadCatalog();
   const expectedPages = blogArchivePageCount(catalog.length, BLOG_ARCHIVE_PAGE_SIZE);
-  for (const locale of ['en', 'uz', 'kz', 'hy', 'tj']) {
+  const localesToCheck = ['ru', 'en', 'uz', 'kz', 'hy', 'tj'];
+  for (const locale of localesToCheck) {
     for (let page = 2; page <= expectedPages; page += 1) {
-      const route = `/${locale}/blog/page/${page}/`;
+      const route =
+        locale === 'ru' ? `/blog/page/${page}/` : `/${locale}/blog/page/${page}/`;
       if (!archivePages.some((entry) => entry.route === route)) {
         violations.push(`Missing native blog archive route in manifest: ${route}`);
       }
@@ -92,7 +94,7 @@ async function main() {
   }
 
   console.log(
-    `Verified ${checked} native blog archive pages (no Elementor body/runtime); ${expectedPages} pages per locale for en/uz/kz/hy/tj.`,
+    `Verified ${checked} native blog archive pages (no Elementor body/runtime); ${expectedPages} pages per locale for ru/en/uz/kz/hy/tj.`,
   );
 }
 
