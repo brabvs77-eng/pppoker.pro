@@ -505,5 +505,31 @@
       "hy": "pppoker-qazakhstan-khaghoghneri",
       "tj": "pppoker-baroi-qozogiston"
     }
+  },
+  {
+    "id": "hud-staty-v-pokere",
+    "sourceRoute": "/hud-staty-v-pokere/",
+    "publishedAt": "2027-04-05T10:00:00+00:00",
+    "image": "/assets/media/2026/01/63038b0050a4e9cf95a8e536_main-image-blog-post_vpip.webp",
+    "slugs": {
+      "en": "how-to-read-poker-hud-stats",
+      "uz": "poker-hud-statistikasi",
+      "kz": "poker-hud-statistikasy",
+      "hy": "poker-hud-stats",
+      "tj": "hud-staty-poker"
+    }
+  },
+  {
+    "id": "otvetstvennaya-igra-v-pokere",
+    "sourceRoute": "/otvetstvennaya-igra-v-pokere/",
+    "publishedAt": "2027-04-20T10:00:00+00:00",
+    "image": "/assets/media/2024/07/money.webp",
+    "slugs": {
+      "en": "responsible-poker-play",
+      "uz": "masuliyatli-poker-oyini",
+      "kz": "masuliyatli-poker-oyin",
+      "hy": "patasxanakan-poker",
+      "tj": "bozii-masuliyati-poker"
+    }
   }
 ]
