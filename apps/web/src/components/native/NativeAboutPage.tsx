@@ -37,10 +37,7 @@ export function NativeAboutPage() {
           loading="eager"
           decoding="async"
         />
-        <figcaption>
-          Девять человек, один клуб — на групповом фото также Элина Джураева и Тимур Сарыев из
-          службы поддержки
-        </figcaption>
+        <figcaption>Девять человек, один клуб, ноль сожалений о выборе худи вместо пиджаков</figcaption>
       </figure>
 
       <div className="about-page__story">
