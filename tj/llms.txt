@@ -28,6 +28,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Implajd odds дар покер: чӣ гуна шансҳои потенсиалии банкро татбиқ кардан — Nuts PPPoker](https://pppoker.pro/tj/implajd-odds-v-pokere/)
 - [Рақибони покери худро бишинос — Nuts PPPoker](https://pppoker.pro/tj/know-your-poker-opponents-secrets-of-winning-strategies/)
 - [Навъҳои асосии бозигарони покер — Nuts PPPoker](https://pppoker.pro/tj/nav-hoi-bozigaroni-poker/)
+- [Ҷадвали турнирҳои NUTS — Nuts PPPoker](https://pppoker.pro/tj/nuts-grafiki-turnirho/)
 - [Чӣ тавр дар 5 дақиқа ба клуби NUTS ҳамроҳ шудан мумкин аст — Nuts PPPoker](https://pppoker.pro/tj/nuts-klubro-chi-tavr-chidam/)
 - [Open Face Chinese Poker (OFC) — Nuts PPPoker](https://pppoker.pro/tj/open-face-chinese-poker-ofc/)
 - [Пасандоз ва гирифтан дар NUTS тавассути Telegram-бот — Nuts PPPoker](https://pppoker.pro/tj/pasandoz-va-giriftan-nuts/)
@@ -45,8 +46,8 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Стратегияи бозӣ дар турнирҳои микроставка — Nuts PPPoker](https://pppoker.pro/tj/strategiyai-turnirhoi-mikrostavka/)
 - [Қоидаҳои Texas Hold'em (NLH) — Nuts PPPoker](https://pppoker.pro/tj/texas-holdem-nlh-qoidaho/)
 - [Қоидаҳои Texas Hold'em — Nuts PPPoker](https://pppoker.pro/tj/texas-holdem-qoidaho/)
+- [Tilt ва психологияи покер: 7 роҳ — Nuts PPPoker](https://pppoker.pro/tj/tilt-va-psixologiyai-poker/)
 - [Турнирҳои чандмизоҷӣ (MTT) — Nuts PPPoker](https://pppoker.pro/tj/turnirhoi-ko-stol-mtt/)
-- [VPIP — Nuts PPPoker](https://pppoker.pro/tj/vpip-v-pokere/)
 
 ## Иловагӣ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
