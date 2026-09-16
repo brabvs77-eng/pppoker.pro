@@ -401,5 +401,31 @@
       "hy": "onlayn-poker-bankroll-management",
       "tj": "bankroll-menejmenti-onlajn"
     }
+  },
+  {
+    "id": "turnirnaya-setka-nuts",
+    "sourceRoute": "/turnirnaya-setka-nuts/",
+    "publishedAt": "2026-12-05T10:00:00+00:00",
+    "image": "/assets/media/2025/09/photo_2025-09-12_20-57-02.webp",
+    "slugs": {
+      "en": "nuts-tournament-schedule",
+      "uz": "nuts-turnir-jadvali",
+      "kz": "nuts-turnir-kestesi",
+      "hy": "nuts-turnirayin-grafik",
+      "tj": "nuts-grafiki-turnirho"
+    }
+  },
+  {
+    "id": "tilt-i-psihologiya-pokera",
+    "sourceRoute": "/tilt-i-psihologiya-pokera/",
+    "publishedAt": "2026-12-15T10:00:00+00:00",
+    "image": "/assets/media/2025/09/capture_250917_191810.webp",
+    "slugs": {
+      "en": "poker-tilt-and-psychology",
+      "uz": "poker-tilt-va-psixologiya",
+      "kz": "poker-tilt-zhane-psihologiya",
+      "hy": "poker-tilt-ev-psixologia",
+      "tj": "tilt-va-psixologiyai-poker"
+    }
   }
 ]
