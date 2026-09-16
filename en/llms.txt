@@ -32,11 +32,13 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Microstakes Tournament Strategy — Nuts PPPoker](https://pppoker.pro/en/microstakes-tournament-strategy/)
 - [Multi-Table Tournaments (MTT): Rules, Formats & Strategy — Nuts PPPoker](https://pppoker.pro/en/multi-table-tournaments-mtt/)
 - [No-Limit Texas Hold'em (NLH) Rules — Nuts PPPoker](https://pppoker.pro/en/no-limit-texas-holdem-rules-nlh/)
+- [From Sochi to Online: The Story of NUTS Club — Nuts PPPoker](https://pppoker.pro/en/nuts-club-history-sochi/)
 - [NUTS Tournament Schedule: How to Read the Grid and Find Value — Nuts PPPoker](https://pppoker.pro/en/nuts-tournament-schedule/)
 - [Online Poker Bankroll Management: Limits, ABI and Discipline — Nuts PPPoker](https://pppoker.pro/en/online-poker-bankroll-management/)
 - [Open Face Chinese Poker (OFC): Rules & Scoring — Nuts PPPoker](https://pppoker.pro/en/open-face-chinese-poker-ofc/)
 - [Poker Agents: Who They Are, Their Role, and Benefits for Players — Nuts PPPoker](https://pppoker.pro/en/poker-agents/)
 - [Poker GTO Explained: How to Apply It at NUTS — Nuts PPPoker](https://pppoker.pro/en/poker-gto-in-nuts-club/)
+- [Table Position in Poker: Why the Button Is a Reg's Best Friend — Nuts PPPoker](https://pppoker.pro/en/poker-table-position/)
 - [Tilt and Poker Psychology: 7 Ways to Stop Bleeding Your Stack — Nuts PPPoker](https://pppoker.pro/en/poker-tilt-and-psychology/)
 - [Pot-Limit Omaha (PLO) Rules & Hand Rankings — Nuts PPPoker](https://pppoker.pro/en/pot-limit-omaha-plo-rules/)
 - [PROMO: MINI HIGHROLLER IN THE NUTS CLUB! — Nuts PPPoker](https://pppoker.pro/en/pppoker-mini-highroller-promo/)
@@ -46,8 +48,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Russian Poker in NUTS: Rules and Strategy for Beginners — Nuts PPPoker](https://pppoker.pro/en/russian-poker-nuts-rules/)
 - [Starting Hands in Texas Hold'em — Nuts PPPoker](https://pppoker.pro/en/starting-hands-in-texas-holdem/)
 - [Texas Hold'em Rules for Beginners — Nuts PPPoker](https://pppoker.pro/en/texas-holdem-rules/)
-- [VPIP in Poker: What It Means and How to Use It — Nuts PPPoker](https://pppoker.pro/en/vpip-stat-in-poker/)
-- [What Is EV in Poker? Expected Value Explained — Nuts PPPoker](https://pppoker.pro/en/what-is-ev-in-poker/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

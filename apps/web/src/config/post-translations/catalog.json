@@ -427,5 +427,31 @@
       "hy": "poker-tilt-ev-psixologia",
       "tj": "tilt-va-psixologiyai-poker"
     }
+  },
+  {
+    "id": "poziciya-za-stolom-poker",
+    "sourceRoute": "/poziciya-za-stolom-poker/",
+    "publishedAt": "2027-01-10T10:00:00+00:00",
+    "image": "/assets/media/2026/01/i-2.webp",
+    "slugs": {
+      "en": "poker-table-position",
+      "uz": "poker-stol-pozitsiyasi",
+      "kz": "poker-stol-oryny",
+      "hy": "poker-uxti-pozicia",
+      "tj": "pozitsiya-v-poker"
+    }
+  },
+  {
+    "id": "istoriya-kluba-nuts-sochi",
+    "sourceRoute": "/istoriya-kluba-nuts-sochi/",
+    "publishedAt": "2027-01-25T10:00:00+00:00",
+    "image": "/assets/media/2026/03/about/about-team-9.png",
+    "slugs": {
+      "en": "nuts-club-history-sochi",
+      "uz": "nuts-klub-tarixi-sochi",
+      "kz": "nuts-klub-tarykhy-sochi",
+      "hy": "nuts-akumb-patyust-sotchi",
+      "tj": "tarixi-klubi-nuts-sochi"
+    }
   }
 ]

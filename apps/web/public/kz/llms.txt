@@ -25,6 +25,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Ең ірі PPPoker турнирі — Nuts PPPoker](https://pppoker.pro/kz/iri-pppoker-turniri/)
 - [Көп үстелдік турнирлер (MTT) — Nuts PPPoker](https://pppoker.pro/kz/koptoldy-turnirler-mtt/)
 - [Микроставка турнирлерінде ойнау стратегиясы — Nuts PPPoker](https://pppoker.pro/kz/mikro-stavka-turnir-strategiyasy/)
+- [Сочиден онлайнға: NUTS клуб тарихы — Nuts PPPoker](https://pppoker.pro/kz/nuts-klub-tarykhy-sochi/)
 - [NUTS клубына 5 минутта қалай қосылуға болады — Nuts PPPoker](https://pppoker.pro/kz/nuts-klubyna-kalay-kosu/)
 - [NUTS турнир кестесі: value қалай табу — Nuts PPPoker](https://pppoker.pro/kz/nuts-turnir-kestesi/)
 - [Онлайн покерде банкролл-менеджмент — Nuts PPPoker](https://pppoker.pro/kz/onlayn-poker-bankroll-menejment/)
@@ -34,6 +35,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Покер жеңісін қалай жұмсау керек — Nuts PPPoker](https://pppoker.pro/kz/poker-jeuinis-kalay-zhumsau/)
 - [Покер қарсыластарыңызды біліңіз: жеңіс стратегияларының сыры — Nuts PPPoker](https://pppoker.pro/kz/poker-karsylastarynyzdy-tanynyz/)
 - [Покер ойыншыларының негізгі түрлері — Nuts PPPoker](https://pppoker.pro/kz/poker-oyynshylary-turleri/)
+- [Покер столдағы позиция — Nuts PPPoker](https://pppoker.pro/kz/poker-stol-oryny/)
 - [Покер tilt және психология: 7 тәсіл — Nuts PPPoker](https://pppoker.pro/kz/poker-tilt-zhane-psihologiya/)
 - [Покерде EV дегеніміз не — Nuts PPPoker](https://pppoker.pro/kz/pokerde-ev-degenimiz-ne/)
 - [Pot-Limit Omaha (PLO) ережелері — Nuts PPPoker](https://pppoker.pro/kz/pot-limit-omaha-plo-erezheleri/)
@@ -46,8 +48,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [PPPoker NUTS-та 6+ (Short Deck) қалай ойнау керек — Nuts PPPoker](https://pppoker.pro/kz/short-deck-6-plus-pppokerde/)
 - [Техас Холдемдегі бастапқы қолдар — Nuts PPPoker](https://pppoker.pro/kz/texas-holdem-bastauy-qol/)
 - [Техас Холдем ережелері — Nuts PPPoker](https://pppoker.pro/kz/texas-holdem-erezheleri/)
-- [Техас Холдем (NLH) ережелері — Nuts PPPoker](https://pppoker.pro/kz/texas-holdem-nlh-erezheleri/)
-- [Тік покер этикеті: жаңадан келгендер не білуі керек — Nuts PPPoker](https://pppoker.pro/kz/tik-poker-etiketi/)
 
 ## Қосымша
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
