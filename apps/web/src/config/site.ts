@@ -129,9 +129,9 @@ export function iplanutsHref(locale: string): string {
 export const siteLegalEntity = {
   associationName: 'International Poker Lovers Association NUTS',
   copyrightStartYear: 2017,
-  address: "QQ7V+C7G, 34 Chargali St, T'bilisi, Georgia",
-  phoneDisplay: '+995 599 99 59 78',
-  phoneHref: 'tel:+995599995978',
+  address: '354000, г. Сочи, ул. Навагинская, д. 9, БЦ «Навагинский», офис 412',
+  phoneDisplay: '+7 (862) 255-44-19',
+  phoneHref: 'tel:+78622554419',
 } as const;
 
 /** Yandex Metrika + Google Tag (Site Kit) — same IDs as legacy WordPress export. */
