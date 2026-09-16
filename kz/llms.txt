@@ -2,7 +2,7 @@
 
 > PPPoker-де ақшаға онлайн покер. Шығару, бонустар және турнирлері бар сенімді покер-рум.
 
-Generated 2026-08-28. All URLs: https://pppoker.pro
+Generated 2026-09-16. All URLs: https://pppoker.pro
 
 ## Беттер
 - [Главная - Қазақстандағы онлайн покер клубы — pppoker Nuts, Астана](https://pppoker.pro/kz/)

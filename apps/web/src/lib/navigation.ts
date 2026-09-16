@@ -13,6 +13,11 @@ export function blogHref(locale: string): string {
   return `${localeBlogRoot(locale as AppLocale)}/`;
 }
 
+/** Russian about page — single route for all locales in header. */
+export function aboutHref(): string {
+  return '/o-nas/';
+}
+
 export function legalHref(
   locale: string,
   slug: 'user-agreement' | 'privacy-policy',

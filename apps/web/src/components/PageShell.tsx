@@ -8,6 +8,7 @@ import { HomePromoModalsBoot } from '@/components/native/HomePromoModalsBoot';
 import { BlogJsonLdBlock } from '@/components/native/BlogJsonLdBlock';
 import { ReviewSnippetsJsonLd } from '@/components/native/ReviewSnippetsJsonLd';
 import { NativeBlogArchive } from '@/components/native/NativeBlogArchive';
+import { NativeAboutPage } from '@/components/native/NativeAboutPage';
 import { NativePage } from '@/components/native/NativePage';
 import { StructuredPost } from '@/components/native/StructuredPost';
 import { SiteFooter } from '@/components/native/SiteFooter';
@@ -16,7 +17,7 @@ import { WidsterEmbed } from '@/components/native/WidsterEmbed';
 import { WordPressBody } from '@/components/WordPressBody';
 import { WordPressHead } from '@/components/WordPressHead';
 import { WordPressRuntimeScripts } from '@/components/WordPressRuntimeScripts';
-import { homePromoRoutes, isNativeHomeShellRoute } from '@/config/site';
+import { homePromoRoutes, isAboutPageRoute, isNativeHomeShellRoute } from '@/config/site';
 import type { BlogArchiveSlice } from '@/lib/blogArchive';
 import type { BlogPostCard } from '@/lib/blogRotation';
 import type { AppLocale } from '@/i18n/routing';
@@ -70,6 +71,8 @@ export function PageShell({
       {children ??
         (nativeBlog ? (
           <NativeBlogArchive locale={page.locale as AppLocale} archive={nativeBlog} />
+        ) : isAboutPageRoute(page.route) ? (
+          <NativeAboutPage />
         ) : nativePage ? (
           <NativePage page={nativePage} />
         ) : structuredPost ? (

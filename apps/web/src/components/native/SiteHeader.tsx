@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { siteBranding, siteContacts } from '@/config/site';
 import { getLocaleAlternates } from '@/lib/localeAlternates';
-import { blogHref, homeHref } from '@/lib/navigation';
+import { aboutHref, blogHref, homeHref } from '@/lib/navigation';
 import type { PageEntry } from '@/lib/types';
 
 import { LocaleSwitcher } from './LocaleSwitcher';
@@ -15,8 +15,10 @@ type SiteHeaderProps = {
 function NavLinks({
   home,
   blog,
+  about,
   homeLabel,
   blogLabel,
+  aboutLabel,
   managerLabel,
   channelLabel,
   depositLabel,
@@ -24,8 +26,10 @@ function NavLinks({
 }: {
   home: string;
   blog: string;
+  about: string;
   homeLabel: string;
   blogLabel: string;
+  aboutLabel: string;
   managerLabel: string;
   channelLabel: string;
   depositLabel: string;
@@ -44,6 +48,7 @@ function NavLinks({
         </a>
       ) : null}
       <Link href={home}>{homeLabel}</Link>
+      <Link href={about}>{aboutLabel}</Link>
       <Link href={blog}>{blogLabel}</Link>
       <a href={siteContacts.telegramManager} target="_blank" rel="noopener noreferrer">
         {managerLabel}
@@ -60,12 +65,15 @@ export async function SiteHeader({ page }: SiteHeaderProps) {
   const alternates = getLocaleAlternates(page);
   const home = homeHref(page.locale);
   const blog = blogHref(page.locale);
+  const about = aboutHref();
   const depositLabel = t('depositTelegram');
   const navProps = {
     home,
     blog,
+    about,
     homeLabel: t('home'),
     blogLabel: t('blog'),
+    aboutLabel: t('about'),
     managerLabel: t('manager'),
     channelLabel: t('channel'),
     depositLabel,
