@@ -531,5 +531,31 @@
       "hy": "patasxanakan-poker",
       "tj": "bozii-masuliyati-poker"
     }
+  },
+  {
+    "id": "faq-kluba-nuts",
+    "sourceRoute": "/faq-kluba-nuts/",
+    "publishedAt": "2027-05-05T10:00:00+00:00",
+    "image": "/assets/media/2027/05/faq-kluba-nuts.webp",
+    "slugs": {
+      "en": "nuts-club-faq",
+      "uz": "nuts-klub-faq",
+      "kz": "nuts-klub-faq-kz",
+      "hy": "nuts-akumb-harc-uxaker",
+      "tj": "nuts-klub-faq-tj"
+    }
+  },
+  {
+    "id": "istoriya-finalnogo-stola-nuts",
+    "sourceRoute": "/istoriya-finalnogo-stola-nuts/",
+    "publishedAt": "2027-05-20T10:00:00+00:00",
+    "image": "/assets/media/2027/05/istoriya-finalnogo-stola-nuts.webp",
+    "slugs": {
+      "en": "nuts-final-table-story",
+      "uz": "nuts-final-stol-tarixi",
+      "kz": "nuts-finaldy-ustel-olayi",
+      "hy": "nuts-final-stoli-patmutyun",
+      "tj": "nuts-final-dasti"
+    }
   }
 ]
