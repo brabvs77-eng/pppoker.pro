@@ -22,10 +22,12 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Банкролл-менеҷменти покери онлайн — Nuts PPPoker](https://pppoker.pro/tj/bankroll-menejmenti-onlajn/)
 - [Бурди покерро барои чӣ харҷ кардан — Nuts PPPoker](https://pppoker.pro/tj/baroi-chi-xarochoti-poker/)
 - [Bomb Pot дар покер: қоидаҳо ва стратегия — Nuts PPPoker](https://pppoker.pro/tj/bomb-pot-poker-qoidaho/)
+- [Бозии масъулиятноки покер — Nuts PPPoker](https://pppoker.pro/tj/bozii-masuliyati-poker/)
 - [Бозтаргони PPPoker — Nuts PPPoker](https://pppoker.pro/tj/boztargan-turniri-pppoker/)
 - [CRASH дар NUTS: чӣ тавр бозӣ кардан ва кай баромадан — Nuts PPPoker](https://pppoker.pro/tj/crash-nuts-chi-tavr-bozi/)
 - [Дастҳои оғозӣ дар Texas Hold'em — Nuts PPPoker](https://pppoker.pro/tj/dasthoi-oshgohi-texas-holdem/)
 - [EV дар покер чист — Nuts PPPoker](https://pppoker.pro/tj/ev-v-pokere-chi-ast/)
+- [HUD-статҳо дар покер — Nuts PPPoker](https://pppoker.pro/tj/hud-staty-poker/)
 - [Implajd odds дар покер: чӣ гуна шансҳои потенсиалии банкро татбиқ кардан — Nuts PPPoker](https://pppoker.pro/tj/implajd-odds-v-pokere/)
 - [Рақибони покери худро бишинос — Nuts PPPoker](https://pppoker.pro/tj/know-your-poker-opponents-secrets-of-winning-strategies/)
 - [Комбинатсияҳои покер: шпаргалка — Nuts PPPoker](https://pppoker.pro/tj/kombinatsiyaho-dar-poker-shpora/)
@@ -47,8 +49,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [PPPoker NUTS: Bomb Pot — формати таркишии экшн! — Nuts PPPoker](https://pppoker.pro/tj/pppoker-nuts-bomb-pot/)
 - [PPPoker: баррасии муфассал 2026 — Nuts PPPoker](https://pppoker.pro/tj/pppoker-review-2026/)
 - [Рейкбек ва бонусҳо дар NUTS — Nuts PPPoker](https://pppoker.pro/tj/rejkbek-va-bonusho-nuts/)
-- [Чӣ тавр 6+ (Short Deck) дар PPPoker NUTS бозӣ кардан — Nuts PPPoker](https://pppoker.pro/tj/short-deck-6-plus-pppoker/)
-- [SNG vs MTT дар NUTS — Nuts PPPoker](https://pppoker.pro/tj/sng-vs-mtt-nuts-klubi/)
 
 ## Иловагӣ
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
