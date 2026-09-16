@@ -2,6 +2,8 @@
 
 Step-by-step guide for adding a structured blog post to pppoker.pro. The site uses a **Strangler Fig** pattern: the RU post is extracted from legacy HTML, rendered natively via `StructuredPost`, and locale copies come from JSON translation files.
 
+**Editorial calendar and topic backlog:** [CONTENT_PLAN.md](./CONTENT_PLAN.md).
+
 ## Architecture (quick reference)
 
 | Layer | Path | Role |

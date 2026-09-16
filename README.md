@@ -213,6 +213,8 @@ GitHub Actions on `main` (after build + smoke) `rsync`s `apps/web/out/` → `/va
 2. Run `npm run build` — content is re-extracted automatically.
 3. Deploy.
 
+**Content calendar:** [docs/CONTENT_PLAN.md](docs/CONTENT_PLAN.md) (pillars, backlog, publishing cadence).
+
 **New structured blog post:** see [docs/NEW_POST_WORKFLOW.md](docs/NEW_POST_WORKFLOW.md) (catalog → translations → `polish:post-translations` → build).
 
 ## Next steps (optional improvements)
