@@ -557,5 +557,31 @@
       "hy": "nuts-final-stoli-patmutyun",
       "tj": "nuts-final-dasti"
     }
+  },
+  {
+    "id": "pppoker-dlya-armenii",
+    "sourceRoute": "/pppoker-dlya-armenii/",
+    "publishedAt": "2027-06-05T10:00:00+00:00",
+    "image": "/assets/media/2027/06/pppoker-dlya-armenii.webp",
+    "slugs": {
+      "en": "pppoker-for-armenia-players",
+      "uz": "pppoker-armeniya-uchun",
+      "kz": "pppoker-armeniya-ushin",
+      "hy": "pppoker-hayasatan-hamar",
+      "tj": "pppoker-baroi-armiston"
+    }
+  },
+  {
+    "id": "nedelnyj-daidzhest-turnirov-nuts",
+    "sourceRoute": "/nedelnyj-daidzhest-turnirov-nuts/",
+    "publishedAt": "2027-06-20T10:00:00+00:00",
+    "image": "/assets/media/2027/06/nedelnyj-daidzhest-turnirov-nuts.webp",
+    "slugs": {
+      "en": "nuts-weekly-tournament-digest",
+      "uz": "nuts-haftalik-turnir-dayjesti",
+      "kz": "nuts-aptalyk-turnir-dayjesti",
+      "hy": "nuts-shabatyan-mrcasharayin-digest",
+      "tj": "nuts-haftagii-digesti-turnirho"
+    }
   }
 ]

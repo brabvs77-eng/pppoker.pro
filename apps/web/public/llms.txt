@@ -38,6 +38,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Комбинации в покере: шпаргалка от пары до стрит-флеша — Nuts PPPoker](https://pppoker.pro/kombinacii-v-pokere-shpora/)
 - [Многостоловые Турниры (МТТ) — Nuts PPPoker](https://pppoker.pro/mnogostolovye-turniry-mtt/)
 - [На что потратить выигрыш в покере? — Nuts PPPoker](https://pppoker.pro/na-chto-potratit-vyigrysh-v-pokere/)
+- [Еженедельный дайджест турниров NUTS: как не пропустить лучшие GTD — Nuts PPPoker](https://pppoker.pro/nedelnyj-daidzhest-turnirov-nuts/)
 - [Обзор онлайн-платформы PPPoker 2025 — Nuts PPPoker](https://pppoker.pro/obzor-onlajn-platformy-pppoker-2025/)
 - [Китайский покер с открытым лицом (OFC) — Nuts PPPoker](https://pppoker.pro/open-face-chinese-poker-ofc/)
 - [Основные типы игроков в покере — Nuts PPPoker](https://pppoker.pro/osnovnye-tipy-igrokov-v-pokere/)
@@ -45,12 +46,11 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Ответственная игра в покере: лимиты, паузы и самоконтроль — Nuts PPPoker](https://pppoker.pro/otvetstvennaya-igra-v-pokere/)
 - [Poker GTO — что это и как применять в клубе NUTS — Nuts PPPoker](https://pppoker.pro/poker-gto-chto-eto-i-kak-primenyat-v-klube-nuts/)
 - [Позиция за столом в покере: почему баттон — лучший друг регуляра — Nuts PPPoker](https://pppoker.pro/poziciya-za-stolom-poker/)
+- [PPPoker для игроков из Армении: валюта, поддержка, клуб NUTS — Nuts PPPoker](https://pppoker.pro/pppoker-dlya-armenii/)
 - [PPPoker для игроков из Казахстана: валюта, столы, клуб NUTS — Nuts PPPoker](https://pppoker.pro/pppoker-dlya-kazakhstana/)
 - [PPPoker для игроков из Узбекистана: валюта, поддержка, клуб NUTS — Nuts PPPoker](https://pppoker.pro/pppoker-dlya-uzbekistana/)
 - [АКЦИЯ: МИНИ ХАЙРОЛЛЕР В КЛУБЕ NUTS! — Nuts PPPoker](https://pppoker.pro/pppoker-mini-highroller/)
 - [PPPoker NUTS: Bomb Pot — Взрывной Формат для Любителей Экшена! — Nuts PPPoker](https://pppoker.pro/pppoker-nuts-bomb-pot-vzryvnoj-format-dlya-lyubitelej-ekshena/)
-- [Правила игры в Техасский Холдем (NLH) — Nuts PPPoker](https://pppoker.pro/pravila-igry-v-tehasskij-holdem-nlh/)
-- [Правила Пот-Лимит Омахи (PLO) — Nuts PPPoker](https://pppoker.pro/pravila-pot-limit-omahi-plo/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)

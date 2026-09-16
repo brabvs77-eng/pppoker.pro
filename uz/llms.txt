@@ -33,6 +33,7 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Mas'uliyatli poker o'yini — Nuts PPPoker](https://pppoker.pro/uz/masuliyatli-poker-oyini/)
 - [Mikrostavka turnirlarida o'ynash strategiyasi — Nuts PPPoker](https://pppoker.pro/uz/mikro-stavka-turnir-strategiyasi/)
 - [NUTS final stol hikoyasi — Nuts PPPoker](https://pppoker.pro/uz/nuts-final-stol-tarixi/)
+- [NUTS haftalik turnir dayjesti — Nuts PPPoker](https://pppoker.pro/uz/nuts-haftalik-turnir-dayjesti/)
 - [NUTS klub FAQ: 20 ta savol — Nuts PPPoker](https://pppoker.pro/uz/nuts-klub-faq/)
 - [Sochidan onlaynga: NUTS klub tarixi — Nuts PPPoker](https://pppoker.pro/uz/nuts-klub-tarixi-sochi/)
 - [NUTS klubiga 5 daqiqada qanday qo'shilish mumkin — Nuts PPPoker](https://pppoker.pro/uz/nuts-klubiga-qanday-qoshilish/)
@@ -51,7 +52,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Poker yutug'ini qayerga sarflash kerak — Nuts PPPoker](https://pppoker.pro/uz/poker-yutugini-qayerga-sarflash/)
 - [Pot-Limit Omaha (PLO) qoidalari — Nuts PPPoker](https://pppoker.pro/uz/pot-limit-omaha-plo-qoidalari/)
 - [PPPoker: 2026-yil uchun shaxsiy pokker klublari platformasining batafsil koʻrib chiqilishi — Nuts PPPoker](https://pppoker.pro/uz/pppoker-2026/)
-- [AKSIYA: NUTS KLUBIDA MINI HIGHROLLER! — Nuts PPPoker](https://pppoker.pro/uz/pppoker-mini-highroller/)
 
 ## Qo'shimcha
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
