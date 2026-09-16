@@ -7,12 +7,13 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 ## Pages
 - [PPPoker for Money — Nuts Online Poker Club](https://pppoker.pro/en/)
 - [Blog — Nuts PPPoker](https://pppoker.pro/en/blog/)
-- [Blog — Nuts PPPoker — page 2 of 7](https://pppoker.pro/en/blog/page/2/)
-- [Blog — Nuts PPPoker — page 3 of 7](https://pppoker.pro/en/blog/page/3/)
-- [Blog — Nuts PPPoker — page 4 of 7](https://pppoker.pro/en/blog/page/4/)
-- [Blog — Nuts PPPoker — page 5 of 7](https://pppoker.pro/en/blog/page/5/)
-- [Blog — Nuts PPPoker — page 6 of 7](https://pppoker.pro/en/blog/page/6/)
-- [Blog — Nuts PPPoker — page 7 of 7](https://pppoker.pro/en/blog/page/7/)
+- [Blog — Nuts PPPoker — page 2 of 8](https://pppoker.pro/en/blog/page/2/)
+- [Blog — Nuts PPPoker — page 3 of 8](https://pppoker.pro/en/blog/page/3/)
+- [Blog — Nuts PPPoker — page 4 of 8](https://pppoker.pro/en/blog/page/4/)
+- [Blog — Nuts PPPoker — page 5 of 8](https://pppoker.pro/en/blog/page/5/)
+- [Blog — Nuts PPPoker — page 6 of 8](https://pppoker.pro/en/blog/page/6/)
+- [Blog — Nuts PPPoker — page 7 of 8](https://pppoker.pro/en/blog/page/7/)
+- [Blog — Nuts PPPoker — page 8 of 8](https://pppoker.pro/en/blog/page/8/)
 - [Privacy Policy — Nuts PPPoker](https://pppoker.pro/en/privacy-policy/)
 - [User Agreement — Nuts PPPoker](https://pppoker.pro/en/user-agreement/)
 
@@ -34,7 +35,9 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [Microstakes Tournament Strategy — Nuts PPPoker](https://pppoker.pro/en/microstakes-tournament-strategy/)
 - [Multi-Table Tournaments (MTT): Rules, Formats & Strategy — Nuts PPPoker](https://pppoker.pro/en/multi-table-tournaments-mtt/)
 - [No-Limit Texas Hold'em (NLH) Rules — Nuts PPPoker](https://pppoker.pro/en/no-limit-texas-holdem-rules-nlh/)
+- [NUTS Club FAQ: 20 Questions for the Manager — Nuts PPPoker](https://pppoker.pro/en/nuts-club-faq/)
 - [From Sochi to Online: The Story of NUTS Club — Nuts PPPoker](https://pppoker.pro/en/nuts-club-history-sochi/)
+- [A NUTS Final Table Story: How I Lost with the Nuts and Won the Tournament — Nuts PPPoker](https://pppoker.pro/en/nuts-final-table-story/)
 - [NUTS Tournament Schedule: How to Read the Grid and Find Value — Nuts PPPoker](https://pppoker.pro/en/nuts-tournament-schedule/)
 - [Online Poker Bankroll Management: Limits, ABI and Discipline — Nuts PPPoker](https://pppoker.pro/en/online-poker-bankroll-management/)
 - [Open Face Chinese Poker (OFC): Rules & Scoring — Nuts PPPoker](https://pppoker.pro/en/open-face-chinese-poker-ofc/)
@@ -47,8 +50,6 @@ Generated 2026-09-16. All URLs: https://pppoker.pro
 - [PPPoker for Players from Kazakhstan: Currency, Tables, NUTS Club — Nuts PPPoker](https://pppoker.pro/en/pppoker-for-kazakhstan-players/)
 - [PPPoker for Players from Uzbekistan: Currency, Support, NUTS Club — Nuts PPPoker](https://pppoker.pro/en/pppoker-for-uzbekistan-players/)
 - [PROMO: MINI HIGHROLLER IN THE NUTS CLUB! — Nuts PPPoker](https://pppoker.pro/en/pppoker-mini-highroller-promo/)
-- [PPPoker NUTS: Bomb Pot — Explosive Action Format! — Nuts PPPoker](https://pppoker.pro/en/pppoker-nuts-bomb-pot-action-format/)
-- [PPPoker Review 2026: Clubs, Games, Rakeback, and Risks — Nuts PPPoker](https://pppoker.pro/en/pppoker-review-2026/)
 
 ## Optional
 - [Sitemap index](https://pppoker.pro/sitemap_index.xml)
