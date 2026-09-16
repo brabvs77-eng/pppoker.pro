@@ -24,6 +24,13 @@ export const homePromoRoutes = homepageNativeRoutes;
 /** Legal/about pages rendered via NativePage (content/pages/*.json). */
 export const nativePageRoutes = nativePagesConfig.routes as readonly string[];
 
+/** Rich about page with team, story, and office map. */
+export const aboutPageRoutes = (nativePagesConfig.aboutRoutes ?? []) as readonly string[];
+
+export function isAboutPageRoute(route: string): boolean {
+  return (aboutPageRoutes as readonly string[]).includes(route);
+}
+
 /** Homepages: hide legacy Elementor blog loop and show native blog slot instead. */
 export const hideLegacyBlogSectionRoutes = elementorChrome.homeBlogSlotRoutes.map(
   (entry) => entry.route,

@@ -1050,6 +1050,232 @@ body {
   border-radius: 8px;
 }
 
+.native-page[data-route='/o-nas/'] {
+  max-width: none;
+  padding: 0;
+  background: #131b2b;
+}
+
+.about-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4.5rem;
+  color: #e8ecf4;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.about-page__hero {
+  margin-bottom: 2rem;
+}
+
+.about-page__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #61ce70;
+}
+
+.about-page__hero h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fde661;
+  text-wrap: balance;
+}
+
+.about-page__lead {
+  margin: 1rem 0 0;
+  max-width: 42rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #9aa8c7;
+}
+
+.about-page__team-photo {
+  margin: 0 0 2.5rem;
+}
+
+.about-page__team-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(253, 230, 97, 0.12);
+}
+
+.about-page__team-photo figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #7b8db2;
+  text-align: center;
+}
+
+.about-page__story {
+  display: grid;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.about-page__section h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  color: #fde661;
+  letter-spacing: -0.02em;
+}
+
+.about-page__section p {
+  margin: 0 0 1rem;
+  max-width: 42rem;
+  line-height: 1.7;
+  color: #e8ecf4;
+}
+
+.about-page__section p:last-child {
+  margin-bottom: 0;
+}
+
+.about-page__team-header,
+.about-page__office-header {
+  margin-bottom: 1.5rem;
+}
+
+.about-page__team-header h2,
+.about-page__office-header h2 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  color: #fde661;
+}
+
+.about-page__team-header p,
+.about-page__office-header p {
+  margin: 0;
+  max-width: 42rem;
+  color: #9aa8c7;
+  line-height: 1.6;
+}
+
+.about-page__team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-page__member {
+  display: flex;
+  flex-direction: column;
+  background: #1a2438;
+  border: 1px solid rgba(253, 230, 97, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.about-page__member-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.about-page__member-body {
+  padding: 1rem 1.1rem 1.25rem;
+}
+
+.about-page__member-body h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fde661;
+}
+
+.about-page__member-role {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e8ecf4;
+}
+
+.about-page__member-origin {
+  margin: 0.2rem 0 0.75rem;
+  font-size: 0.82rem;
+  color: #7b8db2;
+}
+
+.about-page__member-bio {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #9aa8c7;
+}
+
+.about-page__office {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(253, 230, 97, 0.12);
+}
+
+.about-page__office-details {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.about-page__office-details div {
+  padding: 0.9rem 1rem;
+  background: #1a2438;
+  border-radius: 10px;
+  border: 1px solid rgba(253, 230, 97, 0.08);
+}
+
+.about-page__office-details dt {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #7b8db2;
+}
+
+.about-page__office-details dd {
+  margin: 0;
+  line-height: 1.5;
+  color: #e8ecf4;
+}
+
+.about-page__office-details a {
+  color: #fde661;
+  text-decoration: none;
+}
+
+.about-page__office-details a:hover {
+  text-decoration: underline;
+}
+
+.about-page__map-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(253, 230, 97, 0.12);
+  aspect-ratio: 16 / 9;
+  min-height: 320px;
+}
+
+.about-page__map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  .about-page__office-details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .blog-archive {
   max-width: 960px;
   margin: 0 auto;

@@ -10,7 +10,11 @@
     "/hy/privacy-policy/",
     "/tj/user-agreement/",
     "/tj/privacy-policy/",
-    "/rus/"
+    "/rus/",
+    "/o-nas/"
+  ],
+  "aboutRoutes": [
+    "/o-nas/"
   ],
   "legalFallback": {
     "user-agreement": "/en/user-agreement/",
