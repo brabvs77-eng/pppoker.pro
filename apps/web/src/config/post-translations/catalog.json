@@ -323,5 +323,31 @@
       "hy": "inch-e-pppoker",
       "tj": "pppoker-chist"
     }
+  },
+  {
+    "id": "kak-vstupit-v-klub-nuts",
+    "sourceRoute": "/kak-vstupit-v-klub-nuts/",
+    "publishedAt": "2026-09-16T10:00:00+00:00",
+    "image": "/assets/media/2024/08/Mask-group1-opt.webp",
+    "slugs": {
+      "en": "how-to-join-nuts-club",
+      "uz": "nuts-klubiga-qanday-qoshilish",
+      "kz": "nuts-klubyna-kalay-kosu",
+      "hy": "inchpes-miatnal-nuts-akatumb",
+      "tj": "nuts-klubro-chi-tavr-chidam"
+    }
+  },
+  {
+    "id": "russkiy-poker-v-nuts-pravila",
+    "sourceRoute": "/russkiy-poker-v-nuts-pravila/",
+    "publishedAt": "2026-09-20T10:00:00+00:00",
+    "image": "/assets/media/2025/12/photo_2025-12-06_22-22-37.webp",
+    "slugs": {
+      "en": "russian-poker-nuts-rules",
+      "uz": "rus-pokeri-nuts-qoidalari",
+      "kz": "rus-pokeri-nuts-erezheleri",
+      "hy": "rusakan-poker-nuts-kanoner",
+      "tj": "pokeri-rusii-nuts-qoidaho"
+    }
   }
 ]
