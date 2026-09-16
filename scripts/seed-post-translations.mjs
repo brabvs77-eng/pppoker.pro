@@ -6,6 +6,7 @@ import {
   TARGET_LOCALES,
   blogArchivePageCount,
   blogArchiveRoute,
+  ruBlogArchiveRoute,
   loadCatalog,
   loadPostTranslations,
   paginatedBlogArchiveMeta,
@@ -73,6 +74,17 @@ async function main() {
       created += 1;
       console.log(`Seeded ${route}`);
     }
+  }
+
+  // RU pagination shells (page 1 stays legacy-exported at /blog/)
+  for (let page = 2; page <= archivePages; page += 1) {
+    const meta = paginatedBlogArchiveMeta('ru', page, archivePages);
+    const route = ruBlogArchiveRoute(page);
+    const filePath = path.join(rootDir, 'blog', 'page', String(page), 'index.html');
+    const html = renderBlogArchiveHtml({ route, ...meta });
+    await writeSeedFile(filePath, html);
+    created += 1;
+    console.log(`Seeded ${route}`);
   }
 
   const { payload, structuredRoutesPath } = syncStructuredPostRoutes();

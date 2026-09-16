@@ -13,6 +13,12 @@ export const TARGET_LOCALES = ['en', 'uz', 'kz', 'hy', 'tj'];
 export const BLOG_ARCHIVE_PAGE_SIZE = 6;
 
 export const BLOG_ARCHIVES = {
+  ru: {
+    title: 'Всё о покере на деньги — Nuts PPPoker',
+    description:
+      'Блог о приложении PPPoker. Новости, турниры, фрироллы, бонусы, призы. Присоединяйся к нашему сообществу и побеждай прямо сейчас!',
+    lang: 'ru',
+  },
   en: {
     title: 'Blog — Nuts PPPoker',
     description:
@@ -105,6 +111,7 @@ export function renderBlogArchiveHtml({ route, title, description, lang }) {
 }
 
 const PAGE_SUFFIX = {
+  ru: (page, total) => ` — страница ${page} из ${total}`,
   en: (page, total) => ` — page ${page} of ${total}`,
   uz: (page, total) => ` — ${page}-sahifa, jami ${total}`,
   kz: (page, total) => ` — ${page}-бет, барлығы ${total}`,
@@ -112,7 +119,13 @@ const PAGE_SUFFIX = {
   tj: (page, total) => ` — саҳифа ${page} аз ${total}`,
 };
 
+export function ruBlogArchiveRoute(pageNumber) {
+  if (pageNumber <= 1) return '/blog/';
+  return `/blog/page/${pageNumber}/`;
+}
+
 export function blogArchiveRoute(locale, pageNumber) {
+  if (locale === 'ru') return ruBlogArchiveRoute(pageNumber);
   if (pageNumber <= 1) return `/${locale}/blog/`;
   return `/${locale}/blog/page/${pageNumber}/`;
 }
